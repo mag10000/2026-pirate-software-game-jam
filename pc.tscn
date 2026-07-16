@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://d0mnmgw7euc8q"]
+
+[ext_resource type="Script" uid="uid://bdgfbroe8awff" path="res://pc.gd" id="1_de6uy"]
+[ext_resource type="FontFile" uid="uid://b2gtqd3q64ntc" path="res://PressStart2P-Regular.ttf" id="1_ukbfy"]
+[ext_resource type="PackedScene" uid="uid://b8cjd5xlk3m1p" path="res://match 3/scenes/main.tscn" id="2_crfiw"]
+[ext_resource type="AudioStream" uid="uid://k2ydfhxyfqx7" path="res://match 3/sounds/tile-land.ogg" id="4_s818i"]
+
+[node name="PC" type="Control" unique_id=354160987]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_de6uy")
+
+[node name="BG" type="ColorRect" parent="." unique_id=1800069285]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.5019608, 0.5019608, 1)
+
+[node name="taskbar" type="Control" parent="." unique_id=1850188279]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BG" type="ColorRect" parent="taskbar" unique_id=1471722382]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.69803923, 0.74509805, 0.70980394, 0.8156863)
+
+[node name="Label" type="Label" parent="taskbar" unique_id=1737939297]
+z_index = 17
+layout_mode = 0
+offset_left = 748.0
+offset_top = -25.0
+offset_right = 1148.0
+offset_bottom = -9.0
+theme_override_fonts/font = ExtResource("1_ukbfy")
+text = "Desktop - june/Day 0/2026"
+
+[node name="work window" type="Window" parent="." unique_id=855356230]
+oversampling_override = 1.0
+title = "Work"
+initial_position = 1
+size = Vector2i(680, 400)
+theme_override_fonts/title_font = ExtResource("1_ukbfy")
+
+[node name="Main" parent="work window" unique_id=1469547217 instance=ExtResource("2_crfiw")]
+width = 9
+
+[node name="bank account window" type="Window" parent="." unique_id=1736246488]
+oversampling_override = 1.0
+title = "Bank Account"
+position = Vector2i(0, 36)
+size = Vector2i(300, 200)
+theme_override_fonts/title_font = ExtResource("1_ukbfy")
+
+[node name="Title" type="Label" parent="bank account window" unique_id=426150714]
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("1_ukbfy")
+theme_override_font_sizes/font_size = 24
+text = "Earnings 
+from Work.co"
+
+[node name="Money Display" type="Label" parent="bank account window" unique_id=1465504738]
+offset_top = 68.0
+offset_right = 80.0
+offset_bottom = 91.0
+theme_override_fonts/font = ExtResource("1_ukbfy")
+text = "$0.00"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=448535725]
+stream = ExtResource("4_s818i")

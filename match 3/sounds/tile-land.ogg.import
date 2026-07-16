@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://k2ydfhxyfqx7"
+path="res://.godot/imported/tile-land.ogg-4aef74419eebf6c710314a1ba35a34fc.oggvorbisstr"
+
+[deps]
+
+source_file="res://match 3/sounds/tile-land.ogg"
+dest_files=["res://.godot/imported/tile-land.ogg-4aef74419eebf6c710314a1ba35a34fc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -11,3 +11,7 @@ var times = [20,15,10,30,25]
 var phase = 0
 
 var debt = 1000
+
+var minimumPay = 7
+
+var minimumPayStatic = 7

@@ -113,6 +113,25 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.5019608, 0.5019608, 1)
 
+[node name="Label" type="Label" parent="." unique_id=575918547]
+layout_mode = 0
+offset_left = 29.000002
+offset_top = 295.0
+offset_right = 607.0
+offset_bottom = 329.0
+rotation = 0.08726646
+scale = Vector2(1e-05, 1e-05)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("1_ukbfy")
+theme_override_font_sizes/font_size = 34
+text = "It's Work Time!!!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label" unique_id=1911616026]
+libraries/ = SubResource("AnimationLibrary_gbtml")
+autoplay = &"new_animation"
+
 [node name="taskbar" type="Control" parent="." unique_id=1850188279]
 layout_mode = 1
 anchors_preset = 12
@@ -142,12 +161,12 @@ offset_right = 635.0
 offset_bottom = -10.0
 theme_override_fonts/font = ExtResource("1_ukbfy")
 theme_override_font_sizes/font_size = 8
-text = "Desktop - june/Day 0/2026"
+text = "Desktop - July 31, 2037"
 
 [node name="work window" type="Window" parent="." unique_id=855356230]
 oversampling_override = 1.0
 title = "Work"
-position = Vector2i(237, 79)
+position = Vector2i(257, 79)
 size = Vector2i(305, 205)
 theme_override_fonts/title_font = ExtResource("1_ukbfy")
 theme_override_font_sizes/title_font_size = 8
@@ -160,7 +179,7 @@ width = 6
 [node name="bank account window" type="Window" parent="." unique_id=1736246488]
 oversampling_override = 1.0
 title = "Bank Account"
-position = Vector2i(8, 36)
+position = Vector2i(11, 36)
 size = Vector2i(211, 230)
 theme_override_fonts/title_font = ExtResource("1_ukbfy")
 theme_override_font_sizes/title_font_size = 8
@@ -171,7 +190,7 @@ offset_bottom = 51.0
 theme_override_fonts/font = ExtResource("1_ukbfy")
 theme_override_font_sizes/font_size = 16
 text = "Earnings 
-from Work.co"
+from Work Co.:"
 
 [node name="Money Display" type="Label" parent="bank account window" unique_id=1465504738]
 offset_top = 43.0
@@ -194,7 +213,7 @@ offset_right = 320.0
 offset_bottom = 35.0
 theme_override_fonts/font = ExtResource("1_ukbfy")
 text = "Debt From 
-Evil Bank co:"
+Evil Bank Co.:"
 
 [node name="Money Display" type="Label" parent="bank account window/debt" unique_id=423204325]
 layout_mode = 0
@@ -226,7 +245,7 @@ offset_right = 128.0
 offset_bottom = 123.0
 theme_override_fonts/font = ExtResource("1_ukbfy")
 theme_override_font_sizes/font_size = 8
-text = "Minimum Debt Due: $7"
+text = "Minimum Debt Due: $"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=448535725]
 stream = ExtResource("4_s818i")
@@ -234,25 +253,6 @@ stream = ExtResource("4_s818i")
 [node name="work timer" type="Timer" parent="." unique_id=1132678509]
 
 [node name="break timer" type="Timer" parent="." unique_id=513373814]
-
-[node name="Label" type="Label" parent="." unique_id=575918547]
-layout_mode = 0
-offset_left = 29.000002
-offset_top = 295.0
-offset_right = 607.0
-offset_bottom = 329.0
-rotation = 0.08726646
-scale = Vector2(1e-05, 1e-05)
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 20
-theme_override_fonts/font = ExtResource("1_ukbfy")
-theme_override_font_sizes/font_size = 34
-text = "It's Work Time!!!"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Label" unique_id=1911616026]
-libraries/ = SubResource("AnimationLibrary_gbtml")
-autoplay = &"new_animation"
 
 [connection signal="pressed" from="bank account window/debt/deposit" to="." method="_on_deposit_pressed"]
 [connection signal="timeout" from="bank account window/debt/deposit/depositFlickerTimer" to="." method="_on_timer_timeout"]

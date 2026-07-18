@@ -19,34 +19,34 @@ extends Control
 @export var scrollAlertTextAnimation: AnimationPlayer
 
 # The Amount of Money the Player Has
-var money = 0.00
+var money = 0
 
 # Time Remaining in a Counter
 var time = 0
 
-# Whether the Break Text is Shown
-var break_text_shown = false
-
-# Deposited?
+# Amount Deposited in current Round
 var deposited_in_round = 0
 
 
 # Runs every frame
 func _process(delta):
 	earningsAmountDisplay.text = "$" + str(money)
+	debtAmountDisplay.text = "$" + str(Global.debt)
+	debtMinimumPayDisplay.text = "Minimum Debt Due: $" + str(Global.minimumPay)
 	
-	if not Global.work_time_started && Global.phase == 0:
-		Global.break_time_started = false
-		Global.work_time_started = true
-		time = Global.times[Global.current_time_id] + randi_range(1,5)
-		workTimer.start()
-		breakTimer.stop()
-		scrollAlertText.text = "It's Work Time!!!"
+	if Global.phase == 0:
+		Global.minimumPay = 7
+		if not Global.work_time_started:
+			Global.break_time_started = false
+			Global.work_time_started = true
+			time = Global.times[Global.current_time_id] + randi_range(1,5)
+			workTimer.start()
+			breakTimer.stop()
+			scrollAlertText.text = "It's Work Time!!!"
+			scrollAlertTextAnimation.play()
 		bankWindow.title = "Bank Account"
 		depositButton.hide()
 		debtMinimumPayDisplay.hide()
-		scrollAlertTextAnimation.play()
-	if Global.work_time_started && Global.phase == 0:
 		if time == 0:
 			workTimer.stop()
 			Global.work_time_started = false
@@ -60,8 +60,8 @@ func _process(delta):
 			depositButton.show()
 			debtMinimumPayDisplay.show()
 		else:
-			workWindow.title = "Work - " + seconds2hhmmss(time)
-	
+			workWindow.title = "Work - " + str(time)
+			
 	if Global.phase == 1:
 		if not Global.break_time_started:
 			Global.break_time_started = true
@@ -70,11 +70,11 @@ func _process(delta):
 			breakTimer.start()
 			scrollAlertText.text = "It's Break Time!!!"
 			scrollAlertTextAnimation.play()
-		earningsAmountDisplay.text = "$" + str(Global.debt)
+
 		depositButton.show()
 		debtMinimumPayDisplay.show()
 		if time == 0:
-			if deposited_in_round < 7:
+			if deposited_in_round < Global.minimumPayStatic:
 				get_tree().change_scene_to_file("res://game_over.tscn")
 			else:
 				Global.work_time_started = false
@@ -82,7 +82,7 @@ func _process(delta):
 				breakTimer.stop()
 				workWindow.show()
 		else:
-			bankWindow.title = "Bank Account - " + seconds2hhmmss(time)
+			bankWindow.title = "Bank Account - " + str(time)
 
 
 
@@ -104,6 +104,8 @@ func _on_deposit_pressed():
 		money -= 1
 		Global.debt -= 1
 		deposited_in_round += 1
+		if Global.minimumPay != 0:
+			Global.minimumPay -= 1
 
 
 func _on_timer_timeout():

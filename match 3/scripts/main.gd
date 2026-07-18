@@ -116,13 +116,15 @@ func handle_swap_logic(pos_a: Vector2i, pos_b: Vector2i):
 	
 	await get_tree().create_timer(0.3).timeout
 	
-	if find_matches().size() > 0:
-		process_board_state()
-	else:
+	process_board_state()
+	
+	#if find_matches().size() > 0:
+	#	process_board_state()
+	#else:
 		#swap_pieces(pos_a, pos_b)
 		#Audio.play("res://sounds/tile-swap.ogg", false, 2, 0.3)
-		await get_tree().create_timer(0.3).timeout
-		is_swapping = false
+	#	await get_tree().create_timer(0.3).timeout
+	#	is_swapping = false
 
 func swap_pieces(a: Vector2i, b: Vector2i):
 	

@@ -28,7 +28,7 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_y26ei")
 theme_override_font_sizes/font_size = 24
 text = "Game Over - You Failed
- to Deposit the minuimum"
+ to Deposit the Miinimum "
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="." unique_id=274403113]
@@ -45,6 +45,6 @@ offset_bottom = 49.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_y26ei")
-text = "Play Again"
+text = "Main Menu"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -84,7 +84,7 @@ _data = {
 &"new_animation": SubResource("Animation_3d7xj")
 }
 
-[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "workTimer", "breakTimer", "depositFlickerTimer", "workWindow", "bankWindow", "depositButton", "scrollAlertTextAnimation")]
+[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "workTimer", "breakTimer", "depositFlickerTimer", "workWindow", "bankWindow", "itemWindow", "depositButton", "scrollAlertTextAnimation")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -101,6 +101,7 @@ breakTimer = NodePath("break timer")
 depositFlickerTimer = NodePath("bank account window/debt/deposit/depositFlickerTimer")
 workWindow = NodePath("work window")
 bankWindow = NodePath("bank account window")
+itemWindow = NodePath("inventory window")
 depositButton = NodePath("bank account window/debt/deposit")
 scrollAlertTextAnimation = NodePath("Label/AnimationPlayer")
 
@@ -166,7 +167,7 @@ text = "Desktop - July 31, 2037"
 [node name="work window" type="Window" parent="." unique_id=855356230]
 oversampling_override = 1.0
 title = "Work"
-position = Vector2i(257, 79)
+position = Vector2i(257, 36)
 size = Vector2i(305, 205)
 theme_override_fonts/title_font = ExtResource("1_ukbfy")
 theme_override_font_sizes/title_font_size = 8
@@ -176,11 +177,19 @@ position = Vector2(76, 51)
 scale = Vector2(0.5, 0.5)
 width = 6
 
+[node name="store window" type="Window" parent="." unique_id=1995505667]
+oversampling_override = 1.0
+title = "Online Shopping"
+position = Vector2i(257, 36)
+size = Vector2i(305, 205)
+theme_override_fonts/title_font = ExtResource("1_ukbfy")
+theme_override_font_sizes/title_font_size = 8
+
 [node name="bank account window" type="Window" parent="." unique_id=1736246488]
 oversampling_override = 1.0
 title = "Bank Account"
 position = Vector2i(11, 36)
-size = Vector2i(211, 230)
+size = Vector2i(215, 230)
 theme_override_fonts/title_font = ExtResource("1_ukbfy")
 theme_override_font_sizes/title_font_size = 8
 
@@ -246,6 +255,14 @@ offset_bottom = 123.0
 theme_override_fonts/font = ExtResource("1_ukbfy")
 theme_override_font_sizes/font_size = 8
 text = "Minimum Debt Due: $"
+
+[node name="inventory window" type="Window" parent="." unique_id=2121387249]
+oversampling_override = 1.0
+title = "Inventory"
+position = Vector2i(257, 285)
+size = Vector2i(305, 40)
+theme_override_fonts/title_font = ExtResource("1_ukbfy")
+theme_override_font_sizes/title_font_size = 8
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=448535725]
 stream = ExtResource("4_s818i")

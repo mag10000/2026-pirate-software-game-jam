@@ -13,6 +13,7 @@ extends Control
 @export var workWindow: Window
 @export var bankWindow: Window
 @export var itemWindow: Window
+@export var storeWindow: Window
 
 @export var depositButton: Button
 
@@ -57,6 +58,7 @@ func _process(delta):
 			workWindow.title = "Work - Time Up!"
 			await get_tree().create_timer(0.5).timeout
 			workWindow.hide()
+			storeWindow.show()
 			depositButton.show()
 			debtMinimumPayDisplay.show()
 		else:
@@ -80,6 +82,7 @@ func _process(delta):
 				Global.work_time_started = false
 				Global.phase = 0
 				breakTimer.stop()
+				storeWindow.hide()
 				workWindow.show()
 		else:
 			bankWindow.title = "Bank Account - " + str(time)

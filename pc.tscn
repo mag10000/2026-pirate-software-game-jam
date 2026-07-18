@@ -84,7 +84,7 @@ _data = {
 &"new_animation": SubResource("Animation_3d7xj")
 }
 
-[node name="PC" type="Control" unique_id=354160987]
+[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "workTimer", "breakTimer", "depositFlickerTimer", "workWindow", "bankWindow", "depositButton", "scrollAlertTextAnimation")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,6 +92,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_de6uy")
+earningsAmountDisplay = NodePath("bank account window/Money Display")
+debtAmountDisplay = NodePath("bank account window/debt/Money Display")
+debtMinimumPayDisplay = NodePath("bank account window/debt/Min Debt")
+scrollAlertText = NodePath("Label")
+workTimer = NodePath("work timer")
+breakTimer = NodePath("break timer")
+depositFlickerTimer = NodePath("bank account window/debt/deposit/depositFlickerTimer")
+workWindow = NodePath("work window")
+bankWindow = NodePath("bank account window")
+depositButton = NodePath("bank account window/debt/deposit")
+scrollAlertTextAnimation = NodePath("Label/AnimationPlayer")
 
 [node name="BG" type="ColorRect" parent="." unique_id=1800069285]
 layout_mode = 1
@@ -203,7 +214,7 @@ offset_bottom = 93.0
 theme_override_fonts/font = ExtResource("1_ukbfy")
 text = "Deposit $1"
 
-[node name="Timer" type="Timer" parent="bank account window/debt/deposit" unique_id=2066530084]
+[node name="depositFlickerTimer" type="Timer" parent="bank account window/debt/deposit" unique_id=2066530084]
 wait_time = 0.5
 autostart = true
 
@@ -244,6 +255,6 @@ libraries/ = SubResource("AnimationLibrary_gbtml")
 autoplay = &"new_animation"
 
 [connection signal="pressed" from="bank account window/debt/deposit" to="." method="_on_deposit_pressed"]
-[connection signal="timeout" from="bank account window/debt/deposit/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="bank account window/debt/deposit/depositFlickerTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="work timer" to="." method="_on_work_timer_timeout"]
 [connection signal="timeout" from="break timer" to="." method="_on_break_timer_timeout"]

@@ -1,73 +1,88 @@
 extends Control
 
+# Export Variables
+@export var earningsAmountDisplay: Label
+@export var debtAmountDisplay: Label
+@export var debtMinimumPayDisplay: Label
+@export var scrollAlertText: Label
+
+@export var workTimer: Timer
+@export var breakTimer: Timer
+@export var depositFlickerTimer: Timer
+
+@export var workWindow: Window
+@export var bankWindow: Window
+@export var itemWindow: Window
+
+@export var depositButton: Button
+
+@export var scrollAlertTextAnimation: AnimationPlayer
+
+# The Amount of Money the Player Has
 var money = 0.00
 
+# Time Remaining in a Counter
 var time = 0
 
+# Whether the Break Text is Shown
 var break_text_shown = false
 
+# Deposited?
 var deposited_in_round = 0
 
+
+# Runs every frame
 func _process(delta):
-	if ("$" + str(money)).length() == 4:
-		$"bank account window/Money Display".text = "$" + str(money) + "0"
-	else:
-		$"bank account window/Money Display".text = "$" + str(money)
+	earningsAmountDisplay.text = "$" + str(money)
 	
-	if not Global.current_time_started && Global.phase == 0:
-		Global.current_time_started = true
+	if not Global.work_time_started && Global.phase == 0:
+		Global.break_time_started = false
+		Global.work_time_started = true
 		time = Global.times[Global.current_time_id] + randi_range(1,5)
-		$"work timer".start()
-		$Label.text = "It's Work Time!!!"
-		$"break timer".stop()
-		$"bank account window".title = "Bank Account"
-		$"bank account window/debt/deposit".hide()
-		$"bank account window/debt/Min Debt".hide()
-		print("TEST")
-		$Label/AnimationPlayer.play()
-	if Global.current_time_started && Global.phase == 0:
+		workTimer.start()
+		breakTimer.stop()
+		scrollAlertText.text = "It's Work Time!!!"
+		bankWindow.title = "Bank Account"
+		depositButton.hide()
+		debtMinimumPayDisplay.hide()
+		scrollAlertTextAnimation.play()
+	if Global.work_time_started && Global.phase == 0:
 		if time == 0:
-			$"work timer".stop()
-			Global.current_time_started = false
+			workTimer.stop()
+			Global.work_time_started = false
 			if Global.times.size() - 1 == Global.current_time_id:
 				Global.current_time_id = 0
 			Global.current_time_id += 1
 			Global.phase = 1
-			$"work window".title = "Work - Time Up!"
+			workWindow.title = "Work - Time Up!"
 			await get_tree().create_timer(0.5).timeout
-			$"work window".hide()
-			$"bank account window/debt/deposit".show()
-			$"bank account window/debt/Min Debt".show()
+			workWindow.hide()
+			depositButton.show()
+			debtMinimumPayDisplay.show()
 		else:
-			
-			$"work window".title = "Work - " + seconds2hhmmss(time)
+			workWindow.title = "Work - " + seconds2hhmmss(time)
+	
 	if Global.phase == 1:
-		print("Hello") 
-		if not break_text_shown:
+		if not Global.break_time_started:
+			Global.break_time_started = true
 			time = Global.times[Global.current_time_id] + randi_range(1,5)
 			deposited_in_round = 0
-			$"break timer".start()
-			print("hi")
-			
-			$Label.text = "It's Break Time!!!"
-			$Label/AnimationPlayer.play()
-			break_text_shown = true
-		$"bank account window/debt/Money Display".text = "$" + str(Global.debt)
-		$"bank account window/debt/deposit".show()
-		$"bank account window/debt/Min Debt".show()
-		print("Hello")
+			breakTimer.start()
+			scrollAlertText.text = "It's Break Time!!!"
+			scrollAlertTextAnimation.play()
+		earningsAmountDisplay.text = "$" + str(Global.debt)
+		depositButton.show()
+		debtMinimumPayDisplay.show()
 		if time == 0:
-			print("Hello")
 			if deposited_in_round < 7:
 				get_tree().change_scene_to_file("res://game_over.tscn")
 			else:
-				Global.current_time_started = false
+				Global.work_time_started = false
 				Global.phase = 0
-				$"break timer".stop()
-				$"work window".show()
+				breakTimer.stop()
+				workWindow.show()
 		else:
-			print("Hello")
-			$"bank account window".title = "Break - " + seconds2hhmmss(time)
+			bankWindow.title = "Bank Account - " + seconds2hhmmss(time)
 
 
 
@@ -92,10 +107,10 @@ func _on_deposit_pressed():
 
 
 func _on_timer_timeout():
-	if $"bank account window/debt/deposit".disabled:
-		$"bank account window/debt/deposit".disabled = false
+	if depositButton.disabled:
+		depositButton.disabled = false
 	else:
-		$"bank account window/debt/deposit".disabled = true
+		depositButton.disabled = true
 
 
 func _on_break_timer_timeout():

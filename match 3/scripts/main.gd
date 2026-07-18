@@ -178,7 +178,7 @@ func process_board_state():
 			tween.finished.connect(piece.queue_free)
 			
 			if $"../..":
-				$"../..".money += 0.25
+				$"../..".money += 1
 		
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()

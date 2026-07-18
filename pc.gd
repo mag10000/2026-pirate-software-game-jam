@@ -4,6 +4,10 @@ var money = 0.00
 
 var time = 0
 
+var break_text_shown = false
+
+var deposited_in_round = 0
+
 func _process(delta):
 	if ("$" + str(money)).length() == 4:
 		$"bank account window/Money Display".text = "$" + str(money) + "0"
@@ -12,8 +16,15 @@ func _process(delta):
 	
 	if not Global.current_time_started && Global.phase == 0:
 		Global.current_time_started = true
-		time = Global.times[Global.current_time_id]
+		time = Global.times[Global.current_time_id] + randi_range(1,5)
 		$"work timer".start()
+		$Label.text = "It's Work Time!!!"
+		$"break timer".stop()
+		$"bank account window".title = "Bank Account"
+		$"bank account window/debt/deposit".hide()
+		$"bank account window/debt/Min Debt".hide()
+		print("TEST")
+		$Label/AnimationPlayer.play()
 	if Global.current_time_started && Global.phase == 0:
 		if time == 0:
 			$"work timer".stop()
@@ -25,11 +36,38 @@ func _process(delta):
 			$"work window".title = "Work - Time Up!"
 			await get_tree().create_timer(0.5).timeout
 			$"work window".hide()
+			$"bank account window/debt/deposit".show()
+			$"bank account window/debt/Min Debt".show()
 		else:
+			
 			$"work window".title = "Work - " + seconds2hhmmss(time)
 	if Global.phase == 1:
-		$"payoff debt/Money Display".text = "$" + str(Global.debt)
-		$"payoff debt".show()
+		print("Hello") 
+		if not break_text_shown:
+			time = Global.times[Global.current_time_id] + randi_range(1,5)
+			deposited_in_round = 0
+			$"break timer".start()
+			print("hi")
+			
+			$Label.text = "It's Break Time!!!"
+			$Label/AnimationPlayer.play()
+			break_text_shown = true
+		$"bank account window/debt/Money Display".text = "$" + str(Global.debt)
+		$"bank account window/debt/deposit".show()
+		$"bank account window/debt/Min Debt".show()
+		print("Hello")
+		if time == 0:
+			print("Hello")
+			if deposited_in_round < 7:
+				get_tree().change_scene_to_file("res://game_over.tscn")
+			else:
+				Global.current_time_started = false
+				Global.phase = 0
+				$"break timer".stop()
+				$"work window".show()
+		else:
+			print("Hello")
+			$"bank account window".title = "Break - " + seconds2hhmmss(time)
 
 
 
@@ -47,18 +85,18 @@ func _on_work_timer_timeout():
 
 
 func _on_deposit_pressed():
-	if $"bank account deposit window".visible == true:
-		return
+	if money != 0:
+		money -= 1
+		Global.debt -= 1
+		deposited_in_round += 1
+
+
+func _on_timer_timeout():
+	if $"bank account window/debt/deposit".disabled:
+		$"bank account window/debt/deposit".disabled = false
 	else:
-		$"bank account deposit window".show()
-		$"bank account deposit window/SpinBox".max_value = money
+		$"bank account window/debt/deposit".disabled = true
 
 
-func _on_deposit_from_bank_pressed():
-	money -= $"bank account deposit window/SpinBox".value
-	Global.debt -= $"bank account deposit window/SpinBox".value
-	$"bank account deposit window".hide()
-	$"payoff debt".hide()
-	$"work window".show()
-	Global.phase = 0
-	
+func _on_break_timer_timeout():
+	time -= 1

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://cwop7h3qng4w7"]
+
+[ext_resource type="Script" uid="uid://coaujftfii5sh" path="res://settings.gd" id="1_x2hje"]
+[ext_resource type="FontFile" uid="uid://b2gtqd3q64ntc" path="res://PressStart2P-Regular.ttf" id="2_nkug2"]
+
+[node name="settings" type="Control" unique_id=743456714]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x2hje")
+
+[node name="Button" type="Button" parent="." unique_id=707283513]
+layout_mode = 0
+offset_right = 137.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("2_nkug2")
+text = "Back"
+
+[node name="music" type="VSlider" parent="." unique_id=1028970283]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 81.0
+offset_right = 36.0
+offset_bottom = 326.0
+value = 100.0
+
+[node name="Label" type="Label" parent="music" unique_id=366368697]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 10.0
+offset_right = 119.0
+offset_bottom = 33.0
+rotation = 1.5707964
+scale = Vector2(1, 1.0187167)
+theme_override_fonts/font = ExtResource("2_nkug2")
+text = "Music"
+
+[node name="sfx" type="VSlider" parent="." unique_id=661060230]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 81.0
+offset_right = 119.0
+offset_bottom = 326.0
+value = 100.0
+
+[node name="Label" type="Label" parent="sfx" unique_id=1669103325]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 10.0
+offset_right = 119.0
+offset_bottom = 33.0
+rotation = 1.5707964
+scale = Vector2(1, 1.0187167)
+theme_override_fonts/font = ExtResource("2_nkug2")
+text = "Sfx"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

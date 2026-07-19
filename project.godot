@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Audio="*uid://dnjrgvu2rssgg"
 Global="*uid://djvkm7iuxwkui"
+InventoryManager="*uid://1mricf1l88em"
 
 [display]
 

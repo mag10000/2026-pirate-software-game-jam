@@ -28,6 +28,9 @@ var time = 0
 # Amount Deposited in current Round
 var deposited_in_round = 0
 
+func _ready():
+	InventoryManager.grant_item("res://inventory/items/item.tres")
+	InventoryManager.grant_item("res://inventory/items/item.tres")
 
 # Runs every frame
 func _process(delta):

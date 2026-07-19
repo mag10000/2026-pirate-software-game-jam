@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bdgfbroe8awff" path="res://pc.gd" id="1_de6uy"]
 [ext_resource type="FontFile" uid="uid://b2gtqd3q64ntc" path="res://PressStart2P-Regular.ttf" id="1_ukbfy"]
 [ext_resource type="PackedScene" uid="uid://b8cjd5xlk3m1p" path="res://match 3/scenes/main.tscn" id="2_crfiw"]
+[ext_resource type="PackedScene" uid="uid://bn4cxagiavp8u" path="res://inventory/scenes/inventory.tscn" id="4_3d7xj"]
 [ext_resource type="AudioStream" uid="uid://k2ydfhxyfqx7" path="res://match 3/sounds/tile-land.ogg" id="4_s818i"]
 
 [sub_resource type="Animation" id="Animation_s818i"]
@@ -84,7 +85,7 @@ _data = {
 &"new_animation": SubResource("Animation_3d7xj")
 }
 
-[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "workTimer", "breakTimer", "depositFlickerTimer", "workWindow", "bankWindow", "itemWindow", "depositButton", "scrollAlertTextAnimation")]
+[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "workTimer", "breakTimer", "depositFlickerTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "depositButton", "scrollAlertTextAnimation")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -102,6 +103,7 @@ depositFlickerTimer = NodePath("bank account window/debt/deposit/depositFlickerT
 workWindow = NodePath("work window")
 bankWindow = NodePath("bank account window")
 itemWindow = NodePath("inventory window")
+storeWindow = NodePath("store window")
 depositButton = NodePath("bank account window/debt/deposit")
 scrollAlertTextAnimation = NodePath("Label/AnimationPlayer")
 
@@ -176,14 +178,6 @@ theme_override_font_sizes/title_font_size = 8
 position = Vector2(76, 51)
 scale = Vector2(0.5, 0.5)
 width = 6
-
-[node name="store window" type="Window" parent="." unique_id=1995505667]
-oversampling_override = 1.0
-title = "Online Shopping"
-position = Vector2i(257, 36)
-size = Vector2i(305, 205)
-theme_override_fonts/title_font = ExtResource("1_ukbfy")
-theme_override_font_sizes/title_font_size = 8
 
 [node name="bank account window" type="Window" parent="." unique_id=1736246488]
 oversampling_override = 1.0
@@ -264,6 +258,17 @@ size = Vector2i(305, 40)
 theme_override_fonts/title_font = ExtResource("1_ukbfy")
 theme_override_font_sizes/title_font_size = 8
 
+[node name="inventory" parent="inventory window" unique_id=154207438 instance=ExtResource("4_3d7xj")]
+
+[node name="store window" type="Window" parent="." unique_id=1995505667]
+oversampling_override = 1.0
+title = "Online Shopping"
+position = Vector2i(257, 36)
+size = Vector2i(305, 205)
+visible = false
+theme_override_fonts/title_font = ExtResource("1_ukbfy")
+theme_override_font_sizes/title_font_size = 8
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=448535725]
 stream = ExtResource("4_s818i")
 
@@ -275,3 +280,5 @@ stream = ExtResource("4_s818i")
 [connection signal="timeout" from="bank account window/debt/deposit/depositFlickerTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="work timer" to="." method="_on_work_timer_timeout"]
 [connection signal="timeout" from="break timer" to="." method="_on_break_timer_timeout"]
+
+[editable path="inventory window/inventory"]

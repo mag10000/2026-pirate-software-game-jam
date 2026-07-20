@@ -15,3 +15,5 @@ var debt = 1000
 var minimumPay = 7
 
 var minimumPayStatic = 7
+
+var item_pool = ["res://inventory/items/debug/email.tres","res://inventory/items/debug/folder.tres","res://inventory/items/debug/printer.tres"]

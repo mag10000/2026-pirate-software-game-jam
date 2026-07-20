@@ -19,6 +19,24 @@ extends Control
 
 @export var scrollAlertTextAnimation: AnimationPlayer
 
+@export_group("store")
+
+@export var item1: Button
+@export var item1Label: Label
+
+@export var item2: Button
+@export var item2Label: Label
+
+@export var item3: Button
+@export var item3Label: Label
+
+var item1Price = 0
+var item2Price = 0
+var item3Price = 0
+var item1Discription = 0
+var item2Discription = 0
+var item3Discription = 0
+
 # The Amount of Money the Player Has
 var money = 0
 
@@ -73,11 +91,29 @@ func _process(delta):
 			time = Global.times[Global.current_time_id] + randi_range(1,5)
 			deposited_in_round = 0
 			breakTimer.start()
+			var item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+			var item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+			var item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+			item1.text = item1Random.item_name
+			item2.text = item2Random.item_name
+			item3.text = item3Random.item_name
+			item1.icon = item1Random.item_icon
+			item2.icon = item2Random.item_icon
+			item3.icon = item3Random.item_icon
+			item1Discription = item1Random.discription
+			item2Discription = item2Random.discription
+			item3Discription = item3Random.discription
+			item1Price = item1Random.cost
+			item2Price = item2Random.cost
+			item3Price = item3Random.cost
 			scrollAlertText.text = "It's Break Time!!!"
 			scrollAlertTextAnimation.play()
 
 		depositButton.show()
 		debtMinimumPayDisplay.show()
+		item1Label.text = item1Discription + " - Price $" + str(item1Price)
+		item2Label.text = item2Discription + " - Price $" + str(item2Price)
+		item3Label.text = item3Discription + " - Price $" + str(item3Price)
 		if time == 0:
 			if deposited_in_round < Global.minimumPayStatic:
 				get_tree().change_scene_to_file("res://game_over.tscn")
@@ -114,7 +150,7 @@ func _on_deposit_pressed():
 			Global.minimumPay -= 1
 
 
-func _on_timer_timeout():
+func _on_deposit_flicker_timer_timeout():
 	if depositButton.disabled:
 		depositButton.disabled = false
 	else:
@@ -123,3 +159,46 @@ func _on_timer_timeout():
 
 func _on_break_timer_timeout():
 	time -= 1
+
+func item_clicked(node):
+	print("Clicked on item: ",node.item.item_name)
+	match node.item.item_name:
+		pass #TODO
+
+
+func _on_store_flicker_timer_timeout():
+	if item1.disabled:
+		item1.disabled = false
+	else:
+		item1.disabled = true
+	
+	if item2.disabled:
+		item2.disabled = false
+	else:
+		item2.disabled = true
+	
+	if item3.disabled:
+		item3.disabled = false
+	else:
+		item3.disabled = true
+
+
+func _on_item_1_pressed():
+	if money > 0:
+		print("TEST")
+		item1Price -= 1
+		money -= 1
+
+
+func _on_item_2_pressed():
+	if money > 0:
+		print("TEST")
+		item2Price -= 1
+		money -= 1
+
+
+func _on_item_3_pressed():
+	if money > 0:
+		print("TEST")
+		item3Price -= 1
+		money -= 1

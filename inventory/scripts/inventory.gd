@@ -29,3 +29,6 @@ func set_items():
 			on += 1
 	else:
 		print("not enough slots for the amount of items")
+
+func item_clicked(node):
+	$"../..".item_clicked(node)

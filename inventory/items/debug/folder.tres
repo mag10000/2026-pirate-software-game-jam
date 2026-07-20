@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://hy3jrd0mjcpa"]
+
+[ext_resource type="Script" uid="uid://b61bii383w31e" path="res://inventory/scripts/item.gd" id="1_2qp7x"]
+[ext_resource type="Texture2D" uid="uid://v8ocsjth53he" path="res://art/Folder_Icon.png" id="1_77nia"]
+
+[resource]
+script = ExtResource("1_2qp7x")
+item_name = "folder"
+item_icon = ExtResource("1_77nia")
+item_group = "ALL"
+discription = "Does Stuff"
+cost = 5
+metadata/_custom_type_script = "uid://b61bii383w31e"

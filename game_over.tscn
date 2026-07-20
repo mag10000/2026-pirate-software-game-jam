@@ -28,7 +28,7 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_y26ei")
 theme_override_font_sizes/font_size = 24
 text = "Game Over - You Failed
- to Deposit the Miinimum "
+ to Deposit the Minimum "
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="." unique_id=274403113]

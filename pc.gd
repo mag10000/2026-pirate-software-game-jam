@@ -14,6 +14,7 @@ extends Control
 @export var bankWindow: Window
 @export var itemWindow: Window
 @export var storeWindow: Window
+@export var topWindow: Window
 
 @export var depositButton: Button
 
@@ -30,6 +31,9 @@ extends Control
 @export var item3: Button
 @export var item3Label: Label
 
+var item1Random
+var item2Random
+var item3Random
 var item1Price = 0
 var item2Price = 0
 var item3Price = 0
@@ -49,6 +53,9 @@ var deposited_in_round = 0
 func _ready():
 	InventoryManager.grant_item("res://inventory/items/item.tres")
 	InventoryManager.grant_item("res://inventory/items/item.tres")
+	workWindow.hide()
+	storeWindow.hide()
+	topWindow.hide()
 
 # Runs every frame
 func _process(delta):
@@ -59,41 +66,39 @@ func _process(delta):
 	if Global.phase == 0:
 		Global.minimumPay = 7
 		if not Global.work_time_started:
+			scrollAlertText.text = "It's Work Time!!!"
+			topWindow.show()
+			scrollAlertTextAnimation.play()
+			await get_tree().create_timer(1.25).timeout
+			topWindow.hide()
+			workWindow.show()
 			Global.break_time_started = false
 			Global.work_time_started = true
 			time = Global.times[Global.current_time_id] + randi_range(1,5)
 			workTimer.start()
 			breakTimer.stop()
-			scrollAlertText.text = "It's Work Time!!!"
-			scrollAlertTextAnimation.play()
 		bankWindow.title = "Bank Account"
 		depositButton.hide()
 		debtMinimumPayDisplay.hide()
+		storeWindow.hide()
 		if time == 0:
 			workTimer.stop()
 			Global.work_time_started = false
 			if Global.times.size() - 1 == Global.current_time_id:
 				Global.current_time_id = 0
 			Global.current_time_id += 1
-			Global.phase = 1
 			workWindow.title = "Work - Time Up!"
 			await get_tree().create_timer(0.5).timeout
 			workWindow.hide()
-			storeWindow.show()
-			depositButton.show()
-			debtMinimumPayDisplay.show()
+			Global.phase = 1
 		else:
 			workWindow.title = "Work - " + str(time)
 			
 	if Global.phase == 1:
 		if not Global.break_time_started:
-			Global.break_time_started = true
-			time = Global.times[Global.current_time_id] + randi_range(1,5)
-			deposited_in_round = 0
-			breakTimer.start()
-			var item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-			var item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-			var item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+			item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+			item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+			item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
 			item1.text = item1Random.item_name
 			item2.text = item2Random.item_name
 			item3.text = item3Random.item_name
@@ -107,10 +112,20 @@ func _process(delta):
 			item2Price = item2Random.cost
 			item3Price = item3Random.cost
 			scrollAlertText.text = "It's Break Time!!!"
+			topWindow.show()
 			scrollAlertTextAnimation.play()
-
+			await get_tree().create_timer(1.25).timeout
+			topWindow.hide()
+			storeWindow.show()
+			depositButton.show()
+			debtMinimumPayDisplay.show()
+			Global.break_time_started = true
+			time = Global.times[Global.current_time_id] + randi_range(1,5)
+			deposited_in_round = 0
+			breakTimer.start()
 		depositButton.show()
 		debtMinimumPayDisplay.show()
+		storeWindow.show()
 		item1Label.text = item1Discription + " - Price $" + str(item1Price)
 		item2Label.text = item2Discription + " - Price $" + str(item2Price)
 		item3Label.text = item3Discription + " - Price $" + str(item3Price)
@@ -119,10 +134,10 @@ func _process(delta):
 				get_tree().change_scene_to_file("res://game_over.tscn")
 			else:
 				Global.work_time_started = false
-				Global.phase = 0
 				breakTimer.stop()
 				storeWindow.hide()
 				workWindow.show()
+				Global.phase = 0
 		else:
 			bankWindow.title = "Bank Account - " + str(time)
 
@@ -184,21 +199,33 @@ func _on_store_flicker_timer_timeout():
 
 
 func _on_item_1_pressed():
-	if money > 0:
+	if money > 0 && item1Price > 0:
 		print("TEST")
 		item1Price -= 1
 		money -= 1
+		if item1Price == 0:
+			# Grant Item and Remove Item from Store
+			# InventoryManager.grant_item(item1Random)
+			print("Item3Price is Zero")
 
 
 func _on_item_2_pressed():
-	if money > 0:
+	if money > 0 && item2Price > 0:
 		print("TEST")
 		item2Price -= 1
 		money -= 1
+		if item2Price == 0:
+			# Grant Item and Remove Item from Store
+			# InventoryManager.grant_item(item2Random)
+			print("Item2Price is Zero")
 
 
 func _on_item_3_pressed():
-	if money > 0:
+	if money > 0 && item3Price > 0:
 		print("TEST")
 		item3Price -= 1
 		money -= 1
+		if item3Price == 0:
+			# Grant Item and Remove Item from Store
+			# InventoryManager.grant_item(item3Random)
+			print("Item3Price is Zero")

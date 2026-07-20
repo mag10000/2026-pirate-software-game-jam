@@ -10,4 +10,5 @@ item_icon = ExtResource("1_77nia")
 item_group = "ALL"
 discription = "Does Stuff"
 cost = 5
+item_path = "\"res://inventory/items/item.tres\""
 metadata/_custom_type_script = "uid://b61bii383w31e"

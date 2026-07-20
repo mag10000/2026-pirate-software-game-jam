@@ -37,9 +37,9 @@ var item3Random
 var item1Price = 0
 var item2Price = 0
 var item3Price = 0
-var item1Discription = 0
-var item2Discription = 0
-var item3Discription = 0
+var item1Discription
+var item2Discription
+var item3Discription
 
 # The Amount of Money the Player Has
 var money = 0
@@ -51,8 +51,7 @@ var time = 0
 var deposited_in_round = 0
 
 func _ready():
-	InventoryManager.grant_item("res://inventory/items/item.tres")
-	InventoryManager.grant_item("res://inventory/items/item.tres")
+	create_new_store()
 	workWindow.hide()
 	storeWindow.hide()
 	topWindow.hide()
@@ -64,30 +63,22 @@ func _process(delta):
 	debtMinimumPayDisplay.text = "Minimum Debt Due: $" + str(Global.minimumPay)
 	
 	if Global.phase == 0:
-		Global.minimumPay = 7
+		phase_0_setup()
+		
 		if not Global.work_time_started:
-			scrollAlertText.text = "It's Work Time!!!"
-			topWindow.show()
-			scrollAlertTextAnimation.play()
-			await get_tree().create_timer(1.25).timeout
-			topWindow.hide()
-			workWindow.show()
-			Global.break_time_started = false
-			Global.work_time_started = true
+			change_phase_display(0)
 			time = Global.times[Global.current_time_id] + randi_range(1,5)
+			workWindow.show()
 			workTimer.start()
-			breakTimer.stop()
-		bankWindow.title = "Bank Account"
-		depositButton.hide()
-		debtMinimumPayDisplay.hide()
-		storeWindow.hide()
+			Global.work_time_started = true
+
 		if time == 0:
 			workTimer.stop()
 			Global.work_time_started = false
+			workWindow.title = "Work - Time Up!"
 			if Global.times.size() - 1 == Global.current_time_id:
 				Global.current_time_id = 0
 			Global.current_time_id += 1
-			workWindow.title = "Work - Time Up!"
 			await get_tree().create_timer(0.5).timeout
 			workWindow.hide()
 			Global.phase = 1
@@ -95,53 +86,35 @@ func _process(delta):
 			workWindow.title = "Work - " + str(time)
 			
 	if Global.phase == 1:
+		phase_1_setup()
+		
 		if not Global.break_time_started:
-			item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-			item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-			item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-			item1.text = item1Random.item_name
-			item2.text = item2Random.item_name
-			item3.text = item3Random.item_name
-			item1.icon = item1Random.item_icon
-			item2.icon = item2Random.item_icon
-			item3.icon = item3Random.item_icon
-			item1Discription = item1Random.discription
-			item2Discription = item2Random.discription
-			item3Discription = item3Random.discription
-			item1Price = item1Random.cost
-			item2Price = item2Random.cost
-			item3Price = item3Random.cost
-			scrollAlertText.text = "It's Break Time!!!"
-			topWindow.show()
-			scrollAlertTextAnimation.play()
-			await get_tree().create_timer(1.25).timeout
-			topWindow.hide()
-			storeWindow.show()
-			depositButton.show()
-			debtMinimumPayDisplay.show()
-			Global.break_time_started = true
+			create_new_store()
+			change_phase_display(1)
 			time = Global.times[Global.current_time_id] + randi_range(1,5)
 			deposited_in_round = 0
+			depositButton.show()
+			debtMinimumPayDisplay.show()
+			storeWindow.show()
 			breakTimer.start()
-		depositButton.show()
-		debtMinimumPayDisplay.show()
-		storeWindow.show()
-		item1Label.text = item1Discription + " - Price $" + str(item1Price)
-		item2Label.text = item2Discription + " - Price $" + str(item2Price)
-		item3Label.text = item3Discription + " - Price $" + str(item3Price)
+			Global.break_time_started = true
+
 		if time == 0:
 			if deposited_in_round < Global.minimumPayStatic:
 				get_tree().change_scene_to_file("res://game_over.tscn")
 			else:
-				Global.work_time_started = false
 				breakTimer.stop()
+				Global.break_time_started = false
+				if Global.times.size() - 1 == Global.current_time_id:
+					Global.current_time_id = 0
+				Global.current_time_id += 1
+				await get_tree().create_timer(0.5).timeout
 				storeWindow.hide()
-				workWindow.show()
+				depositButton.hide()
+				debtMinimumPayDisplay.hide()
 				Global.phase = 0
 		else:
 			bankWindow.title = "Bank Account - " + str(time)
-
-
 
 func seconds2hhmmss(total_seconds: float) -> String:
 	#total_seconds = 12345
@@ -150,7 +123,6 @@ func seconds2hhmmss(total_seconds: float) -> String:
 	var hours:  int   =  int(total_seconds / 3600.0)
 	var hhmmss_string:String = "%02d:%02d:%05.2f" % [hours, minutes, seconds]
 	return hhmmss_string.replace(".00","")
-
 
 func _on_work_timer_timeout():
 	time -= 1
@@ -205,8 +177,10 @@ func _on_item_1_pressed():
 		money -= 1
 		if item1Price == 0:
 			# Grant Item and Remove Item from Store
-			# InventoryManager.grant_item(item1Random)
+			InventoryManager.grant_item(item1Random.get_path())
 			print("Item3Price is Zero")
+			item1.hide()
+			item1Label.hide()
 
 
 func _on_item_2_pressed():
@@ -216,9 +190,10 @@ func _on_item_2_pressed():
 		money -= 1
 		if item2Price == 0:
 			# Grant Item and Remove Item from Store
-			# InventoryManager.grant_item(item2Random)
+			InventoryManager.grant_item(item2Random.get_path())
 			print("Item2Price is Zero")
-
+			item2.hide()
+			item2Label.hide()
 
 func _on_item_3_pressed():
 	if money > 0 && item3Price > 0:
@@ -227,5 +202,62 @@ func _on_item_3_pressed():
 		money -= 1
 		if item3Price == 0:
 			# Grant Item and Remove Item from Store
-			# InventoryManager.grant_item(item3Random)
+			InventoryManager.grant_item(item3Random.get_path())
 			print("Item3Price is Zero")
+			item3.hide()
+			item3Label.hide()
+			
+			
+func phase_0_setup():
+	Global.break_time_started = false
+	breakTimer.stop()
+	Global.minimumPay = 7
+	bankWindow.title = "Bank Account"
+	depositButton.hide()
+	debtMinimumPayDisplay.hide()
+	storeWindow.hide()
+
+func phase_1_setup():
+	Global.work_time_started = false
+	workTimer.stop()
+	workWindow.hide()
+
+	item1Label.text = item1Discription + " - Price $" + str(item1Price)
+	item2Label.text = item2Discription + " - Price $" + str(item2Price)
+	item3Label.text = item3Discription + " - Price $" + str(item3Price)
+	
+func change_phase_display(phase: int):
+	if phase == 0:
+		scrollAlertText.text = "It's Work Time!!!"
+	elif phase == 1:
+		scrollAlertText.text = "It's Break Time!!!"	
+
+	await get_tree().create_timer(0.5).timeout
+	topWindow.show()
+	scrollAlertTextAnimation.play()
+	await get_tree().create_timer(1.25).timeout
+	topWindow.hide()
+	
+func create_new_store():
+	item1.show()
+	item2Label.show()
+	item2.show()
+	item2Label.show()
+	item3.show()
+	item3Label.show()	
+	
+	item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+	item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+	item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+	item1.text = item1Random.item_name
+	item2.text = item2Random.item_name
+	item3.text = item3Random.item_name
+	item1.icon = item1Random.item_icon
+	item2.icon = item2Random.item_icon
+	item3.icon = item3Random.item_icon
+	item1Discription = item1Random.discription
+	item2Discription = item2Random.discription
+	item3Discription = item3Random.discription
+	item1Price = item1Random.cost
+	item2Price = item2Random.cost
+	item3Price = item3Random.cost

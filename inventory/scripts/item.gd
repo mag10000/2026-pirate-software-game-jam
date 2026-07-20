@@ -1,4 +1,4 @@
-@icon("res://assets/art/item.png")
+@icon("res://art/item.png")
 extends Resource
 class_name InventoryItem
 

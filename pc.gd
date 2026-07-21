@@ -15,6 +15,9 @@ extends Control
 @export var itemWindow: Window
 @export var storeWindow: Window
 @export var topWindow: Window
+@export var timerWindow: Window
+
+@export var progressBar: ProgressBar
 
 @export var depositButton: Button
 
@@ -50,6 +53,11 @@ var time = 0
 # Amount Deposited in current Round
 var deposited_in_round = 0
 
+# Variables for the color in the progress bar
+var r = 0
+var g = 0
+var b = 0
+
 func _ready():
 	create_new_store()
 	workWindow.hide()
@@ -61,13 +69,17 @@ func _process(delta):
 	earningsAmountDisplay.text = "$" + str(money)
 	debtAmountDisplay.text = "$" + str(Global.debt)
 	debtMinimumPayDisplay.text = "Minimum Debt Due: $" + str(Global.minimumPay)
-	
+	progressBar.value = time
+	r = abs(time * 0.01 - 1.0)
+	g = time * 0.01 
+	#progressBar.get("theme_override_styles/fill").bg_color = Color(1.0, 0.0, 0.0, 1.0)
 	if Global.phase == 0:
 		phase_0_setup()
 		
 		if not Global.work_time_started:
 			change_phase_display(0)
-			time = Global.times[Global.current_time_id] + randi_range(1,5)
+			time = Global.work_times[Global.current_work_time_id]
+			progressBar.max_value = time
 			workWindow.show()
 			workTimer.start()
 			Global.work_time_started = true
@@ -75,15 +87,11 @@ func _process(delta):
 		if time == 0:
 			workTimer.stop()
 			Global.work_time_started = false
-			workWindow.title = "Work - Time Up!"
-			if Global.times.size() - 1 == Global.current_time_id:
-				Global.current_time_id = 0
-			Global.current_time_id += 1
+			Global.current_work_time_id = randi_range(0,3)
 			await get_tree().create_timer(0.5).timeout
 			workWindow.hide()
 			Global.phase = 1
-		else:
-			workWindow.title = "Work - " + str(time)
+
 			
 	if Global.phase == 1:
 		phase_1_setup()
@@ -91,7 +99,8 @@ func _process(delta):
 		if not Global.break_time_started:
 			create_new_store()
 			change_phase_display(1)
-			time = Global.times[Global.current_time_id] + randi_range(1,5)
+			time = Global.break_times[Global.current_break_time_id]
+			progressBar.max_value = time
 			deposited_in_round = 0
 			depositButton.show()
 			debtMinimumPayDisplay.show()
@@ -105,16 +114,12 @@ func _process(delta):
 			else:
 				breakTimer.stop()
 				Global.break_time_started = false
-				if Global.times.size() - 1 == Global.current_time_id:
-					Global.current_time_id = 0
-				Global.current_time_id += 1
+				Global.current_break_time_id = randi_range(0, 3)
 				await get_tree().create_timer(0.5).timeout
 				storeWindow.hide()
 				depositButton.hide()
 				debtMinimumPayDisplay.hide()
 				Global.phase = 0
-		else:
-			bankWindow.title = "Bank Account - " + str(time)
 
 func seconds2hhmmss(total_seconds: float) -> String:
 	#total_seconds = 12345
@@ -150,7 +155,9 @@ func _on_break_timer_timeout():
 func item_clicked(node):
 	print("Clicked on item: ",node.item.item_name)
 	match node.item.item_name:
-		pass #TODO
+		"Add Time":
+			time = time + 5
+			InventoryManager.revoke_item("res://inventory/items/time_add_item.tres")
 
 
 func _on_store_flicker_timer_timeout():
@@ -212,7 +219,7 @@ func phase_0_setup():
 	Global.break_time_started = false
 	breakTimer.stop()
 	Global.minimumPay = 7
-	bankWindow.title = "Bank Account"
+
 	depositButton.hide()
 	debtMinimumPayDisplay.hide()
 	storeWindow.hide()

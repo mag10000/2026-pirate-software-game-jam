@@ -13,6 +13,8 @@ func _process(delta):
 		$border/item.texture = item.item_icon
 		if amount > 1:
 			$border/item/Label.text = str(amount)
+		else:
+			$border/item/Label.text = ""
 	else:
 		$border/item.texture = load("res://art/blank.tres")
 		$border/item/Label.text = ""
@@ -20,3 +22,10 @@ func _process(delta):
 
 func _on_button_pressed():
 	$"../../..".item_clicked(self)
+	amount -= 1
+	if amount == 0:
+		item = null
+	
+func reset_item_game_over():
+	amount = 0
+	item = null

@@ -10,14 +10,16 @@
 [ext_resource type="Texture2D" uid="uid://mpsuadf8lyxi" path="res://match 3/sprites/backgrounds/background.png" id="8_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ref71l2dhbw1" path="res://art/Spreadsheet_Icon.png" id="8_6ixp2"]
 [ext_resource type="Texture2D" uid="uid://c26xoi1o70ttr" path="res://match 3/sprites/cursors/cursor-hand-open.png" id="9_4c57u"]
+[ext_resource type="Texture2D" uid="uid://cwknp4xg4o1w8" path="res://art/Phone_Icon.png" id="9_n4ug4"]
 [ext_resource type="Texture2D" uid="uid://eailhed83ju8" path="res://match 3/sprites/cursors/cursor-hand-closed.png" id="10_efxa6"]
+[ext_resource type="Texture2D" uid="uid://cjfvrufwel62i" path="res://art/Message_Icon.png" id="10_pq6s4"]
 
 [node name="Main" type="Node2D" unique_id=1469547217]
 script = ExtResource("1_ig7tw")
 height = 6
 tile_scene = ExtResource("2_0xm2m")
 sparkles_scene = ExtResource("3_kek77")
-textures = Array[Texture2D]([ExtResource("4_l3cu5"), ExtResource("5_10jc3"), ExtResource("6_n4ug4"), ExtResource("7_pq6s4"), ExtResource("8_6ixp2")])
+textures = Array[Texture2D]([ExtResource("4_l3cu5"), ExtResource("5_10jc3"), ExtResource("6_n4ug4"), ExtResource("7_pq6s4"), ExtResource("8_6ixp2"), ExtResource("9_n4ug4"), ExtResource("10_pq6s4")])
 open_hand_cursor = ExtResource("9_4c57u")
 closed_hand_cursor = ExtResource("10_efxa6")
 

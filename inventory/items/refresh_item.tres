@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://cwk08u88pjv0j"]
+
+[ext_resource type="Texture2D" uid="uid://ntgbgwjnxg4o" path="res://art/ITEM_Refresh.png" id="1_ykcgj"]
+[ext_resource type="Script" uid="uid://b61bii383w31e" path="res://inventory/scripts/item.gd" id="2_rilc7"]
+
+[resource]
+script = ExtResource("2_rilc7")
+item_name = "Refresh Board"
+item_icon = ExtResource("1_ykcgj")
+item_group = "ALL"
+discription = "Refresh entire board"
+cost = 5
+metadata/_custom_type_script = "uid://b61bii383w31e"

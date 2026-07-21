@@ -229,3 +229,26 @@ func is_within_grid(pos: Vector2i) -> bool:
 func set_cursor(cursor):
 	
 	Input.set_default_cursor_shape(cursor)
+
+# Item related functions
+
+func remove_random_icon():
+	
+	var randomToDestroy = randi_range(0, textures.size() - 1)
+	var objectsDestroyed = false
+	
+	for x in width:
+		for y in height:
+			if grid[x][y] == textures[randomToDestroy]:
+				grid[x][y] = null
+				$"../..".money += 1
+				objectsDestroyed = true
+	
+	if objectsDestroyed == true:
+		process_board_state()
+
+func reset_board():
+	for x in width:
+		for y in height:
+				grid[x][y] = null
+	refill_board()

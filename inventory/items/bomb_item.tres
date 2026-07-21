@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://dxuhi5wucsn3d"]
+
+[ext_resource type="Texture2D" uid="uid://cbitp1vxvp4qu" path="res://art/ITEM_Bomb.png" id="1_7rb36"]
+[ext_resource type="Script" uid="uid://b61bii383w31e" path="res://inventory/scripts/item.gd" id="2_jr8oe"]
+
+[resource]
+script = ExtResource("2_jr8oe")
+item_name = "Bomb"
+item_icon = ExtResource("1_7rb36")
+item_group = "ALL"
+discription = "Destroys all of one tile"
+cost = 5
+metadata/_custom_type_script = "uid://b61bii383w31e"

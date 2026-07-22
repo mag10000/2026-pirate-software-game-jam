@@ -79,7 +79,7 @@ func _ready():
 func _process(delta):
 	earningsAmountDisplay.text = "$" + str(money)
 	debtAmountDisplay.text = "$" + str(Global.debt)
-	debtMinimumPayDisplay.text = "Minimum Debt Due: $" + str(Global.minimumPay)
+	debtMinimumPayDisplay.text = "Minimum Debt Due Now\n$" + str(Global.minimumPay)
 	progressBar.value = time
 	if (time > yellowTime && time <= greenTime):
 		progressBar.get("theme_override_styles/fill").bg_color = Color(0.0, 1.0, 0.0, 1.0)

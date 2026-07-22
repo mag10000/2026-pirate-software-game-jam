@@ -392,7 +392,10 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("1_ukbfy")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_ifkhm")
+theme_override_font_sizes/font_size = 24
 disabled = true
 text = "folder"
 icon = ExtResource("5_oj12w")
@@ -402,8 +405,11 @@ expand_icon = true
 
 [node name="item1discription" type="Label" parent="store window/storeitems" unique_id=346004273]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_ukbfy")
-theme_override_font_sizes/font_size = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_ifkhm")
+theme_override_font_sizes/font_size = 16
 text = "Does Stuff"
 
 [node name="item2" type="Button" parent="store window/storeitems" unique_id=42902340]
@@ -411,7 +417,9 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("1_ukbfy")
+theme_override_constants/h_separation = 6
+theme_override_fonts/font = ExtResource("2_ifkhm")
+theme_override_font_sizes/font_size = 24
 text = "printer"
 icon = ExtResource("6_ifkhm")
 autowrap_trim_flags = 0
@@ -420,8 +428,11 @@ expand_icon = true
 
 [node name="item2discription" type="Label" parent="store window/storeitems" unique_id=280100941]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_ukbfy")
-theme_override_font_sizes/font_size = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_ifkhm")
+theme_override_font_sizes/font_size = 16
 text = "Does Stuff"
 
 [node name="item3" type="Button" parent="store window/storeitems" unique_id=1409320806]
@@ -429,7 +440,9 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("1_ukbfy")
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_ifkhm")
+theme_override_font_sizes/font_size = 24
 disabled = true
 text = "email"
 icon = ExtResource("7_8pt1j")
@@ -439,8 +452,11 @@ expand_icon = true
 
 [node name="item3discription" type="Label" parent="store window/storeitems" unique_id=89637367]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_ukbfy")
-theme_override_font_sizes/font_size = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_ifkhm")
+theme_override_font_sizes/font_size = 16
 text = "Does Stuff"
 
 [node name="storeFlickerTimer" type="Timer" parent="store window" unique_id=995754268]

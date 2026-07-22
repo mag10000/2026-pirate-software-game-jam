@@ -55,6 +55,7 @@ func _process(_delta):
 		
 		player.stream = load(sound_path)
 		player.pitch_scale = data["pitch"]
+		player.bus = "Sfx"
 		
 		player.volume_db = linear_to_db(data["volume"])
 		

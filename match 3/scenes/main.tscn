@@ -35,3 +35,5 @@ size_flags_vertical = 3
 texture = ExtResource("8_5vw27")
 
 [node name="Board" type="Node2D" parent="." unique_id=879210771]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=372470445]

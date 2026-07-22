@@ -36,6 +36,8 @@ extends Control
 @export var item3: Button
 @export var item3Label: Label
 
+@export var itemSoldOutArt: Texture
+
 # Color Variables for ProgressBar
 var redTime = 5
 var yellowTime = 10
@@ -51,6 +53,9 @@ var item3Price = 0
 var item1Discription
 var item2Discription
 var item3Discription
+var item1SoldOut = false
+var item2SoldOut = false
+var item3SoldOut = false
 
 # The Amount of Money the Player Has
 var money = 0
@@ -182,17 +187,17 @@ func item_clicked(node):
 			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")			
 			
 func _on_store_flicker_timer_timeout():
-	if item1.disabled:
+	if item1.disabled && item1SoldOut == false:
 		item1.disabled = false
 	else:
 		item1.disabled = true
 	
-	if item2.disabled:
+	if item2.disabled && item2SoldOut == false:
 		item2.disabled = false
 	else:
 		item2.disabled = true
 	
-	if item3.disabled:
+	if item3.disabled && item3SoldOut == false:
 		item3.disabled = false
 	else:
 		item3.disabled = true
@@ -207,8 +212,11 @@ func _on_item_1_pressed():
 			# Grant Item and Remove Item from Store
 			InventoryManager.grant_item(item1Random.get_path())
 			print("Item3Price is Zero")
-			item1.hide()
-			item1Label.hide()
+			
+			item1SoldOut = true
+			item1.icon = itemSoldOutArt
+			item1Label.text = "ITEM NOT AVAILABLE!"
+			item1.disabled
 
 
 func _on_item_2_pressed():
@@ -220,8 +228,11 @@ func _on_item_2_pressed():
 			# Grant Item and Remove Item from Store
 			InventoryManager.grant_item(item2Random.get_path())
 			print("Item2Price is Zero")
-			item2.hide()
-			item2Label.hide()
+			
+			item2SoldOut = true
+			item2.icon = itemSoldOutArt
+			item2Label.text = "ITEM NOT AVAILABLE!"
+			item2.disabled
 
 func _on_item_3_pressed():
 	if money > 0 && item3Price > 0:
@@ -232,9 +243,11 @@ func _on_item_3_pressed():
 			# Grant Item and Remove Item from Store
 			InventoryManager.grant_item(item3Random.get_path())
 			print("Item3Price is Zero")
-			item3.hide()
-			item3Label.hide()
 			
+			item3SoldOut = true
+			item3.icon = itemSoldOutArt
+			item3Label.text = "ITEM NOT AVAILABLE!"
+			item3.disabled
 			
 func phase_0_setup():
 	Global.break_time_started = false
@@ -267,6 +280,10 @@ func change_phase_display(phase: int):
 	topWindow.hide()
 	
 func create_new_store():
+	item1SoldOut = false
+	item2SoldOut = false
+	item3SoldOut = false
+	
 	item1.show()
 	item2Label.show()
 	item2.show()

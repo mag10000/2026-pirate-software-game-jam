@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bdgfbroe8awff" path="res://pc.gd" id="1_de6uy"]
 [ext_resource type="FontFile" uid="uid://b2gtqd3q64ntc" path="res://PressStart2P-Regular.ttf" id="1_ukbfy"]
+[ext_resource type="Texture2D" uid="uid://cj5i8fs244xe3" path="res://art/Sold_Out.png" id="2_0727r"]
 [ext_resource type="PackedScene" uid="uid://b8cjd5xlk3m1p" path="res://match 3/scenes/main.tscn" id="2_crfiw"]
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="2_ifkhm"]
 [ext_resource type="PackedScene" uid="uid://bn4cxagiavp8u" path="res://inventory/scenes/inventory.tscn" id="4_3d7xj"]
+[ext_resource type="Texture2D" uid="uid://c7vfqjyx41sbp" path="res://art/X.png" id="4_8pt1j"]
 [ext_resource type="AudioStream" uid="uid://k2ydfhxyfqx7" path="res://match 3/sounds/tile-land.ogg" id="4_s818i"]
 [ext_resource type="Texture2D" uid="uid://v8ocsjth53he" path="res://art/Folder_Icon.png" id="5_oj12w"]
 [ext_resource type="Texture2D" uid="uid://b5xwmugjgdk1o" path="res://art/Printer_Icon.png" id="6_ifkhm"]
@@ -123,6 +125,7 @@ item2 = NodePath("store window/storeitems/item2")
 item2Label = NodePath("store window/storeitems/item2discription")
 item3 = NodePath("store window/storeitems/item3")
 item3Label = NodePath("store window/storeitems/item3discription")
+itemSoldOutArt = ExtResource("2_0727r")
 
 [node name="BG" type="ColorRect" parent="." unique_id=1800069285]
 layout_mode = 1
@@ -160,6 +163,9 @@ offset_left = 435.0
 offset_top = -22.0
 offset_right = 635.0
 offset_bottom = -6.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 16
 text = "Desktop - July 31, 2037"
@@ -207,6 +213,7 @@ theme_override_colors/title_outline_modulate = Color(0, 0, 0, 1)
 theme_override_constants/title_outline_size = 8
 theme_override_fonts/title_font = ExtResource("2_ifkhm")
 theme_override_font_sizes/title_font_size = 32
+theme_override_icons/close = ExtResource("4_8pt1j")
 
 [node name="Main" parent="work window" unique_id=1469547217 instance=ExtResource("2_crfiw")]
 position = Vector2(76, 51)
@@ -219,13 +226,20 @@ title = "Bank Account"
 position = Vector2i(11, 115)
 size = Vector2i(215, 210)
 unresizable = true
+theme_override_colors/title_color = Color(1, 1, 1, 1)
+theme_override_colors/title_outline_modulate = Color(0, 0, 0, 1)
+theme_override_constants/title_outline_size = 8
 theme_override_fonts/title_font = ExtResource("2_ifkhm")
 theme_override_font_sizes/title_font_size = 32
+theme_override_icons/close = ExtResource("4_8pt1j")
 
 [node name="Title" type="Label" parent="bank account window" unique_id=426150714]
 offset_top = 22.0
 offset_right = 215.0
 offset_bottom = 73.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 24
 text = "Earnings "
@@ -235,6 +249,9 @@ horizontal_alignment = 1
 offset_top = 43.0
 offset_right = 214.0
 offset_bottom = 66.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 16
 text = "$0.00"
@@ -311,8 +328,12 @@ title = "Time Left"
 position = Vector2i(11, 36)
 size = Vector2i(215, 35)
 unresizable = true
+theme_override_colors/title_color = Color(1, 1, 1, 1)
+theme_override_colors/title_outline_modulate = Color(0, 0, 0, 1)
+theme_override_constants/title_outline_size = 8
 theme_override_fonts/title_font = ExtResource("2_ifkhm")
 theme_override_font_sizes/title_font_size = 32
+theme_override_icons/close = ExtResource("4_8pt1j")
 
 [node name="ProgressBar" type="ProgressBar" parent="timer window" unique_id=740962831]
 offset_left = 1.0
@@ -328,8 +349,12 @@ title = "Inventory"
 position = Vector2i(257, 285)
 size = Vector2i(305, 40)
 unresizable = true
+theme_override_colors/title_color = Color(1, 1, 1, 1)
+theme_override_colors/title_outline_modulate = Color(0, 0, 0, 1)
+theme_override_constants/title_outline_size = 8
 theme_override_fonts/title_font = ExtResource("2_ifkhm")
 theme_override_font_sizes/title_font_size = 32
+theme_override_icons/close = ExtResource("4_8pt1j")
 
 [node name="inventory" parent="inventory window" unique_id=154207438 instance=ExtResource("4_3d7xj")]
 anchors_preset = 8
@@ -350,6 +375,7 @@ theme_override_colors/title_outline_modulate = Color(1, 1, 1, 1)
 theme_override_constants/title_outline_size = 8
 theme_override_fonts/title_font = ExtResource("2_ifkhm")
 theme_override_font_sizes/title_font_size = 32
+theme_override_icons/close = ExtResource("4_8pt1j")
 
 [node name="storeitems" type="VBoxContainer" parent="store window" unique_id=1660664693]
 anchors_preset = 13

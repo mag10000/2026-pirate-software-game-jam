@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bqn0mkisu2aba" path="res://match 3/scenes/tile.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://d1i8o2nh1b3a" path="res://match 3/scenes/sparkles.tscn" id="3_kek77"]
 [ext_resource type="Texture2D" uid="uid://cu61cbk68hsnt" path="res://art/Document_Icon.png" id="4_l3cu5"]
+[ext_resource type="PackedScene" uid="uid://3h31eth2dvi1" path="res://match 3/scenes/bomb_fire.tscn" id="4_pq6s4"]
 [ext_resource type="Texture2D" uid="uid://cy2bmabiv4453" path="res://art/Email_Icon.png" id="5_10jc3"]
 [ext_resource type="Texture2D" uid="uid://v8ocsjth53he" path="res://art/Folder_Icon.png" id="6_n4ug4"]
 [ext_resource type="Texture2D" uid="uid://b5xwmugjgdk1o" path="res://art/Printer_Icon.png" id="7_pq6s4"]
@@ -19,6 +20,7 @@ script = ExtResource("1_ig7tw")
 height = 6
 tile_scene = ExtResource("2_0xm2m")
 sparkles_scene = ExtResource("3_kek77")
+bomb_fire_scene = ExtResource("4_pq6s4")
 textures = Array[Texture2D]([ExtResource("4_l3cu5"), ExtResource("5_10jc3"), ExtResource("6_n4ug4"), ExtResource("7_pq6s4"), ExtResource("8_6ixp2"), ExtResource("9_n4ug4"), ExtResource("10_pq6s4")])
 open_hand_cursor = ExtResource("9_4c57u")
 closed_hand_cursor = ExtResource("10_efxa6")

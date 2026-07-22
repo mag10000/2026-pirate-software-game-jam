@@ -8,6 +8,7 @@ extends Node2D
 @export_subgroup("Scenes")
 @export var tile_scene: PackedScene 
 @export var sparkles_scene: PackedScene
+@export var bomb_fire_scene: PackedScene
 
 @export_subgroup("Tiles")
 @export var textures: Array[Texture2D] 
@@ -232,29 +233,64 @@ func set_cursor(cursor):
 
 # Item related functions
 
-func remove_random_icon():
+func get_whole_board()-> Array:
 	
+	var board_dict = {}
+
+	for x in width:
+		for y in height:
+			board_dict[grid[x][y]] = true
+	return board_dict.keys()
+	
+
+func remove_random_icon():
 	var randomToDestroy = randi_range(0, textures.size() - 1)
 	var objectsDestroyed = false
+	var whole_board = get_whole_board()
 	
-	#for x in width:
-	#	for y in height:
-	#		if grid[x][y].texture == textures[randomToDestroy]:
-	#			grid[x][y] = null
-	#			print("Got to destroying")
-	#			$"../..".money += 1
-	#			objectsDestroyed = true
-	for child in $Board.get_children():
-		pass
-	
+	for piece in whole_board:
+			if not is_instance_valid(piece):
+				return
+			if piece.type == str(randomToDestroy):
+				objectsDestroyed = true
+				var effect = bomb_fire_scene.instantiate()
+				effect.position = piece.position
+				container.add_child(effect)
+				grid[piece.grid_position.x][piece.grid_position.y] = null
+		
+				var tween = piece.create_tween()
+				tween.tween_property(piece, "scale", Vector2.ZERO, 0.2)
+				tween.finished.connect(piece.queue_free)
+							
+				if $"../..":
+					$"../..".money += 1
 	if objectsDestroyed == true:
+		await get_tree().create_timer(0.3).timeout
+		await collapse_columns()
+		await refill_board()
 		process_board_state()
 
 func reset_board():
+	var whole_board = get_whole_board()
 	
-	for x in width:
-		for y in height:
-				grid[x][y].queue_free
-				grid[x][y] = null
-				print("Got to destroying")
-	refill_board()
+	while whole_board.size() > 0:
+
+		for piece in whole_board:
+			if not is_instance_valid(piece):
+				return
+			#var effect = sparkles_scene.instantiate()
+			#effect.position = piece.position
+			#container.add_child(effect)
+			
+			grid[piece.grid_position.x][piece.grid_position.y] = null
+			
+			var tween = piece.create_tween()
+			tween.tween_property(piece, "scale", Vector2.ZERO, 0.2)
+			tween.finished.connect(piece.queue_free)
+		
+		await get_tree().create_timer(0.3).timeout
+		await collapse_columns()
+		await refill_board()
+		
+		process_board_state()
+		

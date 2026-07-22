@@ -36,8 +36,12 @@ extends Control
 @export var item3: Button
 @export var item3Label: Label
 
+# Color Variables for ProgressBar
+var redTime = 5
+var yellowTime = 10
+var greenTime = 24
 
-
+# For Shop Items
 var item1Random
 var item2Random
 var item3Random
@@ -67,7 +71,7 @@ func _ready():
 	workWindow.hide()
 	storeWindow.hide()
 	topWindow.hide()
-	#InventoryManager.grant_item("res://inventory/items/bomb_item.tres")
+	InventoryManager.grant_item("res://inventory/items/bomb_item.tres")
 	#InventoryManager.grant_item("res://inventory/items/refresh_item.tres")
 	#InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
 
@@ -77,9 +81,14 @@ func _process(delta):
 	debtAmountDisplay.text = "$" + str(Global.debt)
 	debtMinimumPayDisplay.text = "Minimum Debt Due: $" + str(Global.minimumPay)
 	progressBar.value = time
-	r = abs(time * 0.01 - 1.0)
-	g = time * 0.01 
-	#progressBar.get("theme_override_styles/fill").bg_color = Color(1.0, 0.0, 0.0, 1.0)
+	if (time > yellowTime && time <= greenTime):
+		progressBar.get("theme_override_styles/fill").bg_color = Color(0.0, 1.0, 0.0, 1.0)
+	elif (time > redTime && time <= yellowTime):
+		progressBar.get("theme_override_styles/fill").bg_color = Color(1.0, 0.871, 0.129, 1.0)
+	elif (time <= redTime):
+		progressBar.get("theme_override_styles/fill").bg_color = Color(1.0, 0.0, 0.0, 1.0)
+	
+	
 	if Global.phase == 0:
 		phase_0_setup()
 		
@@ -166,10 +175,10 @@ func item_clicked(node):
 			time = time + 5
 			InventoryManager.revoke_item("res://inventory/items/time_add_item.tres")
 		"Bomb":
-			#tileGameReference.remove_random_icon()
+			tileGameReference.remove_random_icon()
 			InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
 		"Refresh Board":
-			#tileGameReference.reset_board()
+			tileGameReference.reset_board()
 			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")			
 			
 func _on_store_flicker_timer_timeout():

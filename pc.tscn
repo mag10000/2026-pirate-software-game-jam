@@ -88,6 +88,9 @@ _data = {
 &"new_animation": SubResource("Animation_3d7xj")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oj12w"]
+bg_color = Color(0, 1, 0, 1)
+
 [node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "workTimer", "breakTimer", "depositFlickerTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "item1", "item1Label", "item2", "item2Label", "item3", "item3Label")]
 layout_mode = 3
 anchors_preset = 15
@@ -292,6 +295,7 @@ offset_left = 1.0
 offset_top = 4.0
 offset_right = 214.0
 offset_bottom = 31.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_oj12w")
 show_percentage = false
 
 [node name="inventory window" type="Window" parent="." unique_id=2121387249]

@@ -19,9 +19,9 @@ func _process(delta):
 
 func set_items():
 	var items = InventoryManager.get_inventory(InventoryManager.get_inventory_enums.DICTONARY_PATH_AMOUNT)
-	var size = items.size()
+	var sizeSet = items.size()
 	var on = 0
-	if size < inventory_slots:
+	if sizeSet < inventory_slots:
 		for item in items:
 			var slot = slots[on]
 			slot.item = load(item)

@@ -4,12 +4,16 @@ extends Panel
 @export var amount : int
 signal show_discription(discription : String)
 
+func _ready():
+	amount = 0
+	item = null
+
 func _process(delta):
-	if Global.phase == 0:
+	if Global.phase == 0 && amount > 0:
 		$Button.disabled = false
-	if Global.phase == 1:
+	elif Global.phase == 1 || amount <= 0:
 		$Button.disabled = true
-	if item:
+	if item != null:
 		$border/item.texture = item.item_icon
 		if amount > 1:
 			$border/item/Label.text = str(amount)

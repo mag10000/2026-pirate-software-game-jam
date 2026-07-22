@@ -103,7 +103,7 @@ func calculate_swipe(final_pos: Vector2):
 		
 		if is_within_grid(other_touch):
 			handle_swap_logic(first_touch, other_touch)
-			Audio.play("res://sounds/tile-swap.ogg", false, randf_range(0.8, 1.2), 0.3)
+			Audio.play("res://match 3/sounds/tile-swap.ogg", false, randf_range(0.8, 1.2), 0.3)
 
 	first_touch = Vector2i(-1, -1)
 
@@ -166,7 +166,7 @@ func process_board_state():
 	
 	while matches.size() > 0:
 		combo_count += 1
-		Audio.play("res://sounds/tile-match.ogg", true, 1.0 + (combo_count * 0.1))
+		Audio.play("res://match 3/sounds/tile-match.ogg", true, 1.0 + (combo_count * 0.1))
 		
 		for piece in matches:
 			var effect = sparkles_scene.instantiate()
@@ -237,18 +237,24 @@ func remove_random_icon():
 	var randomToDestroy = randi_range(0, textures.size() - 1)
 	var objectsDestroyed = false
 	
-	for x in width:
-		for y in height:
-			if grid[x][y] == textures[randomToDestroy]:
-				grid[x][y] = null
-				$"../..".money += 1
-				objectsDestroyed = true
+	#for x in width:
+	#	for y in height:
+	#		if grid[x][y].texture == textures[randomToDestroy]:
+	#			grid[x][y] = null
+	#			print("Got to destroying")
+	#			$"../..".money += 1
+	#			objectsDestroyed = true
+	for child in $Board.get_children():
+		pass
 	
 	if objectsDestroyed == true:
 		process_board_state()
 
 func reset_board():
+	
 	for x in width:
 		for y in height:
+				grid[x][y].queue_free
 				grid[x][y] = null
+				print("Got to destroying")
 	refill_board()

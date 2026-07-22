@@ -20,4 +20,4 @@ var minimumPay = 7
 
 var minimumPayStatic = 7
 
-var item_pool = ["res://inventory/items/time_add_item.tres"]
+var item_pool = ["res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]

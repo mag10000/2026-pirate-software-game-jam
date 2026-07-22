@@ -23,6 +23,8 @@ extends Control
 
 @export var scrollAlertTextAnimation: AnimationPlayer
 
+@export var tileGameReference: Node2D
+
 @export_group("store")
 
 @export var item1: Button
@@ -33,6 +35,8 @@ extends Control
 
 @export var item3: Button
 @export var item3Label: Label
+
+
 
 var item1Random
 var item2Random
@@ -63,6 +67,9 @@ func _ready():
 	workWindow.hide()
 	storeWindow.hide()
 	topWindow.hide()
+	#InventoryManager.grant_item("res://inventory/items/bomb_item.tres")
+	#InventoryManager.grant_item("res://inventory/items/refresh_item.tres")
+	#InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
 
 # Runs every frame
 func _process(delta):
@@ -158,8 +165,13 @@ func item_clicked(node):
 		"Add Time":
 			time = time + 5
 			InventoryManager.revoke_item("res://inventory/items/time_add_item.tres")
-
-
+		"Bomb":
+			#tileGameReference.remove_random_icon()
+			InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
+		"Refresh Board":
+			#tileGameReference.reset_board()
+			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")			
+			
 func _on_store_flicker_timer_timeout():
 	if item1.disabled:
 		item1.disabled = false

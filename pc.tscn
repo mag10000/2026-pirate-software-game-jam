@@ -88,7 +88,7 @@ _data = {
 &"new_animation": SubResource("Animation_3d7xj")
 }
 
-[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "workTimer", "breakTimer", "depositFlickerTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "item1", "item1Label", "item2", "item2Label", "item3", "item3Label")]
+[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "workTimer", "breakTimer", "depositFlickerTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "item1", "item1Label", "item2", "item2Label", "item3", "item3Label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -112,6 +112,7 @@ timerWindow = NodePath("timer window")
 progressBar = NodePath("timer window/ProgressBar")
 depositButton = NodePath("bank account window/debt/deposit")
 scrollAlertTextAnimation = NodePath("top window/Label/AnimationPlayer")
+tileGameReference = NodePath("work window/Main")
 item1 = NodePath("store window/storeitems/item1")
 item1Label = NodePath("store window/storeitems/item1discription")
 item2 = NodePath("store window/storeitems/item2")

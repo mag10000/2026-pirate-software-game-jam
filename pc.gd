@@ -92,6 +92,14 @@ func _process(delta):
 	debtAmountDisplay.text = "$" + str(Global.debt)
 	debtMinimumPayDisplay.text = "Minimum Debt Due Now\n$" + str(Global.minimumPay)
 	progressBar.value = time
+	
+	if item1SoldOut == false:
+		item1Label.text = item1Discription + " - Price $" + str(item1Price)
+	if item2SoldOut == false:
+		item2Label.text = item2Discription + " - Price $" + str(item2Price)
+	if item3SoldOut == false:
+		item3Label.text = item3Discription + " - Price $" + str(item3Price)
+	
 	if (time > yellowTime && time <= greenTime):
 		progressBar.get("theme_override_styles/fill").bg_color = Color(0.0, 1.0, 0.0, 1.0)
 	elif (time > redTime && time <= yellowTime):
@@ -99,10 +107,9 @@ func _process(delta):
 	elif (time <= redTime):
 		progressBar.get("theme_override_styles/fill").bg_color = Color(1.0, 0.0, 0.0, 1.0)
 	
-	
 	if Global.phase == 0:
 		if phase0Setup == true:
-			phase_0_setup()
+			await phase_0_setup()
 		
 		if not Global.work_time_started:
 			change_phase_display(0)
@@ -123,10 +130,9 @@ func _process(delta):
 			
 	if Global.phase == 1:
 		if phase1Setup == true:
-			phase_1_setup()
+			await phase_1_setup()
 		
 		if not Global.break_time_started:
-			create_new_store()
 			change_phase_display(1)
 			time = Global.break_times[Global.current_break_time_id]
 			progressBar.max_value = time
@@ -225,7 +231,7 @@ func _on_item_1_pressed():
 			item1SoldOut = true
 			item1.icon = itemSoldOutArt
 			item1Label.text = "ITEM NOT AVAILABLE!"
-			item1.disabled
+			item1.disabled = true
 
 
 func _on_item_2_pressed():
@@ -241,7 +247,7 @@ func _on_item_2_pressed():
 			item2SoldOut = true
 			item2.icon = itemSoldOutArt
 			item2Label.text = "ITEM NOT AVAILABLE!"
-			item2.disabled
+			item2.disabled = true
 
 func _on_item_3_pressed():
 	if money > 0 && item3Price > 0:
@@ -256,7 +262,7 @@ func _on_item_3_pressed():
 			item3SoldOut = true
 			item3.icon = itemSoldOutArt
 			item3Label.text = "ITEM NOT AVAILABLE!"
-			item3.disabled
+			item3.disabled = true
 			
 func phase_0_setup():
 	MusicPlayer.stop()
@@ -270,7 +276,9 @@ func phase_0_setup():
 
 	depositButton.hide()
 	debtMinimumPayDisplay.hide()
+	create_new_store()
 	storeWindow.hide()
+	
 
 func phase_1_setup():
 	MusicPlayer.stop()
@@ -278,13 +286,8 @@ func phase_1_setup():
 	Global.work_time_started = false
 	MusicPlayer.stream = load("res://music/money to spend [shortened break theme].wav")
 	MusicPlayer.play()
-	
 	workTimer.stop()
 	workWindow.hide()
-
-	item1Label.text = item1Discription + " - Price $" + str(item1Price)
-	item2Label.text = item2Discription + " - Price $" + str(item2Price)
-	item3Label.text = item3Discription + " - Price $" + str(item3Price)
 	
 func change_phase_display(phase: int):
 	if phase == 0:

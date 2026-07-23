@@ -25,6 +25,8 @@ extends Control
 
 @export var tileGameReference: Node2D
 
+@export var MusicPlayer: AudioStreamPlayer
+
 @export_group("store")
 
 @export var item1: Button
@@ -71,6 +73,10 @@ var r = 0
 var g = 0
 var b = 0
 
+# Phase setup booleans
+var phase0Setup = true
+var phase1Setup = false
+
 func _ready():
 	create_new_store()
 	workWindow.hide()
@@ -95,7 +101,8 @@ func _process(delta):
 	
 	
 	if Global.phase == 0:
-		phase_0_setup()
+		if phase0Setup == true:
+			phase_0_setup()
 		
 		if not Global.work_time_started:
 			change_phase_display(0)
@@ -111,11 +118,12 @@ func _process(delta):
 			Global.current_work_time_id = randi_range(0,3)
 			await get_tree().create_timer(0.5).timeout
 			workWindow.hide()
+			phase1Setup = true
 			Global.phase = 1
-
 			
 	if Global.phase == 1:
-		phase_1_setup()
+		if phase1Setup == true:
+			phase_1_setup()
 		
 		if not Global.break_time_started:
 			create_new_store()
@@ -140,6 +148,7 @@ func _process(delta):
 				storeWindow.hide()
 				depositButton.hide()
 				debtMinimumPayDisplay.hide()
+				phase0Setup = true
 				Global.phase = 0
 
 func seconds2hhmmss(total_seconds: float) -> String:
@@ -250,7 +259,12 @@ func _on_item_3_pressed():
 			item3.disabled
 			
 func phase_0_setup():
+	MusicPlayer.stop()
+	phase0Setup = false
 	Global.break_time_started = false
+	MusicPlayer.stream = load("res://music/money on the line [puzzle theme].wav")
+	MusicPlayer.play()
+	
 	breakTimer.stop()
 	Global.minimumPay = 7
 
@@ -259,7 +273,12 @@ func phase_0_setup():
 	storeWindow.hide()
 
 func phase_1_setup():
+	MusicPlayer.stop()
+	phase1Setup = false
 	Global.work_time_started = false
+	MusicPlayer.stream = load("res://music/money to spend [shortened break theme].wav")
+	MusicPlayer.play()
+	
 	workTimer.stop()
 	workWindow.hide()
 

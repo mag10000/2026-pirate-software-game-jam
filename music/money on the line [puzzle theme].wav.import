@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://3j7retq5fugu"
+path="res://.godot/imported/money on the line [puzzle theme].wav-ba4a2fed311f6bb87317a3779b561d30.sample"
+
+[deps]
+
+source_file="res://music/money on the line [puzzle theme].wav"
+dest_files=["res://.godot/imported/money on the line [puzzle theme].wav-ba4a2fed311f6bb87317a3779b561d30.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

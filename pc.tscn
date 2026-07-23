@@ -7,10 +7,10 @@
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="2_ifkhm"]
 [ext_resource type="PackedScene" uid="uid://bn4cxagiavp8u" path="res://inventory/scenes/inventory.tscn" id="4_3d7xj"]
 [ext_resource type="Texture2D" uid="uid://c7vfqjyx41sbp" path="res://art/X.png" id="4_8pt1j"]
-[ext_resource type="AudioStream" uid="uid://k2ydfhxyfqx7" path="res://match 3/sounds/tile-land.ogg" id="4_s818i"]
 [ext_resource type="Texture2D" uid="uid://v8ocsjth53he" path="res://art/Folder_Icon.png" id="5_oj12w"]
 [ext_resource type="Texture2D" uid="uid://b5xwmugjgdk1o" path="res://art/Printer_Icon.png" id="6_ifkhm"]
 [ext_resource type="Texture2D" uid="uid://cy2bmabiv4453" path="res://art/Email_Icon.png" id="7_8pt1j"]
+[ext_resource type="AudioStream" uid="uid://3j7retq5fugu" path="res://music/money on the line [puzzle theme].wav" id="11_0727r"]
 
 [sub_resource type="Animation" id="Animation_s818i"]
 length = 0.001
@@ -94,7 +94,7 @@ _data = {
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oj12w"]
 bg_color = Color(0, 1, 0, 1)
 
-[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "workTimer", "breakTimer", "depositFlickerTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "item1", "item1Label", "item2", "item2Label", "item3", "item3Label")]
+[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "workTimer", "breakTimer", "depositFlickerTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "MusicPlayer", "item1", "item1Label", "item2", "item2Label", "item3", "item3Label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -119,6 +119,7 @@ progressBar = NodePath("timer window/ProgressBar")
 depositButton = NodePath("bank account window/debt/deposit")
 scrollAlertTextAnimation = NodePath("top window/Label/AnimationPlayer")
 tileGameReference = NodePath("work window/Main")
+MusicPlayer = NodePath("MusicPlayer")
 item1 = NodePath("store window/storeitems/item1")
 item1Label = NodePath("store window/storeitems/item1discription")
 item2 = NodePath("store window/storeitems/item2")
@@ -463,8 +464,9 @@ text = "Does Stuff"
 wait_time = 0.5
 autostart = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=448535725]
-stream = ExtResource("4_s818i")
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=448535725]
+stream = ExtResource("11_0727r")
+autoplay = true
 
 [node name="work timer" type="Timer" parent="." unique_id=1132678509]
 

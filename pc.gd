@@ -83,7 +83,7 @@ func _ready():
 	storeWindow.hide()
 	topWindow.hide()
 	InventoryManager.grant_item("res://inventory/items/bomb_item.tres")
-	#InventoryManager.grant_item("res://inventory/items/refresh_item.tres")
+	InventoryManager.grant_item("res://inventory/items/refresh_item.tres")
 	#InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
 
 # Runs every frame
@@ -144,18 +144,25 @@ func _process(delta):
 			Global.break_time_started = true
 
 		if time == 0:
-			if deposited_in_round < Global.minimumPayStatic:
-				get_tree().change_scene_to_file("res://game_over.tscn")
-			else:
-				breakTimer.stop()
-				Global.break_time_started = false
-				Global.current_break_time_id = randi_range(0, 3)
-				await get_tree().create_timer(0.5).timeout
-				storeWindow.hide()
-				depositButton.hide()
-				debtMinimumPayDisplay.hide()
-				phase0Setup = true
-				Global.phase = 0
+			#if deposited_in_round < Global.minimumPayStatic:
+				#get_tree().change_scene_to_file("res://game_over.tscn")
+				#pass
+			#else:
+			breakTimer.stop()
+			Global.break_time_started = false
+			Global.current_break_time_id = randi_range(0, 3)
+			await get_tree().create_timer(0.5).timeout
+			storeWindow.hide()
+			depositButton.hide()
+			debtMinimumPayDisplay.hide()
+			phase0Setup = true
+			Global.phase = 0
+			Global.hour += 1
+			if Global.hour > 8:
+				# TODO - Create scene for new_day
+				Global.day += 1
+				# get_tree().change_scene_to_file("res://new_day.tscn")
+				pass
 
 func seconds2hhmmss(total_seconds: float) -> String:
 	#total_seconds = 12345
@@ -179,11 +186,11 @@ func _on_deposit_pressed():
 
 
 func _on_deposit_flicker_timer_timeout():
-	if depositButton.disabled:
-		depositButton.disabled = false
-	else:
-		depositButton.disabled = true
-
+	#if depositButton.disabled:
+		#depositButton.disabled = false
+	#else:
+		#depositButton.disabled = true
+	pass
 
 func _on_break_timer_timeout():
 	time -= 1
@@ -202,21 +209,21 @@ func item_clicked(node):
 			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")			
 			
 func _on_store_flicker_timer_timeout():
-	if item1.disabled && item1SoldOut == false:
-		item1.disabled = false
-	else:
-		item1.disabled = true
-	
-	if item2.disabled && item2SoldOut == false:
-		item2.disabled = false
-	else:
-		item2.disabled = true
-	
-	if item3.disabled && item3SoldOut == false:
-		item3.disabled = false
-	else:
-		item3.disabled = true
-
+	#if item1.disabled && item1SoldOut == false:
+		#item1.disabled = false
+	#else:
+		#item1.disabled = true
+	#
+	#if item2.disabled && item2SoldOut == false:
+		#item2.disabled = false
+	#else:
+		#item2.disabled = true
+	#
+	#if item3.disabled && item3SoldOut == false:
+		#item3.disabled = false
+	#else:
+		#item3.disabled = true
+	pass
 
 func _on_item_1_pressed():
 	if money > 0 && item1Price > 0:
@@ -231,6 +238,7 @@ func _on_item_1_pressed():
 			item1SoldOut = true
 			item1.icon = itemSoldOutArt
 			item1Label.text = "ITEM NOT AVAILABLE!"
+			item1.text = "SOLD OUT!"
 			item1.disabled = true
 
 
@@ -247,6 +255,7 @@ func _on_item_2_pressed():
 			item2SoldOut = true
 			item2.icon = itemSoldOutArt
 			item2Label.text = "ITEM NOT AVAILABLE!"
+			item2.text = "SOLD OUT!"
 			item2.disabled = true
 
 func _on_item_3_pressed():
@@ -262,6 +271,7 @@ func _on_item_3_pressed():
 			item3SoldOut = true
 			item3.icon = itemSoldOutArt
 			item3Label.text = "ITEM NOT AVAILABLE!"
+			item3.text = "SOLD OUT!"
 			item3.disabled = true
 			
 func phase_0_setup():
@@ -316,15 +326,15 @@ func create_new_store():
 	item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
 	item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
 	item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-	item1.text = item1Random.item_name
-	item2.text = item2Random.item_name
-	item3.text = item3Random.item_name
+	item1.text = "Make $1 Item Payment"
+	item2.text = "Make $1 Item Payment"
+	item3.text = "Make $1 Item Payment"
 	item1.icon = item1Random.item_icon
 	item2.icon = item2Random.item_icon
 	item3.icon = item3Random.item_icon
-	item1Discription = item1Random.discription
-	item2Discription = item2Random.discription
-	item3Discription = item3Random.discription
+	item1Discription = item1Random.item_name + " - " + item1Random.discription
+	item2Discription = item2Random.item_name + " - " + item2Random.discription
+	item3Discription = item3Random.item_name + " - " + item3Random.discription
 	item1Price = item1Random.cost
 	item2Price = item2Random.cost
 	item3Price = item3Random.cost

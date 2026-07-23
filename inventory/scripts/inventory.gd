@@ -21,7 +21,7 @@ func set_items():
 	var items = InventoryManager.get_inventory(InventoryManager.get_inventory_enums.DICTONARY_PATH_AMOUNT)
 	var sizeSet = items.size()
 	var on = 0
-	if sizeSet < inventory_slots:
+	if sizeSet <= inventory_slots:
 		for item in items:
 			var slot = slots[on]
 			slot.item = load(item)
@@ -29,6 +29,14 @@ func set_items():
 			on += 1
 	else:
 		print("not enough slots for the amount of items")
+		
+	if sizeSet != inventory_slots:
+		for n in range(0, 5):
+			if n < on:
+				pass
+			else:
+				slots[n].amount = 0
+				slots[n].item = null	
 
 func item_clicked(node):
 	$"../..".item_clicked(node)

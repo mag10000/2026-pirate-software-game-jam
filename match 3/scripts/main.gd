@@ -25,10 +25,13 @@ var grid = []
 var first_touch = Vector2i(-1, -1)
 var is_swapping = false
 var combo_count: int = 0
+# Depending on which round, we'll get the right amount of icons
+var iconArraySize = 0
 
 # Functions
 
 func _ready():
+	iconArraySize = Global.iconsForRound
 	randomize()
 	
 	setup_grid_array() 
@@ -37,6 +40,8 @@ func _ready():
 	center_grid_on_screen() 
 	
 	get_viewport().size_changed.connect(center_grid_on_screen)
+	
+
 
 # Centers the board on-screen, the above conection ensures the board is centered after resizing the window
 
@@ -64,8 +69,10 @@ func setup_grid_array():
 
 func spawn_at(x, y):
 	
-	var created_piece = tile_scene.instantiate() 
-	var random_index = randi_range(0, textures.size() - 1)
+	var created_piece = tile_scene.instantiate()
+	var random_index = randi_range(0, iconArraySize) 
+	# This is default code for just using the amount of icons in the array
+	#var random_index = randi_range(0, textures.size() - 1)
 	
 	container.add_child(created_piece) 
 	
@@ -81,6 +88,7 @@ func spawn_at(x, y):
 func _on_tile_pressed(grid_position: Vector2i):
 	
 	if not is_swapping:
+		#TODO - If blank can't grab as first
 		first_touch = grid_position
 
 func _input(event):
@@ -168,6 +176,9 @@ func process_board_state():
 	while matches.size() > 0:
 		combo_count += 1
 		Audio.play("res://match 3/sounds/tile-match.ogg", true, 1.0 + (combo_count * 0.1))
+		if combo_count > 1:
+			if $"../..":
+				$"../..".money += ((combo_count-1) * 2)
 		
 		for piece in matches:
 			var effect = sparkles_scene.instantiate()
@@ -245,6 +256,7 @@ func get_whole_board()-> Array:
 
 func remove_random_icon():
 	var randomToDestroy = randi_range(0, textures.size() - 1)
+	var randomToDestroy = randi_range(0, iconArraySize)
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()
 	
@@ -276,6 +288,7 @@ func reset_board():
 	while whole_board.size() > 0:
 
 		for piece in whole_board:
+			print("Got into for loop")
 			if not is_instance_valid(piece):
 				return
 			#var effect = sparkles_scene.instantiate()
@@ -291,6 +304,6 @@ func reset_board():
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
 		await refill_board()
-		
+	
 		process_board_state()
 		

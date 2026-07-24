@@ -255,7 +255,6 @@ func get_whole_board()-> Array:
 	
 
 func remove_random_icon():
-	var randomToDestroy = randi_range(0, textures.size() - 1)
 	var randomToDestroy = randi_range(0, iconArraySize)
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()

@@ -9,7 +9,6 @@ extends Control
 
 @export var workTimer: Timer
 @export var breakTimer: Timer
-@export var depositFlickerTimer: Timer
 
 @export var workWindow: Window
 @export var bankWindow: Window
@@ -187,14 +186,6 @@ func _on_deposit_pressed():
 		deposited_in_round += 1
 		if Global.minimumPay != 0:
 			Global.minimumPay -= 1
-
-
-func _on_deposit_flicker_timer_timeout():
-	#if depositButton.disabled:
-		#depositButton.disabled = false
-	#else:
-		#depositButton.disabled = true
-	pass
 
 func _on_break_timer_timeout():
 	time -= 1

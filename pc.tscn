@@ -94,7 +94,7 @@ _data = {
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oj12w"]
 bg_color = Color(0, 1, 0, 1)
 
-[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "dayHourText", "workTimer", "breakTimer", "depositFlickerTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "MusicPlayer", "item1", "item1Label", "item2", "item2Label", "item3", "item3Label")]
+[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "dayHourText", "workTimer", "breakTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "MusicPlayer", "item1", "item1Label", "item2", "item2Label", "item3", "item3Label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -109,7 +109,6 @@ scrollAlertText = NodePath("top window/Label")
 dayHourText = NodePath("day hour window/Control/Day and Hour Text")
 workTimer = NodePath("work timer")
 breakTimer = NodePath("break timer")
-depositFlickerTimer = NodePath("bank account window/debt/deposit/depositFlickerTimer")
 workWindow = NodePath("work window")
 bankWindow = NodePath("bank account window")
 itemWindow = NodePath("inventory window")
@@ -117,7 +116,7 @@ storeWindow = NodePath("store window")
 topWindow = NodePath("top window")
 timerWindow = NodePath("timer window")
 progressBar = NodePath("timer window/ProgressBar")
-depositButton = NodePath("bank account window/debt/deposit")
+depositButton = NodePath("bank account window/debt/deposit1")
 scrollAlertTextAnimation = NodePath("top window/Label/AnimationPlayer")
 tileGameReference = NodePath("work window/Main")
 MusicPlayer = NodePath("MusicPlayer")
@@ -292,21 +291,41 @@ theme_override_font_sizes/font_size = 16
 text = "$1000.00"
 horizontal_alignment = 1
 
-[node name="deposit" type="Button" parent="bank account window/debt" unique_id=1279548504]
+[node name="deposit1" type="Button" parent="bank account window/debt" unique_id=1279548504]
 layout_mode = 0
 offset_left = 15.0
-offset_top = 77.0
-offset_right = 201.0
-offset_bottom = 108.0
+offset_top = 75.0
+offset_right = 200.0
+offset_bottom = 105.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
 text = "Make $1 Debt Payment"
 
-[node name="depositFlickerTimer" type="Timer" parent="bank account window/debt/deposit" unique_id=2066530084]
-wait_time = 0.5
-autostart = true
+[node name="deposit10" type="Button" parent="bank account window/debt" unique_id=264666888]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 110.0
+offset_right = 200.0
+offset_bottom = 140.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_ifkhm")
+text = "Make $10 Debt Payment"
+
+[node name="deposit11" type="Button" parent="bank account window/debt" unique_id=1150998609]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 145.0
+offset_right = 200.0
+offset_bottom = 175.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_ifkhm")
+text = "Make $100 Debt Payment"
 
 [node name="Min Debt" type="Label" parent="bank account window/debt" unique_id=452453399]
 layout_mode = 0
@@ -401,10 +420,10 @@ slots_Box_Container = NodePath("Control/VBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="inventory window/inventory/Control" parent_id_path=PackedInt32Array(154207438, 1620400334) index="1" unique_id=596366727]
 layout_mode = 0
-offset_left = -55.0
-offset_top = 88.0
-offset_right = 57.0
-offset_bottom = 328.0
+offset_left = -32.0
+offset_top = -98.5
+offset_right = 32.0
+offset_bottom = 101.5
 
 [node name="slots" parent="inventory window/inventory/Control" parent_id_path=PackedInt32Array(154207438, 1620400334) index="2" unique_id=33701807]
 offset_left = -295.0
@@ -523,8 +542,9 @@ autoplay = true
 
 [node name="break timer" type="Timer" parent="." unique_id=513373814]
 
-[connection signal="pressed" from="bank account window/debt/deposit" to="." method="_on_deposit_pressed"]
-[connection signal="timeout" from="bank account window/debt/deposit/depositFlickerTimer" to="." method="_on_deposit_flicker_timer_timeout"]
+[connection signal="pressed" from="bank account window/debt/deposit1" to="." method="_on_deposit_pressed"]
+[connection signal="pressed" from="bank account window/debt/deposit10" to="." method="_on_deposit_pressed"]
+[connection signal="pressed" from="bank account window/debt/deposit11" to="." method="_on_deposit_pressed"]
 [connection signal="pressed" from="store window/storeitems/item1" to="." method="_on_item_1_pressed"]
 [connection signal="pressed" from="store window/storeitems/item2" to="." method="_on_item_2_pressed"]
 [connection signal="pressed" from="store window/storeitems/item3" to="." method="_on_item_3_pressed"]

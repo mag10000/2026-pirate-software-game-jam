@@ -41,8 +41,6 @@ func _ready():
 	
 	get_viewport().size_changed.connect(center_grid_on_screen)
 	
-
-
 # Centers the board on-screen, the above conection ensures the board is centered after resizing the window
 
 func center_grid_on_screen():
@@ -63,14 +61,17 @@ func setup_grid_array():
 	
 	for x in width:
 		for y in height:
-			spawn_at(x, y)
+			spawn_at(x, y, false)
 
 # Spawn a new tile at a certain grid position
 
-func spawn_at(x, y):
+func spawn_at(x, y, blanks: bool):
 	
 	var created_piece = tile_scene.instantiate()
-	var random_index = randi_range(0, iconArraySize) 
+	var random_index = randi_range(1, iconArraySize) 
+	if blanks:
+		random_index = 0 
+
 	# This is default code for just using the amount of icons in the array
 	#var random_index = randi_range(0, textures.size() - 1)
 	
@@ -100,6 +101,8 @@ func _input(event):
 				calculate_swipe(local_mouse_pos)
 
 func calculate_swipe(final_pos: Vector2):
+	if (grid[first_touch.x][first_touch.y].type == "0"):
+				return
 	
 	var difference = final_pos - grid_to_pixel(first_touch.x, first_touch.y)
 	
@@ -149,6 +152,9 @@ func swap_pieces(a: Vector2i, b: Vector2i):
 		
 		piece_a.move_to(grid_to_pixel(b.x, b.y), false)
 		piece_b.move_to(grid_to_pixel(a.x, a.y), false)
+		await get_tree().create_timer(0.3).timeout
+	await collapse_columns()
+	await refill_board(true)
 
 func find_matches() -> Array:
 	
@@ -157,19 +163,22 @@ func find_matches() -> Array:
 	for y in height:
 		for x in range(width - 2):
 			var p1 = grid[x][y]; var p2 = grid[x+1][y]; var p3 = grid[x+2][y]
-			if p1 and p2 and p3 and p1.type == p2.type and p1.type == p3.type:
+			if p1 == null || p2 == null || p3 == null || p1.type == "0" || p2.type == "0" || p3.type == "0":
+				pass
+			elif p1 and p2 and p3 and p1.type == p2.type and p1.type == p3.type:
 				for p in [p1, p2, p3]: matched_dict[p] = true
 
 	for x in width:
 		for y in range(height - 2):
 			var p1 = grid[x][y]; var p2 = grid[x][y+1]; var p3 = grid[x][y+2]
-			if p1 and p2 and p3 and p1.type == p2.type and p1.type == p3.type:
+			if p1 == null || p2 == null || p3 == null || p1.type == "0" || p2.type == "0" || p3.type == "0":
+				pass
+			elif p1 and p2 and p3 and p1.type == p2.type and p1.type == p3.type:
 				for p in [p1, p2, p3]: matched_dict[p] = true
 
 	return matched_dict.keys()
 
 func process_board_state():
-	
 	combo_count = 0 
 	var matches = find_matches()
 	
@@ -179,7 +188,7 @@ func process_board_state():
 		if combo_count > 1:
 			if $"../..":
 				$"../..".money += ((combo_count-1) * 2)
-		
+				
 		for piece in matches:
 			var effect = sparkles_scene.instantiate()
 			effect.position = piece.position
@@ -193,16 +202,25 @@ func process_board_state():
 			
 			if $"../..":
 				$"../..".money += 1
+			#await collapse_columns()
 		
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
-		await refill_board()
+		await refill_board(true)
 		
 		matches = find_matches()
 	
+	await collapse_columns()
 	is_swapping = false
 
 func collapse_columns():
+	
+	for x in width:
+		for y in height:
+			if not is_instance_valid(grid[x][y]):
+				return
+			if grid[x][y].type == "0":
+				grid[x][y] = null
 	
 	for x in width:
 		for y in range(height - 1, -1, -1):
@@ -210,18 +228,27 @@ func collapse_columns():
 				for k in range(y - 1, -1, -1):
 					if grid[x][k] != null:
 						grid[x][y] = grid[x][k]
+#						spawn_at(x, k, true)
 						grid[x][k] = null
 						grid[x][y].grid_position = Vector2i(x, y)
 						grid[x][y].move_to(grid_to_pixel(x, y))
 						break
-	await get_tree().create_timer(0.3).timeout
+	for x in width:
+		for y in height:
+			if grid[x][y] == null:
+				spawn_at(x, y, true)
+				
+	await get_tree().create_timer(0.1).timeout
 
-func refill_board():
+func refill_board(blanks: bool):
 	
 	for x in width:
 		for y in height:
 			if grid[x][y] == null:
-				spawn_at(x, y)
+				if blanks:
+					spawn_at(x, y, true)
+				else:
+					spawn_at(x, y, false)
 				grid[x][y].position.y -= offset * 2 
 				grid[x][y].move_to(grid_to_pixel(x, y))
 	await get_tree().create_timer(0.3).timeout
@@ -278,7 +305,7 @@ func remove_random_icon():
 	if objectsDestroyed == true:
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
-		await refill_board()
+		await refill_board(true)
 		process_board_state()
 
 func reset_board():
@@ -302,7 +329,6 @@ func reset_board():
 		
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
-		await refill_board()
+		await refill_board(false)
 	
 		process_board_state()
-		

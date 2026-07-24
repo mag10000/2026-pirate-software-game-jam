@@ -14,11 +14,9 @@ var break_times = [10,12,8,14]
 
 var phase = 0
 
-var debt = 1000
+var debt = 10000
 
-var minimumPay = 7
-
-var minimumPayStatic = 7
+var minimumPay = 500
 
 var day = 1
 

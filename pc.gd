@@ -5,6 +5,7 @@ extends Control
 @export var debtAmountDisplay: Label
 @export var debtMinimumPayDisplay: Label
 @export var scrollAlertText: Label
+@export var dayHourText: Label
 
 @export var workTimer: Timer
 @export var breakTimer: Timer
@@ -82,6 +83,7 @@ func _ready():
 	workWindow.hide()
 	storeWindow.hide()
 	topWindow.hide()
+	update_day_hour_text()
 	InventoryManager.grant_item("res://inventory/items/bomb_item.tres")
 	InventoryManager.grant_item("res://inventory/items/refresh_item.tres")
 	#InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
@@ -90,7 +92,7 @@ func _ready():
 func _process(delta):
 	earningsAmountDisplay.text = "$" + str(money)
 	debtAmountDisplay.text = "$" + str(Global.debt)
-	debtMinimumPayDisplay.text = "Minimum Debt Due Now\n$" + str(Global.minimumPay)
+	debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(Global.minimumPay)
 	progressBar.value = time
 	
 	if item1SoldOut == false:
@@ -144,10 +146,6 @@ func _process(delta):
 			Global.break_time_started = true
 
 		if time == 0:
-			#if deposited_in_round < Global.minimumPayStatic:
-				#get_tree().change_scene_to_file("res://game_over.tscn")
-				#pass
-			#else:
 			breakTimer.stop()
 			Global.break_time_started = false
 			Global.current_break_time_id = randi_range(0, 3)
@@ -159,10 +157,16 @@ func _process(delta):
 			Global.phase = 0
 			Global.hour += 1
 			if Global.hour > 8:
-				# TODO - Create scene for new_day
-				Global.day += 1
-				# get_tree().change_scene_to_file("res://new_day.tscn")
-				pass
+				# TODO - Check Minimum
+				if deposited_in_round < Global.minimumPay:
+					get_tree().change_scene_to_file("res://game_over.tscn")
+				else:
+					Global.day += 1
+					update_minimum_debt_payment()
+					# TODO - Create scene for new_day
+					# get_tree().change_scene_to_file("res://new_day.tscn")
+			update_day_hour_text()
+
 
 func seconds2hhmmss(total_seconds: float) -> String:
 	#total_seconds = 12345
@@ -280,10 +284,7 @@ func phase_0_setup():
 	Global.break_time_started = false
 	MusicPlayer.stream = load("res://music/money on the line [puzzle theme].wav")
 	MusicPlayer.play()
-	
 	breakTimer.stop()
-	Global.minimumPay = 7
-
 	depositButton.hide()
 	debtMinimumPayDisplay.hide()
 	create_new_store()
@@ -312,29 +313,51 @@ func change_phase_display(phase: int):
 	topWindow.hide()
 	
 func create_new_store():
-	item1SoldOut = false
-	item2SoldOut = false
-	item3SoldOut = false
 	
-	item1.show()
-	item2Label.show()
-	item2.show()
-	item2Label.show()
-	item3.show()
-	item3Label.show()	
+	if item1SoldOut == true || Global.hour == 1:
+		item1SoldOut = false
+		item1.disabled = false
+		item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+		item1.text = "Make $1 Item Payment"
+		item1.icon = item1Random.item_icon
+		item1Price = item1Random.cost
+		item1Discription = item1Random.item_name + " - " + item1Random.discription
+
+	if item2SoldOut == true || Global.hour == 1:
+		item2SoldOut = false
+		item2.disabled = false
+		item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+		item2.text = "Make $1 Item Payment"
+		item2.icon = item2Random.item_icon
+		item2Price = item2Random.cost
+		item2Discription = item2Random.item_name + " - " + item2Random.discription
+
+	if item3SoldOut == true || Global.hour == 1:
+		item3SoldOut = false
+		item3.disabled = false
+		item3SoldOut = false
+		item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+		item3.text = "Make $1 Item Payment"
+		item3.icon = item3Random.item_icon
+		item3Price = item3Random.cost
+		item3Discription = item3Random.item_name + " - " + item3Random.discription
+
+func update_minimum_debt_payment():
+	match Global.day:
+		1:
+			Global.minimumPay = 500
+		2:
+			Global.minimumPay = 1000
+		3:
+			Global.minimumPay = 1500
+		4:
+			Global.minimumPay = 3000
+		5:
+			Global.minimumPay = 4000
+		_:
+			Global.minimumPay = 500
+
+func update_day_hour_text():
+	dayHourText.text = "Day: " + str(Global.day) + "/5 \nHour: " + str(Global.hour) + "/8"
 	
-	item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-	item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-	item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-	item1.text = "Make $1 Item Payment"
-	item2.text = "Make $1 Item Payment"
-	item3.text = "Make $1 Item Payment"
-	item1.icon = item1Random.item_icon
-	item2.icon = item2Random.item_icon
-	item3.icon = item3Random.item_icon
-	item1Discription = item1Random.item_name + " - " + item1Random.discription
-	item2Discription = item2Random.item_name + " - " + item2Random.discription
-	item3Discription = item3Random.item_name + " - " + item3Random.discription
-	item1Price = item1Random.cost
-	item2Price = item2Random.cost
-	item3Price = item3Random.cost
+	

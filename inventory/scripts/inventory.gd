@@ -1,5 +1,6 @@
 extends Control
 
+@export var slots_Box_Container: Control
 @export var inventory_slots : int
 @export var inventory_group : String
 var slot_scene = preload("res://inventory/scenes/inventory_slot.tscn")
@@ -9,8 +10,12 @@ var slots
 func _ready():
 	for slot in inventory_slots:
 		var slot_to_create = slot_scene.instantiate()
-		$Control/slots.add_child(slot_to_create)
-	slots = $Control/slots.get_children()
+		slots_Box_Container.add_child(slot_to_create)
+	slots = slots_Box_Container.get_children()
+
+
+#		$Control/slots.add_child(slot_to_create)
+#	slots = $Control/slots.get_children()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

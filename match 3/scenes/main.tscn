@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://cy2bmabiv4453" path="res://art/Email_Icon.png" id="5_10jc3"]
 [ext_resource type="Texture2D" uid="uid://v8ocsjth53he" path="res://art/Folder_Icon.png" id="6_n4ug4"]
 [ext_resource type="Texture2D" uid="uid://b5xwmugjgdk1o" path="res://art/Printer_Icon.png" id="7_pq6s4"]
-[ext_resource type="Texture2D" uid="uid://mpsuadf8lyxi" path="res://match 3/sprites/backgrounds/background.png" id="8_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ref71l2dhbw1" path="res://art/Spreadsheet_Icon.png" id="8_6ixp2"]
 [ext_resource type="Texture2D" uid="uid://c26xoi1o70ttr" path="res://match 3/sprites/cursors/cursor-hand-open.png" id="9_4c57u"]
 [ext_resource type="Texture2D" uid="uid://cwknp4xg4o1w8" path="res://art/Phone_Icon.png" id="9_n4ug4"]
@@ -19,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://besl3ucfp0pjb" path="res://art/Virus_Icon.png" id="14_l3eup"]
 [ext_resource type="Texture2D" uid="uid://blgk6q3vwmc17" path="res://art/Bar_Chart_Icon.png" id="15_v0df7"]
 [ext_resource type="Texture2D" uid="uid://bt0akxmihfc3j" path="res://art/SociL_Media_Icon.png" id="16_mj2vb"]
+[ext_resource type="Texture2D" uid="uid://dlo2rmna3c5gx" path="res://art/Solid_Gray.png" id="19_v0df7"]
 
 [node name="Main" type="Node2D" unique_id=1469547217]
 script = ExtResource("1_ig7tw")
@@ -37,7 +37,7 @@ offset_right = 738.0
 offset_bottom = 405.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("8_5vw27")
+texture = ExtResource("19_v0df7")
 
 [node name="Board" type="Node2D" parent="." unique_id=879210771]
 

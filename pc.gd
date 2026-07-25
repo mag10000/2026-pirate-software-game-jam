@@ -149,7 +149,6 @@ func _process(delta):
 			Global.current_break_time_id = randi_range(0, 3)
 			await get_tree().create_timer(0.5).timeout
 			storeWindow.hide()
-			debtMinimumPayDisplay.hide()
 			phase0Setup = true
 			Global.phase = 0
 			Global.hour += 1
@@ -294,7 +293,6 @@ func phase_0_setup():
 	MusicPlayer.stream = load("res://music/money on the line [puzzle theme].wav")
 	MusicPlayer.play()
 	breakTimer.stop()
-	debtMinimumPayDisplay.hide()
 	create_new_store()
 	storeWindow.hide()
 	if (Global.day == 1 && Global.hour == 1):

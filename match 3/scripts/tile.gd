@@ -1,25 +1,11 @@
 extends Area2D
 
 signal tile_pressed(pos)
+#signal tile_dpad_swap(dir,pos)
 
 var type:String
 var grid_position:Vector2i
-
-# Highlight tile when hovering mouse
-
-func _on_mouse_entered():
-	
-	var tween = create_tween().set_parallel(true)
-	tween.tween_property($Sprite2D, "scale", Vector2(1.1, 1.1), 0.1)
-	tween.tween_property($Sprite2D, "modulate", Color(1.2, 1.2, 1.2), 0.1) # Brighten
-
-# Return to default state when mouse exits
-
-func _on_mouse_exited():
-	
-	var tween = create_tween().set_parallel(true)
-	tween.tween_property($Sprite2D, "scale", Vector2(1.0, 1.0), 0.1)
-	tween.tween_property($Sprite2D, "modulate", Color(1, 1, 1), 0.1)
+var mouse_hovering = false
 
 # Set piece them when initializing
 
@@ -59,3 +45,28 @@ func _on_move_finished():
 
 func _on_button_pressed():
 	tile_pressed.emit(grid_position)
+
+
+func _on_button_mouse_entered():
+	mouse_hovering = true
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property($Sprite2D, "scale", Vector2(1.3, 1.3), 0.1)
+	tween.tween_property($Sprite2D, "modulate", Color(1.2, 1.2, 1.2), 0.1) # Brighten
+
+
+func _on_button_mouse_exited():
+	mouse_hovering = false
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property($Sprite2D, "scale", Vector2(1.0, 1.0), 0.1)
+	tween.tween_property($Sprite2D, "modulate", Color(1, 1, 1), 0.1)
+
+
+#func _unhandled_input(event):
+	#if Input.is_action_just_pressed("up"):
+		#tile_dpad_swap.emit("up",grid_position)
+	#if Input.is_action_just_pressed("down"):
+		#tile_dpad_swap.emit("down",grid_position)
+	#if Input.is_action_just_pressed("left"):
+		#tile_dpad_swap.emit("left",grid_position)
+	#if Input.is_action_just_pressed("right"):
+		#tile_dpad_swap.emit("right",grid_position)

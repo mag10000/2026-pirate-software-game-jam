@@ -433,7 +433,7 @@ offset_bottom = 79.0
 
 [node name="store window" type="Window" parent="." unique_id=1995505667]
 oversampling_override = 1.0
-title = "Online Shopping"
+title = "Online Shop"
 position = Vector2i(250, 115)
 size = Vector2i(224, 205)
 visible = false

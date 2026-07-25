@@ -138,7 +138,6 @@ func _process(delta):
 			time = Global.break_times[Global.current_break_time_id]
 			progressBar.max_value = time
 			deposited_in_round = 0
-			depositButton.show()
 			debtMinimumPayDisplay.show()
 			storeWindow.show()
 			breakTimer.start()
@@ -150,7 +149,6 @@ func _process(delta):
 			Global.current_break_time_id = randi_range(0, 3)
 			await get_tree().create_timer(0.5).timeout
 			storeWindow.hide()
-			depositButton.hide()
 			debtMinimumPayDisplay.hide()
 			phase0Setup = true
 			Global.phase = 0
@@ -184,8 +182,27 @@ func _on_deposit_pressed():
 		money -= 1
 		Global.debt -= 1
 		deposited_in_round += 1
+		# TODO - Need to change this logic but not sure how because now you can pay more and see it
 		if Global.minimumPay != 0:
 			Global.minimumPay -= 1
+
+func _on_deposit_10_pressed():
+	if money >= 10:
+		money -= 10
+		Global.debt -= 10
+		deposited_in_round += 10
+				# TODO - Need to change this logic but not sure how because now you can pay more and see it
+		if Global.minimumPay != 0:
+			Global.minimumPay -= 10
+
+func _on_deposit_100_pressed():
+	if money >= 100:
+		money -= 100
+		Global.debt -= 100
+		deposited_in_round += 100
+				# TODO - Need to change this logic but not sure how because now you can pay more and see it
+		if Global.minimumPay != 0:
+			Global.minimumPay -= 100
 
 func _on_break_timer_timeout():
 	time -= 1
@@ -276,10 +293,12 @@ func phase_0_setup():
 	MusicPlayer.stream = load("res://music/money on the line [puzzle theme].wav")
 	MusicPlayer.play()
 	breakTimer.stop()
-	depositButton.hide()
 	debtMinimumPayDisplay.hide()
 	create_new_store()
 	storeWindow.hide()
+	if (Global.day == 1 && Global.hour == 1):
+		return
+	tileGameReference.reset_board()
 	
 
 func phase_1_setup():

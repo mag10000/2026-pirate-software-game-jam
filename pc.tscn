@@ -315,7 +315,7 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
 text = "Make $10 Debt Payment"
 
-[node name="deposit11" type="Button" parent="bank account window/debt" unique_id=1150998609]
+[node name="deposit100" type="Button" parent="bank account window/debt" unique_id=1150998609]
 layout_mode = 0
 offset_left = 15.0
 offset_top = 145.0
@@ -366,7 +366,7 @@ show_percentage = false
 oversampling_override = 1.0
 title = "Clock"
 position = Vector2i(500, 36)
-size = Vector2i(100, 35)
+size = Vector2i(130, 35)
 unresizable = true
 theme_override_colors/title_color = Color(1, 1, 1, 1)
 theme_override_colors/title_outline_modulate = Color(0, 0, 0, 1)
@@ -399,9 +399,9 @@ horizontal_alignment = 1
 
 [node name="inventory window" type="Window" parent="." unique_id=2121387249]
 oversampling_override = 1.0
-title = "Inventory"
+title = "Items"
 position = Vector2i(500, 115)
-size = Vector2i(100, 205)
+size = Vector2i(130, 205)
 unresizable = true
 theme_override_colors/title_color = Color(1, 1, 1, 1)
 theme_override_colors/title_outline_modulate = Color(0, 0, 0, 1)
@@ -420,9 +420,9 @@ slots_Box_Container = NodePath("Control/VBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="inventory window/inventory/Control" parent_id_path=PackedInt32Array(154207438, 1620400334) index="1" unique_id=596366727]
 layout_mode = 0
-offset_left = -32.0
+offset_left = -16.0
 offset_top = -98.5
-offset_right = 32.0
+offset_right = 16.0
 offset_bottom = 101.5
 
 [node name="slots" parent="inventory window/inventory/Control" parent_id_path=PackedInt32Array(154207438, 1620400334) index="2" unique_id=33701807]
@@ -434,8 +434,8 @@ offset_bottom = 79.0
 [node name="store window" type="Window" parent="." unique_id=1995505667]
 oversampling_override = 1.0
 title = "Online Shopping"
-position = Vector2i(257, 36)
-size = Vector2i(305, 205)
+position = Vector2i(250, 115)
+size = Vector2i(224, 205)
 visible = false
 unresizable = true
 theme_override_colors/title_color = Color(0, 0, 0, 1)
@@ -543,8 +543,8 @@ autoplay = true
 [node name="break timer" type="Timer" parent="." unique_id=513373814]
 
 [connection signal="pressed" from="bank account window/debt/deposit1" to="." method="_on_deposit_pressed"]
-[connection signal="pressed" from="bank account window/debt/deposit10" to="." method="_on_deposit_pressed"]
-[connection signal="pressed" from="bank account window/debt/deposit11" to="." method="_on_deposit_pressed"]
+[connection signal="pressed" from="bank account window/debt/deposit10" to="." method="_on_deposit_10_pressed"]
+[connection signal="pressed" from="bank account window/debt/deposit100" to="." method="_on_deposit_100_pressed"]
 [connection signal="pressed" from="store window/storeitems/item1" to="." method="_on_item_1_pressed"]
 [connection signal="pressed" from="store window/storeitems/item2" to="." method="_on_item_2_pressed"]
 [connection signal="pressed" from="store window/storeitems/item3" to="." method="_on_item_3_pressed"]

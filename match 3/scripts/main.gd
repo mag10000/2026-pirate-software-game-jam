@@ -27,11 +27,12 @@ var is_swapping = false
 var combo_count: int = 0
 # Depending on which round, we'll get the right amount of icons
 var iconArray = [1, 2, 3, 4, 5, 6]
+var evil_match = 0
 
 # Functions
 
 func _ready():
-	iconArray = Global.iconsForRound
+	iconArray = Global.iconsForRound[Global.day]
 	randomize()
 	
 	setup_grid_array() 
@@ -191,6 +192,8 @@ func find_matches() -> Array:
 			if p1 == null || p2 == null || p3 == null || p1.type == "0" || p2.type == "0" || p3.type == "0" || p1.type == "9" || p2.type == "9" || p3.type == "9":
 				pass
 			elif p1 and p2 and p3 and p1.type == p2.type and p1.type == p3.type:
+				if p1.type == "11" && p2.type == "11" && p3.type == "11":
+					evil_match += 3
 				for p in [p1, p2, p3]: matched_dict[p] = true
 
 	for x in width:
@@ -199,6 +202,8 @@ func find_matches() -> Array:
 			if p1 == null || p2 == null || p3 == null || p1.type == "0" || p2.type == "0" || p3.type == "0" || p1.type == "9" || p2.type == "9" || p3.type == "9":
 				pass
 			elif p1 and p2 and p3 and p1.type == p2.type and p1.type == p3.type:
+				if p1.type == "11" && p2.type == "11" && p3.type == "11":
+					evil_match += 3
 				for p in [p1, p2, p3]: matched_dict[p] = true
 
 	return matched_dict.keys()
@@ -208,7 +213,11 @@ func process_board_state():
 	var matches = find_matches()
 	
 	while matches.size() > 0:
-		combo_count += 1
+		print("Evil Match Count: " + str(evil_match))
+		
+		if evil_match < 1:
+			combo_count += 1
+			
 		Audio.play("res://match 3/sounds/tile-match.ogg", true, 1.0 + (combo_count * 0.1))
 		if combo_count > 1:
 			if $"../..":
@@ -225,17 +234,25 @@ func process_board_state():
 			tween.tween_property(piece, "scale", Vector2.ZERO, 0.2)
 			tween.finished.connect(piece.queue_free)
 			
-			if $"../..":
-				$"../..".money += 1
+			if evil_match == 0:
+				if $"../..":
+					$"../..".money += 1
 			#await collapse_columns()
+			if evil_match >= 1:
+				if $"../..":
+					$"../..".money -= 1
+				evil_match -= 1
 		
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
 		await refill_board(true)
 		
 		matches = find_matches()
+		await collapse_columns()
 	
-	await collapse_columns()
+	#await collapse_columns()
+	#matches = find_matches()
+	#process_board_state()
 	is_swapping = false
 
 func collapse_columns():
@@ -253,7 +270,8 @@ func collapse_columns():
 				for k in range(y - 1, -1, -1):
 					if grid[x][k] != null:
 						grid[x][y] = grid[x][k]
-#						spawn_at(x, k, true)
+						# I had this next line commented out at one point but trying to bug fix and...?
+						spawn_at(x, k, true)
 						grid[x][k] = null
 						grid[x][y].grid_position = Vector2i(x, y)
 						grid[x][y].move_to(grid_to_pixel(x, y))
@@ -307,7 +325,7 @@ func get_whole_board()-> Array:
 	
 
 func remove_random_icon():
-	var randomToDestroy = iconArray.pick_random()
+	var randomToDestroy = Global.bombIconsForRound[Global.day].pick_random()
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()
 	

@@ -221,7 +221,7 @@ func process_board_state():
 		Audio.play("res://match 3/sounds/tile-match.ogg", true, 1.0 + (combo_count * 0.1))
 		if combo_count > 1:
 			if $"../..":
-				$"../..".money += ((combo_count-1) * 2)
+				$"../..".money += ((combo_count-1) * 3)
 				
 		for piece in matches:
 			var effect = sparkles_scene.instantiate()
@@ -236,11 +236,11 @@ func process_board_state():
 			
 			if evil_match == 0:
 				if $"../..":
-					$"../..".money += 1
+					$"../..".money += 2
 			#await collapse_columns()
 			if evil_match >= 1:
 				if $"../..":
-					$"../..".money -= 1
+					$"../..".money -= 2
 				evil_match -= 1
 		
 		await get_tree().create_timer(0.3).timeout
@@ -344,7 +344,7 @@ func remove_random_icon():
 				tween.finished.connect(piece.queue_free)
 							
 				if $"../..":
-					$"../..".money += 1
+					$"../..".money += 2
 	if objectsDestroyed == true:
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()

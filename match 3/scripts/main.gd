@@ -28,7 +28,7 @@ var combo_count: int = 0
 # Depending on which round, we'll get the right amount of icons
 var iconArray = [1, 2, 3, 4, 5, 6]
 var evil_match = 0
-
+var matches 
 # Functions
 
 func _ready():
@@ -210,7 +210,7 @@ func find_matches() -> Array:
 
 func process_board_state():
 	combo_count = 0 
-	var matches = find_matches()
+	matches = find_matches()
 	
 	while matches.size() > 0:
 		print("Evil Match Count: " + str(evil_match))
@@ -221,7 +221,7 @@ func process_board_state():
 		Audio.play("res://match 3/sounds/tile-match.ogg", true, 1.0 + (combo_count * 0.1))
 		if combo_count > 1:
 			if $"../..":
-				$"../..".money += ((combo_count-1) * 3)
+				$"../..".money += ((combo_count-1) * 4)
 				
 		for piece in matches:
 			var effect = sparkles_scene.instantiate()
@@ -282,6 +282,7 @@ func collapse_columns():
 				spawn_at(x, y, true)
 				
 	await get_tree().create_timer(0.1).timeout
+	matches = find_matches()
 
 func refill_board(blanks: bool):
 	
@@ -330,26 +331,34 @@ func remove_random_icon():
 	var whole_board = get_whole_board()
 	
 	for piece in whole_board:
-			if not is_instance_valid(piece):
-				return
-			if piece.type == str(randomToDestroy):
-				objectsDestroyed = true
-				var effect = bomb_fire_scene.instantiate()
-				effect.position = piece.position
-				container.add_child(effect)
-				grid[piece.grid_position.x][piece.grid_position.y] = null
-		
-				var tween = piece.create_tween()
-				tween.tween_property(piece, "scale", Vector2.ZERO, 0.2)
-				tween.finished.connect(piece.queue_free)
-							
-				if $"../..":
-					$"../..".money += 2
+		if not is_instance_valid(piece):
+			return
+		if piece.type == str(randomToDestroy):
+			print("Objects Destroyed: " + str(objectsDestroyed))
+			objectsDestroyed = true
+			var effect = bomb_fire_scene.instantiate()
+			effect.position = piece.position
+			container.add_child(effect)
+			grid[piece.grid_position.x][piece.grid_position.y] = null
+	
+			var tween = piece.create_tween()
+			tween.tween_property(piece, "scale", Vector2.ZERO, 0.2)
+			tween.finished.connect(piece.queue_free)
+						
+			if $"../..":
+				$"../..".money += 2
 	if objectsDestroyed == true:
+		print("Got to objectsDestroyed == true")
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
 		await refill_board(true)
-		process_board_state()
+	await get_tree().create_timer(0.1).timeout
+	await collapse_columns()
+	await refill_board(true)
+	process_board_state()
+#		await collapse_columns()
+	
+	#process_board_state()
 
 func reset_board():
 	var whole_board = get_whole_board()

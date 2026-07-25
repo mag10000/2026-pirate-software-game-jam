@@ -24,4 +24,4 @@ var hour = 1
 
 var item_pool = ["res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
 
-var iconsForRound = 8
+var iconsForRound = [1, 6, 7, 9]

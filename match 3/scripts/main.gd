@@ -26,12 +26,12 @@ var first_touch = Vector2i(-1, -1)
 var is_swapping = false
 var combo_count: int = 0
 # Depending on which round, we'll get the right amount of icons
-var iconArraySize = 0
+var iconArray = [1, 2, 3, 4, 5, 6]
 
 # Functions
 
 func _ready():
-	iconArraySize = Global.iconsForRound
+	iconArray = Global.iconsForRound
 	randomize()
 	
 	setup_grid_array() 
@@ -68,7 +68,7 @@ func setup_grid_array():
 func spawn_at(x, y, blanks: bool):
 	
 	var created_piece = tile_scene.instantiate()
-	var random_index = randi_range(1, iconArraySize) 
+	var random_index = iconArray.pick_random() 
 	if blanks:
 		random_index = 0 
 
@@ -78,6 +78,21 @@ func spawn_at(x, y, blanks: bool):
 	container.add_child(created_piece) 
 	
 	created_piece.set_tile_type(str(random_index), textures[random_index]) 
+	created_piece.tile_pressed.connect(_on_tile_pressed) 
+	created_piece.grid_position = Vector2i(x, y) 
+	created_piece.position = grid_to_pixel(x, y) 
+	
+	grid[x][y] = created_piece
+
+# Spawn a virus at a position
+func spawn_virus_at(x, y):
+	
+	var created_piece = tile_scene.instantiate()
+	var virus_index = 9
+	
+	container.add_child(created_piece) 
+	
+	created_piece.set_tile_type(str(virus_index), textures[virus_index]) 
 	created_piece.tile_pressed.connect(_on_tile_pressed) 
 	created_piece.grid_position = Vector2i(x, y) 
 	created_piece.position = grid_to_pixel(x, y) 
@@ -103,7 +118,7 @@ func _input(event):
 func calculate_swipe(final_pos: Vector2):
 	if (grid[first_touch.x][first_touch.y].type == "0"):
 				return
-	
+					
 	var difference = final_pos - grid_to_pixel(first_touch.x, first_touch.y)
 	
 	if difference.length() > 32:
@@ -112,6 +127,10 @@ func calculate_swipe(final_pos: Vector2):
 			other_touch.x += 1 if difference.x > 0 else -1
 		else: # Vertical dragging
 			other_touch.y += 1 if difference.y > 0 else -1
+		
+		# If one of the blocks is an Error mblock that can't move then return
+		if (grid[first_touch.x][first_touch.y].type == "7" || grid[other_touch.x][other_touch.y].type == "7"):
+			return
 		
 		if is_within_grid(other_touch):
 			handle_swap_logic(first_touch, other_touch)
@@ -149,10 +168,16 @@ func swap_pieces(a: Vector2i, b: Vector2i):
 		
 		piece_a.grid_position = b
 		piece_b.grid_position = a
-		
+				
 		piece_a.move_to(grid_to_pixel(b.x, b.y), false)
 		piece_b.move_to(grid_to_pixel(a.x, a.y), false)
-		await get_tree().create_timer(0.3).timeout
+		
+		if (piece_a.type == "9") && (piece_b.type != "0"):
+			piece_b.set_tile_type("9", textures[9]) 
+		elif (piece_b.type == "9") && (piece_a.type != "0"):
+			piece_a.set_tile_type("9", textures[9]) 
+		
+	await get_tree().create_timer(0.3).timeout
 	await collapse_columns()
 	await refill_board(true)
 
@@ -163,7 +188,7 @@ func find_matches() -> Array:
 	for y in height:
 		for x in range(width - 2):
 			var p1 = grid[x][y]; var p2 = grid[x+1][y]; var p3 = grid[x+2][y]
-			if p1 == null || p2 == null || p3 == null || p1.type == "0" || p2.type == "0" || p3.type == "0":
+			if p1 == null || p2 == null || p3 == null || p1.type == "0" || p2.type == "0" || p3.type == "0" || p1.type == "9" || p2.type == "9" || p3.type == "9":
 				pass
 			elif p1 and p2 and p3 and p1.type == p2.type and p1.type == p3.type:
 				for p in [p1, p2, p3]: matched_dict[p] = true
@@ -171,7 +196,7 @@ func find_matches() -> Array:
 	for x in width:
 		for y in range(height - 2):
 			var p1 = grid[x][y]; var p2 = grid[x][y+1]; var p3 = grid[x][y+2]
-			if p1 == null || p2 == null || p3 == null || p1.type == "0" || p2.type == "0" || p3.type == "0":
+			if p1 == null || p2 == null || p3 == null || p1.type == "0" || p2.type == "0" || p3.type == "0" || p1.type == "9" || p2.type == "9" || p3.type == "9":
 				pass
 			elif p1 and p2 and p3 and p1.type == p2.type and p1.type == p3.type:
 				for p in [p1, p2, p3]: matched_dict[p] = true
@@ -282,7 +307,7 @@ func get_whole_board()-> Array:
 	
 
 func remove_random_icon():
-	var randomToDestroy = randi_range(0, iconArraySize)
+	var randomToDestroy = iconArray.pick_random()
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()
 	

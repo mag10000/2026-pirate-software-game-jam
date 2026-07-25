@@ -15,7 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://cwknp4xg4o1w8" path="res://art/Phone_Icon.png" id="9_n4ug4"]
 [ext_resource type="Texture2D" uid="uid://eailhed83ju8" path="res://match 3/sprites/cursors/cursor-hand-closed.png" id="10_efxa6"]
 [ext_resource type="Texture2D" uid="uid://cjfvrufwel62i" path="res://art/Message_Icon.png" id="10_pq6s4"]
-[ext_resource type="Texture2D" uid="uid://svtaotd5bvl8" path="res://art/Settings_Icon.png" id="12_6ixp2"]
+[ext_resource type="Texture2D" uid="uid://cpicu521oa5tx" path="res://art/Error_Icon.png" id="12_7p84o"]
+[ext_resource type="Texture2D" uid="uid://besl3ucfp0pjb" path="res://art/Virus_Icon.png" id="14_l3eup"]
 
 [node name="Main" type="Node2D" unique_id=1469547217]
 script = ExtResource("1_ig7tw")
@@ -23,7 +24,7 @@ height = 6
 tile_scene = ExtResource("2_0xm2m")
 sparkles_scene = ExtResource("3_kek77")
 bomb_fire_scene = ExtResource("4_pq6s4")
-textures = Array[Texture2D]([ExtResource("5_7p84o"), ExtResource("5_10jc3"), ExtResource("6_n4ug4"), ExtResource("7_pq6s4"), ExtResource("8_6ixp2"), ExtResource("9_n4ug4"), ExtResource("10_pq6s4"), ExtResource("12_6ixp2"), ExtResource("4_l3cu5")])
+textures = Array[Texture2D]([ExtResource("5_7p84o"), ExtResource("5_10jc3"), ExtResource("6_n4ug4"), ExtResource("7_pq6s4"), ExtResource("8_6ixp2"), ExtResource("4_l3cu5"), ExtResource("10_pq6s4"), ExtResource("12_7p84o"), ExtResource("9_n4ug4"), ExtResource("14_l3eup")])
 open_hand_cursor = ExtResource("9_4c57u")
 closed_hand_cursor = ExtResource("10_efxa6")
 

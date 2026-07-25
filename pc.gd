@@ -159,6 +159,7 @@ func _process(delta):
 					get_tree().change_scene_to_file("res://game_over.tscn")
 				else:
 					Global.day += 1
+					Global.hour = 1
 					update_minimum_debt_payment()
 					# TODO - Create scene for new_day
 					# get_tree().change_scene_to_file("res://new_day.tscn")

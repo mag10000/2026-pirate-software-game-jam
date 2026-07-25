@@ -29,6 +29,7 @@ var combo_count: int = 0
 var iconArray = [1, 2, 3, 4, 5, 6]
 var evil_match = 0
 var matches 
+
 # Functions
 
 func _ready():

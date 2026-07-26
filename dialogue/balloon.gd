@@ -1,6 +1,13 @@
 extends CanvasLayer
 ## A basic dialogue balloon for use with Dialogue Manager.
 
+@export var portrait_a : TextureRect
+
+@export var portrait_b : TextureRect
+
+@export var portrait_A_char_name : String
+
+@export var portrait_b_char_name : String
 
 ## The dialogue resource
 @export var dialogue_resource: DialogueResource
@@ -132,6 +139,13 @@ func apply_dialogue_line() -> void:
 
 	character_label.visible = not dialogue_line.character.is_empty()
 	character_label.text = tr(dialogue_line.character, "dialogue")
+
+	if portrait_A_char_name == dialogue_line.character.to_lower().replace(" ","_"):
+		portrait_b.material.set_shader_parameter('width',0.0)
+		portrait_a.material.set_shader_parameter('width',1.0)
+	if portrait_b_char_name == dialogue_line.character.to_lower().replace(" ","_"):
+		portrait_a.material.set_shader_parameter('width',0.0)
+		portrait_b.material.set_shader_parameter('width',1.0)
 
 	dialogue_label.hide()
 	dialogue_label.dialogue_line = dialogue_line

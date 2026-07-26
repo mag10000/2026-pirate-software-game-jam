@@ -30,7 +30,7 @@ func type_text():
 			main_node.add_child(balloon)
 			balloon.start(preload("res://dialogue/test.dialogue"),"start")
 			#TODO - Will want this to be a conditional, only if something happens in the dialogue that triggers it
-			get_tree().change_scene_to_file("res://pc.tscn")
+			#get_tree().change_scene_to_file("res://pc.tscn")
 			
 func format_number(number: int) -> String:
 	# Handle negative numbers by adding the "minus" sign in advance, as we discard it

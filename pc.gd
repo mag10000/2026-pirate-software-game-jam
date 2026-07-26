@@ -86,7 +86,7 @@ func _ready():
 	storeWindow.hide()
 	topWindow.hide()
 	update_day_hour_text()
-	InventoryManager.grant_item("res://inventory/items/bomb_item.tres")
+	InventoryManager.grant_item("res://inventory/items/simplify_board_item.tres")
 	InventoryManager.grant_item("res://inventory/items/missle_item.tres")
 	InventoryManager.grant_item("res://inventory/items/refresh_item.tres")
 	InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres")
@@ -150,6 +150,8 @@ func _process(delta):
 
 		if time == 0:
 			breakTimer.stop()
+			tileGameReference.refresh_icons()
+			print(str(tileGameReference.iconArray))
 			Global.break_time_started = false
 			Global.current_break_time_id = randi_range(0, 3)
 			await get_tree().create_timer(0.5).timeout
@@ -231,7 +233,7 @@ func item_clicked(node):
 		"Simplify Board":
 			tileGameReference.simplify_board()
 			#TODO - Put the correct item below here once made
-			#InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")
+			InventoryManager.revoke_item("res://inventory/items/simplify_board_item.tres")
 		"Missle":
 			tileGameReference.missle_evil_icons()
 			#TODO - Put the correct item below here once made

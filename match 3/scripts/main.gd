@@ -251,7 +251,7 @@ func process_board_state():
 	matches = find_matches()
 	
 	while matches.size() > 0:
-		print("Evil Match Count: " + str(evil_match))
+		#print("Evil Match Count: " + str(evil_match))
 		
 		if evil_match < 1:
 			combo_count += 1
@@ -387,12 +387,13 @@ func simplify_board():
 				$"../..".money += (amount_tile * Global.money_multiplier)
 	if objectsDestroyed == true:
 		print("Got to objectsDestroyed == true")
+		iconArray.erase(randomToDestroy)
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
-		# Refill the board with a new subset by removing the random icon
-		# from the array and calling the refill_board function
-		iconArray.erase(randomToDestroy)
-		await refill_board(false)
+		await refill_board(true)
+		# Instead of the above, if we want we can make it drop new items but
+		# would need to work on it
+		#await fill_blank_spots()
 	await get_tree().create_timer(0.1).timeout
 	await collapse_columns()
 	await refill_board(true)
@@ -506,6 +507,33 @@ func reset_board():
 		await refill_board(false)
 	
 		process_board_state()
-		
+
+func fill_blank_spots():
+	
+	var whole_board = get_whole_board()
+	var piecesToReplace = false
+	
+	for piece in whole_board:
+		if not is_instance_valid(piece):
+			return
+		if piece.type == "0":
+			piecesToReplace = true
+			grid[piece.grid_position.x][piece.grid_position.y] = null
+	
+	if piecesToReplace:
+		# TODO - Create a function like the OLD collapse columns was, where the spots are null not full of
+		# blank spots.
+		# await collapse_columns()
+		for x in width:
+			for y in height:
+				if grid[x][y] == null:
+					spawn_at(x, y, false)
+					grid[x][y].position.y -= offset * 2 
+					grid[x][y].move_to(grid_to_pixel(x, y))
+		await get_tree().create_timer(0.3).timeout
+
 func refresh_icons():
+	print("Before refresh_icons()" + str(iconArray))
 	iconArray = Global.iconsForRound[Global.day]
+	print (str(Global.iconsForRound[Global.day]))
+	print("After refresh_icons()" + str(iconArray))

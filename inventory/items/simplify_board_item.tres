@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://bertyr65gc3xk"]
+
+[ext_resource type="Texture2D" uid="uid://dkj1tg7jfkwq5" path="res://art/ITEM_Icons_Down.png" id="1_dwjkj"]
+[ext_resource type="Script" uid="uid://b61bii383w31e" path="res://inventory/scripts/item.gd" id="2_72noc"]
+
+[resource]
+script = ExtResource("2_72noc")
+item_name = "Simplify Board"
+item_icon = ExtResource("1_dwjkj")
+item_group = "ALL"
+discription = "Removes one type of tile from play for round and refills board"
+cost = 5
+metadata/_custom_type_script = "uid://b61bii383w31e"

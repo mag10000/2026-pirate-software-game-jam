@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://b8cjd5xlk3m1p"]
+
+[ext_resource type="Script" uid="uid://bs7j0wtyby7nv" path="res://match 3/scripts/main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bqn0mkisu2aba" path="res://match 3/scenes/tile.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://d1i8o2nh1b3a" path="res://match 3/scenes/sparkles.tscn" id="3_kek77"]
+[ext_resource type="Texture2D" uid="uid://cu61cbk68hsnt" path="res://art/Document_Icon.png" id="4_l3cu5"]
+[ext_resource type="PackedScene" uid="uid://3h31eth2dvi1" path="res://match 3/scenes/bomb_fire.tscn" id="4_pq6s4"]
+[ext_resource type="Texture2D" uid="uid://5yjf3ur4go6n" path="res://art/Empty_Icon.png" id="5_7p84o"]
+[ext_resource type="Texture2D" uid="uid://cy2bmabiv4453" path="res://art/Email_Icon.png" id="5_10jc3"]
+[ext_resource type="Texture2D" uid="uid://v8ocsjth53he" path="res://art/Folder_Icon.png" id="6_n4ug4"]
+[ext_resource type="Texture2D" uid="uid://b5xwmugjgdk1o" path="res://art/Printer_Icon.png" id="7_pq6s4"]
+[ext_resource type="Texture2D" uid="uid://ref71l2dhbw1" path="res://art/Spreadsheet_Icon.png" id="8_6ixp2"]
+[ext_resource type="Texture2D" uid="uid://c26xoi1o70ttr" path="res://match 3/sprites/cursors/cursor-hand-open.png" id="9_4c57u"]
+[ext_resource type="Texture2D" uid="uid://cwknp4xg4o1w8" path="res://art/Phone_Icon.png" id="9_n4ug4"]
+[ext_resource type="Texture2D" uid="uid://eailhed83ju8" path="res://match 3/sprites/cursors/cursor-hand-closed.png" id="10_efxa6"]
+[ext_resource type="Texture2D" uid="uid://cjfvrufwel62i" path="res://art/Message_Icon.png" id="10_pq6s4"]
+[ext_resource type="Texture2D" uid="uid://cpicu521oa5tx" path="res://art/Error_Icon.png" id="12_7p84o"]
+[ext_resource type="Texture2D" uid="uid://besl3ucfp0pjb" path="res://art/Virus_Icon.png" id="14_l3eup"]
+[ext_resource type="Texture2D" uid="uid://blgk6q3vwmc17" path="res://art/Bar_Chart_Icon.png" id="15_v0df7"]
+[ext_resource type="Texture2D" uid="uid://bt0akxmihfc3j" path="res://art/SociL_Media_Icon.png" id="16_mj2vb"]
+[ext_resource type="Texture2D" uid="uid://dlo2rmna3c5gx" path="res://art/Solid_Gray.png" id="19_v0df7"]
+
+[node name="Main" type="Node2D" unique_id=1469547217]
+script = ExtResource("1_ig7tw")
+tile_scene = ExtResource("2_0xm2m")
+sparkles_scene = ExtResource("3_kek77")
+bomb_fire_scene = ExtResource("4_pq6s4")
+textures = Array[Texture2D]([ExtResource("5_7p84o"), ExtResource("5_10jc3"), ExtResource("6_n4ug4"), ExtResource("7_pq6s4"), ExtResource("8_6ixp2"), ExtResource("4_l3cu5"), ExtResource("10_pq6s4"), ExtResource("12_7p84o"), ExtResource("9_n4ug4"), ExtResource("14_l3eup"), ExtResource("15_v0df7"), ExtResource("16_mj2vb")])
+open_hand_cursor = ExtResource("9_4c57u")
+closed_hand_cursor = ExtResource("10_efxa6")
+
+[node name="Background" type="TextureRect" parent="." unique_id=958130344]
+offset_left = -542.0
+offset_top = -315.0
+offset_right = 738.0
+offset_bottom = 405.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("19_v0df7")
+
+[node name="Board" type="Node2D" parent="." unique_id=879210771]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=372470445]

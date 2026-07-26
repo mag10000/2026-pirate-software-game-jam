@@ -402,6 +402,7 @@ func simplify_board():
 	#process_board_state()
 
 func bomb_random_icon():
+	process_board_state()
 	var randomToDestroy = Global.regularIconsForRound[Global.day].pick_random()
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()
@@ -410,7 +411,7 @@ func bomb_random_icon():
 	for piece in whole_board:
 		if not is_instance_valid(piece):
 			return
-		if piece.type == str(randomToDestroy) && (piece.grid_position.x != 0 || piece.grid_position.x != 5 || piece.grid_position.y != 0 || piece.grid_position.y != 5):
+		if piece.type == str(randomToDestroy) && (piece.grid_position.x != 0 && piece.grid_position.x != 5 && piece.grid_position.y != 0 && piece.grid_position.y != 5):
 			array_random_icons.append(piece)
 			objectsDestroyed = true
 		

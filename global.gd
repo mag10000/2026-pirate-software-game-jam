@@ -8,7 +8,7 @@ var work_time_started = false
 
 var break_time_started = false
 
-var work_times = [2300,2500,2700,2900]
+var work_times = [23,25,21,22]
 
 var break_times = [8,10,12,14]
 
@@ -18,7 +18,7 @@ var debt = 10000
 
 var minimumPay = 500
 
-var day = 3
+var day = 1
 
 var hour = 1
 

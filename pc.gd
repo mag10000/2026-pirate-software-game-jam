@@ -219,6 +219,8 @@ func item_clicked(node):
 		"Refresh Board":
 			tileGameReference.reset_board()
 			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")			
+		"$ Multiplier":
+			Global.money_multiplier = 2
 			
 func _on_store_flicker_timer_timeout():
 	#if item1.disabled && item1SoldOut == false:
@@ -308,6 +310,7 @@ func phase_1_setup():
 	MusicPlayer.play()
 	workTimer.stop()
 	workWindow.hide()
+	Global.money_multiplier = 1
 	
 func change_phase_display(phase: int):
 	if phase == 0:

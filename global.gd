@@ -8,9 +8,9 @@ var work_time_started = false
 
 var break_time_started = false
 
-var work_times = [20,24,18,22]
+var work_times = [23,25,27,29]
 
-var break_times = [10,12,8,14]
+var break_times = [8,10,12,14]
 
 var phase = 0
 
@@ -31,3 +31,5 @@ var bombIconsForRound = [[],[1, 2, 3, 4, 5],[1, 2, 3, 4, 5, 6],[1, 2, 3, 4, 5, 8
 var amt_earned_combos = 4
 
 var amt_earned_icon = 1
+
+var money_multiplier = 1

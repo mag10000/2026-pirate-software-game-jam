@@ -391,6 +391,19 @@ func update_minimum_debt_payment():
 func update_day_hour_text():
 	dayHourText.text = "Day: " + str(Global.day) + "/5 \nHour: " + str(Global.hour) + "/8"
 
+func pause():
+		if not pauseScreen.visible:
+			MusicPlayer.volume_db = -40
+			topWindow.hide()
+			workWindow.hide()
+			bankWindow.hide()
+			timerWindow.hide()
+			dayHourWindow.hide()
+			itemWindow.hide()
+			storeWindow.hide()
+			Engine.time_scale = 0
+			pauseScreen.show()
+
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("pause"):
 		if not pauseScreen.visible:

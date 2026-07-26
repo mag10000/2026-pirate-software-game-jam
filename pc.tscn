@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b5xwmugjgdk1o" path="res://art/Printer_Icon.png" id="6_ifkhm"]
 [ext_resource type="Texture2D" uid="uid://cy2bmabiv4453" path="res://art/Email_Icon.png" id="7_8pt1j"]
 [ext_resource type="AudioStream" uid="uid://3j7retq5fugu" path="res://music/money on the line [puzzle theme].wav" id="11_0727r"]
+[ext_resource type="PackedScene" uid="uid://c24ehyjpe51l6" path="res://pause_screen.tscn" id="12_gh3ss"]
 
 [sub_resource type="Animation" id="Animation_s818i"]
 length = 0.001
@@ -94,7 +95,7 @@ _data = {
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oj12w"]
 bg_color = Color(0, 1, 0, 1)
 
-[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "dayHourText", "workTimer", "breakTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "MusicPlayer", "item1", "item1Label", "item2", "item2Label", "item3", "item3Label")]
+[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "dayHourText", "workTimer", "breakTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "dayHourWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "MusicPlayer", "pauseScreen", "item1", "item1Label", "item2", "item2Label", "item3", "item3Label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,11 +116,13 @@ itemWindow = NodePath("inventory window")
 storeWindow = NodePath("store window")
 topWindow = NodePath("top window")
 timerWindow = NodePath("timer window")
+dayHourWindow = NodePath("day hour window")
 progressBar = NodePath("timer window/ProgressBar")
 depositButton = NodePath("bank account window/debt/deposit1")
 scrollAlertTextAnimation = NodePath("top window/Label/AnimationPlayer")
 tileGameReference = NodePath("work window/Main")
 MusicPlayer = NodePath("MusicPlayer")
+pauseScreen = NodePath("Pause Screen")
 item1 = NodePath("store window/storeitems/item1")
 item1Label = NodePath("store window/storeitems/item1discription")
 item2 = NodePath("store window/storeitems/item2")
@@ -541,6 +544,9 @@ autoplay = true
 [node name="work timer" type="Timer" parent="." unique_id=1132678509]
 
 [node name="break timer" type="Timer" parent="." unique_id=513373814]
+
+[node name="Pause Screen" parent="." unique_id=1419754115 instance=ExtResource("12_gh3ss")]
+visible = false
 
 [connection signal="pressed" from="bank account window/debt/deposit1" to="." method="_on_deposit_pressed"]
 [connection signal="pressed" from="bank account window/debt/deposit10" to="." method="_on_deposit_10_pressed"]

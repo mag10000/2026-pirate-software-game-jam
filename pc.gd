@@ -16,6 +16,7 @@ extends Control
 @export var storeWindow: Window
 @export var topWindow: Window
 @export var timerWindow: Window
+@export var dayHourWindow: Window
 
 @export var progressBar: ProgressBar
 
@@ -26,6 +27,8 @@ extends Control
 @export var tileGameReference: Node2D
 
 @export var MusicPlayer: AudioStreamPlayer
+
+@export var pauseScreen: CanvasLayer
 
 @export_group("store")
 
@@ -371,5 +374,30 @@ func update_minimum_debt_payment():
 
 func update_day_hour_text():
 	dayHourText.text = "Day: " + str(Global.day) + "/5 \nHour: " + str(Global.hour) + "/8"
-	
-	
+
+func _unhandled_input(event):
+	if Input.is_action_just_pressed("pause"):
+		if not pauseScreen.visible:
+			MusicPlayer.volume_db = -40
+			topWindow.hide()
+			workWindow.hide()
+			bankWindow.hide()
+			timerWindow.hide()
+			dayHourWindow.hide()
+			itemWindow.hide()
+			storeWindow.hide()
+			Engine.time_scale = 0
+			pauseScreen.show()
+		else:
+			MusicPlayer.volume_db = 0
+			topWindow.show()
+			bankWindow.show()
+			timerWindow.show()
+			dayHourWindow.show()
+			itemWindow.show()
+			if Global.phase == 1:
+				storeWindow.show()
+			else:
+				workWindow.show()
+			Engine.time_scale = 1
+			pauseScreen.hide()

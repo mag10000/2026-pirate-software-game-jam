@@ -52,3 +52,6 @@ func format_number(number: int) -> String:
 		index += 1
 	
 	return formatted_number
+
+func finish_story_beat():
+	get_tree().change_scene_to_file("res://pc.tscn")

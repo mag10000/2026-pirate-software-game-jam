@@ -86,11 +86,11 @@ func _ready():
 	storeWindow.hide()
 	topWindow.hide()
 	update_day_hour_text()
-	InventoryManager.grant_item("res://inventory/items/simplify_board_item.tres")
-	InventoryManager.grant_item("res://inventory/items/missle_item.tres")
-	InventoryManager.grant_item("res://inventory/items/refresh_item.tres")
-	InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres")
-	#InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
+	#InventoryManager.grant_item("res://inventory/items/simplify_board_item.tres")
+	#InventoryManager.grant_item("res://inventory/items/missle_item.tres")
+	#InventoryManager.grant_item("res://inventory/items/refresh_item.tres")
+	#InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres")
+	#InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 5)
 
 # Runs every frame
 func _process(delta):
@@ -221,21 +221,21 @@ func item_clicked(node):
 			time = time + 5
 			InventoryManager.revoke_item("res://inventory/items/time_add_item.tres")
 		"Bomb":
-			tileGameReference.bomb_random_icon()
+			await tileGameReference.bomb_random_icon()
 			InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
 		"Refresh Board":
-			tileGameReference.reset_board()
+			await tileGameReference.reset_board()
 			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")			
 		"$ Multiplier":
 			Global.money_multiplier += 1
 			#TODO - Put the correct item below here once made
 			InventoryManager.revoke_item("res://inventory/items/money_multiplier_item.tres")
 		"Simplify Board":
-			tileGameReference.simplify_board()
+			await tileGameReference.simplify_board()
 			#TODO - Put the correct item below here once made
 			InventoryManager.revoke_item("res://inventory/items/simplify_board_item.tres")
 		"Missle":
-			tileGameReference.missle_evil_icons()
+			await tileGameReference.missle_evil_icons()
 			#TODO - Put the correct item below here once made
 			InventoryManager.revoke_item("res://inventory/items/missle_item.tres")
 		_: 

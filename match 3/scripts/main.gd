@@ -35,7 +35,7 @@ var amount_combo = 4
 # Functions
 
 func _ready():
-	iconArray = Global.iconsForRound[Global.day]
+	iconArray = Global.iconsForRound[Global.day].duplicate(true)
 	randomize()
 	
 	setup_grid_array() 
@@ -171,7 +171,7 @@ func calculate_swipe(final_pos: Vector2):
 		
 		if is_within_grid(other_touch):
 			# If one of the blocks is an Error block that can't move then return
-			if (grid[first_touch.x][first_touch.y].type == "7" || grid[other_touch.x][other_touch.y].type == "7"):
+			if (Global.day == 3 && (grid[first_touch.x][first_touch.y].type == "7" || grid[other_touch.x][other_touch.y].type == "7")):
 				return
 			handle_swap_logic(first_touch, other_touch)
 			Audio.play("res://match 3/sounds/tile-swap.ogg", false, randf_range(0.8, 1.2), 0.3)
@@ -364,7 +364,9 @@ func get_whole_board()-> Array:
 	
 
 func simplify_board():
-	var randomToDestroy = Global.regularIconsForRound[Global.day].pick_random()
+	var randomToDestroy = iconArray.pick_random()
+	while randomToDestroy == 0 || randomToDestroy == 7 || randomToDestroy == 9 || randomToDestroy == 11:
+		randomToDestroy = iconArray.pick_random()
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()
 	
@@ -398,13 +400,13 @@ func simplify_board():
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
-#		await collapse_columns()
-	
-	#process_board_state()
+
 
 func bomb_random_icon():
-	process_board_state()
-	var randomToDestroy = Global.regularIconsForRound[Global.day].pick_random()
+	var randomToDestroy = iconArray.pick_random()
+	while randomToDestroy == 0 || randomToDestroy == 7 || randomToDestroy == 9 || randomToDestroy == 11:
+		randomToDestroy = iconArray.pick_random()
+	var objectsInArray = false
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()
 	var array_random_icons = []
@@ -412,11 +414,14 @@ func bomb_random_icon():
 	for piece in whole_board:
 		if not is_instance_valid(piece):
 			return
-		if piece.type == str(randomToDestroy) && (piece.grid_position.x != 0 && piece.grid_position.x != 5 && piece.grid_position.y != 0 && piece.grid_position.y != 5):
+		if piece.type == str(randomToDestroy) && piece.grid_position.x != 0 && piece.grid_position.x != 5 && piece.grid_position.y != 0 && piece.grid_position.y != 5:
 			array_random_icons.append(piece)
-			objectsDestroyed = true
+			objectsInArray = true
+			print (str(randomToDestroy))
+			print (str(piece.type))
+			print (str(array_random_icons))
 		
-	if objectsDestroyed:
+	if objectsInArray:
 		var random_index = randi_range(0,array_random_icons.size() - 1)
 		var piece_to_destroy = array_random_icons[random_index]
 		var array_to_destroy = [piece_to_destroy, 
@@ -431,8 +436,7 @@ func bomb_random_icon():
 		
 			#print("Objects Destroyed: " + str(objectsDestroyed))
 		for piece_to_bomb in array_to_destroy:
-			if not is_instance_valid(piece_to_bomb) || piece_to_bomb.type == "0":
-				return
+			objectsDestroyed = true
 			var effect = bomb_fire_scene.instantiate()
 			effect.position = piece_to_bomb.position
 			container.add_child(effect)
@@ -452,8 +456,6 @@ func bomb_random_icon():
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
-	
-	pass
 
 func missle_evil_icons():
 	var randomToDestroy = Global.evilIconsForRound[Global.day].pick_random()
@@ -533,7 +535,4 @@ func fill_blank_spots():
 		await get_tree().create_timer(0.3).timeout
 
 func refresh_icons():
-	print("Before refresh_icons()" + str(iconArray))
-	iconArray = Global.iconsForRound[Global.day]
-	print (str(Global.iconsForRound[Global.day]))
-	print("After refresh_icons()" + str(iconArray))
+	iconArray = Global.iconsForRound[Global.day].duplicate(true)

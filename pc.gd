@@ -87,7 +87,9 @@ func _ready():
 	topWindow.hide()
 	update_day_hour_text()
 	InventoryManager.grant_item("res://inventory/items/bomb_item.tres")
+	InventoryManager.grant_item("res://inventory/items/missle_item.tres")
 	InventoryManager.grant_item("res://inventory/items/refresh_item.tres")
+	InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres")
 	#InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
 
 # Runs every frame
@@ -164,7 +166,7 @@ func _process(delta):
 					Global.hour = 1
 					update_minimum_debt_payment()
 					# TODO - Create scene for new_day
-					# get_tree().change_scene_to_file("res://new_day.tscn")
+					get_tree().change_scene_to_file("res://story_beat.tscn")
 			update_day_hour_text()
 
 
@@ -217,13 +219,25 @@ func item_clicked(node):
 			time = time + 5
 			InventoryManager.revoke_item("res://inventory/items/time_add_item.tres")
 		"Bomb":
-			tileGameReference.remove_random_icon()
+			tileGameReference.bomb_random_icon()
 			InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
 		"Refresh Board":
 			tileGameReference.reset_board()
 			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")			
 		"$ Multiplier":
-			Global.money_multiplier = 2
+			Global.money_multiplier += 1
+			#TODO - Put the correct item below here once made
+			InventoryManager.revoke_item("res://inventory/items/money_multiplier_item.tres")
+		"Simplify Board":
+			tileGameReference.simplify_board()
+			#TODO - Put the correct item below here once made
+			#InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")
+		"Missle":
+			tileGameReference.missle_evil_icons()
+			#TODO - Put the correct item below here once made
+			InventoryManager.revoke_item("res://inventory/items/missle_item.tres")
+		_: 
+			pass
 			
 func _on_store_flicker_timer_timeout():
 	#if item1.disabled && item1SoldOut == false:
@@ -302,6 +316,8 @@ func phase_0_setup():
 	storeWindow.hide()
 	if (Global.day == 1 && Global.hour == 1):
 		return
+	tileGameReference.refresh_icons()
+	Global.money_multiplier = 1
 	tileGameReference.reset_board()
 	
 

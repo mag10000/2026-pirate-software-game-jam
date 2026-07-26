@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://bw2pv5cl6fe8j"]
+
+[ext_resource type="Texture2D" uid="uid://c7xjmtbsysad4" path="res://art/ITEM_Missle.png" id="1_ghg7u"]
+[ext_resource type="Script" uid="uid://b61bii383w31e" path="res://inventory/scripts/item.gd" id="2_4nqpi"]
+
+[resource]
+script = ExtResource("2_4nqpi")
+item_name = "Missle"
+item_icon = ExtResource("1_ghg7u")
+item_group = "ALL"
+discription = "Destroys one kind of bad tiles"
+cost = 5
+metadata/_custom_type_script = "uid://b61bii383w31e"

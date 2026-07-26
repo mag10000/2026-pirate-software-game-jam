@@ -55,7 +55,7 @@ _data = {
 &"fade": SubResource("Animation_cg5s0")
 }
 
-[node name="story_beat" type="Control" unique_id=1322162073]
+[node name="story_beat" type="Control" unique_id=1322162073 node_paths=PackedStringArray("main_node")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,6 +63,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_704ii")
+main_node = NodePath(".")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=754495300]
 layout_mode = 1

@@ -1,8 +1,8 @@
 extends Node2D
 
 @export_subgroup("Properties")
-@export var width: int = 8
-@export var height: int = 8
+@export var width: int = 6
+@export var height: int = 6
 @export var offset: int = 68
 
 @export_subgroup("Scenes")
@@ -29,6 +29,8 @@ var combo_count: int = 0
 var iconArray = [1, 2, 3, 4, 5, 6]
 var evil_match = 0
 var matches 
+var amount_tile = 2
+var amount_combo = 4
 
 # Functions
 
@@ -257,7 +259,7 @@ func process_board_state():
 		Audio.play("res://match 3/sounds/tile-match.ogg", true, 1.0 + (combo_count * 0.1))
 		if combo_count > 1:
 			if $"../..":
-				$"../..".money += ((combo_count-1) * 4 * Global.money_multiplier)
+				$"../..".money += ((combo_count-1) * amount_combo * Global.money_multiplier)
 				
 		for piece in matches:
 			var effect = sparkles_scene.instantiate()
@@ -272,11 +274,11 @@ func process_board_state():
 			
 			if evil_match == 0:
 				if $"../..":
-					$"../..".money += (2 * Global.money_multiplier)
+					$"../..".money += (amount_tile * Global.money_multiplier)
 			#await collapse_columns()
 			if evil_match >= 1:
 				if $"../..":
-					$"../..".money -= 2 
+					$"../..".money -= amount_tile 
 				evil_match -= 1
 		
 		await get_tree().create_timer(0.3).timeout
@@ -361,8 +363,8 @@ func get_whole_board()-> Array:
 	return board_dict.keys()
 	
 
-func remove_random_icon():
-	var randomToDestroy = Global.bombIconsForRound[Global.day].pick_random()
+func simplify_board():
+	var randomToDestroy = Global.regularIconsForRound[Global.day].pick_random()
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()
 	
@@ -370,9 +372,9 @@ func remove_random_icon():
 		if not is_instance_valid(piece):
 			return
 		if piece.type == str(randomToDestroy):
-			print("Objects Destroyed: " + str(objectsDestroyed))
+			#print("Objects Destroyed: " + str(objectsDestroyed))
 			objectsDestroyed = true
-			var effect = bomb_fire_scene.instantiate()
+			var effect = sparkles_scene.instantiate()
 			effect.position = piece.position
 			container.add_child(effect)
 			grid[piece.grid_position.x][piece.grid_position.y] = null
@@ -382,12 +384,15 @@ func remove_random_icon():
 			tween.finished.connect(piece.queue_free)
 						
 			if $"../..":
-				$"../..".money += (2 * Global.money_multiplier)
+				$"../..".money += (amount_tile * Global.money_multiplier)
 	if objectsDestroyed == true:
 		print("Got to objectsDestroyed == true")
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
-		await refill_board(true)
+		# Refill the board with a new subset by removing the random icon
+		# from the array and calling the refill_board function
+		iconArray.erase(randomToDestroy)
+		await refill_board(false)
 	await get_tree().create_timer(0.1).timeout
 	await collapse_columns()
 	await refill_board(true)
@@ -396,13 +401,93 @@ func remove_random_icon():
 	
 	#process_board_state()
 
+func bomb_random_icon():
+	var randomToDestroy = Global.regularIconsForRound[Global.day].pick_random()
+	var objectsDestroyed = false
+	var whole_board = get_whole_board()
+	var array_random_icons = []
+
+	for piece in whole_board:
+		if not is_instance_valid(piece):
+			return
+		if piece.type == str(randomToDestroy) && (piece.grid_position.x != 0 || piece.grid_position.x != 5 || piece.grid_position.y != 0 || piece.grid_position.y != 5):
+			array_random_icons.append(piece)
+			objectsDestroyed = true
+		
+	if objectsDestroyed:
+		var random_index = randi_range(0,array_random_icons.size() - 1)
+		var piece_to_destroy = array_random_icons[random_index]
+		var array_to_destroy = [piece_to_destroy, 
+		grid[piece_to_destroy.grid_position.x + 1][piece_to_destroy.grid_position.y],
+		grid[piece_to_destroy.grid_position.x - 1][piece_to_destroy.grid_position.y],
+		grid[piece_to_destroy.grid_position.x][piece_to_destroy.grid_position.y + 1],
+		grid[piece_to_destroy.grid_position.x][piece_to_destroy.grid_position.y - 1],
+		grid[piece_to_destroy.grid_position.x + 1][piece_to_destroy.grid_position.y + 1],
+		grid[piece_to_destroy.grid_position.x + 1][piece_to_destroy.grid_position.y - 1],
+		grid[piece_to_destroy.grid_position.x - 1][piece_to_destroy.grid_position.y + 1],
+		grid[piece_to_destroy.grid_position.x - 1][piece_to_destroy.grid_position.y - 1]]	
+		
+			#print("Objects Destroyed: " + str(objectsDestroyed))
+		for piece_to_bomb in array_to_destroy:
+			if not is_instance_valid(piece_to_bomb) || piece_to_bomb.type == "0":
+				return
+			var effect = bomb_fire_scene.instantiate()
+			effect.position = piece_to_bomb.position
+			container.add_child(effect)
+			grid[piece_to_bomb.grid_position.x][piece_to_bomb.grid_position.y] = null
+	
+			var tween = piece_to_bomb.create_tween()
+			tween.tween_property(piece_to_bomb, "scale", Vector2.ZERO, 0.2)
+			tween.finished.connect(piece_to_bomb.queue_free)
+			
+			if $"../..":
+				$"../..".money += (amount_tile * Global.money_multiplier)
+	if objectsDestroyed == true:
+		await get_tree().create_timer(0.3).timeout
+		await collapse_columns()
+		await refill_board(true)
+	await get_tree().create_timer(0.1).timeout
+	await collapse_columns()
+	await refill_board(true)
+	process_board_state()
+	
+	pass
+
+func missle_evil_icons():
+	var randomToDestroy = Global.evilIconsForRound[Global.day].pick_random()
+	var objectsDestroyed = false
+	var whole_board = get_whole_board()
+	
+	for piece in whole_board:
+		if not is_instance_valid(piece):
+			return
+		if piece.type == str(randomToDestroy):
+			#print("Objects Destroyed: " + str(objectsDestroyed))
+			objectsDestroyed = true
+			var effect = bomb_fire_scene.instantiate()
+			effect.position = piece.position
+			container.add_child(effect)
+			grid[piece.grid_position.x][piece.grid_position.y] = null
+	
+			var tween = piece.create_tween()
+			tween.tween_property(piece, "scale", Vector2.ZERO, 0.2)
+			tween.finished.connect(piece.queue_free)
+	if objectsDestroyed == true:
+		await get_tree().create_timer(0.3).timeout
+		await collapse_columns()
+		await refill_board(true)
+	await get_tree().create_timer(0.1).timeout
+	await collapse_columns()
+	await refill_board(true)
+	process_board_state()
+
 func reset_board():
 	var whole_board = get_whole_board()
 	
 	while whole_board.size() > 0:
 
 		for piece in whole_board:
-			print("Got into for loop")
+			#print("Got into for loop")
 			if not is_instance_valid(piece):
 				return
 			#var effect = sparkles_scene.instantiate()
@@ -420,3 +505,6 @@ func reset_board():
 		await refill_board(false)
 	
 		process_board_state()
+		
+func refresh_icons():
+	iconArray = Global.iconsForRound[Global.day]

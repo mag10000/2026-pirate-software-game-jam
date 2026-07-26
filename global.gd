@@ -8,7 +8,7 @@ var work_time_started = false
 
 var break_time_started = false
 
-var work_times = [23,25,27,29]
+var work_times = [2300,2500,2700,2900]
 
 var break_times = [8,10,12,14]
 
@@ -18,7 +18,7 @@ var debt = 10000
 
 var minimumPay = 500
 
-var day = 1
+var day = 3
 
 var hour = 1
 
@@ -28,7 +28,9 @@ var item_pool = ["res://inventory/items/time_add_item.tres","res://inventory/ite
 
 var iconsForRound = [[],[1, 2, 3, 4, 5],[1, 2, 3, 4, 5, 6, 7],[1, 2, 3, 4, 5, 8, 9],[1, 2, 3, 4, 5, 10, 11],[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]]
 
-var bombIconsForRound = [[],[1, 2, 3, 4, 5],[1, 2, 3, 4, 5, 6],[1, 2, 3, 4, 5, 8],[1, 2, 3, 4, 5, 10],[1, 2, 3, 4, 5, 6, 8, 10]]
+var regularIconsForRound = [[],[1, 2, 3, 4, 5],[1, 2, 3, 4, 5, 6],[1, 2, 3, 4, 5, 8],[1, 2, 3, 4, 5, 10],[1, 2, 3, 4, 5, 6, 8, 10]]
+
+var evilIconsForRound = [[],[],[7],[9],[11],[7,9,11]]
 
 var amt_earned_combos = 4
 

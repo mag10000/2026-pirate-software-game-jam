@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://dgtemwtr2a0pt"]
+
+[ext_resource type="Texture2D" uid="uid://byvpqij1wr5o2" path="res://art/ITEM_Money_Multiplier.png" id="1_j8eys"]
+[ext_resource type="Script" uid="uid://b61bii383w31e" path="res://inventory/scripts/item.gd" id="2_x1rhu"]
+
+[resource]
+script = ExtResource("2_x1rhu")
+item_name = "$ Multiplier"
+item_icon = ExtResource("1_j8eys")
+item_group = "ALL"
+discription = "Increases money earned in current round"
+cost = 5
+metadata/_custom_type_script = "uid://b61bii383w31e"

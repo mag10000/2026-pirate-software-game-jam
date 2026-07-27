@@ -96,6 +96,9 @@ func _ready():
 
 # Runs every frame
 func _process(delta):
+	if Global.debt < 0:
+		Global.debt = 0
+	
 	earningsAmountDisplay.text = "$" + str(money)
 	debtAmountDisplay.text = "$" + str(Global.debt)
 	debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(Global.minimumPay)

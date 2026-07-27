@@ -14,6 +14,9 @@
 [ext_resource type="AudioStream" uid="uid://3j7retq5fugu" path="res://music/money on the line [puzzle theme].wav" id="11_0727r"]
 [ext_resource type="PackedScene" uid="uid://c24ehyjpe51l6" path="res://pause_screen.tscn" id="12_gh3ss"]
 [ext_resource type="PackedScene" uid="uid://crn1n1owvmd85" path="res://debug_screen.tscn" id="14_62yoi"]
+[ext_resource type="Material" uid="uid://cxr7ihe8nn4hv" path="res://addons/crt_shader/ShaderScreen.material" id="15_mx5f6"]
+[ext_resource type="Script" uid="uid://x7g2xo1usdqp" path="res://addons/crt_shader/crt_screen.gd" id="16_g0o0y"]
+[ext_resource type="Texture2D" uid="uid://b7rrbl58e5lm6" path="res://addons/crt_shader/CRTFrame.png" id="17_g0o0y"]
 
 [sub_resource type="Animation" id="Animation_s818i"]
 length = 0.001
@@ -164,12 +167,11 @@ grow_vertical = 0
 color = Color(0.7764706, 0.7921569, 0.5882353, 1)
 
 [node name="Label" type="Label" parent="taskbar" unique_id=1737939297]
-z_index = 17
 layout_mode = 0
-offset_left = 435.0
-offset_top = -22.0
-offset_right = 635.0
-offset_bottom = -6.0
+offset_left = 469.0
+offset_top = -24.0
+offset_right = 669.0
+offset_bottom = -8.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
@@ -227,6 +229,16 @@ script = ExtResource("5_kcquq")
 [node name="Main" parent="work window" unique_id=1469547217 instance=ExtResource("2_crfiw")]
 position = Vector2(56, 51)
 scale = Vector2(0.5, 0.5)
+
+[node name="CRTScreen" type="ColorRect" parent="work window" unique_id=202987339]
+material = ExtResource("15_mx5f6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_g0o0y")
+metadata/_custom_type_script = "uid://x7g2xo1usdqp"
 
 [node name="bank account window" type="Window" parent="." unique_id=1736246488]
 oversampling_override = 1.0
@@ -349,6 +361,16 @@ text = "Minimum Debt Due Now
 $"
 horizontal_alignment = 1
 
+[node name="CRTScreen" type="ColorRect" parent="bank account window" unique_id=1352707348]
+material = ExtResource("15_mx5f6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_g0o0y")
+metadata/_custom_type_script = "uid://x7g2xo1usdqp"
+
 [node name="timer window" type="Window" parent="." unique_id=974828568]
 oversampling_override = 1.0
 title = "Time Left"
@@ -370,6 +392,16 @@ offset_right = 214.0
 offset_bottom = 31.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_oj12w")
 show_percentage = false
+
+[node name="CRTScreen" type="ColorRect" parent="timer window" unique_id=800428581]
+material = ExtResource("15_mx5f6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_g0o0y")
+metadata/_custom_type_script = "uid://x7g2xo1usdqp"
 
 [node name="day hour window" type="Window" parent="." unique_id=893241672]
 oversampling_override = 1.0
@@ -406,6 +438,16 @@ offset_bottom = 23.0
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
 horizontal_alignment = 1
+
+[node name="CRTScreen" type="ColorRect" parent="day hour window" unique_id=1020561047]
+material = ExtResource("15_mx5f6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_g0o0y")
+metadata/_custom_type_script = "uid://x7g2xo1usdqp"
 
 [node name="inventory window" type="Window" parent="." unique_id=2121387249]
 oversampling_override = 1.0
@@ -444,6 +486,19 @@ offset_bottom = 74.0
 theme_override_constants/h_separation = 1
 theme_override_constants/v_separation = 1
 columns = 2
+
+[node name="CRTScreen" type="ColorRect" parent="inventory window" unique_id=408345644]
+material = ExtResource("15_mx5f6")
+anchors_preset = -1
+anchor_left = -3.8461537
+anchor_top = -1.1333333
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_g0o0y")
+metadata/_custom_type_script = "uid://x7g2xo1usdqp"
+metadata/_edit_use_anchors_ = true
 
 [node name="store window" type="Window" parent="." unique_id=1995505667]
 oversampling_override = 1.0
@@ -555,6 +610,16 @@ autowrap_mode = 3
 wait_time = 0.5
 autostart = true
 
+[node name="CRTScreen" type="ColorRect" parent="store window" unique_id=755498336]
+material = ExtResource("15_mx5f6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_g0o0y")
+metadata/_custom_type_script = "uid://x7g2xo1usdqp"
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=448535725]
 stream = ExtResource("11_0727r")
 autoplay = true
@@ -568,6 +633,22 @@ visible = false
 
 [node name="Debug Screen" parent="." unique_id=275293862 instance=ExtResource("14_62yoi")]
 visible = false
+
+[node name="CRTScreen" type="ColorRect" parent="." unique_id=1066026194]
+material = ExtResource("15_mx5f6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_g0o0y")
+metadata/_custom_type_script = "uid://x7g2xo1usdqp"
+
+[node name="CrtFrame" type="Sprite2D" parent="CRTScreen" unique_id=208218424]
+position = Vector2(319.99997, 180)
+scale = Vector2(0.5914972, 0.44334972)
+texture = ExtResource("17_g0o0y")
 
 [connection signal="pressed" from="bank account window/debt/deposit1" to="." method="_on_deposit_pressed"]
 [connection signal="pressed" from="bank account window/debt/deposit10" to="." method="_on_deposit_10_pressed"]

@@ -465,20 +465,21 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -75.5
-offset_right = 75.5
+offset_left = -96.0
+offset_right = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="item1" type="Button" parent="store window/storeitems" unique_id=1477501938]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 16
 text = "folder"
 icon = ExtResource("5_oj12w")
 autowrap_trim_flags = 0
@@ -486,6 +487,7 @@ expand_icon = true
 
 [node name="item1discription" type="Label" parent="store window/storeitems" unique_id=346004273]
 layout_mode = 2
+size_flags_vertical = 6
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
@@ -493,16 +495,18 @@ theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 12
 text = "Does Stuff"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="item2" type="Button" parent="store window/storeitems" unique_id=42902340]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 16
 text = "printer"
 icon = ExtResource("6_ifkhm")
 autowrap_trim_flags = 0
@@ -510,6 +514,7 @@ expand_icon = true
 
 [node name="item2discription" type="Label" parent="store window/storeitems" unique_id=280100941]
 layout_mode = 2
+size_flags_vertical = 6
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
@@ -517,16 +522,18 @@ theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 12
 text = "Does Stuff"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="item3" type="Button" parent="store window/storeitems" unique_id=1409320806]
+custom_minimum_size = Vector2(32, 40)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 16
 text = "email"
 icon = ExtResource("7_8pt1j")
 autowrap_trim_flags = 0
@@ -534,6 +541,7 @@ expand_icon = true
 
 [node name="item3discription" type="Label" parent="store window/storeitems" unique_id=89637367]
 layout_mode = 2
+size_flags_vertical = 6
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
@@ -541,6 +549,7 @@ theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 12
 text = "Does Stuff"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="storeFlickerTimer" type="Timer" parent="store window" unique_id=995754268]
 wait_time = 0.5

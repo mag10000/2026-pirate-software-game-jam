@@ -30,6 +30,8 @@ extends Control
 
 @export var pauseScreen: CanvasLayer
 
+@export var debugScreen: CanvasLayer
+
 @export_group("store")
 
 @export var item1: Button
@@ -449,4 +451,40 @@ func _unhandled_input(event):
 			Engine.time_scale = 1
 			pauseScreen.hide()
 	if Input.is_action_just_pressed("debug"):
-		pass
+		if not debugScreen.visible:
+			MusicPlayer.volume_db = -40
+			topWindow.hide()
+			workWindow.hide()
+			bankWindow.hide()
+			timerWindow.hide()
+			dayHourWindow.hide()
+			itemWindow.hide()
+			storeWindow.hide()
+			Engine.time_scale = 0
+			debugScreen.show()
+		else:
+			MusicPlayer.volume_db = 0
+			topWindow.show()
+			bankWindow.show()
+			timerWindow.show()
+			dayHourWindow.show()
+			itemWindow.show()
+			if Global.phase == 1:
+				storeWindow.show()
+			else:
+				workWindow.show()
+			Engine.time_scale = 1
+			debugScreen.hide()
+
+func debug():
+		if not debugScreen.visible:
+			MusicPlayer.volume_db = -40
+			topWindow.hide()
+			workWindow.hide()
+			bankWindow.hide()
+			timerWindow.hide()
+			dayHourWindow.hide()
+			itemWindow.hide()
+			storeWindow.hide()
+			Engine.time_scale = 0
+			debugScreen.show()

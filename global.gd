@@ -18,7 +18,7 @@ var debt = 10000
 
 var minimumPay = 500
 
-var day = 2
+var day = 1
 
 var hour = 1
 

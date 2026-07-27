@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://cqcwgqqqhbtxo"]
 
-[ext_resource type="Texture2D" uid="uid://v8ocsjth53he" path="res://art/Folder_Icon.png" id="1_6c0ac"]
+[ext_resource type="Texture2D" uid="uid://by40dbbc0nld0" path="res://art/item.png" id="1_6c0ac"]
 [ext_resource type="Script" uid="uid://b61bii383w31e" path="res://inventory/scripts/item.gd" id="1_wcg6r"]
 
 [resource]
@@ -9,5 +9,4 @@ item_name = "test item"
 item_icon = ExtResource("1_6c0ac")
 item_group = "ALL"
 discription = "test"
-item_string_path = "\"res://inventory/items/item.tres\""
 metadata/_custom_type_script = "uid://b61bii383w31e"

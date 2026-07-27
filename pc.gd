@@ -432,3 +432,5 @@ func _unhandled_input(event):
 				workWindow.show()
 			Engine.time_scale = 1
 			pauseScreen.hide()
+	if Input.is_action_just_pressed("debug"):
+		pass

@@ -4,6 +4,7 @@ signal tile_pressed(pos)
 #signal tile_dpad_swap(dir,pos)
 
 var type:String
+var icon_no:int
 var grid_position:Vector2i
 var mouse_hovering = false
 
@@ -12,6 +13,7 @@ var mouse_hovering = false
 func set_tile_type(id: String, texture: Texture2D):
 	
 	type = id
+	icon_no = int(id)
 	$Sprite2D.texture = texture
 
 # Letting the main code know when a tile has been pressed
@@ -50,7 +52,7 @@ func _on_button_pressed():
 func _on_button_mouse_entered():
 	mouse_hovering = true
 	var tween = create_tween().set_parallel(true)
-	tween.tween_property($Sprite2D, "scale", Vector2(1.3, 1.3), 0.1)
+	tween.tween_property($Sprite2D, "scale", Vector2(1.1, 1.1), 0.1)
 	tween.tween_property($Sprite2D, "modulate", Color(1.2, 1.2, 1.2), 0.1) # Brighten
 
 

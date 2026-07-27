@@ -171,7 +171,7 @@ func calculate_swipe(final_pos: Vector2):
 		
 		if is_within_grid(other_touch):
 			# If one of the blocks is an Error block that can't move then return
-			if (Global.day == 3 && (grid[first_touch.x][first_touch.y].type == "7" || grid[other_touch.x][other_touch.y].type == "7")):
+			if ((Global.day == 2 || Global.day == 5) && (grid[first_touch.x][first_touch.y].type == "7" || grid[other_touch.x][other_touch.y].type == "7")):
 				return
 			handle_swap_logic(first_touch, other_touch)
 			Audio.play("res://match 3/sounds/tile-swap.ogg", false, randf_range(0.8, 1.2), 0.3)

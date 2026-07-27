@@ -225,9 +225,6 @@ script = ExtResource("5_kcquq")
 [node name="Main" parent="work window" unique_id=1469547217 instance=ExtResource("2_crfiw")]
 position = Vector2(56, 51)
 scale = Vector2(0.5, 0.5)
-width = null
-height = null
-offset = null
 
 [node name="bank account window" type="Window" parent="." unique_id=1736246488]
 oversampling_override = 1.0
@@ -483,7 +480,6 @@ theme_override_font_sizes/font_size = 24
 text = "folder"
 icon = ExtResource("5_oj12w")
 autowrap_trim_flags = 0
-icon_alignment = 1
 expand_icon = true
 
 [node name="item1discription" type="Label" parent="store window/storeitems" unique_id=346004273]
@@ -508,7 +504,6 @@ theme_override_font_sizes/font_size = 24
 text = "printer"
 icon = ExtResource("6_ifkhm")
 autowrap_trim_flags = 0
-icon_alignment = 1
 expand_icon = true
 
 [node name="item2discription" type="Label" parent="store window/storeitems" unique_id=280100941]
@@ -533,7 +528,6 @@ theme_override_font_sizes/font_size = 24
 text = "email"
 icon = ExtResource("7_8pt1j")
 autowrap_trim_flags = 0
-icon_alignment = 1
 expand_icon = true
 
 [node name="item3discription" type="Label" parent="store window/storeitems" unique_id=89637367]

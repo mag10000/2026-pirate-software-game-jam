@@ -151,6 +151,8 @@ func _process(delta):
 		if time == 0:
 			breakTimer.stop()
 			tileGameReference.refresh_icons()
+			#tileGameReference.queue_free()
+			
 			print(str(tileGameReference.iconArray))
 			Global.break_time_started = false
 			Global.current_break_time_id = randi_range(0, 3)
@@ -166,6 +168,7 @@ func _process(delta):
 				else:
 					Global.day += 1
 					Global.hour = 1
+					raise_items_update()
 					update_minimum_debt_payment()
 					# TODO - Create scene for new_day
 					get_tree().change_scene_to_file("res://story_beat.tscn")
@@ -211,8 +214,33 @@ func _on_deposit_100_pressed():
 		if Global.minimumPay != 0:
 			Global.minimumPay -= 100
 
+
 func _on_break_timer_timeout():
 	time -= 1
+
+
+func raise_items_update():
+	match Global.day:
+		2:
+			Global.amt_earned_combos = 5
+			Global.amt_earned_icon = 2
+			Global.item_pool = ["res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres", ]
+		3:	
+			Global.amt_earned_combos = 6
+			Global.amt_earned_icon = 3
+			Global.item_pool = ["res://inventory/items/simplify_board_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres", ]
+		4: 
+			Global.amt_earned_combos = 7
+			Global.amt_earned_icon = 4
+			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/simplify_board_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres", ]
+		5: 
+			Global.amt_earned_combos = 8
+			Global.amt_earned_icon = 5
+			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/simplify_board_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres", ]
+		_:
+			pass
+	
+
 
 func item_clicked(node):
 	print("Clicked on item: ",node.item.item_name)
@@ -241,22 +269,6 @@ func item_clicked(node):
 		_: 
 			pass
 			
-func _on_store_flicker_timer_timeout():
-	#if item1.disabled && item1SoldOut == false:
-		#item1.disabled = false
-	#else:
-		#item1.disabled = true
-	#
-	#if item2.disabled && item2SoldOut == false:
-		#item2.disabled = false
-	#else:
-		#item2.disabled = true
-	#
-	#if item3.disabled && item3SoldOut == false:
-		#item3.disabled = false
-	#else:
-		#item3.disabled = true
-	pass
 
 func _on_item_1_pressed():
 	if money > 0 && item1Price > 0:
@@ -351,29 +363,33 @@ func create_new_store():
 		item1SoldOut = false
 		item1.disabled = false
 		item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-		item1.text = "Make $1 Item Payment"
+		item1.text = item1Random.item_name + " - " + "Pay $1"
 		item1.icon = item1Random.item_icon
 		item1Price = item1Random.cost
-		item1Discription = item1Random.item_name + " - " + item1Random.discription
+		item1Discription = item1Random.discription
 
 	if item2SoldOut == true || Global.hour == 1:
 		item2SoldOut = false
 		item2.disabled = false
 		item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-		item2.text = "Make $1 Item Payment"
+		item2.text = item2Random.item_name + " - " + "Pay $1"
 		item2.icon = item2Random.item_icon
 		item2Price = item2Random.cost
-		item2Discription = item2Random.item_name + " - " + item2Random.discription
+		item2Discription = item2Random.discription
 
 	if item3SoldOut == true || Global.hour == 1:
 		item3SoldOut = false
 		item3.disabled = false
 		item3SoldOut = false
-		item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-		item3.text = "Make $1 Item Payment"
+
+		if (item1Random != load("res://inventory/items/refresh_item.tres") && item2Random != load("res://inventory/items/refresh_item.tres")):
+			item3Random = load("res://inventory/items/refresh_item.tres")
+		else:
+			item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+		item3.text = item3Random.item_name + " - " + "Pay $1"
 		item3.icon = item3Random.item_icon
 		item3Price = item3Random.cost
-		item3Discription = item3Random.item_name + " - " + item3Random.discription
+		item3Discription = item3Random.discription
 
 func update_minimum_debt_payment():
 	match Global.day:

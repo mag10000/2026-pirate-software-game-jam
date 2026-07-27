@@ -7,6 +7,7 @@ var type:String
 var icon_no:int
 var grid_position:Vector2i
 var mouse_hovering = false
+var sprite_texture
 
 # Set piece them when initializing
 
@@ -15,6 +16,7 @@ func set_tile_type(id: String, texture: Texture2D):
 	type = id
 	icon_no = int(id)
 	$Sprite2D.texture = texture
+	sprite_texture = $Sprite2D.texture
 
 # Letting the main code know when a tile has been pressed
 

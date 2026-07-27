@@ -23,6 +23,10 @@
 
 [node name="Main" type="Node2D" unique_id=1469547217]
 script = ExtResource("1_ig7tw")
+width = null
+height = null
+offset = null
+day = null
 tile_scene = ExtResource("2_0xm2m")
 sparkles_scene = ExtResource("3_kek77")
 bomb_fire_scene = ExtResource("4_pq6s4")

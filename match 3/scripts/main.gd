@@ -4,6 +4,7 @@ extends Node2D
 @export var width: int = 6
 @export var height: int = 6
 @export var offset: int = 68
+@export var day: int = 1
 
 @export_subgroup("Scenes")
 @export var tile_scene: PackedScene 
@@ -16,6 +17,9 @@ extends Node2D
 @export_subgroup("Cursors")
 @export var open_hand_cursor: Texture2D
 @export var closed_hand_cursor: Texture2D
+
+@export_subgroup("Other Textures")
+@export var bomb_texture: Texture2D
 
 @onready var container = $Board
 
@@ -65,14 +69,19 @@ func setup_grid_array():
 	
 	for x in width:
 		for y in height:
-			spawn_at(x, y, false)
+			#print(x, y)
+			initial_spawn(x, y, false)
 
 # Spawn a new tile at a certain grid position
 
-func spawn_at(x, y, blanks: bool):
+func initial_spawn(x, y, blanks: bool):
 	
 	var created_piece = tile_scene.instantiate()
 	var random_index = iconArray.pick_random() 
+	while (check_neighbors(x, y, random_index) == true): 
+		random_index = iconArray.pick_random()
+		pass
+	
 	if blanks:
 		random_index = 0 
 
@@ -88,6 +97,54 @@ func spawn_at(x, y, blanks: bool):
 	created_piece.position = grid_to_pixel(x, y) 
 	
 	grid[x][y] = created_piece
+	
+
+func spawn_at(x, y, blanks: bool):
+	
+	var created_piece = tile_scene.instantiate()
+	var random_index = iconArray.pick_random() 
+	#while (check_neighbors(x, y, random_index) == true): 
+		#random_index = iconArray.pick_random()
+		#pass
+	
+	if blanks:
+		random_index = 0 
+
+	# This is default code for just using the amount of icons in the array
+	#var random_index = randi_range(0, textures.size() - 1)
+	
+	container.add_child(created_piece) 
+	
+	created_piece.set_tile_type(str(random_index), textures[random_index]) 
+	created_piece.tile_pressed.connect(_on_tile_pressed)
+	#created_piece.tile_dpad_swap.connect(_on_tile_dpad_swap)
+	created_piece.grid_position = Vector2i(x, y) 
+	created_piece.position = grid_to_pixel(x, y) 
+	
+	grid[x][y] = created_piece
+
+func check_neighbors(x, y, random_index) -> bool:
+	#TODO - This sin't right, we can't just flag as false if either is true, have to check
+	#specifically within that function
+	print(x, y)
+	if x == 0:
+		if y == 0:
+			return false
+		elif random_index == grid[x][y - 1].icon_no:
+			return true
+		else:
+			return false
+	elif y == 0:
+		if random_index == grid[x - 1][y].icon_no:
+			return true
+		else: 
+			return false
+	elif random_index == grid[x - 1][y].icon_no:
+		return true
+	elif random_index == grid[x][y - 1].icon_no:
+		return true
+	else:
+		return false
 
 # Spawn a virus at a position
 func spawn_virus_at(x, y):
@@ -330,7 +387,7 @@ func refill_board(blanks: bool):
 				if blanks:
 					spawn_at(x, y, true)
 				else:
-					spawn_at(x, y, false)
+					initial_spawn(x, y, false)
 				grid[x][y].position.y -= offset * 2 
 				grid[x][y].move_to(grid_to_pixel(x, y))
 	await get_tree().create_timer(0.3).timeout
@@ -410,7 +467,7 @@ func bomb_random_icon():
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()
 	var array_random_icons = []
-
+	#TODO - If there are ONLY pieces on edges, we should bomb an edge. If board is empty no big deal.
 	for piece in whole_board:
 		if not is_instance_valid(piece):
 			return
@@ -437,6 +494,8 @@ func bomb_random_icon():
 			#print("Objects Destroyed: " + str(objectsDestroyed))
 		for piece_to_bomb in array_to_destroy:
 			objectsDestroyed = true
+			if piece_to_bomb == piece_to_destroy:
+				piece_to_bomb.sprite_texture = bomb_texture
 			var effect = bomb_fire_scene.instantiate()
 			effect.position = piece_to_bomb.position
 			container.add_child(effect)
@@ -452,6 +511,8 @@ func bomb_random_icon():
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
 		await refill_board(true)
+	else:
+		wait_and_grant_bomb()
 	await get_tree().create_timer(0.1).timeout
 	await collapse_columns()
 	await refill_board(true)
@@ -536,3 +597,8 @@ func fill_blank_spots():
 
 func refresh_icons():
 	iconArray = Global.iconsForRound[Global.day].duplicate(true)
+
+func wait_and_grant_bomb():
+	#TODO - Play ERROR style SFX
+	await get_tree().create_timer(0.4).timeout
+	InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 1)

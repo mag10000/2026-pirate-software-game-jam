@@ -88,11 +88,11 @@ func _ready():
 	storeWindow.hide()
 	topWindow.hide()
 	update_day_hour_text()
-	#InventoryManager.grant_item("res://inventory/items/simplify_board_item.tres")
-	#InventoryManager.grant_item("res://inventory/items/missle_item.tres")
-	#InventoryManager.grant_item("res://inventory/items/refresh_item.tres")
-	#InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres")
-	#InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 5)
+	InventoryManager.grant_item("res://inventory/items/simplify_board_item.tres")
+	InventoryManager.grant_item("res://inventory/items/missle_item.tres")
+	InventoryManager.grant_item("res://inventory/items/refresh_item.tres")
+	InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 10)
+	InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 5)
 
 # Runs every frame
 func _process(delta):

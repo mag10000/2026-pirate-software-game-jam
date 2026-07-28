@@ -10,13 +10,13 @@ extends Control
 @export var workTimer: Timer
 @export var breakTimer: Timer
 
-@export var workWindow: Window
-@export var bankWindow: Window
-@export var itemWindow: Window
-@export var storeWindow: Window
+@export var workWindow: Panel
+@export var bankWindow: Panel
+@export var itemWindow: Panel
+@export var storeWindow: Panel
 @export var topWindow: Window
-@export var timerWindow: Window
-@export var dayHourWindow: Window
+@export var timerWindow: Panel
+@export var dayHourWindow: Panel
 
 @export var progressBar: ProgressBar
 
@@ -44,6 +44,7 @@ extends Control
 @export var item3Label: Label
 
 @export var itemSoldOutArt: Texture
+@export var crtFilerOn = true
 
 # Pause variable...
 var topWindowVisible = false
@@ -86,6 +87,8 @@ var phase0Setup = true
 var phase1Setup = false
 
 func _ready():
+	if crtFilerOn:
+		$CRTScreen.show()
 	create_new_store()
 	workWindow.hide()
 	storeWindow.hide()

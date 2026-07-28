@@ -32,13 +32,12 @@ closed_hand_cursor = ExtResource("10_efxa6")
 bomb_texture = ExtResource("19_mj2vb")
 
 [node name="Background" type="TextureRect" parent="." unique_id=958130344]
-offset_left = -542.0
-offset_top = -315.0
-offset_right = 738.0
-offset_bottom = 405.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+offset_left = 123.0
+offset_top = -26.0
+offset_right = 545.0
+offset_bottom = 369.0
 texture = ExtResource("19_v0df7")
+expand_mode = 1
 
 [node name="Board" type="Node2D" parent="." unique_id=879210771]
 

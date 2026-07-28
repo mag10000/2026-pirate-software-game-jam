@@ -44,4 +44,9 @@ func set_items():
 				slots[n].item = null	
 
 func item_clicked(node):
-	$"../..".item_clicked(node)
+	if InventoryManager.using_item == true:
+		#TODO - Play ITEM ERROR sfx
+		return
+	else:
+		InventoryManager.using_item = true
+		$"../..".item_clicked(node)

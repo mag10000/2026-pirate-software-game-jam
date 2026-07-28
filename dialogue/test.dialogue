@@ -1,6 +1,4 @@
 ~ start
-Magnus: This will eventually be finished dialouge or a cutscene.
-Evil Banker: I'm a evil banker mwahahaha
-You: Ohhhhh no!!!!!!
-do new_day_text()
+Magnus: There was an error with the day, it wasn't 1 through 5. You'll go back to the main menu!
+do load_scene("res://main_menu.tscn")
 => END

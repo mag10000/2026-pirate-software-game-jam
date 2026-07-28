@@ -16,21 +16,26 @@ var dayTileText = [[],["Base Tiles: "],["New Tile: "],["New Tile: "],["New Tile:
 var dayItemText = [[],["Base Items: "]]
 var dayEvilText = [[],[],[],[],[]]
 
-
-
-
-
-
 func _ready():
-	BankerMusicPlayer.play()
+	var balloon: Node = Balloon.instantiate()
+	main_node.add_child(balloon)
 	match Global.story_beat:
 		1:
-			var balloon: Node = Balloon.instantiate()
-			main_node.add_child(balloon)
+			BankerMusicPlayer.play()
 			balloon.start(preload("res://dialogue/day1intro.dialogue"),"start")
+		2:
+			BankerMusicPlayer.play()
+			balloon.start(preload("res://dialogue/day2intro.dialogue"),"start")
+		3:
+			BankerMusicPlayer.play()
+			balloon.start(preload("res://dialogue/day3intro.dialogue"),"start")
+		4:
+			BankerMusicPlayer.play()
+			balloon.start(preload("res://dialogue/day4intro.dialogue"),"start")
+		5:
+			BankerMusicPlayer.play()
+			balloon.start(preload("res://dialogue/day5intro.dialogue"),"start")
 		_:
-			var balloon: Node = Balloon.instantiate()
-			main_node.add_child(balloon)
 			balloon.start(preload("res://dialogue/test.dialogue"),"start")
 			#TODO - Will want this to be a conditional, only if something happens in the dialogue that triggers it
 			#get_tree().change_scene_to_file("res://pc.tscn")
@@ -54,7 +59,7 @@ func type_text():
 	await get_tree().create_timer(2.5).timeout
 	$AnimationPlayer.play("fade")
 	await get_tree().create_timer(1).timeout
-	finish_story_beat()
+	load_scene("res://pc.tscn")
 
 func show_text():
 	var iconstext = ""
@@ -117,5 +122,5 @@ func format_number(number: int) -> String:
 	
 	return formatted_number
 
-func finish_story_beat():
-	get_tree().change_scene_to_file("res://pc.tscn")
+func load_scene(sceneToLoad: String):
+	get_tree().change_scene_to_file(sceneToLoad)

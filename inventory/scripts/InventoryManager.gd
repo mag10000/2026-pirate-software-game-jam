@@ -1,5 +1,6 @@
 extends Node
 
+var using_item = false
 var _inventory : Dictionary = {}
 enum get_inventory_enums {
 	DICTONARY_NAME_AMOUNT,

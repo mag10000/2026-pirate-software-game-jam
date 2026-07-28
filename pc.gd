@@ -171,7 +171,7 @@ func _process(delta):
 				# TODO - Check Minimum
 				if deposited_in_round < Global.minimumPay:
 					get_tree().change_scene_to_file("res://game_over.tscn")
-				elif Global.day == 5
+				elif Global.day == 5:
 					get_tree().change_scene_to_file("res://you_win_credits.tscn")
 				else:
 					Global.day += 1
@@ -253,27 +253,41 @@ func item_clicked(node):
 		"Add Time":
 			time = time + 5
 			InventoryManager.revoke_item("res://inventory/items/time_add_item.tres")
+			await get_tree().create_timer(0.15).timeout
+			InventoryManager.using_item = false
 		"Bomb":
 			await tileGameReference.bomb_random_icon()
 			#TODO - Make sure to grant a missle if it can't fire and play SFX, maybe put revoking in other code
 			InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
+			await get_tree().create_timer(0.15).timeout
+			InventoryManager.using_item = false
 		"Refresh Board":
 			await tileGameReference.reset_board()
 			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")			
+			await get_tree().create_timer(0.15).timeout
+			InventoryManager.using_item = false
 		"$ Multiplier":
 			Global.money_multiplier += 1
 			InventoryManager.revoke_item("res://inventory/items/money_multiplier_item.tres")
+			await get_tree().create_timer(0.15).timeout
+			InventoryManager.using_item = false
 		"Simplify Board":
 			await tileGameReference.simplify_board()
 			#TODO - Make sure to grant a missle if it can't fire and play SFX
 			InventoryManager.revoke_item("res://inventory/items/simplify_board_item.tres")
+			await get_tree().create_timer(0.15).timeout
+			InventoryManager.using_item = false
 		"Missle":
 			await tileGameReference.missle_evil_icons()
 			#TODO - Make sure to grant a missle if it can't fire and play SFX
 			InventoryManager.revoke_item("res://inventory/items/missle_item.tres")
+			await get_tree().create_timer(0.15).timeout
+			InventoryManager.using_item = false
 		"Lightning":
 			await tileGameReference.lightning()
 			InventoryManager.revoke_item("res://inventory/items/lightning_item.tres")
+			await get_tree().create_timer(0.15).timeout
+			InventoryManager.using_item = false
 		_: 
 			pass
 			

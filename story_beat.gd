@@ -19,7 +19,7 @@ var dayEvilText = [[],[],[],[],[]]
 func _ready():
 	var balloon: Node = Balloon.instantiate()
 	main_node.add_child(balloon)
-	match Global.story_beat:
+	match Global.day:
 		1:
 			BankerMusicPlayer.play()
 			balloon.start(preload("res://dialogue/day1intro.dialogue"),"start")

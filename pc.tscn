@@ -729,6 +729,7 @@ horizontal_alignment = 1
 
 [node name="CRTScreen" type="ColorRect" parent="." unique_id=1066026194]
 visible = false
+z_index = 10
 material = ExtResource("15_mx5f6")
 layout_mode = 1
 anchors_preset = 15

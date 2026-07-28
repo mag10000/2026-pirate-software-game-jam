@@ -528,3 +528,10 @@ TO CLOSE THE WINDOW"
 	$"not allow".show()
 	await get_tree().create_timer(2).timeout
 	$"not allow".hide()
+
+func show_money_popup(money_amount : int,good = true):
+	var popup = preload("res://dollar_earn_popup.tscn").instantiate()
+	popup.amount = abs(money_amount)
+	popup.good = good
+	popup.global_position = Vector2(175,165)
+	add_child(popup)

@@ -13,7 +13,9 @@ config_version=5
 config/name="Pirate Software 2026"
 run/main_scene="uid://ct7oupp4g0ts7"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.7607843, 0.67058825, 0.6156863, 1)
+boot_splash/image="uid://ca3nrc25pjbit"
+config/icon="uid://ca3nrc25pjbit"
 
 [autoload]
 
@@ -21,6 +23,7 @@ Audio="*uid://dnjrgvu2rssgg"
 Global="*uid://djvkm7iuxwkui"
 InventoryManager="*uid://1mricf1l88em"
 DialogueManager="*uid://c3rodes2l3gxb"
+SilentWolf="*uid://75our2haght8"
 
 [dialogue_manager]
 
@@ -36,7 +39,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/crt_shader/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/crt_shader/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/silent_wolf/plugin.cfg")
 
 [input]
 

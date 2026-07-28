@@ -14,7 +14,7 @@ var break_times = [10]
 
 var phase = 0
 
-var money_earned = 0
+var money_earned = 500
 
 var debt = 10000
 
@@ -39,3 +39,16 @@ var amt_earned_combos = 4
 var amt_earned_icon = 1
 
 var money_multiplier = 1
+
+
+func _ready():
+	
+	SilentWolf.configure({
+	"api_key": "dVj5hDbhnL7eQuo7VDpR58hryt4hF2d02sW82n8A",
+	"game_id": "hyperdebtswap",
+	"log_level": 1
+	})
+
+	SilentWolf.configure_scores({
+	"open_scene_on_close": "res://scenes/MainPage.tscn"
+	})

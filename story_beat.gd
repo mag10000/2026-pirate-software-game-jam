@@ -89,9 +89,10 @@ func show_text():
 				iconstext += "\nBar Chart [img=32x32]res://art/Bar_Chart_Icon.png[/img], "
 			11:
 				iconstext += "\nSocial Media [img=32x32]res://art/SociL_Media_Icon.png[/img], "
-	for item in Global.newItemsForRound[Global.day]:
-		print(load(item).item_name)
-		itemstext += "\n" + str(load(item).item_name) + " [img=32x32]" + load(item).item_icon.resource_path + "[/img], "
+	for array in Global.newItemsForRound[Global.day]:
+		for item in array:
+			print(load(item).item_name)
+			itemstext += "\n" + str(load(item).item_name) + " [img=32x32]" + load(item).item_icon.resource_path + "[/img], "
 	print("New Tiles: " + iconstext)
 	$"new tile text".text = "New Tiles: " + iconstext
 	$"new item text".text = "New Items: " + itemstext

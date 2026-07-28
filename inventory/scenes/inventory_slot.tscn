@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://b2gtqd3q64ntc" path="res://PressStart2P-Regular.ttf" id="2_6iytm"]
 
 [node name="Inventory Slot" type="Panel" unique_id=1308550850]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(40, 40)
 anchors_preset = -1
 anchor_right = 0.075
 anchor_bottom = 0.13333334
@@ -23,12 +23,17 @@ grow_vertical = 2
 expand_mode = 1
 
 [node name="item" type="TextureRect" parent="border" unique_id=265450872]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 0
-anchor_left = 0.055555556
-anchor_top = 0.055555556
-anchor_right = 0.9444444
-anchor_bottom = 0.9444444
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08055556
+anchor_top = 0.05555556
+anchor_right = 0.96944445
+anchor_bottom = 0.9444445
+offset_left = 0.7777777
+offset_top = 1.7777777
+offset_right = -2.7777786
+offset_bottom = -1.7777786
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -51,10 +56,8 @@ theme_override_font_sizes/font_size = 8
 [node name="Button" type="Button" parent="." unique_id=1040068317]
 z_index = -10
 layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 45.0
-offset_bottom = 45.0
+offset_right = 40.0
+offset_bottom = 40.0
 action_mode = 0
 flat = true
 

@@ -117,7 +117,7 @@ func _process(delta):
 		item3Label.text = item3Discription + " - Price $" + str(item3Price)
 	
 	if (time > yellowTime && time <= greenTime):
-		progressBar.get("theme_override_styles/fill").bg_color = Color("a54a34")
+		progressBar.get("theme_override_styles/fill").bg_color = Color("6abe30")
 	elif (time > redTime && time <= yellowTime):
 		progressBar.get("theme_override_styles/fill").bg_color = Color("e39712")
 	elif (time <= redTime):

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwtcgkouivmiq"
-path="res://.godot/imported/sparkle.png-201dc9cff388d86663ce336f278b9513.ctex"
+uid="uid://cyrljm0g3xlx6"
+path="res://.godot/imported/lightning_particle.png-c60d06a0f62fbfb76da102975bc70619.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://match 3/sprites/particles/sparkle.png"
-dest_files=["res://.godot/imported/sparkle.png-201dc9cff388d86663ce336f278b9513.ctex"]
+source_file="res://match 3/sprites/particles/lightning_particle.png"
+dest_files=["res://.godot/imported/lightning_particle.png-c60d06a0f62fbfb76da102975bc70619.ctex"]
 
 [params]
 

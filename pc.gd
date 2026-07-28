@@ -45,6 +45,9 @@ extends Control
 
 @export var itemSoldOutArt: Texture
 
+# Pause variable...
+var topWindowVisible = false
+
 # Color Variables for ProgressBar
 var redTime = 5
 var yellowTime = 9
@@ -89,10 +92,9 @@ func _ready():
 	topWindow.hide()
 	update_day_hour_text()
 	InventoryManager.grant_item("res://inventory/items/simplify_board_item.tres")
-	InventoryManager.grant_item("res://inventory/items/missle_item.tres")
-	InventoryManager.grant_item("res://inventory/items/refresh_item.tres")
 	InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 10)
 	InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 5)
+	InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 5)
 
 # Runs every frame
 func _process(delta):
@@ -430,7 +432,11 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("pause"):
 		if not pauseScreen.visible:
 			MusicPlayer.volume_db = -40
-			topWindow.hide()
+			if topWindow.visible:
+				topWindowVisible = true
+				topWindow.hide()
+			else:
+				topWindowVisible = false
 			workWindow.hide()
 			bankWindow.hide()
 			timerWindow.hide()
@@ -441,7 +447,8 @@ func _unhandled_input(event):
 			pauseScreen.show()
 		else:
 			MusicPlayer.volume_db = 0
-			topWindow.show()
+			if topWindowVisible:
+				topWindow.show()
 			bankWindow.show()
 			timerWindow.show()
 			dayHourWindow.show()
@@ -455,7 +462,6 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("debug"):
 		if not debugScreen.visible:
 			MusicPlayer.volume_db = -40
-			topWindow.hide()
 			workWindow.hide()
 			bankWindow.hide()
 			timerWindow.hide()
@@ -466,7 +472,6 @@ func _unhandled_input(event):
 			debugScreen.show()
 		else:
 			MusicPlayer.volume_db = 0
-			topWindow.show()
 			bankWindow.show()
 			timerWindow.show()
 			dayHourWindow.show()
@@ -477,6 +482,7 @@ func _unhandled_input(event):
 				workWindow.show()
 			Engine.time_scale = 1
 			debugScreen.hide()
+			bankWindow.grab_focus()
 
 func debug():
 		if not debugScreen.visible:

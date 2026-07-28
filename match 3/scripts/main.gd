@@ -10,6 +10,7 @@ extends Node2D
 @export var tile_scene: PackedScene 
 @export var sparkles_scene: PackedScene
 @export var bomb_fire_scene: PackedScene
+@export var lightning_sparkles_scene: PackedScene
 
 @export_subgroup("Tiles")
 @export var textures: Array[Texture2D] 
@@ -507,7 +508,7 @@ func lightning():
 		if piece.type == str(randomToDestroy):
 			#print("Objects Destroyed: " + str(objectsDestroyed))
 			objectsDestroyed = true
-			var effect = sparkles_scene.instantiate()
+			var effect = lightning_sparkles_scene.instantiate()
 			effect.position = piece.position
 			container.add_child(effect)
 			grid[piece.grid_position.x][piece.grid_position.y] = null

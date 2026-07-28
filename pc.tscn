@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://v8ocsjth53he" path="res://art/Folder_Icon.png" id="5_oj12w"]
 [ext_resource type="Texture2D" uid="uid://b5xwmugjgdk1o" path="res://art/Printer_Icon.png" id="6_ifkhm"]
 [ext_resource type="Texture2D" uid="uid://cy2bmabiv4453" path="res://art/Email_Icon.png" id="7_8pt1j"]
+[ext_resource type="PackedScene" uid="uid://k6fbebxfhax0" path="res://match 3/scenes/lightning_sparkles.tscn" id="8_oluvs"]
 [ext_resource type="AudioStream" uid="uid://3j7retq5fugu" path="res://music/money on the line [puzzle theme].wav" id="11_0727r"]
 [ext_resource type="PackedScene" uid="uid://c24ehyjpe51l6" path="res://pause_screen.tscn" id="12_gh3ss"]
 [ext_resource type="PackedScene" uid="uid://crn1n1owvmd85" path="res://debug_screen.tscn" id="14_62yoi"]
@@ -229,6 +230,7 @@ script = ExtResource("5_kcquq")
 [node name="Main" parent="work window" unique_id=1469547217 instance=ExtResource("2_crfiw")]
 position = Vector2(56, 51)
 scale = Vector2(0.5, 0.5)
+lightning_sparkles_scene = ExtResource("8_oluvs")
 
 [node name="CRTScreen" type="ColorRect" parent="work window" unique_id=202987339]
 material = ExtResource("15_mx5f6")

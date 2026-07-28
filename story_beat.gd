@@ -4,13 +4,26 @@ extends Control
 
 const Balloon = preload("res://dialogue/balloon.tscn")
 
-var text = "DAY 1
-REMAINING DEBT: 10,000"
+var text = ""
+
+var dayTileText = [[],["Base Tiles: "],["New Tile: "],["New Tile: "],["New Tile: "],["New Tile: "]]
+var dayItemText = [[],["Base Items: "]]
+var dayEvilText = [[],[],[],[],[]]
 
 func _ready():
+	match Global.story_beat:
+		_:
+			var balloon: Node = Balloon.instantiate()
+			main_node.add_child(balloon)
+			balloon.start(preload("res://dialogue/test.dialogue"),"start")
+			#TODO - Will want this to be a conditional, only if something happens in the dialogue that triggers it
+			#get_tree().change_scene_to_file("res://pc.tscn")
+
+func new_day_text():
 	text = "DAY " + str(Global.day) + "
-REMAINING DEBT: " + "$" + format_number(Global.debt)
+REMAINING DEBT: " + "$" + format_number(Global.debt) 
 	type_text()
+
 
 func type_text():
 	$text.text = ""
@@ -20,17 +33,13 @@ func type_text():
 		$text.text += letter
 		if letter == ":" or letter == " ":
 			await get_tree().create_timer(0.2).timeout
+	#TODO - SHOW ITEMS
 	await get_tree().create_timer(2).timeout
 	$AnimationPlayer.play("fade")
 	await get_tree().create_timer(1).timeout
+	finish_story_beat()
 
-	match Global.story_beat:
-		_:
-			var balloon: Node = Balloon.instantiate()
-			main_node.add_child(balloon)
-			balloon.start(preload("res://dialogue/test.dialogue"),"start")
-			#TODO - Will want this to be a conditional, only if something happens in the dialogue that triggers it
-			#get_tree().change_scene_to_file("res://pc.tscn")
+
 			
 func format_number(number: int) -> String:
 	# Handle negative numbers by adding the "minus" sign in advance, as we discard it

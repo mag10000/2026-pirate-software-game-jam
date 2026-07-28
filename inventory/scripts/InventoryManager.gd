@@ -38,6 +38,11 @@ func get_inventory(mode : get_inventory_enums):
 			array.insert(array.size(),load(item).item_name)
 		return array
 
+func clear_inventory():
+		for item in _inventory:
+			revoke_item(item.item_name)
+		
+
 func get_group(group : String, mode : get_group_enums):
 	if group.to_lower() != "all":
 		if mode == get_group_enums.DICTONARY_NAME_AMOUNT:

@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://ct7oupp4g0ts7"]
 
-[ext_resource type="FontFile" uid="uid://b2gtqd3q64ntc" path="res://PressStart2P-Regular.ttf" id="1_06t4h"]
 [ext_resource type="Script" uid="uid://cfd4jbvwt1fda" path="res://main_menu.gd" id="1_7vrkn"]
+[ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="2_fu7sn"]
+[ext_resource type="Texture2D" uid="uid://ca3nrc25pjbit" path="res://art/HyperDebtSwap_logo_v2.png" id="3_jix8l"]
 
 [node name="Main menu" type="Control" unique_id=631415015]
 layout_mode = 3
@@ -12,37 +13,59 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7vrkn")
 
-[node name="Button" type="Button" parent="." unique_id=794527364]
+[node name="BG" type="ColorRect" parent="." unique_id=807460772]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+
+[node name="Start" type="Button" parent="." unique_id=794527364]
+custom_minimum_size = Vector2(256, 32)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
+offset_left = -128.0
+offset_top = 29.0
+offset_right = 128.0
+offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 32
 text = "Start"
 
 [node name="Setttings" type="Button" parent="." unique_id=2123849160]
+custom_minimum_size = Vector2(256, 32)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -44.0
-offset_top = 20.0
-offset_right = 44.0
-offset_bottom = 44.0
+offset_left = -128.0
+offset_top = 80.0
+offset_right = 128.0
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 32
 text = "Settings"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="HyperDebtSwapLogoV2" type="Sprite2D" parent="." unique_id=667697646]
+position = Vector2(317, 105)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_jix8l")
+
+[connection signal="pressed" from="Start" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Setttings" to="." method="_on_setttings_pressed"]

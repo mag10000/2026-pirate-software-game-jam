@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwtcgkouivmiq"
-path="res://.godot/imported/sparkle.png-201dc9cff388d86663ce336f278b9513.ctex"
+uid="uid://ca3nrc25pjbit"
+path="res://.godot/imported/HyperDebtSwap_logo_v2.png-5ce482cb8d8bda120136922ac1b56dce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://match 3/sprites/particles/sparkle.png"
-dest_files=["res://.godot/imported/sparkle.png-201dc9cff388d86663ce336f278b9513.ctex"]
+source_file="res://art/HyperDebtSwap_logo_v2.png"
+dest_files=["res://.godot/imported/HyperDebtSwap_logo_v2.png-5ce482cb8d8bda120136922ac1b56dce.ctex"]
 
 [params]
 

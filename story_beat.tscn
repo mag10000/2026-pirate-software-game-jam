@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://duo1syw5y77fd" path="res://music/Banker Jingle.wav" id="2_cg5s0"]
 [ext_resource type="Texture2D" uid="uid://bx2els8um6ix7" path="res://art/Main_Menu_BG.png" id="2_nmyur"]
 [ext_resource type="AudioStream" uid="uid://bauvve4uapf1v" path="res://music/Day Transition.wav" id="4_xwu7q"]
+[ext_resource type="FontFile" uid="uid://b4wclgmin6pam" path="res://Match 8p.ttf" id="5_5pflo"]
 
 [sub_resource type="Animation" id="Animation_cg5s0"]
 resource_name = "fade"
@@ -48,6 +49,50 @@ tracks/3/path = NodePath("data_text:modulate:a")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.16666667, 0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("info_text:modulate:r")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.16666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("info_text:modulate:g")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.16666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("info_text:modulate:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.16666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("info_text:modulate:a")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "handle_modes": PackedInt32Array(0, 2),
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.16666667, 0.16666667, 0, 0),
 "times": PackedFloat32Array(0, 1)
@@ -99,9 +144,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -114.5
-offset_top = -30.0
+offset_top = -97.0
 offset_right = 114.5
-offset_bottom = -6.0
+offset_bottom = -73.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -119,9 +164,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -114.5
-offset_top = 50.0
+offset_top = -17.0
 offset_right = 114.5
-offset_bottom = 74.0
+offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -129,6 +174,48 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("1_s71hl")
 theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="new tile text" type="RichTextLabel" parent="." unique_id=2093363877]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.0
+offset_top = -98.0
+offset_right = -141.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("5_5pflo")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="new item text" type="RichTextLabel" parent="." unique_id=96376170]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 140.0
+offset_top = -98.0
+offset_right = 315.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("5_5pflo")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+scroll_active = false
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=256769246]

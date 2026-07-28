@@ -57,8 +57,39 @@ func type_text():
 	finish_story_beat()
 
 func show_text():
+	var iconstext = ""
+	var itemstext = ""
 	info_text_label.text = "Match 3 for $5, Combos payout higher!!!"
-	
+	for icon in Global.newIconsForRound[Global.day]:
+		match icon:
+			1:
+				iconstext += "\nEmail [img=32x32]res://art/Email_Icon.png[/img], "
+			2:
+				iconstext += "\nFolder [img=32x32]res://art/Folder_Icon.png[/img], "
+			3:
+				iconstext += "\nPrinter [img=32x32]res://art/Printer_Icon.png[/img], "
+			4:
+				iconstext += "\nSpreadsheet [img=32x32]res://art/Spreadsheet_Icon.png[/img], "
+			5:
+				iconstext += "\nDocument [img=32x32]res://art/Document_Icon.png[/img], "
+			6:
+				iconstext += "\nMessage [img=32x32]res://art/Message_Icon.png[/img], "
+			7:
+				iconstext += "\nError [img=32x32]res://art/Error_Icon.png[/img], "
+			8:
+				iconstext += "\nPhone [img=32x32]res://art/Phone_Icon.png[/img], "
+			9:
+				iconstext += "\nVirus [img=32x32]res://art/Virus_Icon.png[/img], "
+			10:
+				iconstext += "\nBar Chart [img=32x32]res://art/Bar_Chart_Icon.png[/img], "
+			11:
+				iconstext += "\nSocial Media [img=32x32]res://art/SociL_Media_Icon.png[/img], "
+	for item in Global.newItemsForRound[Global.day]:
+		print(load(item).item_name)
+		itemstext += "\n" + str(load(item).item_name) + " [img=32x32]" + load(item).item_icon.resource_path + "[/img], "
+	print("New Tiles: " + iconstext)
+	$"new tile text".text = "New Tiles: " + iconstext
+	$"new item text".text = "New Items: " + itemstext
 	pass	
 	#"
 #Match 3 for $5" + "

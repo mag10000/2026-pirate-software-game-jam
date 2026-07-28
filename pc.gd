@@ -535,3 +535,7 @@ func show_money_popup(money_amount : int,good = true):
 	popup.good = good
 	popup.global_position = Vector2(175,165)
 	add_child(popup)
+
+
+func _on_skip_pressed():
+	time = 0

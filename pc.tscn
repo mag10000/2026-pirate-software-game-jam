@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://b5xwmugjgdk1o" path="res://art/Printer_Icon.png" id="6_ifkhm"]
 [ext_resource type="Texture2D" uid="uid://cy2bmabiv4453" path="res://art/Email_Icon.png" id="7_8pt1j"]
 [ext_resource type="PackedScene" uid="uid://k6fbebxfhax0" path="res://match 3/scenes/lightning_sparkles.tscn" id="8_oluvs"]
+[ext_resource type="FontFile" uid="uid://b4wclgmin6pam" path="res://Match 8p.ttf" id="10_iq4h1"]
 [ext_resource type="AudioStream" uid="uid://3j7retq5fugu" path="res://music/money on the line [puzzle theme].wav" id="11_0727r"]
 [ext_resource type="PackedScene" uid="uid://c24ehyjpe51l6" path="res://pause_screen.tscn" id="12_gh3ss"]
 [ext_resource type="PackedScene" uid="uid://crn1n1owvmd85" path="res://debug_screen.tscn" id="14_62yoi"]
@@ -455,9 +456,9 @@ grow_vertical = 2
 
 [node name="Day and Hour Text" type="Label" parent="day hour window/Control" unique_id=1205234166]
 layout_mode = 0
-offset_top = 7.0
+offset_top = 13.0
 offset_right = 100.0
-offset_bottom = 30.0
+offset_bottom = 36.0
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
 horizontal_alignment = 1
@@ -487,6 +488,24 @@ offset_top = -10.0
 offset_right = 130.0
 offset_bottom = -2.0
 flat = true
+
+[node name="skip" type="Button" parent="day hour window" unique_id=606555946]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -37.0
+offset_right = 27.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("10_iq4h1")
+theme_override_font_sizes/font_size = 32
+text = "Skip"
 
 [node name="inventory window" type="Panel" parent="." unique_id=922802641]
 layout_mode = 0
@@ -753,6 +772,7 @@ texture = ExtResource("17_g0o0y")
 [connection signal="pressed" from="bank account window/x button" to="." method="_on_x_button_pressed"]
 [connection signal="pressed" from="timer window/x button" to="." method="_on_x_button_pressed"]
 [connection signal="pressed" from="day hour window/x button" to="." method="_on_x_button_pressed"]
+[connection signal="pressed" from="day hour window/skip" to="." method="_on_skip_pressed"]
 [connection signal="pressed" from="inventory window/x button" to="." method="_on_x_button_pressed"]
 [connection signal="pressed" from="store window/storeitems/item1" to="." method="_on_item_1_pressed"]
 [connection signal="pressed" from="store window/storeitems/item2" to="." method="_on_item_2_pressed"]

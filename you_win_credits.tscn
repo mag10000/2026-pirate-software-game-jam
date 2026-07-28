@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://21sbyt4uks1r"]
 
-[ext_resource type="Script" uid="uid://dp4p23lws3qtl" path="res://game_over.gd" id="1_nqk0f"]
+[ext_resource type="Script" uid="uid://dvtpoi7ls754c" path="res://you_win_credits.gd" id="1_s1ic0"]
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="3_s1ic0"]
 [ext_resource type="Texture2D" uid="uid://ca3nrc25pjbit" path="res://art/HyperDebtSwap_logo_v2.png" id="3_v2j0v"]
 
@@ -63,7 +63,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_nqk0f")
+script = ExtResource("1_s1ic0")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1277404989]
 layout_mode = 1

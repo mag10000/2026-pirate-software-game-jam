@@ -225,7 +225,7 @@ offset_bottom = 321.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_oluvs")
 
 [node name="Main" parent="work window" unique_id=1469547217 instance=ExtResource("2_crfiw")]
-position = Vector2(-50, 39)
+position = Vector2(-45, 39)
 scale = Vector2(0.5, 0.5)
 lightning_sparkles_scene = ExtResource("8_oluvs")
 
@@ -480,10 +480,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_right = 1.0
+offset_bottom = 1.0
 slots_Box_Container = NodePath("Control/GridContainer")
 inventory_slots = 8
 
 [node name="slots" parent="inventory window/inventory/Control" parent_id_path=PackedInt32Array(154207438, 1620400334) index="1" unique_id=33701807]
+visible = false
 offset_left = -295.0
 offset_top = 31.0
 offset_right = 289.0

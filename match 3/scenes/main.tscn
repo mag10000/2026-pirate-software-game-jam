@@ -19,7 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://blgk6q3vwmc17" path="res://art/Bar_Chart_Icon.png" id="15_v0df7"]
 [ext_resource type="Texture2D" uid="uid://bt0akxmihfc3j" path="res://art/SociL_Media_Icon.png" id="16_mj2vb"]
 [ext_resource type="Texture2D" uid="uid://dbeypluehdltx" path="res://art/Bomb_Item.png" id="19_mj2vb"]
-[ext_resource type="Texture2D" uid="uid://dlo2rmna3c5gx" path="res://art/Solid_Gray.png" id="19_v0df7"]
 
 [node name="Main" type="Node2D" unique_id=1469547217]
 script = ExtResource("1_ig7tw")
@@ -36,7 +35,7 @@ offset_left = 123.0
 offset_top = -26.0
 offset_right = 545.0
 offset_bottom = 369.0
-texture = ExtResource("19_v0df7")
+texture = ExtResource("5_7p84o")
 expand_mode = 1
 
 [node name="Board" type="Node2D" parent="." unique_id=879210771]

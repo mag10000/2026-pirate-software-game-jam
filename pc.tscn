@@ -237,6 +237,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("16_g0o0y")
 metadata/_custom_type_script = "uid://x7g2xo1usdqp"
 
@@ -368,6 +369,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("16_g0o0y")
 metadata/_custom_type_script = "uid://x7g2xo1usdqp"
 
@@ -400,6 +402,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("16_g0o0y")
 metadata/_custom_type_script = "uid://x7g2xo1usdqp"
 
@@ -446,6 +449,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("16_g0o0y")
 metadata/_custom_type_script = "uid://x7g2xo1usdqp"
 
@@ -496,6 +500,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("16_g0o0y")
 metadata/_custom_type_script = "uid://x7g2xo1usdqp"
 metadata/_edit_use_anchors_ = true
@@ -617,6 +622,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("16_g0o0y")
 metadata/_custom_type_script = "uid://x7g2xo1usdqp"
 
@@ -642,6 +648,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("16_g0o0y")
 metadata/_custom_type_script = "uid://x7g2xo1usdqp"
 

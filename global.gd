@@ -10,9 +10,11 @@ var break_time_started = false
 
 var work_times = [23,25,21,22]
 
-var break_times = [8,10,12,14]
+var break_times = [10]
 
 var phase = 0
+
+var money_earned = 0
 
 var debt = 10000
 
@@ -24,7 +26,7 @@ var hour = 1
 
 var story_beat = "start_cutscene"
 
-var item_pool = ["res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
+var item_pool = ["res://inventory/items/lightning_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
 
 var iconsForRound = [[],[1, 2, 3, 4, 5],[1, 2, 3, 4, 5, 6, 7],[1, 2, 3, 4, 5, 8, 9],[1, 2, 3, 4, 5, 10, 11],[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]]
 

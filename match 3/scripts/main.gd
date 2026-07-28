@@ -31,6 +31,7 @@ var is_swapping = false
 var combo_count: int = 0
 # Depending on which round, we'll get the right amount of icons
 var iconArray = [1, 2, 3, 4, 5, 6]
+var evilIcons = [7, 9, 11]
 var evil_match = 0
 var matches 
 var amount_tile = 2
@@ -80,7 +81,7 @@ func initial_spawn(x, y, blanks: bool):
 	var random_index = iconArray.pick_random() 
 	while (check_neighbors(x, y, random_index) == true): 
 		random_index = iconArray.pick_random()
-		pass
+
 	
 	if blanks:
 		random_index = 0 
@@ -98,7 +99,7 @@ func initial_spawn(x, y, blanks: bool):
 	
 	grid[x][y] = created_piece
 	
-
+# Spawn a new tile at a certain grid position
 func spawn_at(x, y, blanks: bool):
 	
 	var created_piece = tile_scene.instantiate()
@@ -116,6 +117,20 @@ func spawn_at(x, y, blanks: bool):
 	container.add_child(created_piece) 
 	
 	created_piece.set_tile_type(str(random_index), textures[random_index]) 
+	created_piece.tile_pressed.connect(_on_tile_pressed)
+	#created_piece.tile_dpad_swap.connect(_on_tile_dpad_swap)
+	created_piece.grid_position = Vector2i(x, y) 
+	created_piece.position = grid_to_pixel(x, y) 
+	
+	grid[x][y] = created_piece
+	
+func spawn_specific_at(x, y, type: String):
+	
+	var created_piece = tile_scene.instantiate()
+	
+	container.add_child(created_piece) 
+	
+	created_piece.set_tile_type(type, textures[int(type)])
 	created_piece.tile_pressed.connect(_on_tile_pressed)
 	#created_piece.tile_dpad_swap.connect(_on_tile_dpad_swap)
 	created_piece.grid_position = Vector2i(x, y) 
@@ -317,6 +332,7 @@ func process_board_state():
 		if combo_count > 1:
 			if $"../..":
 				$"../..".money += ((combo_count-1) * amount_combo * Global.money_multiplier)
+				Global.money_earned += ((combo_count-1) * amount_combo * Global.money_multiplier)
 				
 		for piece in matches:
 			var effect = sparkles_scene.instantiate()
@@ -332,10 +348,12 @@ func process_board_state():
 			if evil_match == 0:
 				if $"../..":
 					$"../..".money += (amount_tile * Global.money_multiplier)
+					Global.money_earned += (amount_tile * Global.money_multiplier)
 			#await collapse_columns()
-			if evil_match >= 1:
+			elif evil_match >= 1:
 				if $"../..":
 					$"../..".money -= amount_tile 
+					Global.money_earned -= amount_tile
 				evil_match -= 1
 		
 		await get_tree().create_timer(0.3).timeout
@@ -426,6 +444,62 @@ func simplify_board():
 		randomToDestroy = iconArray.pick_random()
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()
+	var other_types = false
+	var get_new_type = true
+	var type_to_swap 
+	
+	
+	for piece in whole_board:
+		if not is_instance_valid(piece):
+			return
+		if piece.type != str(randomToDestroy):
+			other_types = true	
+			if get_new_type == true:
+				get_new_type = false
+				type_to_swap = piece.type
+		elif piece.type == str(randomToDestroy):
+			#print("Objects Destroyed: " + str(objectsDestroyed))
+			objectsDestroyed = true
+			var effect = sparkles_scene.instantiate()
+			effect.position = piece.position
+			container.add_child(effect)
+			grid[piece.grid_position.x][piece.grid_position.y] = null
+	
+			var tween = piece.create_tween()
+			tween.tween_property(piece, "scale", Vector2.ZERO, 0.2)
+			tween.finished.connect(piece.queue_free)
+						
+			if $"../..":
+				$"../..".money += (amount_tile * Global.money_multiplier)
+			Global.money_earned += (amount_tile * Global.money_multiplier)
+			
+			spawn_specific_at(piece.grid_position.x,piece.grid_position.y, type_to_swap)
+			
+		# TODO - Make this work so that one type in the whole board is 
+		# now changed
+	if objectsDestroyed == false:
+		#TODO - play a failed to use item SFX
+		#TODO - DONT REVOKE THE ITEM
+		pass
+	
+	elif objectsDestroyed == true:
+		print("Got to objectsDestroyed == true")
+		#iconArray.erase(randomToDestroy)
+
+		await get_tree().create_timer(0.15).timeout
+		await collapse_columns()
+		await refill_board(true)
+	await get_tree().create_timer(0.15).timeout
+	await collapse_columns()
+	await refill_board(true)
+	process_board_state()
+
+func lightning():
+	var randomToDestroy = iconArray.pick_random()
+	while randomToDestroy == 0 || randomToDestroy == 7 || randomToDestroy == 9 || randomToDestroy == 11:
+		randomToDestroy = iconArray.pick_random()
+	var objectsDestroyed = false
+	var whole_board = get_whole_board()
 	
 	for piece in whole_board:
 		if not is_instance_valid(piece):
@@ -444,20 +518,15 @@ func simplify_board():
 						
 			if $"../..":
 				$"../..".money += (amount_tile * Global.money_multiplier)
+				Global.money_earned += (amount_tile * Global.money_multiplier)
 	if objectsDestroyed == true:
-		print("Got to objectsDestroyed == true")
-		iconArray.erase(randomToDestroy)
-		await get_tree().create_timer(0.3).timeout
+		await get_tree().create_timer(0.15).timeout
 		await collapse_columns()
 		await refill_board(true)
-		# Instead of the above, if we want we can make it drop new items but
-		# would need to work on it
-		#await fill_blank_spots()
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.15).timeout
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
-
 
 func bomb_random_icon():
 	var randomToDestroy = iconArray.pick_random()
@@ -507,13 +576,14 @@ func bomb_random_icon():
 			
 			if $"../..":
 				$"../..".money += (amount_tile * Global.money_multiplier)
+				Global.money_earned += (amount_tile * Global.money_multiplier)
 	if objectsDestroyed == true:
-		await get_tree().create_timer(0.3).timeout
+		await get_tree().create_timer(0.15).timeout
 		await collapse_columns()
 		await refill_board(true)
 	else:
 		wait_and_grant_bomb()
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.15).timeout
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
@@ -527,7 +597,6 @@ func missle_evil_icons():
 		if not is_instance_valid(piece):
 			return
 		if piece.type == str(randomToDestroy):
-			#print("Objects Destroyed: " + str(objectsDestroyed))
 			objectsDestroyed = true
 			var effect = bomb_fire_scene.instantiate()
 			effect.position = piece.position
@@ -552,12 +621,8 @@ func reset_board():
 	while whole_board.size() > 0:
 
 		for piece in whole_board:
-			#print("Got into for loop")
 			if not is_instance_valid(piece):
 				return
-			#var effect = sparkles_scene.instantiate()
-			#effect.position = piece.position
-			#container.add_child(effect)
 			
 			grid[piece.grid_position.x][piece.grid_position.y] = null
 			
@@ -570,30 +635,6 @@ func reset_board():
 		await refill_board(false)
 	
 		process_board_state()
-
-func fill_blank_spots():
-	
-	var whole_board = get_whole_board()
-	var piecesToReplace = false
-	
-	for piece in whole_board:
-		if not is_instance_valid(piece):
-			return
-		if piece.type == "0":
-			piecesToReplace = true
-			grid[piece.grid_position.x][piece.grid_position.y] = null
-	
-	if piecesToReplace:
-		# TODO - Create a function like the OLD collapse columns was, where the spots are null not full of
-		# blank spots.
-		# await collapse_columns()
-		for x in width:
-			for y in height:
-				if grid[x][y] == null:
-					spawn_at(x, y, false)
-					grid[x][y].position.y -= offset * 2 
-					grid[x][y].move_to(grid_to_pixel(x, y))
-		await get_tree().create_timer(0.3).timeout
 
 func refresh_icons():
 	iconArray = Global.iconsForRound[Global.day].duplicate(true)

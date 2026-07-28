@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://cnlop7xagjo1j"]
+
+[ext_resource type="Texture2D" uid="uid://bvkpsefdtudb1" path="res://art/ITEM_Lightning.png" id="1_w06ju"]
+[ext_resource type="Script" uid="uid://b61bii383w31e" path="res://inventory/scripts/item.gd" id="2_d5ca1"]
+
+[resource]
+script = ExtResource("2_d5ca1")
+item_name = "Lightning"
+item_icon = ExtResource("1_w06ju")
+item_group = "ALL"
+discription = "Destroys all of one kind of regular tiles"
+cost = 5
+metadata/_custom_type_script = "uid://b61bii383w31e"

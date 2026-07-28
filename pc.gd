@@ -47,7 +47,7 @@ extends Control
 
 # Color Variables for ProgressBar
 var redTime = 5
-var yellowTime = 10
+var yellowTime = 9
 var greenTime = 24
 
 # For Shop Items
@@ -112,11 +112,11 @@ func _process(delta):
 		item3Label.text = item3Discription + " - Price $" + str(item3Price)
 	
 	if (time > yellowTime && time <= greenTime):
-		progressBar.get("theme_override_styles/fill").bg_color = Color(0.0, 1.0, 0.0, 1.0)
+		progressBar.get("theme_override_styles/fill").bg_color = Color("a54a34")
 	elif (time > redTime && time <= yellowTime):
-		progressBar.get("theme_override_styles/fill").bg_color = Color(1.0, 0.871, 0.129, 1.0)
+		progressBar.get("theme_override_styles/fill").bg_color = Color("e39712")
 	elif (time <= redTime):
-		progressBar.get("theme_override_styles/fill").bg_color = Color(1.0, 0.0, 0.0, 1.0)
+		progressBar.get("theme_override_styles/fill").bg_color = Color("a54a34")
 	
 	if Global.phase == 0:
 		if phase0Setup == true:
@@ -160,7 +160,6 @@ func _process(delta):
 			
 			print(str(tileGameReference.iconArray))
 			Global.break_time_started = false
-			Global.current_break_time_id = randi_range(0, 3)
 			await get_tree().create_timer(0.5).timeout
 			storeWindow.hide()
 			phase0Setup = true
@@ -229,24 +228,21 @@ func raise_items_update():
 		2:
 			Global.amt_earned_combos = 5
 			Global.amt_earned_icon = 2
-			Global.item_pool = ["res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres", ]
+			Global.item_pool = ["res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres", "res://inventory/items/lightning_item.tres"]
 		3:	
 			Global.amt_earned_combos = 6
 			Global.amt_earned_icon = 3
-			Global.item_pool = ["res://inventory/items/simplify_board_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres", ]
+			Global.item_pool = ["res://inventory/items/simplify_board_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres", "res://inventory/items/lightning_item.tres"]
 		4: 
 			Global.amt_earned_combos = 7
 			Global.amt_earned_icon = 4
-			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/simplify_board_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres", ]
+			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/simplify_board_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres", "res://inventory/items/lightning_item.tres"]
 		5: 
 			Global.amt_earned_combos = 8
 			Global.amt_earned_icon = 5
-			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/simplify_board_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres", ]
+			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/simplify_board_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres", "res://inventory/items/lightning_item.tres"]
 		_:
 			pass
-	
-
-
 func item_clicked(node):
 	print("Clicked on item: ",node.item.item_name)
 	match node.item.item_name:
@@ -255,22 +251,25 @@ func item_clicked(node):
 			InventoryManager.revoke_item("res://inventory/items/time_add_item.tres")
 		"Bomb":
 			await tileGameReference.bomb_random_icon()
+			#TODO - Make sure to grant a missle if it can't fire and play SFX, maybe put revoking in other code
 			InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
 		"Refresh Board":
 			await tileGameReference.reset_board()
 			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")			
 		"$ Multiplier":
 			Global.money_multiplier += 1
-			#TODO - Put the correct item below here once made
 			InventoryManager.revoke_item("res://inventory/items/money_multiplier_item.tres")
 		"Simplify Board":
 			await tileGameReference.simplify_board()
-			#TODO - Put the correct item below here once made
+			#TODO - Make sure to grant a missle if it can't fire and play SFX
 			InventoryManager.revoke_item("res://inventory/items/simplify_board_item.tres")
 		"Missle":
 			await tileGameReference.missle_evil_icons()
-			#TODO - Put the correct item below here once made
+			#TODO - Make sure to grant a missle if it can't fire and play SFX
 			InventoryManager.revoke_item("res://inventory/items/missle_item.tres")
+		"Lightning":
+			await tileGameReference.lightning()
+			InventoryManager.revoke_item("res://inventory/items/lightning_item.tres")
 		_: 
 			pass
 			

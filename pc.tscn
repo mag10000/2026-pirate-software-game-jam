@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cj5i8fs244xe3" path="res://art/Sold_Out.png" id="2_0727r"]
 [ext_resource type="PackedScene" uid="uid://b8cjd5xlk3m1p" path="res://match 3/scenes/main.tscn" id="2_crfiw"]
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="2_ifkhm"]
+[ext_resource type="Texture2D" uid="uid://dufeqhckwcijp" path="res://art/Screen_BG_Windows.png" id="3_32g7d"]
 [ext_resource type="PackedScene" uid="uid://bn4cxagiavp8u" path="res://inventory/scenes/inventory.tscn" id="4_3d7xj"]
 [ext_resource type="Texture2D" uid="uid://c7vfqjyx41sbp" path="res://art/X.png" id="4_8pt1j"]
 [ext_resource type="Script" uid="uid://by0hop2diytv2" path="res://window_pause.gd" id="5_kcquq"]
@@ -99,6 +100,10 @@ _data = {
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oluvs"]
+bg_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32g7d"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oj12w"]
 bg_color = Color(0, 1, 0, 1)
@@ -111,7 +116,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_de6uy")
-earningsAmountDisplay = NodePath("bank account window/Money Display")
+earningsAmountDisplay = NodePath("bank account window/EarningsAmountText")
 debtAmountDisplay = NodePath("bank account window/debt/Money Display")
 debtMinimumPayDisplay = NodePath("bank account window/debt/Min Debt")
 scrollAlertText = NodePath("top window/Label")
@@ -150,7 +155,27 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.6901961, 0.2, 0.5921569, 1)
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1955980174]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("3_32g7d")
+
+[node name="Label" type="Label" parent="." unique_id=1737939297]
+layout_mode = 0
+offset_left = 558.0
+offset_top = 340.0
+offset_right = 758.0
+offset_bottom = 356.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_ifkhm")
+theme_override_font_sizes/font_size = 16
+text = "07/31/2037"
+
 [node name="taskbar" type="Control" parent="." unique_id=1850188279]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -169,19 +194,6 @@ offset_top = -27.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.45882353, 0.3764706, 0.41568628, 1)
-
-[node name="Label" type="Label" parent="taskbar" unique_id=1737939297]
-layout_mode = 0
-offset_left = 469.0
-offset_top = -24.0
-offset_right = 669.0
-offset_bottom = -8.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 16
-text = "Desktop - July 31, 2037"
 
 [node name="top window" type="Window" parent="." unique_id=2137004118]
 transparent_bg = true
@@ -218,48 +230,48 @@ autoplay = &"new_animation"
 
 [node name="work window" type="Panel" parent="." unique_id=1506877542]
 layout_mode = 0
-offset_left = 244.0
-offset_top = 83.0
-offset_right = 481.0
-offset_bottom = 321.0
+offset_left = 256.0
+offset_top = 110.0
+offset_right = 480.0
+offset_bottom = 314.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_oluvs")
 
 [node name="Main" parent="work window" unique_id=1469547217 instance=ExtResource("2_crfiw")]
-position = Vector2(-45, 39)
+position = Vector2(-47, 12)
 scale = Vector2(0.5, 0.5)
 lightning_sparkles_scene = ExtResource("8_oluvs")
 
 [node name="X" type="Sprite2D" parent="work window" unique_id=412388983]
+visible = false
 position = Vector2(209, 14)
 texture = ExtResource("4_8pt1j")
 
 [node name="Title" type="Label" parent="work window" unique_id=1469198734]
 layout_mode = 0
 offset_left = 11.0
-offset_top = 1.0
+offset_top = -11.0
 offset_right = 197.0
-offset_bottom = 25.0
+offset_bottom = 13.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 12
 text = "Work"
-horizontal_alignment = 1
 
 [node name="bank account window" type="Panel" parent="." unique_id=388714631]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 4.0
-offset_right = 225.0
-offset_bottom = 321.0
+offset_left = 12.0
+offset_top = 26.0
+offset_right = 236.0
+offset_bottom = 314.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_oluvs")
 
-[node name="Title" type="Label" parent="bank account window" unique_id=426150714]
+[node name="EarningsText" type="Label" parent="bank account window" unique_id=426150714]
 layout_mode = 0
-offset_top = 46.0
+offset_top = 14.0
 offset_right = 215.0
-offset_bottom = 97.0
+offset_bottom = 65.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
@@ -268,11 +280,11 @@ theme_override_font_sizes/font_size = 24
 text = "Earnings "
 horizontal_alignment = 1
 
-[node name="Money Display" type="Label" parent="bank account window" unique_id=1465504738]
+[node name="EarningsAmountText" type="Label" parent="bank account window" unique_id=1465504738]
 layout_mode = 0
-offset_top = 67.0
+offset_top = 35.0
 offset_right = 214.0
-offset_bottom = 90.0
+offset_bottom = 58.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
@@ -283,9 +295,9 @@ horizontal_alignment = 1
 
 [node name="debt" type="Control" parent="bank account window" unique_id=1104295427]
 anchors_preset = 0
-offset_top = 114.0
+offset_top = 69.0
 offset_right = 40.0
-offset_bottom = 154.0
+offset_bottom = 109.0
 
 [node name="Title" type="Label" parent="bank account window/debt" unique_id=1542182676]
 layout_mode = 0
@@ -316,9 +328,9 @@ horizontal_alignment = 1
 [node name="deposit1" type="Button" parent="bank account window/debt" unique_id=1279548504]
 layout_mode = 0
 offset_left = 15.0
-offset_top = 75.0
+offset_top = 99.0
 offset_right = 200.0
-offset_bottom = 105.0
+offset_bottom = 129.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
@@ -328,9 +340,9 @@ text = "Make $1 Debt Payment"
 [node name="deposit10" type="Button" parent="bank account window/debt" unique_id=264666888]
 layout_mode = 0
 offset_left = 15.0
-offset_top = 110.0
+offset_top = 134.0
 offset_right = 200.0
-offset_bottom = 140.0
+offset_bottom = 164.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
@@ -340,9 +352,9 @@ text = "Make $10 Debt Payment"
 [node name="deposit100" type="Button" parent="bank account window/debt" unique_id=1150998609]
 layout_mode = 0
 offset_left = 15.0
-offset_top = 145.0
+offset_top = 169.0
 offset_right = 200.0
-offset_bottom = 175.0
+offset_bottom = 199.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
@@ -364,64 +376,65 @@ $"
 horizontal_alignment = 1
 
 [node name="X" type="Sprite2D" parent="bank account window" unique_id=979953687]
+visible = false
 position = Vector2(201, 15)
 texture = ExtResource("4_8pt1j")
 
 [node name="Title2" type="Label" parent="bank account window" unique_id=1813208689]
 layout_mode = 0
 offset_left = 10.0
-offset_top = 2.0
+offset_top = -11.0
 offset_right = 189.0
-offset_bottom = 26.0
+offset_bottom = 13.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 12
 text = "Bank Account"
-horizontal_alignment = 1
 
 [node name="timer window" type="Panel" parent="." unique_id=1788662047]
 layout_mode = 0
-offset_left = 244.0
-offset_top = 4.0
-offset_right = 481.0
-offset_bottom = 76.0
+offset_left = 256.0
+offset_top = 26.0
+offset_right = 480.0
+offset_bottom = 90.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_oluvs")
 
 [node name="ProgressBar" type="ProgressBar" parent="timer window" unique_id=740962831]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 35.0
-offset_right = 222.0
-offset_bottom = 62.0
+offset_left = 10.0
+offset_top = 16.0
+offset_right = 214.0
+offset_bottom = 48.0
+theme_override_styles/background = SubResource("StyleBoxFlat_32g7d")
 theme_override_styles/fill = SubResource("StyleBoxFlat_oj12w")
 show_percentage = false
 
 [node name="X" type="Sprite2D" parent="timer window" unique_id=1069924505]
+visible = false
 position = Vector2(209, 15)
 texture = ExtResource("4_8pt1j")
 
 [node name="Title" type="Label" parent="timer window" unique_id=294795218]
 layout_mode = 0
 offset_left = 11.0
-offset_top = 2.0
+offset_top = -11.0
 offset_right = 197.0
-offset_bottom = 26.0
+offset_bottom = 13.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 24
-text = "Time Left"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+text = "Time Remaining"
 
 [node name="day hour window" type="Panel" parent="." unique_id=824341781]
 layout_mode = 0
 offset_left = 500.0
-offset_top = 4.0
-offset_right = 630.0
-offset_bottom = 76.0
+offset_top = 26.0
+offset_right = 628.0
+offset_bottom = 113.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_oluvs")
 
 [node name="Control" type="Control" parent="day hour window" unique_id=238246801]
@@ -448,29 +461,29 @@ theme_override_fonts/font = ExtResource("2_ifkhm")
 horizontal_alignment = 1
 
 [node name="X" type="Sprite2D" parent="day hour window" unique_id=2114843244]
+visible = false
 position = Vector2(113, 15)
 texture = ExtResource("4_8pt1j")
 
 [node name="Title" type="Label" parent="day hour window" unique_id=1850524558]
 layout_mode = 0
 offset_left = 11.0
-offset_top = 2.0
+offset_top = -11.0
 offset_right = 102.0
-offset_bottom = 26.0
+offset_bottom = 13.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 24
-text = "Clock"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+text = "Date and Time"
 
 [node name="inventory window" type="Panel" parent="." unique_id=922802641]
 layout_mode = 0
 offset_left = 500.0
-offset_top = 83.0
-offset_right = 630.0
-offset_bottom = 321.0
+offset_top = 129.0
+offset_right = 628.0
+offset_bottom = 313.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_oluvs")
 
 [node name="inventory" parent="inventory window" unique_id=154207438 node_paths=PackedStringArray("slots_Box_Container") instance=ExtResource("4_3d7xj")]
@@ -480,8 +493,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 1.0
-offset_bottom = 1.0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 10.0
+offset_bottom = 7.0
 slots_Box_Container = NodePath("Control/GridContainer")
 inventory_slots = 8
 
@@ -498,35 +513,34 @@ offset_left = -51.0
 offset_top = -88.0
 offset_right = 52.0
 offset_bottom = 112.0
-theme_override_constants/h_separation = 1
-theme_override_constants/v_separation = 1
+theme_override_constants/h_separation = 3
+theme_override_constants/v_separation = 3
 columns = 2
 
 [node name="X" type="Sprite2D" parent="inventory window" unique_id=945967124]
+visible = false
 position = Vector2(113, 15)
 texture = ExtResource("4_8pt1j")
 
 [node name="Title" type="Label" parent="inventory window" unique_id=143284280]
 layout_mode = 0
 offset_left = 11.0
-offset_top = 2.0
+offset_top = -11.0
 offset_right = 102.0
-offset_bottom = 26.0
+offset_bottom = 13.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 24
-text = "Items"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+text = "Inventory"
 
 [node name="store window" type="Panel" parent="." unique_id=154578895]
-visible = false
 layout_mode = 0
-offset_left = 244.0
-offset_top = 83.0
-offset_right = 481.0
-offset_bottom = 321.0
+offset_left = 256.0
+offset_top = 110.0
+offset_right = 480.0
+offset_bottom = 314.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_oluvs")
 
 [node name="storeitems" type="VBoxContainer" parent="store window" unique_id=1660664693]
@@ -536,13 +550,14 @@ anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -96.0
-offset_top = 26.0
+offset_top = 0.5
 offset_right = 96.0
+offset_bottom = 3.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="item1" type="Button" parent="store window/storeitems" unique_id=1477501938]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(40, 32)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -557,19 +572,20 @@ autowrap_trim_flags = 0
 expand_icon = true
 
 [node name="item1discription" type="Label" parent="store window/storeitems" unique_id=346004273]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 8
 text = "Does Stuff"
 horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="item2" type="Button" parent="store window/storeitems" unique_id=42902340]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(40, 32)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -584,19 +600,20 @@ autowrap_trim_flags = 0
 expand_icon = true
 
 [node name="item2discription" type="Label" parent="store window/storeitems" unique_id=280100941]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 8
 text = "Does Stuff"
 horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="item3" type="Button" parent="store window/storeitems" unique_id=1409320806]
-custom_minimum_size = Vector2(32, 40)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -611,13 +628,14 @@ autowrap_trim_flags = 0
 expand_icon = true
 
 [node name="item3discription" type="Label" parent="store window/storeitems" unique_id=89637367]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 8
 text = "Does Stuff"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -627,22 +645,22 @@ wait_time = 0.5
 autostart = true
 
 [node name="X" type="Sprite2D" parent="store window" unique_id=960716360]
+visible = false
 position = Vector2(209, 14)
 texture = ExtResource("4_8pt1j")
 
 [node name="Title" type="Label" parent="store window" unique_id=1429789751]
 layout_mode = 0
 offset_left = 11.0
-offset_top = 1.0
+offset_top = -11.0
 offset_right = 197.0
-offset_bottom = 25.0
+offset_bottom = 13.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("2_ifkhm")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 12
 text = "Online Shop"
-horizontal_alignment = 1
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=448535725]
 stream = ExtResource("11_0727r")

@@ -57,4 +57,13 @@ scale = Vector2(1, 1.0187167)
 theme_override_fonts/font = ExtResource("2_nkug2")
 text = "Sfx"
 
+[node name="CheckBox" type="CheckBox" parent="." unique_id=1401760065]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 48.0
+offset_right = 213.0
+offset_bottom = 72.0
+button_pressed = true
+text = "Crt Filter"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

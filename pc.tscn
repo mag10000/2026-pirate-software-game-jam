@@ -144,7 +144,6 @@ item2Label = NodePath("store window/storeitems/item2discription")
 item3 = NodePath("store window/storeitems/item3")
 item3Label = NodePath("store window/storeitems/item3discription")
 itemSoldOutArt = ExtResource("2_0727r")
-crtFilerOn = false
 
 [node name="BG" type="ColorRect" parent="." unique_id=1800069285]
 layout_mode = 1
@@ -173,27 +172,6 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 16
 text = "07/31/2037"
-
-[node name="taskbar" type="Control" parent="." unique_id=1850188279]
-visible = false
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="BG" type="ColorRect" parent="taskbar" unique_id=1471722382]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -27.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.45882353, 0.3764706, 0.41568628, 1)
 
 [node name="top window" type="Window" parent="." unique_id=2137004118]
 transparent_bg = true
@@ -251,13 +229,21 @@ layout_mode = 0
 offset_left = 11.0
 offset_top = -11.0
 offset_right = 197.0
-offset_bottom = 13.0
+offset_bottom = 1.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 12
 text = "Work"
+
+[node name="x button" type="Button" parent="work window" unique_id=1592118935]
+layout_mode = 0
+offset_left = 218.0
+offset_top = -10.0
+offset_right = 226.0
+offset_bottom = -2.0
+flat = true
 
 [node name="bank account window" type="Panel" parent="." unique_id=388714631]
 layout_mode = 0
@@ -393,6 +379,14 @@ theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 12
 text = "Bank Account"
 
+[node name="x button" type="Button" parent="bank account window" unique_id=558060740]
+layout_mode = 0
+offset_left = 218.0
+offset_top = -10.0
+offset_right = 226.0
+offset_bottom = -2.0
+flat = true
+
 [node name="timer window" type="Panel" parent="." unique_id=1788662047]
 layout_mode = 0
 offset_left = 256.0
@@ -429,12 +423,20 @@ theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 12
 text = "Time Remaining"
 
+[node name="x button" type="Button" parent="timer window" unique_id=1449028513]
+layout_mode = 0
+offset_left = 218.0
+offset_top = -10.0
+offset_right = 226.0
+offset_bottom = -2.0
+flat = true
+
 [node name="day hour window" type="Panel" parent="." unique_id=824341781]
 layout_mode = 0
 offset_left = 500.0
 offset_top = 26.0
 offset_right = 628.0
-offset_bottom = 113.0
+offset_bottom = 108.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_oluvs")
 
 [node name="Control" type="Control" parent="day hour window" unique_id=238246801]
@@ -477,6 +479,14 @@ theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 12
 text = "Date and Time"
+
+[node name="x button" type="Button" parent="day hour window" unique_id=2114424204]
+layout_mode = 0
+offset_left = 122.0
+offset_top = -10.0
+offset_right = 130.0
+offset_bottom = -2.0
+flat = true
 
 [node name="inventory window" type="Panel" parent="." unique_id=922802641]
 layout_mode = 0
@@ -535,7 +545,16 @@ theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 12
 text = "Inventory"
 
+[node name="x button" type="Button" parent="inventory window" unique_id=1123708300]
+layout_mode = 0
+offset_left = 122.0
+offset_top = -10.0
+offset_right = 130.0
+offset_bottom = -2.0
+flat = true
+
 [node name="store window" type="Panel" parent="." unique_id=154578895]
+visible = false
 layout_mode = 0
 offset_left = 256.0
 offset_top = 110.0
@@ -662,6 +681,14 @@ theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 12
 text = "Online Shop"
 
+[node name="x button" type="Button" parent="store window" unique_id=1164657000]
+layout_mode = 0
+offset_left = 218.0
+offset_top = -10.0
+offset_right = 226.0
+offset_bottom = -2.0
+flat = true
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=448535725]
 stream = ExtResource("11_0727r")
 autoplay = true
@@ -675,6 +702,30 @@ visible = false
 
 [node name="Debug Screen" parent="." unique_id=275293862 instance=ExtResource("14_62yoi")]
 visible = false
+
+[node name="not allow" type="Panel" parent="." unique_id=1224024603]
+visible = false
+layout_mode = 0
+offset_left = 435.0
+offset_top = 264.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="text" type="Label" parent="not allow" unique_id=1565444203]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 9.0
+offset_right = 198.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_ifkhm")
+theme_override_font_sizes/font_size = 24
+text = "YOUR BOSS IS NOT
+ ALLOWING YOU 
+TO CLOSE THE WINDOW"
+horizontal_alignment = 1
 
 [node name="CRTScreen" type="ColorRect" parent="." unique_id=1066026194]
 visible = false
@@ -694,13 +745,19 @@ position = Vector2(319.99997, 180)
 scale = Vector2(0.5914972, 0.44334972)
 texture = ExtResource("17_g0o0y")
 
+[connection signal="pressed" from="work window/x button" to="." method="_on_x_button_pressed"]
 [connection signal="pressed" from="bank account window/debt/deposit1" to="." method="_on_deposit_pressed"]
 [connection signal="pressed" from="bank account window/debt/deposit10" to="." method="_on_deposit_10_pressed"]
 [connection signal="pressed" from="bank account window/debt/deposit100" to="." method="_on_deposit_100_pressed"]
+[connection signal="pressed" from="bank account window/x button" to="." method="_on_x_button_pressed"]
+[connection signal="pressed" from="timer window/x button" to="." method="_on_x_button_pressed"]
+[connection signal="pressed" from="day hour window/x button" to="." method="_on_x_button_pressed"]
+[connection signal="pressed" from="inventory window/x button" to="." method="_on_x_button_pressed"]
 [connection signal="pressed" from="store window/storeitems/item1" to="." method="_on_item_1_pressed"]
 [connection signal="pressed" from="store window/storeitems/item2" to="." method="_on_item_2_pressed"]
 [connection signal="pressed" from="store window/storeitems/item3" to="." method="_on_item_3_pressed"]
 [connection signal="timeout" from="store window/storeFlickerTimer" to="." method="_on_store_flicker_timer_timeout"]
+[connection signal="pressed" from="store window/x button" to="." method="_on_x_button_pressed"]
 [connection signal="timeout" from="work timer" to="." method="_on_work_timer_timeout"]
 [connection signal="timeout" from="break timer" to="." method="_on_break_timer_timeout"]
 

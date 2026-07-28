@@ -515,3 +515,16 @@ func debug():
 			storeWindow.hide()
 			Engine.time_scale = 0
 			debugScreen.show()
+
+
+func _on_x_button_pressed():
+	if Global.phase == 0:
+		$"not allow/text".text = "YOUR BOSS IS NOT
+ALLOWING YOU 
+TO CLOSE THE WINDOW"
+	else:
+		$"not allow/text".text = "INTERNAL ERROR
+		CODE: HDS2026PSGJ"
+	$"not allow".show()
+	await get_tree().create_timer(2).timeout
+	$"not allow".hide()

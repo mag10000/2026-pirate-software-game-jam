@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bnd0tg8hbc2tf"
+path="res://.godot/imported/losescreen.dialogue-119b37ed4eaf18de2b9e297e14d257a7.tres"
+
+[deps]
+
+source_file="res://dialogue/losescreen.dialogue"
+dest_files=["res://.godot/imported/losescreen.dialogue-119b37ed4eaf18de2b9e297e14d257a7.tres"]
+
+[params]
+
+defaults=true

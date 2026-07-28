@@ -1,0 +1,5 @@
+~ start
+Evil Banker: Okay I’ve had enough!!! I’m throwing everything I've got at you! You won't pay off the full $10,000!! FORECLOSURE IS IMMINENT!!!
+
+do new_day_text()
+=> END

@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://21sbyt4uks1r"]
+
+[ext_resource type="Script" uid="uid://dp4p23lws3qtl" path="res://game_over.gd" id="1_nqk0f"]
+[ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="3_s1ic0"]
+
+[node name="You Win" type="Control" unique_id=1602707038]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nqk0f")
+
+[node name="YOU WIN" type="Label" parent="." unique_id=850907030]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -203.5
+offset_top = -181.0
+offset_right = 203.5
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("3_s1ic0")
+theme_override_font_sizes/font_size = 64
+text = "YOU WIN!
+"
+horizontal_alignment = 1
+
+[node name="Scores" type="Label" parent="." unique_id=878500559]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -105.0
+offset_right = 215.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_s1ic0")
+theme_override_font_sizes/font_size = 48
+text = "PROFIT: $
+TOTAL $ EARNED: $"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=274403113]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = 18.5
+offset_right = 84.0
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_s1ic0")
+theme_override_font_sizes/font_size = 32
+text = "Try Again?"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

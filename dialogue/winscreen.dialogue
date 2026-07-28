@@ -1,0 +1,5 @@
+~ start
+Evil Banker: You paid off all your debt... How??? 
+Ziggy: Now it's time to go party!
+#do game_over()
+=> END

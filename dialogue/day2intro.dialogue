@@ -1,0 +1,5 @@
+~ start
+Evil Banker: Impressive work, but can you pay off $1,500 by the end of the work day?
+
+do new_day_text()
+=> END

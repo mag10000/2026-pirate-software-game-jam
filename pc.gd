@@ -171,6 +171,8 @@ func _process(delta):
 				# TODO - Check Minimum
 				if deposited_in_round < Global.minimumPay:
 					get_tree().change_scene_to_file("res://game_over.tscn")
+				elif Global.day == 5
+					get_tree().change_scene_to_file("res://you_win_credits.tscn")
 				else:
 					Global.day += 1
 					Global.hour = 1

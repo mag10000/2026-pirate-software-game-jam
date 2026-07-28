@@ -1,5 +1,0 @@
-~ start
-Evil Banker: You only have the 8 hour work day to pay off $500 of your debt! Can you make it?
-
-do new_day_text()
-=> END

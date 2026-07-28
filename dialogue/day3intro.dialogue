@@ -1,0 +1,5 @@
+~ start
+Evil Banker: I can’t believe it!! No way you can make it to $3000 by the end of the day...
+
+do new_day_text()
+=> END

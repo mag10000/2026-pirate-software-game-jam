@@ -1,0 +1,5 @@
+~ start
+Evil Banker: What?! You paid the minimum? AND you got a raise at work?!
+#Congratulations! You paid off a bit of your debt. You got a raise!
+do new_day_text()
+=> END

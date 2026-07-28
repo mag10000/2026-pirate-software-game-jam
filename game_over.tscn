@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b6j7jdv2w3v4g"]
 
-[ext_resource type="FontFile" uid="uid://b2gtqd3q64ntc" path="res://PressStart2P-Regular.ttf" id="1_y26ei"]
 [ext_resource type="Script" uid="uid://dp4p23lws3qtl" path="res://game_over.gd" id="1_yxx3c"]
+[ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="2_yxx3c"]
 
 [node name="Game Over" type="Control" unique_id=1602707038]
 layout_mode = 3
@@ -25,10 +25,10 @@ offset_right = 203.5
 offset_bottom = 46.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_y26ei")
-theme_override_font_sizes/font_size = 24
-text = "Game Over - You Failed
- to Deposit the Minimum "
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_font_sizes/font_size = 64
+text = "GAME OVER"
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="." unique_id=274403113]
@@ -44,7 +44,10 @@ offset_right = 84.0
 offset_bottom = 49.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_y26ei")
-text = "Main Menu"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_font_sizes/font_size = 32
+text = "Try Again?"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

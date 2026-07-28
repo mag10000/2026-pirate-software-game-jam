@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://rk37cvt8utpn"
+path="res://.godot/imported/days1-4win.dialogue-fba7e45789ccc9a363157dd46e556e5f.tres"
+
+[deps]
+
+source_file="res://dialogue/days1-4win.dialogue"
+dest_files=["res://.godot/imported/days1-4win.dialogue-fba7e45789ccc9a363157dd46e556e5f.tres"]
+
+[params]
+
+defaults=true

@@ -2,16 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bl2imnjxntjit" path="res://story_beat.gd" id="1_704ii"]
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="1_s71hl"]
-[ext_resource type="AudioStream" uid="uid://duo1syw5y77fd" path="res://music/Banker Jingle.wav" id="2_cg5s0"]
-[ext_resource type="Texture2D" uid="uid://bx2els8um6ix7" path="res://art/Main_Menu_BG.png" id="2_nmyur"]
-[ext_resource type="AudioStream" uid="uid://bauvve4uapf1v" path="res://music/Day Transition.wav" id="4_xwu7q"]
 
 [sub_resource type="Animation" id="Animation_cg5s0"]
 resource_name = "fade"
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("data_text:modulate:r")
+tracks/0/path = NodePath("text:modulate:r")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -22,7 +19,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("data_text:modulate:g")
+tracks/1/path = NodePath("text:modulate:g")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -33,7 +30,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("data_text:modulate:b")
+tracks/2/path = NodePath("text:modulate:b")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -44,7 +41,7 @@ tracks/2/keys = {
 tracks/3/type = "bezier"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("data_text:modulate:a")
+tracks/3/path = NodePath("text:modulate:a")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -58,7 +55,7 @@ _data = {
 &"fade": SubResource("Animation_cg5s0")
 }
 
-[node name="story_beat" type="Control" unique_id=1322162073 node_paths=PackedStringArray("main_node", "data_text_label", "info_text_label", "BankerMusicPlayer", "DayMusicPlayer")]
+[node name="story_beat" type="Control" unique_id=1322162073 node_paths=PackedStringArray("main_node")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,31 +64,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_704ii")
 main_node = NodePath(".")
-data_text_label = NodePath("data_text")
-info_text_label = NodePath("info_text")
-BankerMusicPlayer = NodePath("BankerStinger")
-DayMusicPlayer = NodePath("DayStinger")
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=229072552]
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 360.0
-texture = ExtResource("2_nmyur")
-
-[node name="BankerStinger" type="AudioStreamPlayer" parent="." unique_id=1095940861]
-stream = ExtResource("2_cg5s0")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=754495300]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+color = Color(0, 0, 0, 1)
 
-[node name="data_text" type="Label" parent="." unique_id=1299168360]
+[node name="text" type="Label" parent="." unique_id=1299168360]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -99,29 +82,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -114.5
-offset_top = -30.0
+offset_top = -12.0
 offset_right = 114.5
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_fonts/font = ExtResource("1_s71hl")
-theme_override_font_sizes/font_size = 24
-horizontal_alignment = 1
-
-[node name="info_text" type="Label" parent="." unique_id=804315723]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -114.5
-offset_top = 50.0
-offset_right = 114.5
-offset_bottom = 74.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -133,6 +96,3 @@ horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=256769246]
 libraries/ = SubResource("AnimationLibrary_xwu7q")
-
-[node name="DayStinger" type="AudioStreamPlayer" parent="." unique_id=555388425]
-stream = ExtResource("4_xwu7q")

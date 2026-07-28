@@ -24,7 +24,7 @@ var day = 1
 
 var hour = 1
 
-var story_beat = "start_cutscene"
+var story_beat = 1
 
 var item_pool = ["res://inventory/items/lightning_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
 

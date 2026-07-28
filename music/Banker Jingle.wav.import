@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://duo1syw5y77fd"
+path="res://.godot/imported/Banker Jingle.wav-2461c4609b9183332a6e056520e78a30.sample"
+
+[deps]
+
+source_file="res://music/Banker Jingle.wav"
+dest_files=["res://.godot/imported/Banker Jingle.wav-2461c4609b9183332a6e056520e78a30.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -65,18 +65,18 @@ horizontal_alignment = 1
 
 [node name="LineEdit" type="LineEdit" parent="." unique_id=1805952698]
 layout_mode = 0
-offset_left = 48.0
+offset_left = 53.5
 offset_top = 140.0
-offset_right = 126.5
-offset_bottom = 171.0
+offset_right = 121.0
+offset_bottom = 180.0
 theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("4_wr7jb")
 theme_override_font_sizes/font_size = 32
-placeholder_text = "Name"
+placeholder_text = "AAA"
 alignment = 1
-max_length = 4
+max_length = 3
 
 [node name="submit" type="Button" parent="LineEdit" unique_id=1777289468]
 custom_minimum_size = Vector2(128, 32)

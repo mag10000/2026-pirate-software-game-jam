@@ -94,10 +94,9 @@ func _ready():
 	storeWindow.hide()
 	topWindow.hide()
 	update_day_hour_text()
-	InventoryManager.grant_item("res://inventory/items/simplify_board_item.tres")
-	InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 10)
-	InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 5)
-	InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 5)
+	InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 1)
+	InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 1)
+	InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 1)
 
 # Runs every frame
 func _process(delta):
@@ -411,6 +410,8 @@ func create_new_store():
 			item3Random = load("res://inventory/items/refresh_item.tres")
 		else:
 			item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+			while (item3Random == item1Random && item3Random == item2Random):
+				item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
 		item3.text = item3Random.item_name + " - " + "Pay $1"
 		item3.icon = item3Random.item_icon
 		item3Price = item3Random.cost

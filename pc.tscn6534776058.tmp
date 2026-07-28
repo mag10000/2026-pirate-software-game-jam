@@ -218,6 +218,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_oluvs")
 [node name="Main" parent="work window" unique_id=1469547217 node_paths=PackedStringArray("pc_ref") instance=ExtResource("2_crfiw")]
 position = Vector2(-47, 12)
 scale = Vector2(0.5, 0.5)
+width = 6
+height = 6
+offset = 68
+day = 1
 lightning_sparkles_scene = ExtResource("8_oluvs")
 pc_ref = NodePath("../..")
 

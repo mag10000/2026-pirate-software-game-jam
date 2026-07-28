@@ -24,6 +24,8 @@ extends Node2D
 
 @onready var container = $Board
 
+@export var pc_ref: Control
+
 # State
 
 var grid = []
@@ -35,8 +37,8 @@ var iconArray = [1, 2, 3, 4, 5, 6]
 var evilIcons = [7, 9, 11]
 var evil_match = 0
 var matches 
-var amount_tile = 2
-var amount_combo = 4
+var amount_tile
+var amount_combo
 
 # Functions
 
@@ -50,6 +52,8 @@ func _ready():
 	center_grid_on_screen() 
 	
 	get_viewport().size_changed.connect(center_grid_on_screen)
+	amount_tile = Global.amt_earned_icon
+	amount_combo = Global.amt_earned_combos
 	
 # Centers the board on-screen, the above conection ensures the board is centered after resizing the window
 
@@ -322,7 +326,7 @@ func find_matches() -> Array:
 func process_board_state():
 	combo_count = 0 
 	matches = find_matches()
-	
+	var earned_this_round = 0
 	while matches.size() > 0:
 		#print("Evil Match Count: " + str(evil_match))
 		
@@ -332,9 +336,9 @@ func process_board_state():
 		Audio.play("res://match 3/sounds/tile-match.ogg", true, 1.0 + (combo_count * 0.1))
 		if combo_count > 1:
 			if $"../..":
-				$"../..".money += ((combo_count-1) * amount_combo * Global.money_multiplier)
-				Global.money_earned += ((combo_count-1) * amount_combo * Global.money_multiplier)
-				
+				$"../..".money += round(((combo_count-1) * amount_combo * Global.money_multiplier))
+				Global.money_earned += round(((combo_count-1) * amount_combo * Global.money_multiplier))
+				earned_this_round += round(((combo_count-1) * amount_combo * Global.money_multiplier))
 		for piece in matches:
 			var effect = sparkles_scene.instantiate()
 			effect.position = piece.position
@@ -348,13 +352,15 @@ func process_board_state():
 			
 			if evil_match == 0:
 				if $"../..":
-					$"../..".money += (amount_tile * Global.money_multiplier)
-					Global.money_earned += (amount_tile * Global.money_multiplier)
+					$"../..".money += round((amount_tile * Global.money_multiplier))
+					Global.money_earned += round((amount_tile * Global.money_multiplier))
+					earned_this_round += round((amount_tile * Global.money_multiplier))
 			#await collapse_columns()
 			elif evil_match >= 1:
 				if $"../..":
-					$"../..".money -= amount_tile 
-					Global.money_earned -= amount_tile
+					$"../..".money -= round(amount_tile)
+					Global.money_earned -= round(amount_tile)
+					earned_this_round -= round(amount_tile)
 				evil_match -= 1
 		
 		await get_tree().create_timer(0.3).timeout
@@ -363,6 +369,10 @@ func process_board_state():
 		
 		matches = find_matches()
 		await collapse_columns()
+		if earned_this_round > 0:
+			pc_ref.show_money_popup(earned_this_round)
+		elif earned_this_round < 0:
+			pc_ref.show_money_popup(earned_this_round, false)
 	
 	#await collapse_columns()
 	#matches = find_matches()
@@ -448,7 +458,7 @@ func simplify_board():
 	var other_types = false
 	var get_new_type = true
 	var type_to_swap 
-	
+	var earned_this_round = 0
 	
 	for piece in whole_board:
 		if not is_instance_valid(piece):
@@ -471,9 +481,9 @@ func simplify_board():
 			tween.finished.connect(piece.queue_free)
 						
 			if $"../..":
-				$"../..".money += (amount_tile * Global.money_multiplier)
-			Global.money_earned += (amount_tile * Global.money_multiplier)
-			
+				$"../..".money += round((amount_tile * Global.money_multiplier))
+			Global.money_earned += round((amount_tile * Global.money_multiplier))
+			earned_this_round += round((amount_tile * Global.money_multiplier))
 			spawn_specific_at(piece.grid_position.x,piece.grid_position.y, type_to_swap)
 			
 		# TODO - Make this work so that one type in the whole board is 
@@ -486,7 +496,10 @@ func simplify_board():
 	elif objectsDestroyed == true:
 		print("Got to objectsDestroyed == true")
 		#iconArray.erase(randomToDestroy)
-
+		if earned_this_round > 0:
+			pc_ref.show_money_popup(earned_this_round)
+		elif earned_this_round < 0:
+			pc_ref.show_money_popup(earned_this_round, false)
 		await get_tree().create_timer(0.15).timeout
 		await collapse_columns()
 		await refill_board(true)
@@ -501,6 +514,7 @@ func lightning():
 		randomToDestroy = iconArray.pick_random()
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()
+	var earned_this_round = 0
 	
 	for piece in whole_board:
 		if not is_instance_valid(piece):
@@ -518,9 +532,14 @@ func lightning():
 			tween.finished.connect(piece.queue_free)
 						
 			if $"../..":
-				$"../..".money += (amount_tile * Global.money_multiplier)
-				Global.money_earned += (amount_tile * Global.money_multiplier)
+				$"../..".money += round((amount_tile * Global.money_multiplier))
+				Global.money_earned += round((amount_tile * Global.money_multiplier))
+				earned_this_round += round((amount_tile * Global.money_multiplier))
 	if objectsDestroyed == true:
+		if earned_this_round > 0:
+			pc_ref.show_money_popup(earned_this_round)
+		elif earned_this_round < 0:
+			pc_ref.show_money_popup(earned_this_round, false)
 		await get_tree().create_timer(0.15).timeout
 		await collapse_columns()
 		await refill_board(true)
@@ -530,6 +549,7 @@ func lightning():
 	process_board_state()
 
 func bomb_random_icon():
+	var earned_this_round = 0
 	var randomToDestroy = iconArray.pick_random()
 	while randomToDestroy == 0 || randomToDestroy == 7 || randomToDestroy == 9 || randomToDestroy == 11:
 		randomToDestroy = iconArray.pick_random()
@@ -576,9 +596,14 @@ func bomb_random_icon():
 			tween.finished.connect(piece_to_bomb.queue_free)
 			
 			if $"../..":
-				$"../..".money += (amount_tile * Global.money_multiplier)
-				Global.money_earned += (amount_tile * Global.money_multiplier)
+				$"../..".money += round((amount_tile * Global.money_multiplier))
+				Global.money_earned += round((amount_tile * Global.money_multiplier))
+				earned_this_round += round((amount_tile * Global.money_multiplier))
 	if objectsDestroyed == true:
+		if earned_this_round > 0:
+			pc_ref.show_money_popup(earned_this_round)
+		elif earned_this_round < 0:
+			pc_ref.show_money_popup(earned_this_round, false)
 		await get_tree().create_timer(0.15).timeout
 		await collapse_columns()
 		await refill_board(true)

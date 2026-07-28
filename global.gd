@@ -39,9 +39,9 @@ var newItemsForRound = [[], [["res://inventory/items/lightning_item.tres"],["res
 
 var evilIconsForRound = [[],[],[7],[9],[11],[7,9,11]]
 
-var amt_earned_combos = 4
+var amt_earned_combos = 6
 
-var amt_earned_icon = 1
+var amt_earned_icon = 2
 
 var money_multiplier = 1
 

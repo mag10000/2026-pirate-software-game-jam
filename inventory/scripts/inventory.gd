@@ -36,7 +36,7 @@ func set_items():
 		print("not enough slots for the amount of items")
 		
 	if sizeSet != inventory_slots:
-		for n in range(0, 5):
+		for n in range(0, 7):
 			if n < on:
 				pass
 			else:

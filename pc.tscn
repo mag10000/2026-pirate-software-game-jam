@@ -145,7 +145,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.22745098, 0.38039216, 0.52156866, 1)
+color = Color(0.6901961, 0.2, 0.5921569, 1)
 
 [node name="taskbar" type="Control" parent="." unique_id=1850188279]
 layout_mode = 1
@@ -165,7 +165,7 @@ anchor_bottom = 1.0
 offset_top = -27.0
 grow_horizontal = 2
 grow_vertical = 0
-color = Color(0.7764706, 0.7921569, 0.5882353, 1)
+color = Color(0.45882353, 0.3764706, 0.41568628, 1)
 
 [node name="Label" type="Label" parent="taskbar" unique_id=1737939297]
 layout_mode = 0
@@ -476,6 +476,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 slots_Box_Container = NodePath("Control/GridContainer")
+inventory_slots = 8
 
 [node name="slots" parent="inventory window/inventory/Control" parent_id_path=PackedInt32Array(154207438, 1620400334) index="1" unique_id=33701807]
 offset_left = -295.0

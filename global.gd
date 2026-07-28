@@ -32,6 +32,12 @@ var iconsForRound = [[],[1, 2, 3, 4, 5],[1, 2, 3, 4, 5, 6, 7],[1, 2, 3, 4, 5, 8,
 
 var regularIconsForRound = [[],[1, 2, 3, 4, 5],[1, 2, 3, 4, 5, 6],[1, 2, 3, 4, 5, 8],[1, 2, 3, 4, 5, 10],[1, 2, 3, 4, 5, 6, 8, 10]]
 
+var newIconsForRound = [[],[1,2,3,4,5],[6,7],[8,9],[10,11],[]]
+
+var newItemsForRound = [[],[[load("res://inventory/items/lightning_item.tres"),load("res://inventory/items/time_add_item.tres"),load("res://inventory/items/refresh_item.tres"),load("res://inventory/items/bomb_item.tres")]
+
+][load("res://inventory/items/lightning_item.tres")],[],[],[],[]]
+
 var evilIconsForRound = [[],[],[7],[9],[11],[7,9,11]]
 
 var amt_earned_combos = 4

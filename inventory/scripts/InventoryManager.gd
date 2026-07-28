@@ -41,7 +41,7 @@ func get_inventory(mode : get_inventory_enums):
 
 func clear_inventory():
 		for item in _inventory:
-			revoke_item(item.item_name)
+			revoke_item(item)
 		
 
 func get_group(group : String, mode : get_group_enums):

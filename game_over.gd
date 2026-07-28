@@ -1,8 +1,9 @@
 extends Control
 
+var scroll = false
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file("res://main_menu.tscn")
+	$Button.disabled = true
 	#TODO - Update this as we change things
 	# Logic to reset all amounts to default
 	InventoryManager.clear_inventory()
@@ -26,3 +27,19 @@ func _on_button_pressed():
 	Global.amt_earned_combos = 4
 	Global.amt_earned_icon = 1
 	Global.money_multiplier = 1
+	$AnimationPlayer.play("fade")
+	$ScrollTimer.start()
+	scroll = true
+
+func _physics_process(delta):
+	if scroll:
+		$Camera2D.position.y += 1
+		$ColorRect.position.y += 1
+
+func _on_timer_timeout():
+	scroll = false
+	$WaitTimer.start()
+
+
+func _on_wait_timer_timeout():
+	get_tree().change_scene_to_file("res://leader_board.tscn")

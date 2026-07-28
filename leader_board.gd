@@ -46,3 +46,7 @@ func format_number(number: int) -> String:
 func _on_submit_pressed():
 	SilentWolf.Scores.save_score($LineEdit.text.to_upper(), Global.money_earned)
 	get_scores()
+
+
+func _on_to_main_pressed():
+	get_tree().change_scene_to_file("res://main_menu.tscn")

@@ -102,6 +102,30 @@ theme_override_fonts/font = ExtResource("3_xvw5l")
 theme_override_font_sizes/font_size = 32
 text = "Submit score"
 
+[node name="to_main" type="Button" parent="LineEdit" unique_id=1394107366]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.25
+offset_top = 84.0
+offset_right = 92.75
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
+theme_override_colors/font_focus_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_pressed_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_hover_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_xvw5l")
+theme_override_font_sizes/font_size = 32
+text = "Main Menu"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1622563909]
 custom_minimum_size = Vector2(425, 253)
 layout_mode = 0
@@ -116,3 +140,4 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [connection signal="pressed" from="LineEdit/submit" to="." method="_on_submit_pressed"]
+[connection signal="pressed" from="LineEdit/to_main" to="." method="_on_to_main_pressed"]

@@ -44,3 +44,11 @@ func _on_pause_timer_pressed():
 
 func _on_button_pressed():
 	InventoryManager.grant_item("res://inventory/items/" + $Button/LineEdit.text + ".tres")
+
+
+func _on_win_pressed():
+	get_tree().change_scene_to_file("res://you_win_credits.tscn")
+
+
+func _on_lose_pressed():
+	get_tree().change_scene_to_file("res://game_over.tscn")

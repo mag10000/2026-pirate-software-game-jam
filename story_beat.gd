@@ -125,3 +125,7 @@ func format_number(number: int) -> String:
 
 func load_scene(sceneToLoad: String):
 	get_tree().change_scene_to_file(sceneToLoad)
+
+
+func _on_button_pressed():
+	load_scene("res://pc.tscn")

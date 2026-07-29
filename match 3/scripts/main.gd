@@ -253,8 +253,8 @@ func _input(event):
 
 func calculate_swipe(final_pos: Vector2):
 	if (grid[first_touch.x][first_touch.y].type == "0"):
-				return
-					
+		return
+		
 	var difference = final_pos - grid_to_pixel(first_touch.x, first_touch.y)
 	
 	if difference.length() > 32:

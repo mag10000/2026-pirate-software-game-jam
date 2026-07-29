@@ -214,6 +214,7 @@ func _on_deposit_pressed():
 		# TODO - Need to change this logic but not sure how because now you can pay more and see it
 		if Global.minimumPay != 0:
 			Global.minimumPay -= 1
+		show_money_popup(1, false)
 
 func _on_deposit_10_pressed():
 	if money >= 10:
@@ -223,6 +224,7 @@ func _on_deposit_10_pressed():
 				# TODO - Need to change this logic but not sure how because now you can pay more and see it
 		if Global.minimumPay != 0:
 			Global.minimumPay -= 10
+		show_money_popup(10, false)
 
 func _on_deposit_100_pressed():
 	if money >= 100:
@@ -232,6 +234,7 @@ func _on_deposit_100_pressed():
 				# TODO - Need to change this logic but not sure how because now you can pay more and see it
 		if Global.minimumPay != 0:
 			Global.minimumPay -= 100
+		show_money_popup(100, false)
 
 
 func _on_break_timer_timeout():
@@ -313,6 +316,7 @@ func _on_item_1_pressed():
 		print("TEST")
 		item1Price -= 1
 		money -= 1
+		show_money_popup(1, false)
 		if item1Price == 0:
 			# Grant Item and Remove Item from Store
 			InventoryManager.grant_item(item1Random.get_path())
@@ -330,6 +334,7 @@ func _on_item_2_pressed():
 		print("TEST")
 		item2Price -= 1
 		money -= 1
+		show_money_popup(1, false)
 		if item2Price == 0:
 			# Grant Item and Remove Item from Store
 			InventoryManager.grant_item(item2Random.get_path())
@@ -346,6 +351,7 @@ func _on_item_3_pressed():
 		print("TEST")
 		item3Price -= 1
 		money -= 1
+		show_money_popup(1, false)
 		if item3Price == 0:
 			# Grant Item and Remove Item from Store
 			InventoryManager.grant_item(item3Random.get_path())
@@ -542,6 +548,7 @@ TO CLOSE THE WINDOW"
 	$"not allow".hide()
 
 func show_money_popup(money_amount : int,good = true):
+	Audio.play("res://sfx/Anti Cha Ching.wav",true)
 	var popup = preload("res://dollar_earn_popup.tscn").instantiate()
 	popup.amount = abs(money_amount)
 	popup.good = good

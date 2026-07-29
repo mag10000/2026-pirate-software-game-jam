@@ -50,8 +50,8 @@ extends Control
 var topWindowVisible = false
 
 # Color Variables for ProgressBar
-var redTime = 5
-var yellowTime = 9
+var redTime = 4.5
+var yellowTime = 8.5
 var greenTime = 24
 
 # For Shop Items

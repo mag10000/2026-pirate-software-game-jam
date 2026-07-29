@@ -10,7 +10,7 @@ var break_time_started = false
 
 var work_times = [23,25,21,22]
 
-var break_times = [10]
+var break_times = [9]
 
 var phase = 0
 

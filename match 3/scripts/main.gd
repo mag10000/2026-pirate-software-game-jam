@@ -91,25 +91,21 @@ func initial_spawn(x, y, blanks: bool):
 		evil_block_count += 1
 
 	# Allow an evil block only if there aren't too many for how far into the day you are
-	if evil_block_count >= 3 && Global.hour >= 3:
-		if evil_block_count >= 4 && Global.hour >= 5:
-			if evil_block_count >= 5 && Global.hour >= 7:
-				if evil_block_count >= 6:
-					while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
-						random_index = iconArray.pick_random()
-				else:
-					while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
-						random_index = iconArray.pick_random()
-			else:
-				while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
-					random_index = iconArray.pick_random()
-		else:
+	if evil_block_count >= 3:
+		if Global.hour <= 2:
 			while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
-				random_index = iconArray.pick_random()
-	else:
-		while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
-			random_index = iconArray.pick_random()
-			
+						random_index = iconArray.pick_random()
+		if evil_block_count >= 4:
+			if Global.hour <= 4:
+				while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
+						random_index = iconArray.pick_random()
+			if evil_block_count >= 5:
+				if Global.hour <= 6:
+					while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
+						random_index = iconArray.pick_random()
+				elif evil_block_count >= 6:
+					while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
+						random_index = iconArray.pick_random()
 	if blanks:
 		random_index = 0 
 

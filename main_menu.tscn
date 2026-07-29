@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bx2els8um6ix7" path="res://art/Main_Menu_BG.png" id="2_jix8l"]
 [ext_resource type="Texture2D" uid="uid://ca3nrc25pjbit" path="res://art/HyperDebtSwap_logo_v2.png" id="3_jix8l"]
 [ext_resource type="AudioStream" uid="uid://cjw1wbqi08crg" path="res://music/Title Screen.wav" id="5_glbon"]
+[ext_resource type="PackedScene" uid="uid://cwop7h3qng4w7" path="res://settings.tscn" id="6_nlkkf"]
 
 [node name="Main menu" type="Control" unique_id=631415015 node_paths=PackedStringArray("MusicPlayer")]
 layout_mode = 3
@@ -87,6 +88,11 @@ texture = ExtResource("3_jix8l")
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1659671116]
 stream = ExtResource("5_glbon")
 autoplay = true
+
+[node name="settings" parent="." unique_id=743456714 instance=ExtResource("6_nlkkf")]
+visible = false
+layout_mode = 1
+close_to_home = false
 
 [connection signal="pressed" from="Start" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Setttings" to="." method="_on_setttings_pressed"]

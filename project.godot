@@ -12,6 +12,8 @@ config_version=5
 
 config/name="Hyper Debt Swap"
 run/main_scene="uid://ct7oupp4g0ts7"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Pirate 2026 Hyper Debt Swap"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0.7607843, 0.67058825, 0.6156863, 1)
 boot_splash/image="uid://ca3nrc25pjbit"

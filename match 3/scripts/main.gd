@@ -90,20 +90,25 @@ func initial_spawn(x, y, blanks: bool):
 	if is_evil_block(random_index):
 		evil_block_count += 1
 
-	#match Global.hour:
-	#	3:
-	#TODO - Fix this
-	elif evil_block_count >= 3 && Global.hour >= 3:
-		if Global.hour >= 3:
-			if evil_block_count > 5:
+	# Allow an evil block only if there aren't too many for how far into the day you are
+	if evil_block_count >= 3 && Global.hour >= 3:
+		if evil_block_count >= 4 && Global.hour >= 5:
+			if evil_block_count >= 5 && Global.hour >= 7:
+				if evil_block_count >= 6:
+					while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
+						random_index = iconArray.pick_random()
+				else:
+					while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
+						random_index = iconArray.pick_random()
+			else:
 				while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
 					random_index = iconArray.pick_random()
-			else:
-				pass
-		# WE DONT WANT AN EVIL BLOCK
 		else:
 			while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
 				random_index = iconArray.pick_random()
+	else:
+		while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
+			random_index = iconArray.pick_random()
 			
 	if blanks:
 		random_index = 0 
@@ -583,27 +588,32 @@ func lightning():
 func bomb_random_icon():
 	var earned_this_round = 0
 	var randomToDestroy = iconArray.pick_random()
-	while randomToDestroy == 0 || randomToDestroy == 7 || randomToDestroy == 9 || randomToDestroy == 11:
+	while randomToDestroy == 0:
 		randomToDestroy = iconArray.pick_random()
-	var objectsInArray = false
+	var objectsInIdealArray = false
+	var objectsInOtherArray = false
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()
-	var array_random_icons = []
+	var array_random_ideal_icons = []
+	var array_random_other_icons = []
+	var random_index
+	var piece_to_destroy 
+	var array_to_destroy = []
 	#TODO - If there are ONLY pieces on edges, we should bomb an edge. If board is empty no big deal.
 	for piece in whole_board:
 		if not is_instance_valid(piece):
 			return
-		if piece.type == str(randomToDestroy) && piece.grid_position.x != 0 && piece.grid_position.x != 5 && piece.grid_position.y != 0 && piece.grid_position.y != 5:
-			array_random_icons.append(piece)
-			objectsInArray = true
-			print (str(randomToDestroy))
-			print (str(piece.type))
-			print (str(array_random_icons))
+		if piece.type != "0" && piece.grid_position.x != 0 && piece.grid_position.x != 5 && piece.grid_position.y != 0 && piece.grid_position.y != 5:
+			array_random_ideal_icons.append(piece)
+			objectsInIdealArray = true
+		elif piece.type != "0":
+			array_random_other_icons.append(piece)
+			objectsInOtherArray = true
 		
-	if objectsInArray:
-		var random_index = randi_range(0,array_random_icons.size() - 1)
-		var piece_to_destroy = array_random_icons[random_index]
-		var array_to_destroy = [piece_to_destroy, 
+	if objectsInIdealArray:
+		random_index = randi_range(0,array_random_ideal_icons.size() - 1)
+		piece_to_destroy = array_random_ideal_icons[random_index]
+		array_to_destroy = [piece_to_destroy, 
 		grid[piece_to_destroy.grid_position.x + 1][piece_to_destroy.grid_position.y],
 		grid[piece_to_destroy.grid_position.x - 1][piece_to_destroy.grid_position.y],
 		grid[piece_to_destroy.grid_position.x][piece_to_destroy.grid_position.y + 1],
@@ -613,9 +623,39 @@ func bomb_random_icon():
 		grid[piece_to_destroy.grid_position.x - 1][piece_to_destroy.grid_position.y + 1],
 		grid[piece_to_destroy.grid_position.x - 1][piece_to_destroy.grid_position.y - 1]]	
 		
+	elif objectsInOtherArray:
+		random_index = randi_range(0,array_random_other_icons.size() - 1)
+		piece_to_destroy = array_random_other_icons[random_index]
+		array_to_destroy.append(piece_to_destroy)
+		var x = piece_to_destroy.grid_position.x
+		var y = piece_to_destroy.grid_position.y
+			
+		if is_position_in_grid(x + 1, y) && grid[x + 1][y] != null:
+			array_to_destroy.append(grid[x + 1][y])
+		if is_position_in_grid(x - 1, y) && grid[x - 1][y] != null:
+			array_to_destroy.append(grid[x - 1][y])
+		if is_position_in_grid(x + 1, y + 1) && grid[x + 1][y + 1] != null:
+			array_to_destroy.append(grid[x + 1][y + 1])
+		if is_position_in_grid(x + 1, y - 1) && grid[x + 1][y - 1] != null:
+			array_to_destroy.append(grid[x + 1][y - 1])
+		if is_position_in_grid(x - 1, y + 1) && grid[x - 1][y + 1] != null:
+			array_to_destroy.append(grid[x - 1][y + 1])
+		if is_position_in_grid(x - 1, y - 1) && grid[x - 1][y - 1] != null:
+			array_to_destroy.append(grid[x - 1][y - 1])
+		if is_position_in_grid(x, y + 1) && grid[x][y + 1] != null:
+			array_to_destroy.append(grid[x][y + 1])
+		if is_position_in_grid(x, y - 1) && grid[x][y - 1] != null:
+			array_to_destroy.append(grid[x][y - 1])
+	
+			
+	if objectsInIdealArray || objectsInOtherArray:
+
 			#print("Objects Destroyed: " + str(objectsDestroyed))
 		for piece_to_bomb in array_to_destroy:
+			var grant_money = false
 			objectsDestroyed = true
+			if piece_to_bomb.type != "0":
+				grant_money = true
 			if piece_to_bomb == piece_to_destroy:
 				piece_to_bomb.sprite_texture = bomb_texture
 			var effect = bomb_fire_scene.instantiate()
@@ -627,11 +667,14 @@ func bomb_random_icon():
 			tween.tween_property(piece_to_bomb, "scale", Vector2.ZERO, 0.2)
 			tween.finished.connect(piece_to_bomb.queue_free)
 			
-			if $"../..":
-				$"../..".money += round((amount_tile * Global.money_multiplier))
-				Global.money_earned += round((amount_tile * Global.money_multiplier))
-				earned_this_round += round((amount_tile * Global.money_multiplier))
+			if grant_money == true:
+				if $"../..":
+					$"../..".money += round((amount_tile * Global.money_multiplier))
+					Global.money_earned += round((amount_tile * Global.money_multiplier))
+					earned_this_round += round((amount_tile * Global.money_multiplier))
+				
 	if objectsDestroyed == true:
+		InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
 		Audio.play("res://sfx/Bomb.wav",true)
 		if earned_this_round > 0:
 			pc_ref.show_money_popup(earned_this_round)
@@ -640,22 +683,19 @@ func bomb_random_icon():
 		await get_tree().create_timer(0.15).timeout
 		await collapse_columns()
 		await refill_board(true)
-	else:
-		wait_and_grant_bomb()
 	await get_tree().create_timer(0.15).timeout
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
 
 func missle_evil_icons():
-	var randomToDestroy = Global.evilIconsForRound[Global.day].pick_random()
 	var objectsDestroyed = false
 	var whole_board = get_whole_board()
 	
 	for piece in whole_board:
 		if not is_instance_valid(piece):
 			return
-		if piece.type == str(randomToDestroy):
+		if is_evil_block(piece.type):
 			objectsDestroyed = true
 			var effect = bomb_fire_scene.instantiate()
 			effect.position = piece.position
@@ -698,14 +738,15 @@ func reset_board():
 
 func refresh_icons():
 	iconArray = Global.iconsForRound[Global.day].duplicate(true)
-
-func wait_and_grant_bomb():
-	#TODO - Play ERROR style SFX
-	await get_tree().create_timer(0.4).timeout
-	InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 1)
 	
 func is_evil_block(type: int)-> bool: 
 	if (type == 7 || type == 9 || type == 11):
+		return true
+	else:
+		return false
+		
+func is_position_in_grid(x: int, y: int)->bool:
+	if (x >= 0 && x <=5 && y >=0 && y<= 5):
 		return true
 	else:
 		return false

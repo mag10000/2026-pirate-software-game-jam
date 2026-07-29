@@ -272,7 +272,7 @@ func item_clicked(node):
 		"Bomb":
 			await tileGameReference.bomb_random_icon()
 			#TODO - Make sure to grant a missle if it can't fire and play SFX, maybe put revoking in other code
-			InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")
+
 			await get_tree().create_timer(0.15).timeout
 			InventoryManager.using_item = false
 		"Refresh Board":

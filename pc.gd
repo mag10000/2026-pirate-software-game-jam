@@ -278,7 +278,7 @@ func item_clicked(node):
 		"Refresh Board":
 			Audio.play("res://sfx/Time Add.wav",true)
 			await tileGameReference.reset_board()
-			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")			
+			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")
 			await get_tree().create_timer(0.15).timeout
 			InventoryManager.using_item = false
 		"$ Multiplier":

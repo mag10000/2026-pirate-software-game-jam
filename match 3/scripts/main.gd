@@ -89,12 +89,21 @@ func initial_spawn(x, y, blanks: bool):
 		random_index = iconArray.pick_random()
 	if is_evil_block(random_index):
 		evil_block_count += 1
-		print(str(evil_block_count))
-	if random_index == 9:
-		pass
-	elif evil_block_count >= 4:
-		while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
-			random_index = iconArray.pick_random()
+
+	#match Global.hour:
+	#	3:
+	#TODO - Fix this
+	elif evil_block_count >= 3 && Global.hour >= 3:
+		if Global.hour >= 3:
+			if evil_block_count > 5:
+				while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
+					random_index = iconArray.pick_random()
+			else:
+				pass
+		# WE DONT WANT AN EVIL BLOCK
+		else:
+			while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
+				random_index = iconArray.pick_random()
 			
 	if blanks:
 		random_index = 0 

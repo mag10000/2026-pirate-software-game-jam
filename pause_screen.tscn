@@ -2,9 +2,18 @@
 
 [ext_resource type="Script" uid="uid://4ixilal05uy7" path="res://pause_screen.gd" id="1_gkx8r"]
 [ext_resource type="PackedScene" uid="uid://cwop7h3qng4w7" path="res://settings.tscn" id="2_rk3l4"]
+[ext_resource type="Texture2D" uid="uid://bx2els8um6ix7" path="res://art/Main_Menu_BG.png" id="2_un6tb"]
+[ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="3_rbgr5"]
 
 [node name="Pause Screen" type="CanvasLayer" unique_id=1419754115]
 script = ExtResource("1_gkx8r")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2067060830]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_un6tb")
+expand_mode = 1
+stretch_mode = 2
 
 [node name="Control" type="Control" parent="." unique_id=455821233]
 layout_mode = 3
@@ -15,6 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="Control" unique_id=1964407514]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,20 +35,62 @@ color = Color(0.105882354, 0.105882354, 0.105882354, 0.5254902)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Control" unique_id=1393987238]
 layout_mode = 0
-offset_right = 220.0
-offset_bottom = 40.0
-text = "Game is paused"
-
-[node name="Button" type="Button" parent="." unique_id=1764498903]
-offset_left = 12.0
-offset_top = 33.0
-offset_right = 97.0
-offset_bottom = 64.0
-text = "Settings"
+offset_left = 63.0
+offset_top = 34.0
+offset_right = 703.0
+offset_bottom = 153.0
+theme_override_colors/default_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/normal_font = ExtResource("3_rbgr5")
+theme_override_font_sizes/normal_font_size = 64
+text = "PAUSE MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="settings" parent="." unique_id=743456714 instance=ExtResource("2_rk3l4")]
 visible = false
 close_to_home = false
 
+[node name="Settings_Button" type="Button" parent="." unique_id=1764498903]
+offset_left = 485.0
+offset_top = 230.0
+offset_right = 621.0
+offset_bottom = 270.0
+theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
+theme_override_colors/font_focus_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_pressed_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_hover_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_rbgr5")
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="Main_Menu_Button" type="Button" parent="." unique_id=1639846247]
+custom_minimum_size = Vector2(128, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 165.0
+offset_top = 100.0
+offset_right = 301.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
+theme_override_colors/font_focus_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_pressed_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_hover_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_rbgr5")
+theme_override_font_sizes/font_size = 32
+text = "Main Menu"
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Settings_Button" to="." method="_on_button_pressed"]

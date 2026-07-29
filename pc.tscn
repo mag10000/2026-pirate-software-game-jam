@@ -459,13 +459,12 @@ grow_vertical = 2
 
 [node name="Day and Hour Text" type="Label" parent="day hour window/Control" unique_id=1205234166]
 layout_mode = 0
-offset_left = 27.0
+offset_left = 36.0
 offset_top = -34.5
-offset_right = 123.0
+offset_right = 132.0
 offset_bottom = -2.5
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
-horizontal_alignment = 1
 
 [node name="X" type="Sprite2D" parent="day hour window" unique_id=2114843244]
 visible = false
@@ -527,7 +526,7 @@ width = 1.0
 default_color = Color(0, 0, 0, 1)
 
 [node name="minute" type="Line2D" parent="day hour window/TextureRect" unique_id=1871973113]
-points = PackedVector2Array(19, 8, 19.5, 19.5)
+points = PackedVector2Array(19, 11, 19.5, 19.5)
 width = 1.0
 default_color = Color(0, 0, 0, 1)
 

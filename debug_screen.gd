@@ -5,7 +5,7 @@ func _ready():
 	$Control/Debt.value = Global.debt
 	$Control/Day.value = Global.day
 	$Control/Hour.value = Global.hour
-	$Control/Money.value = $"..".money
+	$Control/Money.value = Global.money
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -15,7 +15,7 @@ func _process(delta):
 		$Control/Debt.value = Global.debt
 		$Control/Day.value = Global.day
 		$Control/Hour.value = Global.hour
-		$Control/Money.value = $"..".money
+		$Control/Money.value = Global.money
 
 func _on_debt_value_changed(value):
 	if visible:
@@ -34,7 +34,7 @@ func _on_hour_value_changed(value):
 
 func _on_money_value_changed(value):
 	if visible:
-		$"..".money = $Control/Money.value
+		Global.money = $Control/Money.value
 
 
 func _on_pause_timer_pressed():

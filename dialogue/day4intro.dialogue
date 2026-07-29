@@ -1,5 +1,5 @@
 ~ start
-Evil Banker: Impossible! You should have lost by now! If you make it to $6,000 in 8 hours I’ll start to sweat!
+Evil Banker: Impossible! You should have lost by now! If you make it to $3,000 in 8 hours I’ll start to sweat!
 
 do new_day_text()
 => END

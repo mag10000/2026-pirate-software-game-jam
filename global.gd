@@ -14,9 +14,13 @@ var break_times = [9]
 
 var phase = 0
 
+var money = 0
+
 var money_earned = 0
 
 var debt = 10000
+
+var debt_paid = 0
 
 var minimumPay = 500
 
@@ -48,6 +52,7 @@ var amt_earned_combos = 6
 var amt_earned_icon = 2
 
 var money_multiplier = 1
+
 
 
 

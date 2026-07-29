@@ -316,6 +316,14 @@ func swap_pieces(a: Vector2i, b: Vector2i):
 		elif (piece_b.type == "11") && (piece_a.type != "0"):
 			piece_a.set_tile_type("11", textures[11]) 
 			Audio.play("res://sfx/Glitchy Block Swap.wav", false, randf_range(0.8, 1.2), 0.3) 
+		elif (piece_a.type == "9") && (piece_b.type != "0"):
+			Global.money -= round((amount_tile*3)/2)
+			pc_ref.show_money_popup(round((amount_tile*3)/2), false)
+			Audio.play("res://sfx/Anti Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
+		elif (piece_b.type == "9") && (piece_a.type != "0"):
+			Global.money -= round((amount_tile*3)/2)
+			pc_ref.show_money_popup(round((amount_tile*3)/2), false)
+			Audio.play("res://sfx/Anti Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
 		else:
 			Audio.play("res://sfx/Block Swap.wav", false, randf_range(0.8, 1.2), 0.3)
 
@@ -362,12 +370,11 @@ func process_board_state():
 		if evil_match < 1:
 			combo_count += 1
 		
-		Audio.play("res://sfx/Combo.wav", true, 1.0 + (combo_count * 0.1))
 		if combo_count > 1:
-			if $"../..":
-				$"../..".money += round(((combo_count-1) * amount_combo * Global.money_multiplier))
-				Global.money_earned += round(((combo_count-1) * amount_combo * Global.money_multiplier))
-				earned_this_round += round(((combo_count-1) * amount_combo * Global.money_multiplier))
+			Audio.play("res://sfx/Combo.wav", true, 1.0 + (combo_count * 0.1))
+			Global.money += round(((combo_count-1) * amount_combo * Global.money_multiplier))
+			Global.money_earned += round(((combo_count-1) * amount_combo * Global.money_multiplier))
+			earned_this_round += round(((combo_count-1) * amount_combo * Global.money_multiplier))
 		for piece in matches:
 			var effect = sparkles_scene.instantiate()
 			effect.position = piece.position
@@ -380,23 +387,20 @@ func process_board_state():
 			tween.finished.connect(piece.queue_free)
 			
 			if evil_match == 0:
-				if $"../..":
-					$"../..".money += round((amount_tile * Global.money_multiplier))
-					Global.money_earned += round((amount_tile * Global.money_multiplier))
-					earned_this_round += round((amount_tile * Global.money_multiplier))
+				Global.money += round((amount_tile * Global.money_multiplier))
+				Global.money_earned += round((amount_tile * Global.money_multiplier))
+				earned_this_round += round((amount_tile * Global.money_multiplier))
 			#await collapse_columns()
 			elif evil_match >= 1:
-				if $"../..":
-					$"../..".money -= round(amount_tile)
-					Global.money_earned -= round(amount_tile)
-					earned_this_round -= round(amount_tile)
+				Global.money -= round(amount_tile)
+				Global.money_earned -= round(amount_tile)
+				earned_this_round -= round(amount_tile)
 				evil_match -= 1
 		if earned_this_round > 0:
 			pc_ref.show_money_popup(earned_this_round)
 			Audio.play("res://sfx/Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
 		elif earned_this_round < 0:
 			pc_ref.show_money_popup(earned_this_round, false)
-			#Audio.play("res://sfx/Anti Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
 		await refill_board(true)
@@ -512,8 +516,7 @@ func simplify_board():
 			tween.tween_property(piece, "scale", Vector2.ZERO, 0.2)
 			tween.finished.connect(piece.queue_free)
 						
-			if $"../..":
-				$"../..".money += round((amount_tile * Global.money_multiplier))
+			Global.money += round((amount_tile * Global.money_multiplier))
 			Global.money_earned += round((amount_tile * Global.money_multiplier))
 			earned_this_round += round((amount_tile * Global.money_multiplier))
 			spawn_specific_at(piece.grid_position.x,piece.grid_position.y, type_to_swap)
@@ -565,10 +568,9 @@ func lightning():
 			tween.tween_property(piece, "scale", Vector2.ZERO, 0.2)
 			tween.finished.connect(piece.queue_free)
 						
-			if $"../..":
-				$"../..".money += round((amount_tile * Global.money_multiplier))
-				Global.money_earned += round((amount_tile * Global.money_multiplier))
-				earned_this_round += round((amount_tile * Global.money_multiplier))
+			Global.money += round((amount_tile * Global.money_multiplier))
+			Global.money_earned += round((amount_tile * Global.money_multiplier))
+			earned_this_round += round((amount_tile * Global.money_multiplier))
 	if objectsDestroyed == true:
 		Audio.play("res://sfx/Lightning.wav",true)
 		if earned_this_round > 0:
@@ -666,10 +668,9 @@ func bomb_random_icon():
 			tween.finished.connect(piece_to_bomb.queue_free)
 			
 			if grant_money == true:
-				if $"../..":
-					$"../..".money += round((amount_tile * Global.money_multiplier))
-					Global.money_earned += round((amount_tile * Global.money_multiplier))
-					earned_this_round += round((amount_tile * Global.money_multiplier))
+				Global.money += round((amount_tile * Global.money_multiplier))
+				Global.money_earned += round((amount_tile * Global.money_multiplier))
+				earned_this_round += round((amount_tile * Global.money_multiplier))
 				
 	if objectsDestroyed == true:
 		InventoryManager.revoke_item("res://inventory/items/bomb_item.tres")

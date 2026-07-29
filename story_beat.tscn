@@ -119,7 +119,7 @@ DayMusicPlayer = NodePath("DayStinger")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1230484060]
 
-[node name="Button" type="Button" parent="CanvasLayer" unique_id=1227837658]
+[node name="Skip Button" type="Button" parent="CanvasLayer" unique_id=1227837658]
 modulate = Color(1, 1, 1, 0.61960787)
 anchors_preset = 3
 anchor_left = 1.0
@@ -130,10 +130,40 @@ offset_left = -89.0
 offset_top = -40.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("5_5pflo")
+theme_override_fonts/font = ExtResource("1_s71hl")
 theme_override_font_sizes/font_size = 32
 text = "Skip"
+metadata/_edit_use_anchors_ = true
+
+[node name="Continue Button" type="Button" parent="CanvasLayer" unique_id=1991857308]
+visible = false
+modulate = Color(1, 1, 1, 0.61960787)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = 90.0
+offset_right = 62.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("1_s71hl")
+theme_override_font_sizes/font_size = 32
+text = "Continue"
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=229072552]
@@ -141,6 +171,13 @@ layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
 texture = ExtResource("2_nmyur")
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=830166544]
+visible = false
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
 
 [node name="BankerStinger" type="AudioStreamPlayer" parent="." unique_id=1095940861]
 stream = ExtResource("2_cg5s0")
@@ -163,9 +200,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -114.5
-offset_top = -97.0
+offset_top = -111.0
 offset_right = 114.5
-offset_bottom = -73.0
+offset_bottom = -87.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -183,9 +220,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -114.5
-offset_top = -17.0
+offset_top = -55.0
 offset_right = 114.5
-offset_bottom = 7.0
+offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -208,13 +245,13 @@ offset_right = -141.0
 offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/normal_font = ExtResource("5_5pflo")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 scroll_active = false
-horizontal_alignment = 1
 
 [node name="new item text" type="RichTextLabel" parent="." unique_id=96376170]
 layout_mode = 1
@@ -229,13 +266,13 @@ offset_right = 315.0
 offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/normal_font = ExtResource("5_5pflo")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 scroll_active = false
-horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=256769246]
 libraries/ = SubResource("AnimationLibrary_xwu7q")
@@ -243,4 +280,5 @@ libraries/ = SubResource("AnimationLibrary_xwu7q")
 [node name="DayStinger" type="AudioStreamPlayer" parent="." unique_id=555388425]
 stream = ExtResource("4_xwu7q")
 
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Skip Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Continue Button" to="." method="_on_continue_button_pressed"]

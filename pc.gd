@@ -69,7 +69,6 @@ var item2SoldOut = false
 var item3SoldOut = false
 
 # The Amount of Money the Player Has
-var money = 0
 
 # Time Remaining in a Counter
 var time = 0
@@ -85,22 +84,25 @@ var b = 0
 # Phase setup booleans
 var phase0Setup = true
 var phase1Setup = false
+var day1hour1Setup = false
 
 func _ready():
 	crtFilerOn = Global.crt_on
 	if crtFilerOn:
 		$CRTScreen.show()
 	create_new_store()
-	workWindow.hide()
 	storeWindow.hide()
 	topWindow.hide()
 	update_day_hour_text()
-	InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 3)
-	InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 3)
-	InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 3)
 
 # Runs every frame
 func _process(delta):
+	if day1hour1Setup == false:
+		day1hour1Setup = true
+		InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 1)
+		InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 1)
+		InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 1)
+	
 	if Global.debt < 0:
 		Global.debt = 0
 	
@@ -110,7 +112,7 @@ func _process(delta):
 	else:
 		$CRTScreen.hide()
 	
-	earningsAmountDisplay.text = "$" + str(money)
+	earningsAmountDisplay.text = "$" + str(Global.money)
 	debtAmountDisplay.text = "$" + str(Global.debt)
 	debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(Global.minimumPay)
 	progressBar.value = time
@@ -138,7 +140,7 @@ func _process(delta):
 			change_phase_display(0)
 			time = Global.work_times[Global.current_work_time_id]
 			progressBar.max_value = time
-			workWindow.show()
+			$"work window/Title".show()
 			workTimer.start()
 			Global.work_time_started = true
 
@@ -147,7 +149,7 @@ func _process(delta):
 			Global.work_time_started = false
 			Global.current_work_time_id = randi_range(0,3)
 			await get_tree().create_timer(0.5).timeout
-			workWindow.hide()
+			$"work window/Title".hide()
 			phase1Setup = true
 			Global.phase = 1
 
@@ -158,7 +160,13 @@ func _process(delta):
 		
 		if not Global.break_time_started:
 			change_phase_display(1)
-			time = Global.break_times[Global.current_break_time_id]
+			if Global.hour == 8:
+				if Global.day == 5:
+					time = 0
+				else:
+					time = Global.break_times[Global.current_break_time_id] * 2
+			else:
+				time = Global.break_times[Global.current_break_time_id]
 			progressBar.max_value = time
 			deposited_in_round = 0
 			debtMinimumPayDisplay.show()
@@ -207,35 +215,40 @@ func _on_work_timer_timeout():
 
 
 func _on_deposit_pressed():
-	if money != 0:
-		money -= 1
+	if Global.money > 0:
+		Global.money -= 1
 		Global.debt -= 1
+		Global.debt_paid += 1
 		deposited_in_round += 1
 		# TODO - Need to change this logic but not sure how because now you can pay more and see it
 		if Global.minimumPay != 0:
 			Global.minimumPay -= 1
 		show_money_popup(1, false)
+		Audio.play("res://sfx/money_paid.wav",true)
 
 func _on_deposit_10_pressed():
-	if money >= 10:
-		money -= 10
+	if Global.money >= 10:
+		Global.money -= 10
 		Global.debt -= 10
+		Global.debt_paid += 10
 		deposited_in_round += 10
 				# TODO - Need to change this logic but not sure how because now you can pay more and see it
 		if Global.minimumPay != 0:
 			Global.minimumPay -= 10
 		show_money_popup(10, false)
-
+		Audio.play("res://sfx/money_paid.wav",true, 1.2)
 func _on_deposit_100_pressed():
-	if money >= 100:
-		money -= 100
+	if Global.money >= 100:
+		Global.money -= 100
 		Global.debt -= 100
+		Global.debt_paid += 100
 		deposited_in_round += 100
+		
 				# TODO - Need to change this logic but not sure how because now you can pay more and see it
 		if Global.minimumPay != 0:
 			Global.minimumPay -= 100
 		show_money_popup(100, false)
-
+		Audio.play("res://sfx/money_paid.wav",true, 1.5)
 
 func _on_break_timer_timeout():
 	time -= 1
@@ -247,27 +260,27 @@ func raise_items_update():
 			Global.amt_earned_combos += 6
 			Global.amt_earned_icon +=2
 			Global.item_pool = ["res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
-			InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 3)
+			InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 1)
 		3:	
 			Global.amt_earned_combos += 6
 			Global.amt_earned_icon +=2
 			Global.item_pool = ["res://inventory/items/lightning_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
-			InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 3)
+			InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 1)
 		4: 
 			Global.amt_earned_combos += 6
 			Global.amt_earned_icon +=2
 			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
-			InventoryManager.grant_item("res://inventory/items/missle_item.tres", 3)	
+			InventoryManager.grant_item("res://inventory/items/missle_item.tres", 1)	
 		5: 
 			Global.amt_earned_combos += 6
 			Global.amt_earned_icon +=2
 			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
-			InventoryManager.grant_item("res://inventory/items/missle_item.tres", 3)
-			InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 3)
-			InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 3)
-			InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 3)
-			InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 3)
-			InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 3)
+			InventoryManager.grant_item("res://inventory/items/missle_item.tres", 1)
+			InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 1)
+			InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 1)
+			InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 1)
+			InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 1)
+			InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 1)
 		_:
 			pass
 func item_clicked(node):
@@ -318,11 +331,12 @@ func item_clicked(node):
 			
 
 func _on_item_1_pressed():
-	if money > 0 && item1Price > 0:
+	if Global.money > 0 && item1Price > 0:
 		print("TEST")
 		item1Price -= 1
-		money -= 1
+		Global.money -= 1
 		show_money_popup(1, false)
+		Audio.play("res://sfx/money_paid.wav",true)
 		if item1Price == 0:
 			# Grant Item and Remove Item from Store
 			InventoryManager.grant_item(item1Random.get_path())
@@ -336,11 +350,12 @@ func _on_item_1_pressed():
 
 
 func _on_item_2_pressed():
-	if money > 0 && item2Price > 0:
+	if Global.money > 0 && item2Price > 0:
 		print("TEST")
 		item2Price -= 1
-		money -= 1
+		Global.money -= 1
 		show_money_popup(1, false)
+		Audio.play("res://sfx/money_paid.wav",true)
 		if item2Price == 0:
 			# Grant Item and Remove Item from Store
 			InventoryManager.grant_item(item2Random.get_path())
@@ -353,11 +368,12 @@ func _on_item_2_pressed():
 			item2.disabled = true
 
 func _on_item_3_pressed():
-	if money > 0 && item3Price > 0:
+	if Global.money > 0 && item3Price > 0:
 		print("TEST")
 		item3Price -= 1
-		money -= 1
+		Global.money -= 1
 		show_money_popup(1, false)
+		Audio.play("res://sfx/money_paid.wav",true)
 		if item3Price == 0:
 			# Grant Item and Remove Item from Store
 			InventoryManager.grant_item(item3Random.get_path())
@@ -392,7 +408,6 @@ func phase_1_setup():
 	change_music_track()
 	MusicPlayer.play()
 	workTimer.stop()
-	workWindow.hide()
 	Global.money_multiplier = 1
 	
 func change_phase_display(phase: int):
@@ -445,13 +460,13 @@ func update_minimum_debt_payment():
 		1:
 			Global.minimumPay = 500
 		2:
-			Global.minimumPay = 1000
+			Global.minimumPay = 1500 - Global.debt_paid
 		3:
-			Global.minimumPay = 1500
+			Global.minimumPay = 3000 - Global.debt_paid
 		4:
-			Global.minimumPay = 3000
+			Global.minimumPay = 6000 - Global.debt_paid
 		5:
-			Global.minimumPay = 4000
+			Global.minimumPay = 10000 - Global.debt_paid
 		_:
 			Global.minimumPay = 500
 
@@ -555,7 +570,9 @@ TO CLOSE THE WINDOW"
 
 func show_money_popup(money_amount : int,good = true):
 	if good == false:
-		Audio.play("res://sfx/Anti Cha Ching.wav",true)
+		pass
+		# For now I think we're handling this elsewhere
+#		Audio.play("res://sfx/Anti Cha Ching.wav",true)
 	var popup = preload("res://dollar_earn_popup.tscn").instantiate()
 	popup.amount = abs(money_amount)
 	popup.good = good

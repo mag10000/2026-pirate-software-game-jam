@@ -354,6 +354,7 @@ func find_matches() -> Array:
 func process_board_state():
 	combo_count = 0 
 	matches = find_matches()
+	var money_lost = false
 	var earned_this_round = 0
 	while matches.size() > 0:
 		#print("Evil Match Count: " + str(evil_match))
@@ -362,7 +363,6 @@ func process_board_state():
 			combo_count += 1
 		
 		Audio.play("res://sfx/Combo.wav", true, 1.0 + (combo_count * 0.1))
-		Audio.play("res://sfx/Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
 		if combo_count > 1:
 			if $"../..":
 				$"../..".money += round(((combo_count-1) * amount_combo * Global.money_multiplier))
@@ -393,8 +393,10 @@ func process_board_state():
 				evil_match -= 1
 		if earned_this_round > 0:
 			pc_ref.show_money_popup(earned_this_round)
+			Audio.play("res://sfx/Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
 		elif earned_this_round < 0:
 			pc_ref.show_money_popup(earned_this_round, false)
+			Audio.play("res://sfx/Anti Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
 		await refill_board(true)

@@ -367,17 +367,17 @@ func process_board_state():
 					Global.money_earned -= round(amount_tile)
 					earned_this_round -= round(amount_tile)
 				evil_match -= 1
-		
+		if earned_this_round > 0:
+			pc_ref.show_money_popup(earned_this_round)
+		elif earned_this_round < 0:
+			pc_ref.show_money_popup(earned_this_round, false)
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
 		await refill_board(true)
 		
 		matches = find_matches()
 		await collapse_columns()
-		if earned_this_round > 0:
-			pc_ref.show_money_popup(earned_this_round)
-		elif earned_this_round < 0:
-			pc_ref.show_money_popup(earned_this_round, false)
+
 	
 	#await collapse_columns()
 	#matches = find_matches()

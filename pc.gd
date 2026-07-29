@@ -255,6 +255,7 @@ func item_clicked(node):
 		"Add Time":
 			time = time + 5
 			InventoryManager.revoke_item("res://inventory/items/time_add_item.tres")
+			Audio.play("res://sfx/Time Add.wav",true)
 			await get_tree().create_timer(0.15).timeout
 			InventoryManager.using_item = false
 		"Bomb":

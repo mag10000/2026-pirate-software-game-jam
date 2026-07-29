@@ -44,7 +44,7 @@ func move_to(target_position: Vector2, play_sound: bool = true):
 
 func _on_move_finished():
 	
-	Audio.play("res://match 3/sounds/tile-land.ogg")
+	Audio.play("res://sfx/Block Drop.wav")
 
 
 func _on_button_pressed():

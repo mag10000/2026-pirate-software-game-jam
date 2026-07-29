@@ -184,7 +184,11 @@ func spawn_virus_at(x, y):
 # Interaction
 
 func _on_tile_pressed(grid_position: Vector2i):
-	
+	print(grid[grid_position.x][grid_position.y].type)
+	if grid[grid_position.x][grid_position.y].type == "7":
+		Audio.play("res://sfx/Error 3.wav")
+	else:
+		Audio.play("res://sfx/Click_Select.wav")
 	if not is_swapping:
 		#TODO - If blank can't grab as first
 		first_touch = grid_position
@@ -251,7 +255,7 @@ func calculate_swipe(final_pos: Vector2):
 			if ((Global.day == 2 || Global.day == 5) && (grid[first_touch.x][first_touch.y].type == "7" || grid[other_touch.x][other_touch.y].type == "7")):
 				return
 			handle_swap_logic(first_touch, other_touch)
-			Audio.play("res://match 3/sounds/tile-swap.ogg", false, randf_range(0.8, 1.2), 0.3)
+			Audio.play("res://sfx/Block Swap.wav", false, randf_range(0.8, 1.2), 0.3)
 
 	first_touch = Vector2i(-1, -1)
 
@@ -332,8 +336,9 @@ func process_board_state():
 		
 		if evil_match < 1:
 			combo_count += 1
-			
-		Audio.play("res://match 3/sounds/tile-match.ogg", true, 1.0 + (combo_count * 0.1))
+		
+		Audio.play("res://sfx/Combo.wav", true, 1.0 + (combo_count * 0.1))
+		Audio.play("res://sfx/Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
 		if combo_count > 1:
 			if $"../..":
 				$"../..".money += round(((combo_count-1) * amount_combo * Global.money_multiplier))
@@ -493,7 +498,9 @@ func simplify_board():
 		#TODO - DONT REVOKE THE ITEM
 		pass
 	
+	
 	elif objectsDestroyed == true:
+		Audio.play("res://sfx/Simplify Board.wav",true)
 		print("Got to objectsDestroyed == true")
 		#iconArray.erase(randomToDestroy)
 		if earned_this_round > 0:
@@ -536,6 +543,7 @@ func lightning():
 				Global.money_earned += round((amount_tile * Global.money_multiplier))
 				earned_this_round += round((amount_tile * Global.money_multiplier))
 	if objectsDestroyed == true:
+		Audio.play("res://sfx/Lightning.wav",true)
 		if earned_this_round > 0:
 			pc_ref.show_money_popup(earned_this_round)
 		elif earned_this_round < 0:
@@ -600,6 +608,7 @@ func bomb_random_icon():
 				Global.money_earned += round((amount_tile * Global.money_multiplier))
 				earned_this_round += round((amount_tile * Global.money_multiplier))
 	if objectsDestroyed == true:
+		Audio.play("res://sfx/Bomb.wav",true)
 		if earned_this_round > 0:
 			pc_ref.show_money_popup(earned_this_round)
 		elif earned_this_round < 0:
@@ -633,6 +642,7 @@ func missle_evil_icons():
 			tween.tween_property(piece, "scale", Vector2.ZERO, 0.2)
 			tween.finished.connect(piece.queue_free)
 	if objectsDestroyed == true:
+		Audio.play("res://sfx/Missile.wav",true)
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
 		await refill_board(true)
@@ -663,6 +673,7 @@ func reset_board():
 		process_board_state()
 
 func refresh_icons():
+	Audio.play("res://sfx/Refresh.wav",true)
 	iconArray = Global.iconsForRound[Global.day].duplicate(true)
 
 func wait_and_grant_bomb():

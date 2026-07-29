@@ -396,7 +396,7 @@ func process_board_state():
 			Audio.play("res://sfx/Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
 		elif earned_this_round < 0:
 			pc_ref.show_money_popup(earned_this_round, false)
-			Audio.play("res://sfx/Anti Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
+			#Audio.play("res://sfx/Anti Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
 		await refill_board(true)

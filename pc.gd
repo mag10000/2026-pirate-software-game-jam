@@ -95,9 +95,9 @@ func _ready():
 	storeWindow.hide()
 	topWindow.hide()
 	update_day_hour_text()
-	InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 1)
-	InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 1)
-	InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 1)
+	InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 3)
+	InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 3)
+	InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 3)
 
 # Runs every frame
 func _process(delta):
@@ -247,21 +247,27 @@ func raise_items_update():
 			Global.amt_earned_combos += 6
 			Global.amt_earned_icon +=2
 			Global.item_pool = ["res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
-			InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 1)
+			InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 3)
 		3:	
 			Global.amt_earned_combos += 6
 			Global.amt_earned_icon +=2
 			Global.item_pool = ["res://inventory/items/lightning_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
-			InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 1)
+			InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 3)
 		4: 
 			Global.amt_earned_combos += 6
 			Global.amt_earned_icon +=2
 			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
-			InventoryManager.grant_item("res://inventory/items/missle_item.tres", 1)	
+			InventoryManager.grant_item("res://inventory/items/missle_item.tres", 3)	
 		5: 
 			Global.amt_earned_combos += 6
 			Global.amt_earned_icon +=2
 			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
+			InventoryManager.grant_item("res://inventory/items/missle_item.tres", 3)
+			InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 3)
+			InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 3)
+			InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 3)
+			InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 3)
+			InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 3)
 		_:
 			pass
 func item_clicked(node):
@@ -548,7 +554,8 @@ TO CLOSE THE WINDOW"
 	$"not allow".hide()
 
 func show_money_popup(money_amount : int,good = true):
-	Audio.play("res://sfx/Anti Cha Ching.wav",true)
+	if good == false:
+		Audio.play("res://sfx/Anti Cha Ching.wav",true)
 	var popup = preload("res://dollar_earn_popup.tscn").instantiate()
 	popup.amount = abs(money_amount)
 	popup.good = good

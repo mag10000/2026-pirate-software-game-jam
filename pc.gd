@@ -444,7 +444,7 @@ func update_minimum_debt_payment():
 			Global.minimumPay = 500
 
 func update_day_hour_text():
-	dayHourText.text = "Day: " + str(Global.day) + "/5 \nHour: " + str(Global.hour) + "/8"
+	dayHourText.text = "Day: " + str(Global.day) + "/5 \nHour: " + str(Global.hour) + "/8 \nPhase: " + str(Global.phase + 1) +"/2"
 
 func pause():
 		if not pauseScreen.visible:

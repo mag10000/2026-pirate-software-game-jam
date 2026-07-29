@@ -264,7 +264,6 @@ func calculate_swipe(final_pos: Vector2):
 				Audio.play("res://sfx/Error 3.wav")
 				return
 			handle_swap_logic(first_touch, other_touch)
-			Audio.play("res://sfx/Block Swap.wav", false, randf_range(0.8, 1.2), 0.3)
 
 	first_touch = Vector2i(-1, -1)
 
@@ -302,9 +301,15 @@ func swap_pieces(a: Vector2i, b: Vector2i):
 		piece_b.move_to(grid_to_pixel(a.x, a.y), false)
 		
 		if (piece_a.type == "11") && (piece_b.type != "0"):
-			piece_b.set_tile_type("11", textures[11]) 
+			piece_b.set_tile_type("11", textures[11])
+			Audio.play("res://sfx/Glitchy Block Swap.wav", false, randf_range(0.8, 1.2), 0.3) 
 		elif (piece_b.type == "11") && (piece_a.type != "0"):
 			piece_a.set_tile_type("11", textures[11]) 
+			Audio.play("res://sfx/Glitchy Block Swap.wav", false, randf_range(0.8, 1.2), 0.3) 
+		else:
+			Audio.play("res://sfx/Block Swap.wav", false, randf_range(0.8, 1.2), 0.3)
+
+		#SFX for Virus?
 		
 	await get_tree().create_timer(0.3).timeout
 	await collapse_columns()

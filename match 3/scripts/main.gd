@@ -184,7 +184,7 @@ func spawn_virus_at(x, y):
 # Interaction
 
 func _on_tile_pressed(grid_position: Vector2i):
-	print(grid[grid_position.x][grid_position.y].type)
+	#print(grid[grid_position.x][grid_position.y].type)
 	if grid[grid_position.x][grid_position.y].type == "7":
 		Audio.play("res://sfx/Error 3.wav")
 	else:

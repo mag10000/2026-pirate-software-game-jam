@@ -87,6 +87,7 @@ var phase0Setup = true
 var phase1Setup = false
 
 func _ready():
+	crtFilerOn = Global.crt_on
 	if crtFilerOn:
 		$CRTScreen.show()
 	create_new_store()
@@ -102,6 +103,12 @@ func _ready():
 func _process(delta):
 	if Global.debt < 0:
 		Global.debt = 0
+	
+	crtFilerOn = Global.crt_on
+	if crtFilerOn:
+		$CRTScreen.show()
+	else:
+		$CRTScreen.hide()
 	
 	earningsAmountDisplay.text = "$" + str(money)
 	debtAmountDisplay.text = "$" + str(Global.debt)

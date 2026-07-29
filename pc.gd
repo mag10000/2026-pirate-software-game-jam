@@ -377,7 +377,7 @@ func phase_1_setup():
 	MusicPlayer.stop()
 	phase1Setup = false
 	Global.work_time_started = false
-	MusicPlayer.stream = load("res://music/money to spend [shortened break theme].wav")
+	change_music_track()
 	MusicPlayer.play()
 	workTimer.stop()
 	workWindow.hide()

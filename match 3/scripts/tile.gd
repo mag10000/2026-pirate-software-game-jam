@@ -1,13 +1,14 @@
 extends Area2D
 
 signal tile_pressed(pos)
-#signal tile_dpad_swap(dir,pos)
+signal tile_dpad_swap(dir,pos)
 
 var type:String
 var icon_no:int
 var grid_position:Vector2i
 var mouse_hovering = false
 var sprite_texture
+var dpad_pressing = false
 
 # Set piece them when initializing
 
@@ -65,12 +66,29 @@ func _on_button_mouse_exited():
 	tween.tween_property($Sprite2D, "modulate", Color(1, 1, 1), 0.1)
 
 
-#func _unhandled_input(event):
-	#if Input.is_action_just_pressed("up"):
-		#tile_dpad_swap.emit("up",grid_position)
-	#if Input.is_action_just_pressed("down"):
-		#tile_dpad_swap.emit("down",grid_position)
-	#if Input.is_action_just_pressed("left"):
-		#tile_dpad_swap.emit("left",grid_position)
-	#if Input.is_action_just_pressed("right"):
-		#tile_dpad_swap.emit("right",grid_position)
+func _unhandled_input(event):
+	if Input.is_action_just_pressed("up"):
+		if dpad_pressing == false:
+			dpad_pressing = true
+			tile_dpad_swap.emit("up",grid_position)
+			await get_tree().create_timer(0.3).timeout
+			dpad_pressing = false
+	if Input.is_action_just_pressed("down"):
+		if dpad_pressing == false:
+			dpad_pressing = true
+			dpad_pressing = true
+			tile_dpad_swap.emit("down",grid_position)
+			await get_tree().create_timer(0.3).timeout
+			dpad_pressing = false
+	if Input.is_action_just_pressed("left"):
+		if dpad_pressing == false:
+			dpad_pressing = true
+			tile_dpad_swap.emit("left",grid_position)
+			await get_tree().create_timer(0.3).timeout
+			dpad_pressing = false
+	if Input.is_action_just_pressed("right"):
+		if dpad_pressing == false:
+			dpad_pressing = true
+			tile_dpad_swap.emit("right",grid_position)
+			await get_tree().create_timer(0.3).timeout
+			dpad_pressing = false

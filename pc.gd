@@ -558,56 +558,80 @@ func change_music_track():
 	match Global.hour:
 		1:
 			if Global.phase == 0:
-				MusicPlayer.stream = load("res://music/MoneyOnTheLine_12.wav")
+				if Global.day == 5:
+					MusicPlayer.stream = load("res://music/Rave.wav")
+				else:
+					MusicPlayer.stream = load("res://music/MoneyOnTheLine_12.wav")
 			elif Global.phase == 1:
 				MusicPlayer.stream = load("res://music/MoneyToSpend_12.wav")
 			else:
 				print("Error with Global.phase and Music playing")
 		2:
 			if Global.phase == 0:
-				MusicPlayer.stream = load("res://music/MoneyOnTheLine_12.wav")
+				if Global.day == 5:
+					MusicPlayer.stream = load("res://music/Rave.wav")
+				else:
+					MusicPlayer.stream = load("res://music/MoneyOnTheLine_12.wav")
 			elif Global.phase == 1:
 				MusicPlayer.stream = load("res://music/MoneyToSpend_12.wav")
 			else:
 				print("Error with Global.phase and Music playing")
 		3:
 			if Global.phase == 0:
-				MusicPlayer.stream = load("res://music/MoneyOnTheLine_34.wav")
+				if Global.day == 5:
+					MusicPlayer.stream = load("res://music/Rave.wav")
+				else:
+					MusicPlayer.stream = load("res://music/MoneyOnTheLine_34.wav")
 			elif Global.phase == 1:
 				MusicPlayer.stream = load("res://music/MoneyToSpend_34.wav")
 			else:
 				print("Error with Global.phase and Music playing")
 		4:
 			if Global.phase == 0:
-				MusicPlayer.stream = load("res://music/MoneyOnTheLine_34.wav")
+				if Global.day == 5:
+					MusicPlayer.stream = load("res://music/Rave.wav")
+				else:
+					MusicPlayer.stream = load("res://music/MoneyOnTheLine_34.wav")
 			elif Global.phase == 1:
 				MusicPlayer.stream = load("res://music/MoneyToSpend_34.wav")
 			else:
 				print("Error with Global.phase and Music playing")
 		5:
 			if Global.phase == 0:
-				MusicPlayer.stream = load("res://music/MoneyOnTheLine_56.wav")
+				if Global.day == 5:
+					MusicPlayer.stream = load("res://music/Rave.wav")
+				else:
+					MusicPlayer.stream = load("res://music/MoneyOnTheLine_56.wav")
 			elif Global.phase == 1:
 				MusicPlayer.stream = load("res://music/MoneyToSpend_56.wav")
 			else:
 				print("Error with Global.phase and Music playing")
 		6:
 			if Global.phase == 0:
-				MusicPlayer.stream = load("res://music/MoneyOnTheLine_56.wav")
+				if Global.day == 5:
+					MusicPlayer.stream = load("res://music/Rave.wav")
+				else:
+					MusicPlayer.stream = load("res://music/MoneyOnTheLine_56.wav")
 			elif Global.phase == 1:
 				MusicPlayer.stream = load("res://music/MoneyToSpend_56.wav")
 			else:
 				print("Error with Global.phase and Music playing")
 		7:
 			if Global.phase == 0:
-				MusicPlayer.stream = load("res://music/MoneyOnTheLine_78.wav")
+				if Global.day == 5:
+					MusicPlayer.stream = load("res://music/Rave.wav")
+				else:
+					MusicPlayer.stream = load("res://music/MoneyOnTheLine_78.wav")
 			elif Global.phase == 1:
 				MusicPlayer.stream = load("res://music/MoneyToSpend_78.wav")
 			else:
 				print("Error with Global.phase and Music playing")
 		8:
 			if Global.phase == 0:
-				MusicPlayer.stream = load("res://music/MoneyOnTheLine_78.wav")
+				if Global.day == 5:
+					MusicPlayer.stream = load("res://music/Rave.wav")
+				else:
+					MusicPlayer.stream = load("res://music/MoneyOnTheLine_78.wav")
 			elif Global.phase == 1:
 				MusicPlayer.stream = load("res://music/MoneyToSpend_78.wav")
 			else:

@@ -28,6 +28,7 @@ func _on_button_pressed():
 	Global.amt_earned_icon = 1
 	Global.money_multiplier = 1
 	$AnimationPlayer.play("fade")
+	$LeaderBoard.get_scores()
 	$ScrollTimer.start()
 	scroll = true
 
@@ -37,9 +38,12 @@ func _physics_process(delta):
 		$ColorRect.position.y += 1
 
 func _on_timer_timeout():
+	$LeaderBoard.get_scores()
 	scroll = false
 	$WaitTimer.start()
 
 
 func _on_wait_timer_timeout():
-	get_tree().change_scene_to_file("res://leader_board.tscn")
+	$LeaderBoard.get_scores()
+	$LeaderBoard.show()
+	$Camera2D.position = Vector2(320.0,180.0)

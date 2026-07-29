@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://73yx3cl6gogl"]
+
+[ext_resource type="Script" uid="uid://dwi5gnwi5xpjx" path="res://leaderboard_manager.gd" id="1_xxsrn"]
+
+[node name="Leaderboard Manager" type="Control" unique_id=295260165]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xxsrn")
+
+[node name="Button" type="Button" parent="." unique_id=691012973]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Wipe Board"
+
+[node name="Button3" type="Button" parent="." unique_id=1517494173]
+layout_mode = 0
+offset_left = 113.0
+offset_right = 211.0
+offset_bottom = 31.0
+text = "Check Scores"
+
+[node name="Button2" type="Button" parent="." unique_id=561426188]
+layout_mode = 0
+offset_top = 39.0
+offset_right = 98.0
+offset_bottom = 70.0
+text = "Quit"
+
+[node name="Label" type="Label" parent="." unique_id=1432880717]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 39.0
+offset_right = 611.0
+offset_bottom = 203.0
+autowrap_mode = 3
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

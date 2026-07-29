@@ -141,6 +141,16 @@ theme_override_fonts/font = ExtResource("2_08fl4")
 theme_override_font_sizes/font_size = 24
 text = "Lose"
 
+[node name="Manager" type="Button" parent="." unique_id=1532649619]
+offset_left = 98.0
+offset_top = 231.0
+offset_right = 295.0
+offset_bottom = 264.0
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_08fl4")
+theme_override_font_sizes/font_size = 24
+text = "Silentwolf Manager"
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="value_changed" from="Control/Money" to="." method="_on_money_value_changed"]
 [connection signal="focus_entered" from="Control/Debt" to="." method="_on_debt_focus_entered"]
@@ -158,3 +168,4 @@ text = "Lose"
 [connection signal="pressed" from="PauseTimer" to="." method="_on_pause_timer_pressed"]
 [connection signal="pressed" from="win" to="." method="_on_win_pressed"]
 [connection signal="pressed" from="lose" to="." method="_on_lose_pressed"]
+[connection signal="pressed" from="Manager" to="." method="_on_manager_pressed"]

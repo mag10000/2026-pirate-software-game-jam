@@ -42,7 +42,8 @@ func _ready():
 
 func new_day_text():
 	data_text = "DAY " + str(Global.day) + "
-REMAINING DEBT: " + "$" + format_number(Global.debt)
+REMAINING DEBT: " + "$" + format_number(Global.debt) + "
+DAILY GOAL: " + "$" + format_number(Global.debt_payments[Global.day])
 	type_text()
 	
 

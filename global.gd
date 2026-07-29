@@ -22,6 +22,8 @@ var minimumPay = 500
 
 var crt_on = false
 
+var clock_hand_pos = [Vector2(7.0,19.0),Vector2(9.0,14.0),Vector2(11.0,11.0),Vector2(19.0,8.0),Vector2(26.0,10.0),Vector2(29.0,14.0),Vector2(30.0,25.0),Vector2(27.0,26.0)]
+
 var day = 1
 
 var hour = 1

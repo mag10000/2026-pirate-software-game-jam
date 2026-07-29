@@ -117,6 +117,25 @@ info_text_label = NodePath("info_text")
 BankerMusicPlayer = NodePath("BankerStinger")
 DayMusicPlayer = NodePath("DayStinger")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1230484060]
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=1227837658]
+modulate = Color(1, 1, 1, 0.61960787)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -89.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("5_5pflo")
+theme_override_font_sizes/font_size = 32
+text = "Skip"
+metadata/_edit_use_anchors_ = true
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=229072552]
 layout_mode = 0
 offset_right = 640.0
@@ -223,23 +242,5 @@ libraries/ = SubResource("AnimationLibrary_xwu7q")
 
 [node name="DayStinger" type="AudioStreamPlayer" parent="." unique_id=555388425]
 stream = ExtResource("4_xwu7q")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1230484060]
-
-[node name="Button" type="Button" parent="CanvasLayer" unique_id=1227837658]
-modulate = Color(1, 1, 1, 0.61960787)
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -89.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("5_5pflo")
-theme_override_font_sizes/font_size = 32
-text = "Skip"
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

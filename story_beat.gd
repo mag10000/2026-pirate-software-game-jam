@@ -48,6 +48,7 @@ REMAINING DEBT: " + "$" + format_number(Global.debt)
 
 
 func type_text():
+	BankerMusicPlayer.stop()
 	DayMusicPlayer.play()
 	for letter in data_text:
 		print("hi")

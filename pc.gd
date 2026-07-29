@@ -114,6 +114,7 @@ func _process(delta):
 	debtAmountDisplay.text = "$" + str(Global.debt)
 	debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(Global.minimumPay)
 	progressBar.value = time
+	update_day_hour_text()
 	
 	if item1SoldOut == false:
 		item1Label.text = item1Discription + " - Price $" + str(item1Price)
@@ -149,6 +150,7 @@ func _process(delta):
 			workWindow.hide()
 			phase1Setup = true
 			Global.phase = 1
+
 			
 	if Global.phase == 1:
 		if phase1Setup == true:
@@ -190,7 +192,6 @@ func _process(delta):
 					update_minimum_debt_payment()
 					# TODO - Create scene for new_day
 					get_tree().change_scene_to_file("res://story_beat.tscn")
-			update_day_hour_text()
 
 
 func seconds2hhmmss(total_seconds: float) -> String:
@@ -360,7 +361,7 @@ func phase_0_setup():
 	MusicPlayer.stop()
 	phase0Setup = false
 	Global.break_time_started = false
-	MusicPlayer.stream = load("res://music/money on the line [puzzle theme].wav")
+	change_music_track()
 	MusicPlayer.play()
 	breakTimer.stop()
 	create_new_store()
@@ -371,7 +372,6 @@ func phase_0_setup():
 	#tileGameReference.refresh_icons()
 	Global.money_multiplier = 1
 	tileGameReference.reset_board()
-	
 
 func phase_1_setup():
 	MusicPlayer.stop()
@@ -553,6 +553,67 @@ func show_money_popup(money_amount : int,good = true):
 		randi = randi_range(15,65)
 	popup.global_position = Vector2(randi,165)
 	add_child(popup)
+
+func change_music_track():
+	match Global.hour:
+		1:
+			if Global.phase == 0:
+				MusicPlayer.stream = load("res://music/MoneyOnTheLine_12.wav")
+			elif Global.phase == 1:
+				MusicPlayer.stream = load("res://music/MoneyToSpend_12.wav")
+			else:
+				print("Error with Global.phase and Music playing")
+		2:
+			if Global.phase == 0:
+				MusicPlayer.stream = load("res://music/MoneyOnTheLine_12.wav")
+			elif Global.phase == 1:
+				MusicPlayer.stream = load("res://music/MoneyToSpend_12.wav")
+			else:
+				print("Error with Global.phase and Music playing")
+		3:
+			if Global.phase == 0:
+				MusicPlayer.stream = load("res://music/MoneyOnTheLine_34.wav")
+			elif Global.phase == 1:
+				MusicPlayer.stream = load("res://music/MoneyToSpend_34.wav")
+			else:
+				print("Error with Global.phase and Music playing")
+		4:
+			if Global.phase == 0:
+				MusicPlayer.stream = load("res://music/MoneyOnTheLine_34.wav")
+			elif Global.phase == 1:
+				MusicPlayer.stream = load("res://music/MoneyToSpend_34.wav")
+			else:
+				print("Error with Global.phase and Music playing")
+		5:
+			if Global.phase == 0:
+				MusicPlayer.stream = load("res://music/MoneyOnTheLine_56.wav")
+			elif Global.phase == 1:
+				MusicPlayer.stream = load("res://music/MoneyToSpend_56.wav")
+			else:
+				print("Error with Global.phase and Music playing")
+		6:
+			if Global.phase == 0:
+				MusicPlayer.stream = load("res://music/MoneyOnTheLine_56.wav")
+			elif Global.phase == 1:
+				MusicPlayer.stream = load("res://music/MoneyToSpend_56.wav")
+			else:
+				print("Error with Global.phase and Music playing")
+		7:
+			if Global.phase == 0:
+				MusicPlayer.stream = load("res://music/MoneyOnTheLine_78.wav")
+			elif Global.phase == 1:
+				MusicPlayer.stream = load("res://music/MoneyToSpend_78.wav")
+			else:
+				print("Error with Global.phase and Music playing")
+		8:
+			if Global.phase == 0:
+				MusicPlayer.stream = load("res://music/MoneyOnTheLine_78.wav")
+			elif Global.phase == 1:
+				MusicPlayer.stream = load("res://music/MoneyToSpend_78.wav")
+			else:
+				print("Error with Global.phase and Music playing")
+		_:
+			print("Error with Global.day and Music playing")
 
 
 func _on_skip_pressed():

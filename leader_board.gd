@@ -45,6 +45,7 @@ func format_number(number: int) -> String:
 
 func _on_submit_pressed():
 	SilentWolf.Scores.save_score($LineEdit.text.to_upper(), Global.money_earned)
+	$LineEdit/submit.disabled = true
 	get_scores()
 
 

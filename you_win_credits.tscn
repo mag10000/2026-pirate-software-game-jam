@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dvtpoi7ls754c" path="res://you_win_credits.gd" id="1_s1ic0"]
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="3_s1ic0"]
 [ext_resource type="Texture2D" uid="uid://ca3nrc25pjbit" path="res://art/HyperDebtSwap_logo_v2.png" id="3_v2j0v"]
+[ext_resource type="AudioStream" uid="uid://bjylr1h6vlsjl" path="res://music/Victory Jam.wav" id="4_v2j0v"]
+[ext_resource type="PackedScene" uid="uid://ce6h03dkleugn" path="res://leader_board.tscn" id="5_txgdd"]
 
 [sub_resource type="Animation" id="Animation_nqk0f"]
 resource_name = "fade"
@@ -202,6 +204,14 @@ one_shot = true
 [node name="ScrollTimer" type="Timer" parent="." unique_id=1819649717]
 wait_time = 20.0
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1933852790]
+stream = ExtResource("4_v2j0v")
+autoplay = true
+
+[node name="LeaderBoard" parent="." unique_id=1461126638 instance=ExtResource("5_txgdd")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]

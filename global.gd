@@ -14,7 +14,7 @@ var break_times = [9]
 
 var phase = 0
 
-var money_earned = 500
+var money_earned = 0
 
 var debt = 10000
 

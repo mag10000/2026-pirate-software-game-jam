@@ -52,3 +52,7 @@ func _on_win_pressed():
 
 func _on_lose_pressed():
 	get_tree().change_scene_to_file("res://game_over.tscn")
+
+
+func _on_manager_pressed():
+	get_tree().change_scene_to_file("res://leaderboard_manager.tscn")

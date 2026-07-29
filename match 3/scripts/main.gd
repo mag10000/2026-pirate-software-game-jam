@@ -89,9 +89,11 @@ func initial_spawn(x, y, blanks: bool):
 		random_index = iconArray.pick_random()
 	if is_evil_block(random_index):
 		evil_block_count += 1
-	
-	if evil_block_count >= 4:
-		while is_evil_block(random_index) && check_neighbors(x, y, random_index) == true:
+		print(str(evil_block_count))
+	if random_index == 9:
+		pass
+	elif evil_block_count >= 4:
+		while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
 			random_index = iconArray.pick_random()
 			
 	if blanks:
@@ -152,7 +154,7 @@ func spawn_specific_at(x, y, type: String):
 func check_neighbors(x, y, random_index) -> bool:
 	#TODO - This sin't right, we can't just flag as false if either is true, have to check
 	#specifically within that function
-	print(x, y)
+	#print(x, y)
 	if x == 0:
 		if y == 0:
 			return false
@@ -191,12 +193,12 @@ func spawn_virus_at(x, y):
 
 func _on_tile_pressed(grid_position: Vector2i):
 	#print(grid[grid_position.x][grid_position.y].type)
-	if grid[grid_position.x][grid_position.y].type == "7":
-		Audio.play("res://sfx/Error 3.wav")
-	else:
-		Audio.play("res://sfx/Click_Select.wav")
 	if not is_swapping:
-		#TODO - If blank can't grab as first
+		if grid[grid_position.x][grid_position.y].type == "7":
+			Audio.play("res://sfx/Error 3.wav")
+		else:
+			Audio.play("res://sfx/Click_Select.wav")
+			#TODO - If blank can't grab as first
 		first_touch = grid_position
 
 
@@ -259,6 +261,7 @@ func calculate_swipe(final_pos: Vector2):
 		if is_within_grid(other_touch):
 			# If one of the blocks is an Error block that can't move then return
 			if ((Global.day == 2 || Global.day == 5) && (grid[first_touch.x][first_touch.y].type == "7" || grid[other_touch.x][other_touch.y].type == "7")):
+				Audio.play("res://sfx/Error 3.wav")
 				return
 			handle_swap_logic(first_touch, other_touch)
 			Audio.play("res://sfx/Block Swap.wav", false, randf_range(0.8, 1.2), 0.3)
@@ -508,7 +511,7 @@ func simplify_board():
 	
 	elif objectsDestroyed == true:
 		Audio.play("res://sfx/Simplify Board.wav",true)
-		print("Got to objectsDestroyed == true")
+		#print("Got to objectsDestroyed == true")
 		#iconArray.erase(randomToDestroy)
 		if earned_this_round > 0:
 			pc_ref.show_money_popup(earned_this_round)
@@ -680,7 +683,6 @@ func reset_board():
 		process_board_state()
 
 func refresh_icons():
-	Audio.play("res://sfx/Refresh.wav",true)
 	iconArray = Global.iconsForRound[Global.day].duplicate(true)
 
 func wait_and_grant_bomb():

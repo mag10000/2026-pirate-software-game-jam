@@ -166,7 +166,8 @@ func _process(delta):
 
 		if time == 0:
 			breakTimer.stop()
-			tileGameReference.refresh_icons()
+			# We have removed Simplify item so we don't need this anymore
+			#tileGameReference.refresh_icons()
 			#tileGameReference.queue_free()
 			
 			print(str(tileGameReference.iconArray))
@@ -275,6 +276,7 @@ func item_clicked(node):
 			await get_tree().create_timer(0.15).timeout
 			InventoryManager.using_item = false
 		"Refresh Board":
+			Audio.play("res://sfx/Time Add.wav",true)
 			await tileGameReference.reset_board()
 			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")			
 			await get_tree().create_timer(0.15).timeout
@@ -365,7 +367,8 @@ func phase_0_setup():
 	storeWindow.hide()
 	if (Global.day == 1 && Global.hour == 1):
 		return
-	tileGameReference.refresh_icons()
+	# We have removed SIMPLIFY item so we don't need this any more
+	#tileGameReference.refresh_icons()
 	Global.money_multiplier = 1
 	tileGameReference.reset_board()
 	

@@ -39,7 +39,7 @@ var evil_match = 0
 var matches 
 var amount_tile
 var amount_combo
-
+var evil_block_count = 0
 # Functions
 
 func _ready():
@@ -77,17 +77,23 @@ func setup_grid_array():
 		for y in height:
 			#print(x, y)
 			initial_spawn(x, y, false)
+	
+	evil_block_count = 0
 
 # Spawn a new tile at a certain grid position
 
 func initial_spawn(x, y, blanks: bool):
-	
 	var created_piece = tile_scene.instantiate()
 	var random_index = iconArray.pick_random() 
 	while (check_neighbors(x, y, random_index) == true): 
 		random_index = iconArray.pick_random()
-
+	if is_evil_block(random_index):
+		evil_block_count += 1
 	
+	if evil_block_count >= 4:
+		while is_evil_block(random_index) && check_neighbors(x, y, random_index) == true:
+			random_index = iconArray.pick_random()
+			
 	if blanks:
 		random_index = 0 
 
@@ -170,7 +176,7 @@ func check_neighbors(x, y, random_index) -> bool:
 func spawn_virus_at(x, y):
 	
 	var created_piece = tile_scene.instantiate()
-	var virus_index = 9
+	var virus_index = 11
 	
 	container.add_child(created_piece) 
 	
@@ -292,10 +298,10 @@ func swap_pieces(a: Vector2i, b: Vector2i):
 		piece_a.move_to(grid_to_pixel(b.x, b.y), false)
 		piece_b.move_to(grid_to_pixel(a.x, a.y), false)
 		
-		if (piece_a.type == "9") && (piece_b.type != "0"):
-			piece_b.set_tile_type("9", textures[9]) 
-		elif (piece_b.type == "9") && (piece_a.type != "0"):
-			piece_a.set_tile_type("9", textures[9]) 
+		if (piece_a.type == "11") && (piece_b.type != "0"):
+			piece_b.set_tile_type("11", textures[11]) 
+		elif (piece_b.type == "11") && (piece_a.type != "0"):
+			piece_a.set_tile_type("11", textures[11]) 
 		
 	await get_tree().create_timer(0.3).timeout
 	await collapse_columns()
@@ -308,20 +314,20 @@ func find_matches() -> Array:
 	for y in height:
 		for x in range(width - 2):
 			var p1 = grid[x][y]; var p2 = grid[x+1][y]; var p3 = grid[x+2][y]
-			if p1 == null || p2 == null || p3 == null || p1.type == "0" || p2.type == "0" || p3.type == "0" || p1.type == "9" || p2.type == "9" || p3.type == "9":
+			if p1 == null || p2 == null || p3 == null || p1.type == "0" || p2.type == "0" || p3.type == "0" || p1.type == "11" || p2.type == "11" || p3.type == "11":
 				pass
 			elif p1 and p2 and p3 and p1.type == p2.type and p1.type == p3.type:
-				if p1.type == "11" && p2.type == "11" && p3.type == "11":
+				if p1.type == "9" && p2.type == "9" && p3.type == "9":
 					evil_match += 3
 				for p in [p1, p2, p3]: matched_dict[p] = true
 
 	for x in width:
 		for y in range(height - 2):
 			var p1 = grid[x][y]; var p2 = grid[x][y+1]; var p3 = grid[x][y+2]
-			if p1 == null || p2 == null || p3 == null || p1.type == "0" || p2.type == "0" || p3.type == "0" || p1.type == "9" || p2.type == "9" || p3.type == "9":
+			if p1 == null || p2 == null || p3 == null || p1.type == "0" || p2.type == "0" || p3.type == "0" || p1.type == "11" || p2.type == "11" || p3.type == "11":
 				pass
 			elif p1 and p2 and p3 and p1.type == p2.type and p1.type == p3.type:
-				if p1.type == "11" && p2.type == "11" && p3.type == "11":
+				if p1.type == "9" && p2.type == "9" && p3.type == "9":
 					evil_match += 3
 				for p in [p1, p2, p3]: matched_dict[p] = true
 
@@ -424,6 +430,7 @@ func refill_board(blanks: bool):
 					initial_spawn(x, y, false)
 				grid[x][y].position.y -= offset * 2 
 				grid[x][y].move_to(grid_to_pixel(x, y))
+	evil_block_count = 0
 	await get_tree().create_timer(0.3).timeout
 
 # Utilities for coordinates
@@ -680,3 +687,9 @@ func wait_and_grant_bomb():
 	#TODO - Play ERROR style SFX
 	await get_tree().create_timer(0.4).timeout
 	InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 1)
+	
+func is_evil_block(type: int)-> bool: 
+	if (type == 7 || type == 9 || type == 11):
+		return true
+	else:
+		return false

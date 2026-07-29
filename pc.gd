@@ -394,39 +394,36 @@ func change_phase_display(phase: int):
 	
 func create_new_store():
 	
-	if item1SoldOut == true || Global.hour == 1:
+	if item1SoldOut == true:
 		item1SoldOut = false
-		item1.disabled = false
-		item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-		item1.text = item1Random.item_name + " - " + "Pay $1"
-		item1.icon = item1Random.item_icon
-		item1Price = item1Random.cost
-		item1Discription = item1Random.discription
+	item1.disabled = false
+	item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+	item1.text = item1Random.item_name + " - " + "Pay $1"
+	item1.icon = item1Random.item_icon
+	item1Price = item1Random.cost
+	item1Discription = item1Random.discription
 
-	if item2SoldOut == true || Global.hour == 1:
+	if item2SoldOut == true:
 		item2SoldOut = false
-		item2.disabled = false
-		item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-		item2.text = item2Random.item_name + " - " + "Pay $1"
-		item2.icon = item2Random.item_icon
-		item2Price = item2Random.cost
-		item2Discription = item2Random.discription
+	item2.disabled = false
+	item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+	item2.text = item2Random.item_name + " - " + "Pay $1"
+	item2.icon = item2Random.item_icon
+	item2Price = item2Random.cost
+	item2Discription = item2Random.discription
 
-	if item3SoldOut == true || Global.hour == 1:
+	if item3SoldOut == true:
 		item3SoldOut = false
-		item3.disabled = false
-		item3SoldOut = false
+	item3.disabled = false
+	item3SoldOut = false
 
-		if (item1Random != load("res://inventory/items/refresh_item.tres") && item2Random != load("res://inventory/items/refresh_item.tres")):
-			item3Random = load("res://inventory/items/refresh_item.tres")
-		else:
-			item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-			while (item3Random == item1Random && item3Random == item2Random):
-				item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-		item3.text = item3Random.item_name + " - " + "Pay $1"
-		item3.icon = item3Random.item_icon
-		item3Price = item3Random.cost
-		item3Discription = item3Random.discription
+	item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+	while (item3Random == item1Random && item3Random == item2Random):
+		item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
+	item3.text = item3Random.item_name + " - " + "Pay $1"
+	item3.icon = item3Random.item_icon
+	item3Price = item3Random.cost
+	item3Discription = item3Random.discription
 
 func update_minimum_debt_payment():
 	match Global.day:

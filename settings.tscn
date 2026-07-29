@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://coaujftfii5sh" path="res://settings.gd" id="1_x2hje"]
 [ext_resource type="FontFile" uid="uid://b2gtqd3q64ntc" path="res://PressStart2P-Regular.ttf" id="2_nkug2"]
+[ext_resource type="FontFile" uid="uid://b4wclgmin6pam" path="res://Match 8p.ttf" id="3_3ykye"]
 
 [node name="settings" type="Control" unique_id=743456714]
 layout_mode = 3
@@ -44,7 +45,8 @@ offset_right = 119.0
 offset_bottom = 33.0
 rotation = 1.5707964
 scale = Vector2(1, 1.0187167)
-theme_override_fonts/font = ExtResource("2_nkug2")
+theme_override_fonts/font = ExtResource("3_3ykye")
+theme_override_font_sizes/font_size = 32
 text = "Music"
 
 [node name="sfx" type="VSlider" parent="." unique_id=661060230]
@@ -63,7 +65,8 @@ offset_right = 119.0
 offset_bottom = 33.0
 rotation = 1.5707964
 scale = Vector2(1, 1.0187167)
-theme_override_fonts/font = ExtResource("2_nkug2")
+theme_override_fonts/font = ExtResource("3_3ykye")
+theme_override_font_sizes/font_size = 32
 text = "Sfx"
 
 [node name="CheckBox" type="CheckBox" parent="." unique_id=1401760065]
@@ -72,8 +75,11 @@ offset_left = 189.0
 offset_top = 48.0
 offset_right = 213.0
 offset_bottom = 72.0
+theme_override_fonts/font = ExtResource("3_3ykye")
+theme_override_font_sizes/font_size = 32
 button_pressed = true
 text = "Crt Filter"
 
+[connection signal="hidden" from="." to="." method="_on_hidden"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CheckBox" to="." method="_on_check_box_pressed"]

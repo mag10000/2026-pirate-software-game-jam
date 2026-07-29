@@ -538,7 +538,13 @@ func show_money_popup(money_amount : int,good = true):
 	var popup = preload("res://dollar_earn_popup.tscn").instantiate()
 	popup.amount = abs(money_amount)
 	popup.good = good
-	popup.global_position = Vector2(randi_range(15,200),165)
+	var randi_type = randi_range(1,2)
+	var randi = 0
+	if randi_type == 1:
+		randi = randi_range(145,200)
+	if randi_type == 2:
+		randi = randi_range(15,65)
+	popup.global_position = Vector2(randi,165)
 	add_child(popup)
 
 

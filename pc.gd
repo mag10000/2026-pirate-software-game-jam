@@ -135,7 +135,7 @@ func _process(delta):
 		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(0-debt_due)
 	elif (debt_due == 0 && celebrate) == false:
 		celebrate = true
-		#PLAY SFX
+		Audio.play("res://sfx/MinimumMet.wav",true)
 		debtMinimumPayDisplay.text = "Minimum Debt Paid!\n For Today..."
 	elif (debt_due < 0):
 		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(0-debt_due)

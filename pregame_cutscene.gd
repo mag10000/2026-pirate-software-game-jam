@@ -43,7 +43,7 @@ func play_cutscene():
 func type_text(str: String):
 	for letter in str:
 		print("hi")
-		await get_tree().create_timer(0.005).timeout
+		await get_tree().create_timer(0.075).timeout
 		label.text += letter
 #		if letter == ":" or letter == " ":
 #			await get_tree().create_timer(0.1).timeout

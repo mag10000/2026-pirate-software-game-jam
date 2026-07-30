@@ -15,7 +15,7 @@
 [node name="PregameCutscene" type="Node2D" unique_id=1418337636 node_paths=PackedStringArray("label")]
 script = ExtResource("1_fnm77")
 label = NodePath("RichTextLabel")
-time_between_pics = 2.125
+time_between_pics = 3.0
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=581769569]
 offset_right = 640.0

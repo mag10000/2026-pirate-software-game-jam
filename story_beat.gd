@@ -107,6 +107,33 @@ func show_text():
 	#print("New Tiles: " + iconstext)
 	#$"new tile text".text = "New Tiles: " + iconstext
 	#$"new item text".text = "New Items: " + itemstext
+	
+	match Global.day:
+		1:
+			$Screen.texture = load("res://screens/DAYONE_SCREEN_1.png")
+			await get_tree().create_timer(1).timeout
+			$Screen.texture = load("res://screens/DAYONE_SCREEN_2.png")
+			await get_tree().create_timer(2).timeout
+			$Screen.texture = load("res://screens/DAYONE_SCREEN_3.png")
+		2:
+			$Screen.texture = load("res://screens/DAYTWO_SCREEN_1.png")
+			await get_tree().create_timer(1).timeout
+			$Screen.texture = load("res://screens/DAYTWO_SCREEN_2.png")
+		3:
+			$Screen.texture = load("res://screens/DAYTHREE_SCREEN_1.png")
+			await get_tree().create_timer(1).timeout
+			$Screen.texture = load("res://screens/DAYTHREE_SCREEN_2.png")
+		4:
+			$Screen.texture = load("res://screens/DAYFOUR_SCREEN_1.png")
+			await get_tree().create_timer(1).timeout
+			$Screen.texture = load("res://screens/DAYFOUR_SCREEN_2.png")
+		5:
+			$Screen.texture = load("res://screens/DAYFIVE_SCREEN_1.png")
+			await get_tree().create_timer(1).timeout
+			$Screen.texture = load("res://screens/DAYFIVE_SCREEN_2.png")
+			await get_tree().create_timer(2).timeout
+			$Screen.texture = load("res://screens/DAYFIVE_SCREEN_3.png")
+	
 	await get_tree().create_timer(3.2).timeout
 	$"CanvasLayer/Continue Button".show()
 	$"CanvasLayer/Skip Button".hide()

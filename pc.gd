@@ -78,6 +78,8 @@ var moneyUpInRound = 0
 var timeUpInRound = 0
 var missleInRound = 0
 
+var celebrate = false
+
 # The Amount of Money the Player Has
 
 # Time Remaining in a Counter
@@ -113,9 +115,6 @@ func _process(delta):
 		InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 3)
 		InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 3)
 	
-	if Global.debt < 0:
-		Global.debt = 0
-	
 	crtFilerOn = Global.crt_on
 	if crtFilerOn:
 		$CRTScreen.show()
@@ -129,7 +128,17 @@ func _process(delta):
 		debt_due = 0
 	else:
 		debt_due = Global.minimumPay
-	debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(debt_due)
+	
+	if Global.debt < 0:
+		debtMinimumPayDisplay.text = "PROFIT!\n$" + str(Global.debt)
+	if (debt_due) > 0:
+		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(debt_due)
+	elif (debt_due == 0 && celebrate) == false:
+		celebrate = true
+		#PLAY SFX
+		debtMinimumPayDisplay.text = "Minimum Debt Paid\n$" + str(debt_due)
+	elif (debt_due < 0):
+		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(debt_due)
 	progressBar.value = time
 	update_day_hour_text()
 	

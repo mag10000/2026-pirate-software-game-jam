@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dykqb248bswbw"]
+[gd_scene format=3 uid="uid://1knbfkvff5xe"]
 
 [ext_resource type="Script" uid="uid://cfdoc43q6juik" path="res://pregame_cutscene.gd" id="1_fnm77"]
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="2_17pbn"]
@@ -15,7 +15,7 @@
 [node name="PregameCutscene" type="Node2D" unique_id=1418337636 node_paths=PackedStringArray("label")]
 script = ExtResource("1_fnm77")
 label = NodePath("RichTextLabel")
-time_between_pics = 2.667
+time_between_pics = 2.6
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=581769569]
 offset_right = 640.0

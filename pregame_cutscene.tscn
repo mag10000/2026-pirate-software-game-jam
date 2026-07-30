@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://1knbfkvff5xe"]
+[gd_scene format=3 uid="uid://dykqb248bswbw"]
 
 [ext_resource type="Script" uid="uid://cfdoc43q6juik" path="res://pregame_cutscene.gd" id="1_fnm77"]
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="2_17pbn"]

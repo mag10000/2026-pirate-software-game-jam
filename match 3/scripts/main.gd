@@ -40,6 +40,7 @@ var matches
 var amount_tile
 var amount_combo
 var evil_block_count = 0
+var is_dpad_attempt = false
 # Functions
 
 func _ready():
@@ -203,6 +204,7 @@ func spawn_virus_at(x, y):
 
 func _on_tile_pressed(grid_position: Vector2i):
 	#print(grid[grid_position.x][grid_position.y].type)
+	print(grid_position)
 	if not is_swapping:
 		if grid[grid_position.x][grid_position.y].type == "7":
 			Audio.play("res://sfx/Error 3.wav")
@@ -213,8 +215,9 @@ func _on_tile_pressed(grid_position: Vector2i):
 
 
 func _on_tile_dpad_swap(direction_to_swap : String, grid_position: Vector2):
-	
+
 	print (grid_position)
+	first_touch = grid_position
 	var difference = grid_position - grid_to_pixel(first_touch.x, first_touch.y)
 	print(difference)
 	if (grid[first_touch.x][first_touch.y].type == "0"):
@@ -238,7 +241,7 @@ func _on_tile_dpad_swap(direction_to_swap : String, grid_position: Vector2):
 				other_position.x += 1
 		#TODO - Logic to figure out the grid position
 		
-		#print(other_position)
+		print(other_position)
 		if is_within_grid(other_position):
 			#print (grid_position)
 			#print (other_position)
@@ -247,6 +250,8 @@ func _on_tile_dpad_swap(direction_to_swap : String, grid_position: Vector2):
 				return
 			handle_swap_logic(grid_position, other_position)
 			Audio.play("res://match 3/sounds/tile-swap.ogg", false, randf_range(0.8, 1.2), 0.3)
+			
+	first_touch = Vector2i(-1, -1)
 
 func _input(event):
 	

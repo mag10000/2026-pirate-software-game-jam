@@ -54,6 +54,7 @@ func _on_button_pressed():
 
 func _on_button_mouse_entered():
 	mouse_hovering = true
+	print(grid_position)
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property($Sprite2D, "scale", Vector2(1.025, 1.025), 0.1)
 	tween.tween_property($Sprite2D, "modulate", Color(1.2, 1.2, 1.2), 0.1) # Brighten
@@ -68,10 +69,11 @@ func _on_button_mouse_exited():
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("up"):
+		print(grid_position)
 		if dpad_pressing == false:
 			dpad_pressing = true
 			tile_dpad_swap.emit("up",grid_position)
-			await get_tree().create_timer(0.3).timeout
+			await get_tree().create_timer(1).timeout
 			dpad_pressing = false
 	if Input.is_action_just_pressed("down"):
 		if dpad_pressing == false:

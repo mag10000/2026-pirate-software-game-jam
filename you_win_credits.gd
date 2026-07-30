@@ -4,7 +4,6 @@ var scroll = false
 
 func _on_button_pressed():
 	$Button.disabled = true
-	Global.clear_data()
 	$AnimationPlayer.play("fade")
 	$LeaderBoard.get_scores()
 	$ScrollTimer.start()

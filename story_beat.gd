@@ -49,8 +49,6 @@ DAILY GOAL: " + "$" + format_number(Global.debt_payments[Global.day])
 
 
 func type_text():
-	$ColorRect2.show()
-	$TextureRect.hide()
 	BankerMusicPlayer.stop()
 	DayMusicPlayer.play()
 	for letter in data_text:

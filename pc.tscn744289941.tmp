@@ -108,7 +108,7 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oj12w"]
 bg_color = Color(0, 1, 0, 1)
 
-[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "dayHourText", "workTimer", "breakTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "dayHourWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "MusicPlayer", "pauseScreen", "debugScreen", "item1", "item1Label", "item1TextureRect", "item2", "item2Label", "item2TextureRect", "item3", "item3Label", "item3TextureRect")]
+[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "dayHourText", "workTimer", "breakTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "dayHourWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "MusicPlayer", "pauseScreen", "debugScreen", "item1", "item1Label", "item2", "item2Label", "item3", "item3Label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,13 +139,10 @@ pauseScreen = NodePath("Pause Screen")
 debugScreen = NodePath("Debug Screen")
 item1 = NodePath("store window/storeitems/item1")
 item1Label = NodePath("store window/storeitems/item1discription")
-item1TextureRect = NodePath("store window/storeitems/item1/TextureRect")
 item2 = NodePath("store window/storeitems/item2")
 item2Label = NodePath("store window/storeitems/item2discription")
-item2TextureRect = NodePath("store window/storeitems/item2/TextureRect")
 item3 = NodePath("store window/storeitems/item3")
 item3Label = NodePath("store window/storeitems/item3discription")
-item3TextureRect = NodePath("store window/storeitems/item3/TextureRect")
 itemSoldOutArt = ExtResource("2_0727r")
 
 [node name="BG" type="ColorRect" parent="." unique_id=1800069285]
@@ -761,9 +758,8 @@ autoplay = true
 
 [node name="break timer" type="Timer" parent="." unique_id=513373814]
 
-[node name="Pause Screen" parent="." unique_id=1419754115 node_paths=PackedStringArray("pc") instance=ExtResource("12_gh3ss")]
+[node name="Pause Screen" parent="." unique_id=1419754115 instance=ExtResource("12_gh3ss")]
 visible = false
-pc = NodePath("..")
 
 [node name="Debug Screen" parent="." unique_id=275293862 instance=ExtResource("14_62yoi")]
 visible = false

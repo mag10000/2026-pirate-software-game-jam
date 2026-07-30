@@ -36,12 +36,15 @@ extends Control
 
 @export var item1: Button
 @export var item1Label: Label
+@export var item1TextureRect: TextureRect
 
 @export var item2: Button
 @export var item2Label: Label
+@export var item2TextureRect: TextureRect
 
 @export var item3: Button
 @export var item3Label: Label
+@export var item3TextureRect: TextureRect
 
 @export var itemSoldOutArt: Texture
 @export var crtFilerOn = true
@@ -345,7 +348,7 @@ func item_clicked(node):
 		"$ Multiplier":
 			if moneyUpInRound < 3 && Global.phase == 0:
 				Global.money_multiplier += 1
-				Audio.play("res://sfx/Error 2.wav",true)
+				Audio.play("res://sfx/MoneyMult.wav",true)
 				InventoryManager.revoke_item("res://inventory/items/money_multiplier_item.tres")
 				await get_tree().create_timer(0.15).timeout
 				InventoryManager.using_item = false
@@ -397,7 +400,7 @@ func _on_item_1_pressed():
 			print("Item3Price is Zero")
 			
 			item1SoldOut = true
-			item1.icon = itemSoldOutArt
+			item1TextureRect.texture = itemSoldOutArt
 			item1Label.text = "ITEM NOT AVAILABLE!"
 			item1.text = "SOLD OUT!"
 			item1.disabled = true
@@ -416,7 +419,7 @@ func _on_item_2_pressed():
 			print("Item2Price is Zero")
 			
 			item2SoldOut = true
-			item2.icon = itemSoldOutArt
+			item2TextureRect.texture = itemSoldOutArt
 			item2Label.text = "ITEM NOT AVAILABLE!"
 			item2.text = "SOLD OUT!"
 			item2.disabled = true
@@ -434,7 +437,7 @@ func _on_item_3_pressed():
 			print("Item3Price is Zero")
 			
 			item3SoldOut = true
-			item3.icon = itemSoldOutArt
+			item3TextureRect.texture = itemSoldOutArt
 			item3Label.text = "ITEM NOT AVAILABLE!"
 			item3.text = "SOLD OUT!"
 			item3.disabled = true
@@ -482,8 +485,8 @@ func create_new_store():
 		item1SoldOut = false
 	item1.disabled = false
 	item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-	item1.text = item1Random.item_name + " - " + "Pay $1"
-	$"store window/storeitems/item1/TextureRect".texture
+	item1.text = "     " + item1Random.item_name + " - " + "Pay $1"
+	item1TextureRect.texture = item1Random.item_icon
 	item1Price = item1Random.cost
 	item1Discription = item1Random.discription
 
@@ -491,8 +494,8 @@ func create_new_store():
 		item2SoldOut = false
 	item2.disabled = false
 	item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-	item2.text = item2Random.item_name + " - " + "Pay $1"
-	$"store window/storeitems/item2/TextureRect".texture = item2Random.item_icon
+	item2.text = "     " + item2Random.item_name + " - " + "Pay $1"
+	item2TextureRect.texture = item2Random.item_icon
 	item2Price = item2Random.cost
 	item2Discription = item2Random.discription
 
@@ -504,8 +507,8 @@ func create_new_store():
 	item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
 	while (item3Random == item1Random && item3Random == item2Random):
 		item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
-	item3.text = item3Random.item_name + " - " + "Pay $1"
-	$"store window/storeitems/item3/TextureRect".texture = item3Random.item_icon
+	item3.text = "     " + item3Random.item_name + " - " + "Pay $1"
+	item3TextureRect.texture = item3Random.item_icon
 	item3Price = item3Random.cost
 	item3Discription = item3Random.discription
 
@@ -540,6 +543,21 @@ func pause():
 			storeWindow.hide()
 			Engine.time_scale = 0
 			pauseScreen.show()
+		else:
+			MusicPlayer.volume_db = 0
+			if topWindowVisible:
+				topWindow.show()
+			bankWindow.show()
+			timerWindow.show()
+			dayHourWindow.show()
+			itemWindow.show()
+			if Global.phase == 1:
+				storeWindow.show()
+			else:
+				workWindow.show()
+				$"work window/Title".show()
+			Engine.time_scale = 1
+			pauseScreen.hide()
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("pause"):

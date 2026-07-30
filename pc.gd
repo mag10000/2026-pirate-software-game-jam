@@ -176,11 +176,6 @@ func _process(delta):
 
 		if time == 0:
 			breakTimer.stop()
-			# We have removed Simplify item so we don't need this anymore
-			#tileGameReference.refresh_icons()
-			#tileGameReference.queue_free()
-			
-			print(str(tileGameReference.iconArray))
 			Global.break_time_started = false
 			await get_tree().create_timer(0.5).timeout
 			storeWindow.hide()

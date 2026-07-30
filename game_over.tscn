@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="2_yxx3c"]
 [ext_resource type="Texture2D" uid="uid://bmc67xelhyu40" path="res://art/GAME_OVER_banker_text.png" id="3_ccer4"]
 [ext_resource type="AudioStream" uid="uid://b1blfrxjvo1uf" path="res://music/Loser.wav" id="4_8u835"]
+[ext_resource type="Texture2D" uid="uid://bx2els8um6ix7" path="res://art/Main_Menu_BG.png" id="5_ftari"]
 
 [sub_resource type="Animation" id="Animation_ftari"]
 length = 0.001
@@ -487,6 +488,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yxx3c")
 
+[node name="MainMenuBg" type="Sprite2D" parent="." unique_id=2077502949]
+position = Vector2(320, 180)
+texture = ExtResource("5_ftari")
+
 [node name="Label" type="Label" parent="." unique_id=850907030]
 layout_mode = 1
 anchors_preset = 8
@@ -494,16 +499,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -203.5
-offset_top = -46.5
-offset_right = 203.5
-offset_bottom = 46.5
+offset_left = -99.0
+offset_top = -99.0
+offset_right = 308.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("2_yxx3c")
 theme_override_font_sizes/font_size = 64
-text = "GAME OVER"
+text = "FORECLOSED"
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="." unique_id=274403113]
@@ -513,10 +518,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -84.0
-offset_top = 18.5
-offset_right = 84.0
-offset_bottom = 49.5
+offset_left = 138.0
+offset_top = 74.0
+offset_right = 306.0
+offset_bottom = 114.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -563,6 +568,11 @@ offset_right = 82.0
 offset_bottom = -35.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.54509807, 0.12941177, 0.02745098, 0.38431373)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_font_sizes/font_size = 32
 text = "You failed to meet your minimum payments."
 
 [node name="eviltext2" type="Label" parent="." unique_id=1188512700]
@@ -580,6 +590,11 @@ offset_right = 104.5
 offset_bottom = 56.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "i'm foreclosing on it all..."
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.54509807, 0.12941177, 0.02745098, 0.38431373)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_font_sizes/font_size = 32
+text = "I'm foreclosing on it all..."
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -28,6 +28,7 @@ func cycle_leaderboard():
 	$LeaderBoard.hide()
 	$Tutorial.show()
 	await get_tree().create_timer($Tutorial.total_time).timeout
+	await get_tree().create_timer(4).timeout
 	cycle_leaderboard()
 
 

@@ -536,6 +536,7 @@ func pause():
 			MusicPlayer.volume_db = -40
 			topWindow.hide()
 			workWindow.hide()
+			$"work window/Title".show()
 			bankWindow.hide()
 			timerWindow.hide()
 			dayHourWindow.hide()
@@ -554,6 +555,7 @@ func _unhandled_input(event):
 			else:
 				topWindowVisible = false
 			workWindow.hide()
+			$"work window/Title".show()
 			bankWindow.hide()
 			timerWindow.hide()
 			dayHourWindow.hide()
@@ -573,12 +575,14 @@ func _unhandled_input(event):
 				storeWindow.show()
 			else:
 				workWindow.show()
+				$"work window/Title".show()
 			Engine.time_scale = 1
 			pauseScreen.hide()
 	if Input.is_action_just_pressed("debug"):
 		if not debugScreen.visible:
 			MusicPlayer.volume_db = -40
 			workWindow.hide()
+			$"work window/Title".show()
 			bankWindow.hide()
 			timerWindow.hide()
 			dayHourWindow.hide()
@@ -596,6 +600,7 @@ func _unhandled_input(event):
 				storeWindow.show()
 			else:
 				workWindow.show()
+				$"work window/Title".show()
 			Engine.time_scale = 1
 			debugScreen.hide()
 			bankWindow.grab_focus()
@@ -605,6 +610,7 @@ func debug():
 			MusicPlayer.volume_db = -40
 			topWindow.hide()
 			workWindow.hide()
+			$"work window/Title".hide()
 			bankWindow.hide()
 			timerWindow.hide()
 			dayHourWindow.hide()

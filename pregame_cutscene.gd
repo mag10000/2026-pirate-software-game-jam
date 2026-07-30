@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var label: RichTextLabel
-
+@export var time_between_pics: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,27 +17,27 @@ func play_cutscene():
 	$AudioStreamPlayer.play()
 	type_text("Ziggy returns home after another long, wild night out on the town")
 	show_image(1)
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(time_between_pics).timeout
 	show_image(2)
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(time_between_pics).timeout
 	label.text = ""
 	type_text("Checking his bank account he sees his life catching up with him")
 	show_image(3)
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(time_between_pics).timeout
 	show_image(4)
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(time_between_pics).timeout
 	label.text = ""
 	type_text("“Oh man…. I’m gonna have to work so hard to pay this off…. WHAT THE HELL!?”")
 	show_image(5)
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(time_between_pics).timeout
 	show_image(6)
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(time_between_pics).timeout
 	label.text = ""
 	type_text("“You have FIVE DAYS to pay off your debt… Or it’s LIGHTS OUT! Muahaha!!”")
 	show_image(7)
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(time_between_pics).timeout
 	show_image(8)
-	await get_tree().create_timer(2).timeout	
+	await get_tree().create_timer(time_between_pics).timeout	
 	load_main_menu()
 	
 func type_text(str: String):

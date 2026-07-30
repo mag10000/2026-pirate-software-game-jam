@@ -756,6 +756,7 @@ flat = true
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=448535725]
 stream = ExtResource("11_0727r")
 autoplay = true
+bus = &"Music"
 
 [node name="work timer" type="Timer" parent="." unique_id=1132678509]
 

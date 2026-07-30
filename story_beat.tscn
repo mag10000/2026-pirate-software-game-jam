@@ -5,7 +5,6 @@
 [ext_resource type="AudioStream" uid="uid://duo1syw5y77fd" path="res://music/Banker Jingle.wav" id="2_cg5s0"]
 [ext_resource type="Texture2D" uid="uid://bx2els8um6ix7" path="res://art/Main_Menu_BG.png" id="2_nmyur"]
 [ext_resource type="AudioStream" uid="uid://bauvve4uapf1v" path="res://music/Day Transition.wav" id="4_xwu7q"]
-[ext_resource type="FontFile" uid="uid://b4wclgmin6pam" path="res://Match 8p.ttf" id="5_5pflo"]
 
 [sub_resource type="Animation" id="Animation_cg5s0"]
 resource_name = "fade"
@@ -225,6 +224,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="BankerStinger" type="AudioStreamPlayer" parent="." unique_id=1095940861]
 stream = ExtResource("2_cg5s0")
+bus = &"Music"
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=754495300]
 visible = false
@@ -292,7 +292,7 @@ grow_vertical = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
-theme_override_fonts/normal_font = ExtResource("5_5pflo")
+theme_override_fonts/normal_font = ExtResource("1_s71hl")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 scroll_active = false
@@ -313,7 +313,7 @@ grow_vertical = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
-theme_override_fonts/normal_font = ExtResource("5_5pflo")
+theme_override_fonts/normal_font = ExtResource("1_s71hl")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 scroll_active = false
@@ -323,6 +323,7 @@ libraries/ = SubResource("AnimationLibrary_xwu7q")
 
 [node name="DayStinger" type="AudioStreamPlayer" parent="." unique_id=555388425]
 stream = ExtResource("4_xwu7q")
+bus = &"Music"
 
 [node name="Screen" type="TextureRect" parent="." unique_id=1992262722]
 layout_mode = 1

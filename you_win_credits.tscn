@@ -208,6 +208,7 @@ one_shot = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1933852790]
 stream = ExtResource("4_v2j0v")
 autoplay = true
+bus = &"Music"
 
 [node name="LeaderBoard" parent="." unique_id=1461126638 instance=ExtResource("5_txgdd")]
 visible = false

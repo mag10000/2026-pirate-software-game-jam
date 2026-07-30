@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dxbamf35mfc1e"
+path="res://.godot/imported/Opening Dialogue.wav-fd793b677264e29c120de0d6d246c8f0.sample"
+
+[deps]
+
+source_file="res://music/Opening Dialogue.wav"
+dest_files=["res://.godot/imported/Opening Dialogue.wav-fd793b677264e29c120de0d6d246c8f0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

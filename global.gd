@@ -99,6 +99,6 @@ func clear_data():
 	[["res://inventory/items/money_multiplier_item.tres"]],[["res://inventory/items/lightning_item.tres"]],[["res://inventory/items/missle_item.tres"]],[]]
 	evilIconsForRound = [[],[],[7],[9],[11],[7,9,11]]
 	debt_payments = [0,500,1000,1500,3000,4000]
-	amt_earned_combos = 6
+	amt_earned_combos = 12
 	amt_earned_icon = 2
 	money_multiplier = 1

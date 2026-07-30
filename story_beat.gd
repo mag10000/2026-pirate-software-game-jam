@@ -172,6 +172,6 @@ func _on_button_pressed():
 
 
 func _on_continue_button_pressed():
-	$AnimationPlayer.play("fade")
-	await get_tree().create_timer(1).timeout
+	#$AnimationPlayer.play("fade")
+	#await get_tree().create_timer(1).timeout
 	load_scene("res://pc.tscn")

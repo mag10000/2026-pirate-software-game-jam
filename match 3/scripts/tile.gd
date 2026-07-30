@@ -44,8 +44,8 @@ func move_to(target_position: Vector2, play_sound: bool = true):
 # Audio that plays after the tile lands on the board
 
 func _on_move_finished():
-	
-	Audio.play("res://sfx/Block Drop.wav")
+	if type != "0":
+		Audio.play("res://sfx/Block Drop.wav")
 
 
 func _on_button_pressed():
@@ -54,10 +54,12 @@ func _on_button_pressed():
 
 func _on_button_mouse_entered():
 	mouse_hovering = true
-	print(grid_position)
+	#print(grid_position)
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property($Sprite2D, "scale", Vector2(1.025, 1.025), 0.1)
 	tween.tween_property($Sprite2D, "modulate", Color(1.2, 1.2, 1.2), 0.1) # Brighten
+	if dpad_pressing == true:
+		pass
 
 
 func _on_button_mouse_exited():

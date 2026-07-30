@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://spgtnfsrrl82" path="res://leader_board.gd" id="1_w1jv0"]
 [ext_resource type="Texture2D" uid="uid://bx2els8um6ix7" path="res://art/Main_Menu_BG.png" id="2_yx86l"]
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="3_xvw5l"]
-[ext_resource type="FontFile" uid="uid://b4wclgmin6pam" path="res://Match 8p.ttf" id="4_wr7jb"]
 
 [node name="LeaderBoard" type="Control" unique_id=1461126638]
 layout_mode = 3
@@ -37,7 +36,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_xvw5l")
 theme_override_font_sizes/font_size = 32
-text = "Leaderboard"
+text = "LEADERBOARD"
 horizontal_alignment = 1
 
 [node name="score" type="Label" parent="." unique_id=1937078894]
@@ -47,9 +46,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -347.0
+offset_left = -331.0
 offset_top = -125.5
-offset_right = -118.0
+offset_right = -102.0
 offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -58,27 +57,12 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("3_xvw5l")
 theme_override_font_sizes/font_size = 24
-text = "You earned in
- total:
+text = "TOTAL EARNED:
+$
 "
 horizontal_alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="." unique_id=1805952698]
-layout_mode = 0
-offset_left = 53.5
-offset_top = 140.0
-offset_right = 121.0
-offset_bottom = 180.0
-theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("4_wr7jb")
-theme_override_font_sizes/font_size = 32
-placeholder_text = "AAA"
-alignment = 1
-max_length = 3
-
-[node name="submit" type="Button" parent="LineEdit" unique_id=1777289468]
+[node name="submit" type="Button" parent="." unique_id=1777289468]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 1
 anchors_preset = 8
@@ -86,10 +70,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -79.25
-offset_top = 32.0
-offset_right = 92.75
-offset_bottom = 72.0
+offset_left = -309.75
+offset_top = 12.0
+offset_right = -137.75
+offset_bottom = 52.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
@@ -100,9 +84,9 @@ theme_override_colors/font_hover_pressed_color = Color(0.1882353, 0.1882353, 0.1
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_xvw5l")
 theme_override_font_sizes/font_size = 32
-text = "Submit score"
+text = "Submit Score"
 
-[node name="to_main" type="Button" parent="LineEdit" unique_id=1394107366]
+[node name="to_main" type="Button" parent="." unique_id=1394107366]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 1
 anchors_preset = 8
@@ -110,10 +94,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -79.25
-offset_top = 84.0
-offset_right = 92.75
-offset_bottom = 124.0
+offset_left = -310.0
+offset_top = 64.0
+offset_right = -138.0
+offset_bottom = 104.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
@@ -125,6 +109,21 @@ theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_xvw5l")
 theme_override_font_sizes/font_size = 32
 text = "Main Menu"
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=1805952698]
+layout_mode = 0
+offset_left = 60.5
+offset_top = 140.0
+offset_right = 132.5
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_xvw5l")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "AAA"
+alignment = 1
+max_length = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1622563909]
 custom_minimum_size = Vector2(425, 253)
@@ -139,5 +138,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="pressed" from="LineEdit/submit" to="." method="_on_submit_pressed"]
-[connection signal="pressed" from="LineEdit/to_main" to="." method="_on_to_main_pressed"]
+[connection signal="pressed" from="submit" to="." method="_on_submit_pressed"]
+[connection signal="pressed" from="to_main" to="." method="_on_to_main_pressed"]

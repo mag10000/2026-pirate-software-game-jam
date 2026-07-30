@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://b5xwmugjgdk1o" path="res://art/Printer_Icon.png" id="6_ifkhm"]
 [ext_resource type="Texture2D" uid="uid://cy2bmabiv4453" path="res://art/Email_Icon.png" id="7_8pt1j"]
 [ext_resource type="PackedScene" uid="uid://k6fbebxfhax0" path="res://match 3/scenes/lightning_sparkles.tscn" id="8_oluvs"]
-[ext_resource type="FontFile" uid="uid://b4wclgmin6pam" path="res://Match 8p.ttf" id="10_iq4h1"]
 [ext_resource type="Texture2D" uid="uid://c17brlyx5xyci" path="res://art/Clock_UI.png" id="11_8moq3"]
 [ext_resource type="AudioStream" uid="uid://3j7retq5fugu" path="res://music/money on the line [puzzle theme].wav" id="11_0727r"]
 [ext_resource type="Script" uid="uid://cm5pmuv4m23ig" path="res://clock.gd" id="12_e6gv4"]
@@ -499,14 +498,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -55.5
+offset_left = -56.0
 offset_top = 15.0
-offset_right = 56.5
+offset_right = 56.0
 offset_bottom = 39.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("10_iq4h1")
+theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 16
 text = "Skip	"
 

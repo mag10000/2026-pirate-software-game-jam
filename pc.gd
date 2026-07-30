@@ -68,6 +68,13 @@ var item1SoldOut = false
 var item2SoldOut = false
 var item3SoldOut = false
 
+var bombInRound = 0
+var lightningInRound = 0
+var refreshInRound = 0
+var moneyUpInRound = 0
+var timeUpInRound = 0
+var missleInRound = 0
+
 # The Amount of Money the Player Has
 
 # Time Remaining in a Counter
@@ -99,9 +106,9 @@ func _ready():
 func _process(delta):
 	if day1hour1Setup == false:
 		day1hour1Setup = true
-		InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 1)
-		InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 1)
-		InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 1)
+		InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 5)
+		InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 5)
+		InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 5)
 	
 	if Global.debt < 0:
 		Global.debt = 0
@@ -114,7 +121,12 @@ func _process(delta):
 	
 	earningsAmountDisplay.text = "$" + str(Global.money)
 	debtAmountDisplay.text = "$" + str(Global.debt)
-	debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(Global.minimumPay)
+	var debt_due
+	if Global.minimumPay <= 0:
+		debt_due = 0
+	else:
+		debt_due = Global.minimumPay
+	debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(debt_due)
 	progressBar.value = time
 	update_day_hour_text()
 	
@@ -146,6 +158,7 @@ func _process(delta):
 
 		if time == 0:
 			workTimer.stop()
+			reset_item_limit_on_round()
 			Global.work_time_started = false
 			Global.current_work_time_id = randi_range(0,3)
 			await get_tree().create_timer(0.5).timeout
@@ -176,15 +189,13 @@ func _process(delta):
 
 		if time == 0:
 			breakTimer.stop()
-			# We have removed Simplify item so we don't need this anymore
-			#tileGameReference.refresh_icons()
-			#tileGameReference.queue_free()
-			
-			print(str(tileGameReference.iconArray))
 			Global.break_time_started = false
-			await get_tree().create_timer(0.5).timeout
-			storeWindow.hide()
-			phase0Setup = true
+			if Global.day == 8 and Global.hour == 8:
+				pass
+			else:
+				await get_tree().create_timer(0.5).timeout
+				storeWindow.hide()
+				phase0Setup = true
 			Global.phase = 0
 			Global.hour += 1
 			if Global.hour > 8:
@@ -287,28 +298,34 @@ func item_clicked(node):
 	print("Clicked on item: ",node.item.item_name)
 	match node.item.item_name:
 		"Add Time":
-			time = time + 5
-			InventoryManager.revoke_item("res://inventory/items/time_add_item.tres")
-			Audio.play("res://sfx/Time Add.wav",true)
-			await get_tree().create_timer(0.15).timeout
-			InventoryManager.using_item = false
+			if timeUpInRound < 3 && Global.phase == 0:
+				print(timeUpInRound)
+				time = time + 5
+				InventoryManager.revoke_item("res://inventory/items/time_add_item.tres")
+				Audio.play("res://sfx/Time Add.wav",true)
+				await get_tree().create_timer(0.15).timeout
+				InventoryManager.using_item = false
+				timeUpInRound += 1
 		"Bomb":
-			await tileGameReference.bomb_random_icon()
-			#TODO - Make sure to grant a missle if it can't fire and play SFX, maybe put revoking in other code
-
-			await get_tree().create_timer(0.15).timeout
-			InventoryManager.using_item = false
+			if bombInRound < 3 && Global.phase == 0:
+				await tileGameReference.bomb_random_icon()
+				InventoryManager.using_item = false
+				bombInRound += 1
 		"Refresh Board":
-			Audio.play("res://sfx/Time Add.wav",true)
-			await tileGameReference.reset_board()
-			InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")
-			await get_tree().create_timer(0.15).timeout
-			InventoryManager.using_item = false
+			if refreshInRound < 3 && Global.phase == 0:
+				Audio.play("res://sfx/Time Add.wav",true)
+				await tileGameReference.reset_board()
+				InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")
+				await get_tree().create_timer(0.15).timeout
+				InventoryManager.using_item = false
+				refreshInRound += 1
 		"$ Multiplier":
-			Global.money_multiplier += 1
-			InventoryManager.revoke_item("res://inventory/items/money_multiplier_item.tres")
-			await get_tree().create_timer(0.15).timeout
-			InventoryManager.using_item = false
+			if moneyUpInRound < 3 && Global.phase == 0:
+				Global.money_multiplier += 1
+				InventoryManager.revoke_item("res://inventory/items/money_multiplier_item.tres")
+				await get_tree().create_timer(0.15).timeout
+				InventoryManager.using_item = false
+				moneyUpInRound += 1
 		"Simplify Board":
 			await tileGameReference.simplify_board()
 			#TODO - Make sure to grant a missle if it can't fire and play SFX
@@ -316,16 +333,24 @@ func item_clicked(node):
 			await get_tree().create_timer(0.15).timeout
 			InventoryManager.using_item = false
 		"Missle":
-			await tileGameReference.missle_evil_icons()
-			#TODO - Make sure to grant a missle if it can't fire and play SFX
-			InventoryManager.revoke_item("res://inventory/items/missle_item.tres")
-			await get_tree().create_timer(0.15).timeout
-			InventoryManager.using_item = false
+			if missleInRound < 3 && Global.phase == 0:
+				await tileGameReference.missle_evil_icons()
+				#TODO - Make sure to grant a missle if it can't fire and play SFX
+				InventoryManager.revoke_item("res://inventory/items/missle_item.tres")
+				await get_tree().create_timer(0.15).timeout
+				InventoryManager.using_item = false
+				missleInRound += 1
 		"Lightning":
-			await tileGameReference.lightning()
-			InventoryManager.revoke_item("res://inventory/items/lightning_item.tres")
-			await get_tree().create_timer(0.15).timeout
-			InventoryManager.using_item = false
+			if lightningInRound < 3 && Global.phase == 0:
+				await tileGameReference.lightning()
+				InventoryManager.revoke_item("res://inventory/items/lightning_item.tres")
+				await get_tree().create_timer(0.15).timeout
+				InventoryManager.using_item = false
+				lightningInRound += 1
+			else:
+				#PLAY SFX
+				pass
+				
 		_: 
 			pass
 			
@@ -670,6 +695,13 @@ func change_music_track():
 		_:
 			print("Error with Global.day and Music playing")
 
+func reset_item_limit_on_round():
+	bombInRound = 0
+	lightningInRound = 0
+	refreshInRound = 0
+	moneyUpInRound = 0
+	timeUpInRound = 0
+	missleInRound = 0
 
 func _on_skip_pressed():
 	time = 0

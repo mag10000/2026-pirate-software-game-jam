@@ -399,18 +399,19 @@ func process_board_state():
 			if evil_match == 0:
 				Global.money += round((amount_tile * Global.money_multiplier))
 				Global.money_earned += round((amount_tile * Global.money_multiplier))
-				earned_this_round += round((amount_tile * Global.money_multiplier))
+				earned_this_round += round(amount_tile * Global.money_multiplier)
 			#await collapse_columns()
 			elif evil_match >= 1:
-				Global.money -= round(amount_tile)
-				Global.money_earned -= round(amount_tile)
-				earned_this_round -= round(amount_tile)
+				Global.money -= round(amount_tile * Global.money_multiplier)
+				Global.money_earned -= round(amount_tile * Global.money_multiplier)
+				earned_this_round -= round(amount_tile * Global.money_multiplier)
 				evil_match -= 1
 		if earned_this_round > 0:
 			pc_ref.show_money_popup(earned_this_round)
 			Audio.play("res://sfx/Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
 		elif earned_this_round < 0:
 			pc_ref.show_money_popup(earned_this_round, false)
+			Audio.play("res://sfx/Anti Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
 		await get_tree().create_timer(0.3).timeout
 		await collapse_columns()
 		await refill_board(true)
@@ -704,7 +705,7 @@ func missle_evil_icons():
 	for piece in whole_board:
 		if not is_instance_valid(piece):
 			return
-		if is_evil_block(piece.type):
+		if is_evil_block(int(piece.type)):
 			objectsDestroyed = true
 			var effect = bomb_fire_scene.instantiate()
 			effect.position = piece.position

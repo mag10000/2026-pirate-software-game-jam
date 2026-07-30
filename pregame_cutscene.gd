@@ -38,12 +38,15 @@ func play_cutscene():
 	await get_tree().create_timer(time_between_pics).timeout
 	show_image(8)
 	await get_tree().create_timer(time_between_pics).timeout	
+	label.text = ""
+	$Image8.hide()
+	await get_tree().create_timer(1.5).timeout	
 	load_main_menu()
 	
 func type_text(str: String):
 	for letter in str:
 		print("hi")
-		await get_tree().create_timer(0.005).timeout
+		await get_tree().create_timer(0.05).timeout
 		label.text += letter
 #		if letter == ":" or letter == " ":
 #			await get_tree().create_timer(0.1).timeout

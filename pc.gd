@@ -173,11 +173,7 @@ func _process(delta):
 		
 		if not Global.break_time_started:
 			change_phase_display(1)
-			if Global.hour == 8:
-				if Global.day == 5:
-					time = 0
-			else:
-				time = Global.break_times[Global.current_break_time_id]
+			time = Global.break_times[Global.current_break_time_id]
 			progressBar.max_value = time
 			deposited_in_round = 0
 			debtMinimumPayDisplay.show()
@@ -194,9 +190,8 @@ func _process(delta):
 				await get_tree().create_timer(0.5).timeout
 				storeWindow.hide()
 				phase0Setup = true
-			Global.phase = 0
-			Global.hour += 1
-			if Global.hour > 8:
+
+			if Global.hour >= 8:
 				# TODO - Check Minimum
 				if deposited_in_round < Global.minimumPay:
 					get_tree().change_scene_to_file("res://game_over.tscn")
@@ -209,6 +204,9 @@ func _process(delta):
 					update_minimum_debt_payment()
 					# TODO - Create scene for new_day
 					get_tree().change_scene_to_file("res://story_beat.tscn")
+			else:
+				Global.phase = 0
+				Global.hour += 1
 
 
 func seconds2hhmmss(total_seconds: float) -> String:

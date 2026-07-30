@@ -4,7 +4,8 @@
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="2_yxx3c"]
 [ext_resource type="Texture2D" uid="uid://bmc67xelhyu40" path="res://art/GAME_OVER_banker_text.png" id="3_ccer4"]
 [ext_resource type="AudioStream" uid="uid://b1blfrxjvo1uf" path="res://music/Loser.wav" id="4_8u835"]
-[ext_resource type="Texture2D" uid="uid://bx2els8um6ix7" path="res://art/Main_Menu_BG.png" id="5_ftari"]
+[ext_resource type="FontFile" uid="uid://b4wclgmin6pam" path="res://Match 8p.ttf" id="5_ftari"]
+[ext_resource type="PackedScene" uid="uid://ce6h03dkleugn" path="res://leader_board.tscn" id="6_28vn7"]
 
 [sub_resource type="Animation" id="Animation_ftari"]
 length = 0.001
@@ -518,10 +519,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 138.0
-offset_top = 74.0
-offset_right = 306.0
-offset_bottom = 114.0
+offset_left = -106.0
+offset_top = 14.0
+offset_right = 106.0
+offset_bottom = 54.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -529,6 +530,25 @@ theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("2_yxx3c")
 theme_override_font_sizes/font_size = 32
 text = "Try Again?"
+
+[node name="Leaderboard" type="Button" parent="." unique_id=622868086]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = 61.0
+offset_right = 106.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_font_sizes/font_size = 32
+text = "Leaderboard"
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=863056133]
 visible = false
@@ -568,10 +588,7 @@ offset_right = 82.0
 offset_bottom = -35.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.54509807, 0.12941177, 0.02745098, 0.38431373)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_fonts/font = ExtResource("5_ftari")
 theme_override_font_sizes/font_size = 32
 text = "You failed to meet your minimum payments."
 
@@ -590,11 +607,14 @@ offset_right = 104.5
 offset_bottom = 56.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.54509807, 0.12941177, 0.02745098, 0.38431373)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_fonts/font = ExtResource("5_ftari")
 theme_override_font_sizes/font_size = 32
-text = "I'm foreclosing on it all..."
+text = "i'm foreclosing on it all..."
+
+[node name="LeaderBoard" parent="." unique_id=1461126638 instance=ExtResource("6_28vn7")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Leaderboard" to="." method="_on_leaderboard_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -487,7 +487,7 @@ func create_new_store():
 	item1.disabled = false
 	item1Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
 	item1.text = item1Random.item_name + " - " + "Pay $1"
-	item1.icon = item1Random.item_icon
+	$"store window/storeitems/item1/TextureRect".texture
 	item1Price = item1Random.cost
 	item1Discription = item1Random.discription
 
@@ -496,7 +496,7 @@ func create_new_store():
 	item2.disabled = false
 	item2Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
 	item2.text = item2Random.item_name + " - " + "Pay $1"
-	item2.icon = item2Random.item_icon
+	$"store window/storeitems/item2/TextureRect".texture = item2Random.item_icon
 	item2Price = item2Random.cost
 	item2Discription = item2Random.discription
 
@@ -509,7 +509,7 @@ func create_new_store():
 	while (item3Random == item1Random && item3Random == item2Random):
 		item3Random = load(Global.item_pool[randi_range(0,Global.item_pool.size() - 1)])
 	item3.text = item3Random.item_name + " - " + "Pay $1"
-	item3.icon = item3Random.item_icon
+	$"store window/storeitems/item3/TextureRect".texture = item3Random.item_icon
 	item3Price = item3Random.cost
 	item3Discription = item3Random.discription
 

@@ -9,15 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://bn4cxagiavp8u" path="res://inventory/scenes/inventory.tscn" id="4_3d7xj"]
 [ext_resource type="Texture2D" uid="uid://c7vfqjyx41sbp" path="res://art/X.png" id="4_8pt1j"]
 [ext_resource type="Script" uid="uid://by0hop2diytv2" path="res://window_pause.gd" id="5_kcquq"]
-[ext_resource type="Texture2D" uid="uid://v8ocsjth53he" path="res://art/Folder_Icon.png" id="5_oj12w"]
-[ext_resource type="Texture2D" uid="uid://b5xwmugjgdk1o" path="res://art/Printer_Icon.png" id="6_ifkhm"]
-[ext_resource type="Texture2D" uid="uid://cy2bmabiv4453" path="res://art/Email_Icon.png" id="7_8pt1j"]
 [ext_resource type="PackedScene" uid="uid://k6fbebxfhax0" path="res://match 3/scenes/lightning_sparkles.tscn" id="8_oluvs"]
 [ext_resource type="Texture2D" uid="uid://c17brlyx5xyci" path="res://art/Clock_UI.png" id="11_8moq3"]
 [ext_resource type="AudioStream" uid="uid://3j7retq5fugu" path="res://music/money on the line [puzzle theme].wav" id="11_0727r"]
 [ext_resource type="Script" uid="uid://cm5pmuv4m23ig" path="res://clock.gd" id="12_e6gv4"]
 [ext_resource type="PackedScene" uid="uid://c24ehyjpe51l6" path="res://pause_screen.tscn" id="12_gh3ss"]
 [ext_resource type="PackedScene" uid="uid://crn1n1owvmd85" path="res://debug_screen.tscn" id="14_62yoi"]
+[ext_resource type="Texture2D" uid="uid://ntgbgwjnxg4o" path="res://art/ITEM_Refresh.png" id="14_e6gv4"]
 [ext_resource type="Material" uid="uid://cxr7ihe8nn4hv" path="res://addons/crt_shader/ShaderScreen.material" id="15_mx5f6"]
 [ext_resource type="Script" uid="uid://x7g2xo1usdqp" path="res://addons/crt_shader/crt_screen.gd" id="16_g0o0y"]
 [ext_resource type="Texture2D" uid="uid://b7rrbl58e5lm6" path="res://addons/crt_shader/CRTFrame.png" id="17_g0o0y"]
@@ -608,9 +606,9 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -96.0
+offset_left = -108.0
 offset_top = 0.5
-offset_right = 96.0
+offset_right = 108.0
 offset_bottom = 3.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -626,9 +624,15 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 16
 text = "folder"
-icon = ExtResource("5_oj12w")
 autowrap_trim_flags = 0
 expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="store window/storeitems/item1" unique_id=1538802091]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("14_e6gv4")
+expand_mode = 1
 
 [node name="item1discription" type="Label" parent="store window/storeitems" unique_id=346004273]
 custom_minimum_size = Vector2(0, 24)
@@ -655,9 +659,16 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 16
 text = "printer"
-icon = ExtResource("6_ifkhm")
 autowrap_trim_flags = 0
 expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="store window/storeitems/item2" unique_id=370973672]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 32.0
+offset_bottom = 33.0
+texture = ExtResource("14_e6gv4")
+expand_mode = 1
 
 [node name="item2discription" type="Label" parent="store window/storeitems" unique_id=280100941]
 custom_minimum_size = Vector2(0, 24)
@@ -684,9 +695,16 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ifkhm")
 theme_override_font_sizes/font_size = 16
 text = "email"
-icon = ExtResource("7_8pt1j")
 autowrap_trim_flags = 0
 expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="store window/storeitems/item3" unique_id=2089798964]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 32.0
+offset_bottom = 33.0
+texture = ExtResource("14_e6gv4")
+expand_mode = 1
 
 [node name="item3discription" type="Label" parent="store window/storeitems" unique_id=89637367]
 custom_minimum_size = Vector2(0, 24)

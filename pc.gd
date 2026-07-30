@@ -130,15 +130,15 @@ func _process(delta):
 		debt_due = Global.minimumPay
 	
 	if Global.debt < 0:
-		debtMinimumPayDisplay.text = "PROFIT!\n$" + str(Global.debt)
+		debtMinimumPayDisplay.text = "PROFIT!\n$" + str(0-Global.debt)
 	if (debt_due) > 0:
-		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(debt_due)
+		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(0-debt_due)
 	elif (debt_due == 0 && celebrate) == false:
 		celebrate = true
 		#PLAY SFX
-		debtMinimumPayDisplay.text = "Minimum Debt Paid!"
+		debtMinimumPayDisplay.text = "Minimum Debt Paid!\n For Today..."
 	elif (debt_due < 0):
-		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(debt_due)
+		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(0-debt_due)
 	progressBar.value = time
 	update_day_hour_text()
 	

@@ -1,7 +1,7 @@
 extends Control
 
 func _ready():
-	$score.text += "$" + format_number(Global.money_earned)
+	$score.text += "$" + format_number(0-Global.debt)
 	get_scores()
 
 func get_scores():
@@ -13,7 +13,7 @@ func get_scores():
 		var label = Label.new()
 		label.text = " Name: " + score.player_name + ", Score: " + format_number(score.score)
 		label.add_theme_font_size_override("font_size",32)
-		label.add_theme_font_override("font",load("res://Match 8p.ttf"))
+		label.add_theme_font_override("font",load("res://Match 8h.ttf"))
 		label.add_theme_constant_override("outline_size",8)
 		label.name = score.player_name + str(score.score)
 		$ScrollContainer/ScoresContainer.add_child(label)
@@ -44,7 +44,7 @@ func format_number(number: int) -> String:
 
 
 func _on_submit_pressed():
-	SilentWolf.Scores.save_score($LineEdit.text.to_upper(), Global.money_earned)
+	SilentWolf.Scores.save_score($LineEdit.text.to_upper(), 0-Global.money_earned)
 	$submit.disabled = true
 	get_scores()
 

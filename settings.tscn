@@ -19,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.14767182, 0.14767179, 0.14767179, 1)
 
 [node name="Label" type="Label" parent="." unique_id=1624394633]
 layout_mode = 0
@@ -52,7 +52,9 @@ offset_left = 169.0
 offset_top = 93.0
 offset_right = 185.0
 offset_bottom = 338.0
-value = 100.0
+max_value = 1.0
+step = 0.05
+value = 1.0
 
 [node name="Label" type="Label" parent="music" unique_id=366368697]
 layout_mode = 0
@@ -72,7 +74,9 @@ offset_left = 252.0
 offset_top = 93.0
 offset_right = 268.0
 offset_bottom = 338.0
-value = 100.0
+max_value = 1.0
+step = 0.05
+value = 1.0
 
 [node name="Label" type="Label" parent="sfx" unique_id=1669103325]
 layout_mode = 0
@@ -88,9 +92,9 @@ text = "SFX"
 
 [node name="CheckBox" type="CheckBox" parent="." unique_id=1401760065]
 layout_mode = 0
-offset_left = 344.0
+offset_left = 340.0
 offset_top = 141.0
-offset_right = 499.0
+offset_right = 495.0
 offset_bottom = 181.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -102,4 +106,8 @@ text = "CRT Filter"
 
 [connection signal="hidden" from="." to="." method="_on_hidden"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_exited" from="music" to="." method="_on_music_mouse_exited"]
+[connection signal="value_changed" from="music" to="." method="_on_music_value_changed"]
+[connection signal="mouse_exited" from="sfx" to="." method="_on_sfx_mouse_exited"]
+[connection signal="value_changed" from="sfx" to="." method="_on_sfx_value_changed"]
 [connection signal="pressed" from="CheckBox" to="." method="_on_check_box_pressed"]

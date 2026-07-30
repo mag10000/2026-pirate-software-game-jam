@@ -176,8 +176,6 @@ func _process(delta):
 			if Global.hour == 8:
 				if Global.day == 5:
 					time = 0
-				else:
-					time = Global.break_times[Global.current_break_time_id] * 2
 			else:
 				time = Global.break_times[Global.current_break_time_id]
 			progressBar.max_value = time
@@ -190,7 +188,7 @@ func _process(delta):
 		if time == 0:
 			breakTimer.stop()
 			Global.break_time_started = false
-			if Global.day == 8 and Global.hour == 8:
+			if Global.hour == 8:
 				pass
 			else:
 				await get_tree().create_timer(0.5).timeout

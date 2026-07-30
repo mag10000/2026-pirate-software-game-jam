@@ -704,7 +704,7 @@ func missle_evil_icons():
 	for piece in whole_board:
 		if not is_instance_valid(piece):
 			return
-		if is_evil_block(piece.type):
+		if is_evil_block(int(piece.type)):
 			objectsDestroyed = true
 			var effect = bomb_fire_scene.instantiate()
 			effect.position = piece.position

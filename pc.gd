@@ -99,9 +99,9 @@ func _ready():
 func _process(delta):
 	if day1hour1Setup == false:
 		day1hour1Setup = true
-		InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 1)
-		InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 1)
-		InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 1)
+		InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 3)
+		InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 3)
+		InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 3)
 	
 	if Global.debt < 0:
 		Global.debt = 0

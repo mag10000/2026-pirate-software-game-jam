@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cwop7h3qng4w7" path="res://settings.tscn" id="2_rk3l4"]
 [ext_resource type="Texture2D" uid="uid://bx2els8um6ix7" path="res://art/Main_Menu_BG.png" id="2_un6tb"]
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="3_rbgr5"]
+[ext_resource type="PackedScene" uid="uid://buv74nc20e1ce" path="res://tutorial.tscn" id="5_cfagd"]
 
 [node name="Pause Screen" type="CanvasLayer" unique_id=1419754115]
 script = ExtResource("1_gkx8r")
@@ -50,9 +51,9 @@ vertical_alignment = 1
 
 [node name="Settings_Button" type="Button" parent="." unique_id=1764498903]
 offset_left = 485.0
-offset_top = 230.0
+offset_top = 203.0
 offset_right = 621.0
-offset_bottom = 270.0
+offset_bottom = 243.0
 theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
 theme_override_colors/font_focus_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
 theme_override_colors/font_pressed_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
@@ -72,9 +73,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 165.0
-offset_top = 100.0
+offset_top = 73.0
 offset_right = 301.0
-offset_bottom = 140.0
+offset_bottom = 113.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
@@ -88,9 +89,38 @@ theme_override_fonts/font = ExtResource("3_rbgr5")
 theme_override_font_sizes/font_size = 32
 text = "Main Menu"
 
+[node name="Tutorial_Button" type="Button" parent="." unique_id=1164177754]
+custom_minimum_size = Vector2(128, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 165.0
+offset_top = 123.0
+offset_right = 301.0
+offset_bottom = 163.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
+theme_override_colors/font_focus_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_pressed_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_hover_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_rbgr5")
+theme_override_font_sizes/font_size = 32
+text = "Tutorial"
+
 [node name="settings" parent="." unique_id=743456714 instance=ExtResource("2_rk3l4")]
 visible = false
 close_to_home = false
 
+[node name="Tutorial" parent="." unique_id=456041026 instance=ExtResource("5_cfagd")]
+visible = false
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="Settings_Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Main_Menu_Button" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="Tutorial_Button" to="." method="_on_tutorial_button_pressed"]

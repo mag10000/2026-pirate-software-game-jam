@@ -17,3 +17,12 @@ func _on_button_pressed():
 
 func _on_visibility_changed():
 	$settings.hide()
+
+
+func _on_tutorial_button_pressed():
+	$Tutorial.show()
+	await get_tree().create_timer($Tutorial.total_time).timeout
+
+
+func _on_main_menu_button_pressed():
+	get_tree().change_scene_to_file("res://main_menu.tscn")

@@ -40,6 +40,7 @@ func cycle():
 	image9.show()
 	await get_tree().create_timer(cycle_time).timeout
 	image9.hide()
+	hide()
 
 func _on_visibility_changed():
 	if visible:

@@ -122,7 +122,7 @@ func _process(delta):
 		$CRTScreen.hide()
 	
 	earningsAmountDisplay.text = "$" + str(Global.money)
-	debtAmountDisplay.text = "$" + str(Global.debt)
+	debtAmountDisplay.text = "$-" + str(Global.debt)
 	var debt_due
 	if Global.minimumPay <= 0:
 		debt_due = 0

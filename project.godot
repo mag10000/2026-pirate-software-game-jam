@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Hyper Debt Swap"
-run/main_scene="uid://ct7oupp4g0ts7"
+run/main_scene="uid://1knbfkvff5xe"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="Pirate 2026 Hyper Debt Swap"
 config/features=PackedStringArray("4.6", "Forward Plus")

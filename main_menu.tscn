@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ca3nrc25pjbit" path="res://art/HyperDebtSwap_logo_v2.png" id="3_jix8l"]
 [ext_resource type="AudioStream" uid="uid://cjw1wbqi08crg" path="res://music/Title Screen.wav" id="5_glbon"]
 [ext_resource type="PackedScene" uid="uid://cwop7h3qng4w7" path="res://settings.tscn" id="6_nlkkf"]
+[ext_resource type="PackedScene" uid="uid://ce6h03dkleugn" path="res://leader_board.tscn" id="7_qe12f"]
 
 [node name="Main menu" type="Control" unique_id=631415015 node_paths=PackedStringArray("MusicPlayer")]
 layout_mode = 3
@@ -96,5 +97,17 @@ visible = false
 layout_mode = 1
 close_to_home = false
 
+[node name="LeaderBoard" parent="." unique_id=1461126638 instance=ExtResource("7_qe12f")]
+visible = false
+layout_mode = 1
+
+[node name="score" parent="LeaderBoard" index="2" unique_id=1937078894]
+visible = false
+
+[node name="LineEdit" parent="LeaderBoard" index="3" unique_id=1805952698]
+visible = false
+
 [connection signal="pressed" from="Start" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Setttings" to="." method="_on_setttings_pressed"]
+
+[editable path="LeaderBoard"]

@@ -114,7 +114,12 @@ func _process(delta):
 	
 	earningsAmountDisplay.text = "$" + str(Global.money)
 	debtAmountDisplay.text = "$" + str(Global.debt)
-	debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(Global.minimumPay)
+	var debt_due
+	if Global.minimumPay <= 0:
+		debt_due = 0
+	else:
+		debt_due = Global.minimumPay
+	debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(debt_due)
 	progressBar.value = time
 	update_day_hour_text()
 	
@@ -177,9 +182,12 @@ func _process(delta):
 		if time == 0:
 			breakTimer.stop()
 			Global.break_time_started = false
-			await get_tree().create_timer(0.5).timeout
-			storeWindow.hide()
-			phase0Setup = true
+			if Global.day == 8 and Global.hour == 8:
+				pass
+			else:
+				await get_tree().create_timer(0.5).timeout
+				storeWindow.hide()
+				phase0Setup = true
 			Global.phase = 0
 			Global.hour += 1
 			if Global.hour > 8:

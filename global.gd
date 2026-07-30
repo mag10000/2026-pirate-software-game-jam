@@ -75,23 +75,30 @@ func clear_data():
 	#TODO - Update this as we change things
 	# Logic to reset all amounts to default
 	InventoryManager.clear_inventory()
-	Global.current_work_time_id = 0
-	Global.current_break_time_id = 0
-	Global.work_time_started = false
-	Global.break_time_started = false
-	Global.work_times = [23,25,21,22]
-	Global.break_times = [10]
-	Global.phase = 0
-	Global.money_earned = 0
-	Global.debt = 10000
-	Global.minimumPay = 500
-	Global.day = 1
-	Global.hour = 1
-	Global.story_beat = "start_cutscene"
-	Global.item_pool = ["res://inventory/items/lightning_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
-	Global.iconsForRound = [[],[1, 2, 3, 4, 5],[1, 2, 3, 4, 5, 6, 7],[1, 2, 3, 4, 5, 8, 9],[1, 2, 3, 4, 5, 10, 11],[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]]
-	Global.regularIconsForRound = [[],[1, 2, 3, 4, 5],[1, 2, 3, 4, 5, 6],[1, 2, 3, 4, 5, 8],[1, 2, 3, 4, 5, 10],[1, 2, 3, 4, 5, 6, 8, 10]]
-	Global.evilIconsForRound = [[],[],[7],[9],[11],[7,9,11]]
-	Global.amt_earned_combos = 4
-	Global.amt_earned_icon = 1
-	Global.money_multiplier = 1
+	current_work_time_id = 0
+	current_break_time_id = 0
+	work_time_started = false
+	break_time_started = false
+	work_times = [23,25,21,22]
+	break_times = [9]
+	phase = 0
+	money = 0
+	money_earned = 0
+	debt = 10000
+	debt_paid = 0
+	minimumPay = 500
+	clock_hand_pos = [Vector2(7.0,19.0),Vector2(9.0,14.0),Vector2(11.0,11.0),Vector2(19.0,8.0),Vector2(26.0,10.0),Vector2(29.0,14.0),Vector2(30.0,25.0),Vector2(27.0,26.0)]
+	day = 1
+	hour = 1
+	story_beat = 1
+	item_pool = ["res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
+	iconsForRound = [[],[1, 2, 3, 4, 5],[1, 2, 3, 4, 5, 6, 7],[1, 2, 3, 4, 5, 8, 9],[1, 2, 3, 4, 5, 10, 11],[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]]
+	regularIconsForRound = [[],[1, 2, 3, 4, 5],[1, 2, 3, 4, 5, 6],[1, 2, 3, 4, 5, 8],[1, 2, 3, 4, 5, 10],[1, 2, 3, 4, 5, 6, 8, 10]]
+	newIconsForRound = [[],[1,2,3,4,5],[6,7],[8,9],[10,11],[]]
+	newItemsForRound = [[], [["res://inventory/items/time_add_item.tres"],["res://inventory/items/refresh_item.tres"],["res://inventory/items/bomb_item.tres"]],
+	[["res://inventory/items/money_multiplier_item.tres"]],[["res://inventory/items/lightning_item.tres"]],[["res://inventory/items/missle_item.tres"]],[]]
+	evilIconsForRound = [[],[],[7],[9],[11],[7,9,11]]
+	debt_payments = [0,500,1000,1500,3000,4000]
+	amt_earned_combos = 6
+	amt_earned_icon = 2
+	money_multiplier = 1

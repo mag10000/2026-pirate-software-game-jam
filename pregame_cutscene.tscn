@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://1knbfkvff5xe"]
 
 [ext_resource type="Script" uid="uid://cfdoc43q6juik" path="res://pregame_cutscene.gd" id="1_fnm77"]
+[ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="2_17pbn"]
 [ext_resource type="Texture2D" uid="uid://80aktvpxx6n4" path="res://art/cutscene/INTRO_3_Key1_comp.png" id="2_pnk1l"]
 [ext_resource type="Texture2D" uid="uid://6u6r5dmpwvns" path="res://art/cutscene/Intro_Cutscene - 2.png" id="3_pnk1l"]
 [ext_resource type="Texture2D" uid="uid://cavse7s5un6hr" path="res://art/cutscene/Intro_Cutscene - 3.png" id="4_17pbn"]
@@ -18,10 +19,16 @@ color = Color(0, 0, 0, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=469724922]
 custom_minimum_size = Vector2(500, 100)
-offset_left = 76.0
-offset_top = 260.0
-offset_right = 576.0
-offset_bottom = 360.0
+offset_left = 79.0
+offset_top = 273.0
+offset_right = 579.0
+offset_bottom = 373.0
+theme_override_colors/font_outline_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("2_17pbn")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 15
+text = "This will be text....typed out from left to right...."
 
 [node name="Image1" type="TextureRect" parent="." unique_id=1037159538]
 offset_left = 130.0

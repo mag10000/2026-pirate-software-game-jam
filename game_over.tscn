@@ -344,9 +344,9 @@ tracks/9/path = NodePath("eviltext2:modulate:r")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"handle_modes": PackedInt32Array(0, 2, 0, 2),
+"handle_modes": PackedInt32Array(0, 0, 0, 2),
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0, 0, 1, -0.25, 0, 0, 0, 1, -0.049999993, 0, 0, 0),
-"times": PackedFloat32Array(0, 1.5, 2.4666667, 3.3)
+"times": PackedFloat32Array(0, 1.0333333, 2.4666667, 3.3)
 }
 tracks/10/type = "bezier"
 tracks/10/imported = false
@@ -355,9 +355,9 @@ tracks/10/path = NodePath("eviltext2:modulate:g")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"handle_modes": PackedInt32Array(0, 2, 0, 2),
+"handle_modes": PackedInt32Array(0, 0, 0, 2),
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0, 0, 1, -0.25, 0, 0, 0, 1, -0.049999993, 0, 0, 0),
-"times": PackedFloat32Array(0, 1.5, 2.4666667, 3.3)
+"times": PackedFloat32Array(0, 1.0333333, 2.4666667, 3.3)
 }
 tracks/11/type = "bezier"
 tracks/11/imported = false
@@ -366,9 +366,9 @@ tracks/11/path = NodePath("eviltext2:modulate:b")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"handle_modes": PackedInt32Array(0, 2, 0, 2),
+"handle_modes": PackedInt32Array(0, 0, 0, 2),
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0, 0, 1, -0.25, 0, 0, 0, 1, -0.049999993, 0, 0, 0),
-"times": PackedFloat32Array(0, 1.5, 2.4666667, 3.3)
+"times": PackedFloat32Array(0, 1.0333333, 2.4666667, 3.3)
 }
 tracks/12/type = "bezier"
 tracks/12/imported = false
@@ -377,9 +377,9 @@ tracks/12/path = NodePath("eviltext2:modulate:a")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"handle_modes": PackedInt32Array(0, 2, 0, 2),
+"handle_modes": PackedInt32Array(0, 0, 0, 2),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0, 0, 1, -0.25, -0.16666667, 0, 0, 0, -0.049999993, 0.16666667, 0, 0),
-"times": PackedFloat32Array(0, 1.5, 2.4666667, 3.3)
+"times": PackedFloat32Array(0, 1.0333333, 2.4666667, 3.3)
 }
 tracks/13/type = "bezier"
 tracks/13/imported = false

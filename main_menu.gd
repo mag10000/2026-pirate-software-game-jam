@@ -26,6 +26,7 @@ func cycle_leaderboard():
 	$LeaderBoard.get_scores()
 	$LeaderBoard.hide()
 	$Tutorial.show()
+	await get_tree().create_timer($Tutorial.total_time).timeout
 	cycle_leaderboard()
 
 

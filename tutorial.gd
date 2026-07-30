@@ -9,12 +9,38 @@ extends Node2D
 @export var image7: TextureRect
 @export var image8: TextureRect
 @export var image9: TextureRect
+@export var cycle_time = 1.0
+var total_time = cycle_time * 9
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func cycle():
+	image1.show()
+	await get_tree().create_timer(cycle_time).timeout
+	image1.hide()
+	image2.show()
+	await get_tree().create_timer(cycle_time).timeout
+	image2.hide()
+	image3.show()
+	await get_tree().create_timer(cycle_time).timeout
+	image3.hide()
+	image4.show()
+	await get_tree().create_timer(cycle_time).timeout
+	image4.hide()
+	image5.show()
+	await get_tree().create_timer(cycle_time).timeout
+	image5.hide()
+	image6.show()
+	await get_tree().create_timer(cycle_time).timeout
+	image6.hide()
+	image7.show()
+	await get_tree().create_timer(cycle_time).timeout
+	image7.hide()
+	image8.show()
+	await get_tree().create_timer(cycle_time).timeout
+	image8.hide()
+	image9.show()
+	await get_tree().create_timer(cycle_time).timeout
+	image9.hide()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_visibility_changed():
+	if visible:
+		cycle()

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cexwghhwlb58m" path="res://tutorial.gd" id="1_7n6eb"]
 [ext_resource type="Texture2D" uid="uid://b3ry4mous2nma" path="res://screens/INTROHOWTO_SCREEN_1.png" id="2_tvjhf"]
+[ext_resource type="Texture2D" uid="uid://bx2els8um6ix7" path="res://art/Main_Menu_BG.png" id="2_vmw6g"]
 [ext_resource type="Texture2D" uid="uid://dgp4fd0hd53vj" path="res://screens/INTROHOWTO_SCREEN_2.png" id="3_vmw6g"]
 [ext_resource type="Texture2D" uid="uid://b2u03ofv3uv2x" path="res://screens/INTROHOWTO_SCREEN_3.png" id="4_4hjyh"]
 [ext_resource type="Texture2D" uid="uid://brafnha8804b1" path="res://screens/INTROHOWTO_SCREEN_4.png" id="5_bsk3x"]
@@ -10,63 +11,76 @@
 [ext_resource type="Texture2D" uid="uid://cq34olpbekdju" path="res://screens/INTROITEM_SCREEN_3.png" id="8_k08xv"]
 [ext_resource type="Texture2D" uid="uid://b2essk6yb1nt2" path="res://screens/INTROITEM_SCREEN_4.png" id="9_g52lx"]
 [ext_resource type="Texture2D" uid="uid://bmbomli5abaq3" path="res://screens/INTROITEM_SCREEN_5.png" id="10_0lped"]
-[ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="11_dudfa"]
 
-[node name="Tutorial" type="Node2D" unique_id=456041026]
+[node name="Tutorial" type="Node2D" unique_id=456041026 node_paths=PackedStringArray("image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9")]
 script = ExtResource("1_7n6eb")
+image1 = NodePath("image1")
+image2 = NodePath("image2")
+image3 = NodePath("image3")
+image4 = NodePath("image4")
+image5 = NodePath("image5")
+image6 = NodePath("image6")
+image7 = NodePath("image7")
+image8 = NodePath("image8")
+image9 = NodePath("image9")
+cycle_time = 1.5
+
+[node name="MainMenuBg" type="Sprite2D" parent="." unique_id=1984083843]
+position = Vector2(320, 180)
+texture = ExtResource("2_vmw6g")
 
 [node name="image1" type="TextureRect" parent="." unique_id=1168366636]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_tvjhf")
 
 [node name="image2" type="TextureRect" parent="." unique_id=1579005581]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("3_vmw6g")
 
 [node name="image3" type="TextureRect" parent="." unique_id=1991496408]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("4_4hjyh")
 
 [node name="image4" type="TextureRect" parent="." unique_id=1148163781]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("5_bsk3x")
 
 [node name="image5" type="TextureRect" parent="." unique_id=165491442]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("6_dl7dh")
 
 [node name="image6" type="TextureRect" parent="." unique_id=793305545]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("7_r4o0u")
 
 [node name="image7" type="TextureRect" parent="." unique_id=1033023248]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("8_k08xv")
 
 [node name="image8" type="TextureRect" parent="." unique_id=569685585]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("9_g52lx")
 
 [node name="image9" type="TextureRect" parent="." unique_id=1047786016]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("10_0lped")
 
-[node name="Button" type="Button" parent="." unique_id=1374262277]
-offset_left = 603.0
-offset_top = 336.0
-offset_right = 639.0
-offset_bottom = 360.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_fonts/font = ExtResource("11_dudfa")
-text = "SKIP"
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

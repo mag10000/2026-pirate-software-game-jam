@@ -295,7 +295,6 @@ func raise_items_update():
 		_:
 			pass
 func item_clicked(node):
-	print("Clicked on item: ",node.item.item_name)
 	match node.item.item_name:
 		"Add Time":
 			if timeUpInRound < 3 && Global.phase == 0:
@@ -306,11 +305,15 @@ func item_clicked(node):
 				await get_tree().create_timer(0.15).timeout
 				InventoryManager.using_item = false
 				timeUpInRound += 1
+			else:
+				Audio.play("res://sfx/Error 2.wav",true)
 		"Bomb":
 			if bombInRound < 3 && Global.phase == 0:
 				await tileGameReference.bomb_random_icon()
 				InventoryManager.using_item = false
 				bombInRound += 1
+			else:
+				Audio.play("res://sfx/Error 2.wav",true)
 		"Refresh Board":
 			if refreshInRound < 3 && Global.phase == 0:
 				Audio.play("res://sfx/Time Add.wav",true)
@@ -319,6 +322,8 @@ func item_clicked(node):
 				await get_tree().create_timer(0.15).timeout
 				InventoryManager.using_item = false
 				refreshInRound += 1
+			else:
+				Audio.play("res://sfx/Error 2.wav",true)
 		"$ Multiplier":
 			if moneyUpInRound < 3 && Global.phase == 0:
 				Global.money_multiplier += 1
@@ -326,6 +331,8 @@ func item_clicked(node):
 				await get_tree().create_timer(0.15).timeout
 				InventoryManager.using_item = false
 				moneyUpInRound += 1
+			else:
+				Audio.play("res://sfx/Error 2.wav",true)
 		"Simplify Board":
 			await tileGameReference.simplify_board()
 			#TODO - Make sure to grant a missle if it can't fire and play SFX
@@ -340,6 +347,8 @@ func item_clicked(node):
 				await get_tree().create_timer(0.15).timeout
 				InventoryManager.using_item = false
 				missleInRound += 1
+			else:
+				Audio.play("res://sfx/Error 2.wav",true)
 		"Lightning":
 			if lightningInRound < 3 && Global.phase == 0:
 				await tileGameReference.lightning()
@@ -348,8 +357,7 @@ func item_clicked(node):
 				InventoryManager.using_item = false
 				lightningInRound += 1
 			else:
-				#PLAY SFX
-				pass
+				Audio.play("res://sfx/Error 2.wav",true)
 				
 		_: 
 			pass

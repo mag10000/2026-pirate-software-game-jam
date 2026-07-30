@@ -41,6 +41,7 @@ var amount_tile
 var amount_combo
 var evil_block_count = 0
 var is_dpad_attempt = false
+var spawn_count = 0
 # Functions
 
 func _ready():
@@ -80,27 +81,38 @@ func setup_grid_array():
 			initial_spawn(x, y, false)
 	
 	evil_block_count = 0
+	spawn_count = 0
 
 # Spawn a new tile at a certain grid position
 
 func initial_spawn(x, y, blanks: bool):
 	var created_piece = tile_scene.instantiate()
 	var random_index = iconArray.pick_random() 
+	spawn_count += 1
 	while (check_neighbors(x, y, random_index) == true): 
 		random_index = iconArray.pick_random()
 	if is_evil_block(random_index):
 		evil_block_count += 1
 
+	if Global.day > 1 && spawn_count > 24 && evil_block_count < 3:
+			while (check_neighbors(x, y, random_index) == true): 
+				random_index = iconArray.pick_random()
+				if is_evil_block(random_index):
+					evil_block_count += 1
+			if spawn_count > 30:
+				while (!is_evil_block(random_index) && check_neighbors(x, y, random_index) == true): 
+					random_index = iconArray.pick_random()
+
 	# Allow an evil block only if there aren't too many for how far into the day you are
-	if evil_block_count >= 3:
+	if evil_block_count > 3:
 		if Global.hour <= 2:
 			while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
-						random_index = iconArray.pick_random()
-		if evil_block_count >= 4:
+				random_index = iconArray.pick_random()
+		if evil_block_count > 4:
 			if Global.hour <= 4:
 				while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
 						random_index = iconArray.pick_random()
-			if evil_block_count >= 5:
+			if evil_block_count > 5:
 				if Global.hour <= 6:
 					while is_evil_block(random_index) || check_neighbors(x, y, random_index) == true:
 						random_index = iconArray.pick_random()
@@ -122,7 +134,7 @@ func initial_spawn(x, y, blanks: bool):
 	created_piece.position = grid_to_pixel(x, y) 
 	
 	grid[x][y] = created_piece
-	
+			
 # Spawn a new tile at a certain grid position
 func spawn_at(x, y, blanks: bool):
 	
@@ -466,6 +478,7 @@ func refill_board(blanks: bool):
 				grid[x][y].position.y -= offset * 2 
 				grid[x][y].move_to(grid_to_pixel(x, y))
 	evil_block_count = 0
+	spawn_count = 0
 	await get_tree().create_timer(0.3).timeout
 
 # Utilities for coordinates

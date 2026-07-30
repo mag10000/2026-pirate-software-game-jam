@@ -106,9 +106,9 @@ func _ready():
 func _process(delta):
 	if day1hour1Setup == false:
 		day1hour1Setup = true
-		InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 5)
-		InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 5)
-		InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 5)
+		InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 3)
+		InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 3)
+		InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 3)
 	
 	if Global.debt < 0:
 		Global.debt = 0
@@ -155,10 +155,10 @@ func _process(delta):
 			$"work window/Title".show()
 			workTimer.start()
 			Global.work_time_started = true
+			reset_item_limit_on_round()
 
 		if time == 0:
 			workTimer.stop()
-			reset_item_limit_on_round()
 			Global.work_time_started = false
 			Global.current_work_time_id = randi_range(0,3)
 			await get_tree().create_timer(0.5).timeout
@@ -227,6 +227,9 @@ func _on_work_timer_timeout():
 
 func _on_deposit_pressed():
 	if Global.money > 0:
+		if Global.debt <= 0:
+			Audio.play("res://sfx/Error 2.wav",true)
+			return
 		Global.money -= 1
 		Global.debt -= 1
 		Global.debt_paid += 1
@@ -236,9 +239,14 @@ func _on_deposit_pressed():
 			Global.minimumPay -= 1
 		show_money_popup(1, false)
 		Audio.play("res://sfx/money_paid.wav",true)
-
+	else:
+		Audio.play("res://sfx/Error 2.wav",true)
+		
 func _on_deposit_10_pressed():
 	if Global.money >= 10:
+		if Global.debt <= 0:
+			Audio.play("res://sfx/Error 2.wav",true)
+			return
 		Global.money -= 10
 		Global.debt -= 10
 		Global.debt_paid += 10
@@ -248,8 +256,14 @@ func _on_deposit_10_pressed():
 			Global.minimumPay -= 10
 		show_money_popup(10, false)
 		Audio.play("res://sfx/money_paid.wav",true, 1.2)
+	else:
+		Audio.play("res://sfx/Error 2.wav",true)
+		
 func _on_deposit_100_pressed():
 	if Global.money >= 100:
+		if Global.debt <= 0:
+			Audio.play("res://sfx/Error 2.wav",true)
+			return
 		Global.money -= 100
 		Global.debt -= 100
 		Global.debt_paid += 100
@@ -260,6 +274,8 @@ func _on_deposit_100_pressed():
 			Global.minimumPay -= 100
 		show_money_popup(100, false)
 		Audio.play("res://sfx/money_paid.wav",true, 1.5)
+	else:
+		Audio.play("res://sfx/Error 2.wav",true)
 
 func _on_break_timer_timeout():
 	time -= 1
@@ -297,7 +313,9 @@ func raise_items_update():
 func item_clicked(node):
 	match node.item.item_name:
 		"Add Time":
+			print("Got to Add Time in Match")
 			if timeUpInRound < 3 && Global.phase == 0:
+				print("Got USING Add Time in Match")
 				print(timeUpInRound)
 				time = time + 5
 				InventoryManager.revoke_item("res://inventory/items/time_add_item.tres")
@@ -306,7 +324,9 @@ func item_clicked(node):
 				InventoryManager.using_item = false
 				timeUpInRound += 1
 			else:
+				print("Got UNABLE TO USE Add Time in Match")
 				Audio.play("res://sfx/Error 2.wav",true)
+				InventoryManager.using_item = false
 		"Bomb":
 			if bombInRound < 3 && Global.phase == 0:
 				await tileGameReference.bomb_random_icon()
@@ -314,9 +334,10 @@ func item_clicked(node):
 				bombInRound += 1
 			else:
 				Audio.play("res://sfx/Error 2.wav",true)
+				InventoryManager.using_item = false
 		"Refresh Board":
 			if refreshInRound < 3 && Global.phase == 0:
-				Audio.play("res://sfx/Time Add.wav",true)
+				Audio.play("res://sfx/Refresh.wav",true)
 				await tileGameReference.reset_board()
 				InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")
 				await get_tree().create_timer(0.15).timeout
@@ -324,15 +345,18 @@ func item_clicked(node):
 				refreshInRound += 1
 			else:
 				Audio.play("res://sfx/Error 2.wav",true)
+				InventoryManager.using_item = false
 		"$ Multiplier":
 			if moneyUpInRound < 3 && Global.phase == 0:
 				Global.money_multiplier += 1
+				Audio.play("res://sfx/Error 2.wav",true)
 				InventoryManager.revoke_item("res://inventory/items/money_multiplier_item.tres")
 				await get_tree().create_timer(0.15).timeout
 				InventoryManager.using_item = false
 				moneyUpInRound += 1
 			else:
 				Audio.play("res://sfx/Error 2.wav",true)
+				InventoryManager.using_item = false
 		"Simplify Board":
 			await tileGameReference.simplify_board()
 			#TODO - Make sure to grant a missle if it can't fire and play SFX
@@ -349,6 +373,7 @@ func item_clicked(node):
 				missleInRound += 1
 			else:
 				Audio.play("res://sfx/Error 2.wav",true)
+				InventoryManager.using_item = false
 		"Lightning":
 			if lightningInRound < 3 && Global.phase == 0:
 				await tileGameReference.lightning()
@@ -358,7 +383,7 @@ func item_clicked(node):
 				lightningInRound += 1
 			else:
 				Audio.play("res://sfx/Error 2.wav",true)
-				
+				InventoryManager.using_item = false
 		_: 
 			pass
 			

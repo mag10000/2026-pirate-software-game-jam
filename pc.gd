@@ -130,15 +130,15 @@ func _process(delta):
 		debt_due = Global.minimumPay
 	
 	if Global.debt < 0:
-		debtMinimumPayDisplay.text = "PROFIT!\n$" + str(Global.debt)
+		debtMinimumPayDisplay.text = "PROFIT!\n$" + str(0-Global.debt)
 	if (debt_due) > 0:
-		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(debt_due)
+		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(0-debt_due)
 	elif (debt_due == 0 && celebrate) == false:
 		celebrate = true
 		#PLAY SFX
-		debtMinimumPayDisplay.text = "Minimum Debt Paid!"
+		debtMinimumPayDisplay.text = "Minimum Debt Paid!\n For Today..."
 	elif (debt_due < 0):
-		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(debt_due)
+		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(0-debt_due)
 	progressBar.value = time
 	update_day_hour_text()
 	
@@ -202,6 +202,8 @@ func _process(delta):
 				await get_tree().create_timer(0.5).timeout
 				storeWindow.hide()
 				phase0Setup = true
+				Global.phase = 0
+				Global.hour += 1
 
 			if Global.hour >= 8:
 				# TODO - Check Minimum
@@ -216,9 +218,6 @@ func _process(delta):
 					update_minimum_debt_payment()
 					# TODO - Create scene for new_day
 					get_tree().change_scene_to_file("res://story_beat.tscn")
-			else:
-				Global.phase = 0
-				Global.hour += 1
 
 
 func seconds2hhmmss(total_seconds: float) -> String:

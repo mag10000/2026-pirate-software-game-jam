@@ -47,6 +47,8 @@ var newItemsForRound = [[], [["res://inventory/items/time_add_item.tres"],["res:
 
 var evilIconsForRound = [[],[],[7],[9],[11],[7,9,11]]
 
+var debt_payments = [0,500,1000,1500,3000,4000]
+
 var amt_earned_combos = 6
 
 var amt_earned_icon = 2

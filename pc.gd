@@ -153,12 +153,12 @@ func _process(delta):
 			time = Global.work_times[Global.current_work_time_id]
 			progressBar.max_value = time
 			$"work window/Title".show()
-			reset_item_limit_on_round()
 			workTimer.start()
 			Global.work_time_started = true
 
 		if time == 0:
 			workTimer.stop()
+			reset_item_limit_on_round()
 			Global.work_time_started = false
 			Global.current_work_time_id = randi_range(0,3)
 			await get_tree().create_timer(0.5).timeout
@@ -312,7 +312,7 @@ func item_clicked(node):
 				InventoryManager.using_item = false
 				bombInRound += 1
 		"Refresh Board":
-			if refreshInRound <3 && Global.phase == 0:
+			if refreshInRound < 3 && Global.phase == 0:
 				Audio.play("res://sfx/Time Add.wav",true)
 				await tileGameReference.reset_board()
 				InventoryManager.revoke_item("res://inventory/items/refresh_item.tres")

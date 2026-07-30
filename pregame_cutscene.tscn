@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://1knbfkvff5xe"]
+
+[ext_resource type="Script" uid="uid://cfdoc43q6juik" path="res://pregame_cutscene.gd" id="1_fnm77"]
+[ext_resource type="Texture2D" uid="uid://bqth66whvbm0q" path="res://art/cutscene/Intro_Cutscene - 1.png" id="2_544bh"]
+[ext_resource type="Texture2D" uid="uid://6u6r5dmpwvns" path="res://art/cutscene/Intro_Cutscene - 2.png" id="3_pnk1l"]
+[ext_resource type="Texture2D" uid="uid://cavse7s5un6hr" path="res://art/cutscene/Intro_Cutscene - 3.png" id="4_17pbn"]
+[ext_resource type="Texture2D" uid="uid://087hyu5fi80c" path="res://art/cutscene/Intro_Cutscene - 5.png" id="5_djf6a"]
+[ext_resource type="Texture2D" uid="uid://cvgevxn2nvt8i" path="res://art/cutscene/Intro_Cutscene - 6.png" id="6_6yyk2"]
+[ext_resource type="Texture2D" uid="uid://bof16cyfeug64" path="res://art/cutscene/Intro_Cutscene - 7.png" id="7_xlw0h"]
+
+[node name="PregameCutscene" type="Node2D" unique_id=1418337636]
+script = ExtResource("1_fnm77")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=581769569]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=469724922]
+custom_minimum_size = Vector2(500, 100)
+offset_left = 76.0
+offset_top = 260.0
+offset_right = 576.0
+offset_bottom = 360.0
+
+[node name="Image1" type="TextureRect" parent="." unique_id=1037159538]
+offset_left = 130.0
+offset_top = 32.0
+offset_right = 510.0
+offset_bottom = 245.0
+texture = ExtResource("2_544bh")
+
+[node name="Image2" type="TextureRect" parent="." unique_id=1009408837]
+offset_left = 130.0
+offset_top = 32.0
+offset_right = 510.0
+offset_bottom = 245.0
+texture = ExtResource("3_pnk1l")
+
+[node name="Image3" type="TextureRect" parent="." unique_id=1246069900]
+offset_left = 130.0
+offset_top = 32.0
+offset_right = 510.0
+offset_bottom = 245.0
+texture = ExtResource("4_17pbn")
+
+[node name="Image4" type="TextureRect" parent="." unique_id=1488076279]
+offset_left = 130.0
+offset_top = 32.0
+offset_right = 170.0
+offset_bottom = 72.0
+
+[node name="Image5" type="TextureRect" parent="." unique_id=53192042]
+offset_left = 130.0
+offset_top = 32.0
+offset_right = 510.0
+offset_bottom = 245.0
+texture = ExtResource("5_djf6a")
+
+[node name="Image6" type="TextureRect" parent="." unique_id=1826459554]
+offset_left = 130.0
+offset_top = 32.0
+offset_right = 510.0
+offset_bottom = 245.0
+texture = ExtResource("6_6yyk2")
+
+[node name="Image7" type="TextureRect" parent="." unique_id=732339282]
+offset_left = 130.0
+offset_top = 32.0
+offset_right = 510.0
+offset_bottom = 245.0
+texture = ExtResource("7_xlw0h")
+
+[node name="Image8" type="TextureRect" parent="." unique_id=1619013162]
+offset_left = 130.0
+offset_top = 32.0
+offset_right = 170.0
+offset_bottom = 72.0

@@ -49,8 +49,6 @@ DAILY GOAL: " + "$" + format_number(Global.debt_payments[Global.day])
 
 
 func type_text():
-	$ColorRect2.show()
-	$TextureRect.hide()
 	BankerMusicPlayer.stop()
 	DayMusicPlayer.play()
 	for letter in data_text:
@@ -110,38 +108,23 @@ func show_text():
 	
 	match Global.day:
 		1:
-			$Screen.texture = load("res://screens/DAYONE_SCREEN_1.png")
-			await get_tree().create_timer(1).timeout
-			$Screen.texture = load("res://screens/DAYONE_SCREEN_2.png")
-			await get_tree().create_timer(2).timeout
 			$Screen.texture = load("res://screens/DAYONE_SCREEN_3.png")
 		2:
-			$Screen.texture = load("res://screens/DAYTWO_SCREEN_1.png")
-			await get_tree().create_timer(1).timeout
 			$Screen.texture = load("res://screens/DAYTWO_SCREEN_2.png")
 		3:
-			$Screen.texture = load("res://screens/DAYTHREE_SCREEN_1.png")
-			await get_tree().create_timer(1).timeout
 			$Screen.texture = load("res://screens/DAYTHREE_SCREEN_2.png")
 		4:
-			$Screen.texture = load("res://screens/DAYFOUR_SCREEN_1.png")
-			await get_tree().create_timer(1).timeout
 			$Screen.texture = load("res://screens/DAYFOUR_SCREEN_2.png")
 		5:
-			$Screen.texture = load("res://screens/DAYFIVE_SCREEN_1.png")
-			await get_tree().create_timer(1).timeout
-			$Screen.texture = load("res://screens/DAYFIVE_SCREEN_2.png")
-			await get_tree().create_timer(2).timeout
 			$Screen.texture = load("res://screens/DAYFIVE_SCREEN_3.png")
 	
-	await get_tree().create_timer(3.2).timeout
+
 	$"CanvasLayer/Continue Button".show()
 	$"CanvasLayer/Skip Button".hide()
 	#"
 #Match 3 for $5" + "
 #Combos payout higher!!!"
 
-			
 func format_number(number: int) -> String:
 	# Handle negative numbers by adding the "minus" sign in advance, as we discard it
 	# when looping over the number.

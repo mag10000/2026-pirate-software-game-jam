@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+@export var pc: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,3 +27,7 @@ func _on_tutorial_button_pressed():
 
 func _on_main_menu_button_pressed():
 	get_tree().change_scene_to_file("res://main_menu.tscn")
+
+
+func _on_back_pressed():
+	pc.pause()

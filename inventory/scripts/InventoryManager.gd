@@ -41,6 +41,7 @@ func get_inventory(mode : get_inventory_enums):
 
 func clear_inventory():
 		for item in _inventory:
+			print("Got to inside clearing inventory loop")
 			revoke_item(item)
 		
 

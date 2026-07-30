@@ -339,7 +339,7 @@ func swap_pieces(a: Vector2i, b: Vector2i):
 			piece_a.set_tile_type("11", textures[11]) 
 			Audio.play("res://sfx/Glitchy Block Swap.wav", false, randf_range(0.8, 1.2), 0.3) 
 		elif (piece_a.type == "9") && (piece_b.type != "0"):
-			Global.money -= round((amount_tile*3)/2)
+			Global.money -= round((amount_tile*3))
 			pc_ref.show_money_popup(round((amount_tile*3)/2), false)
 			Audio.play("res://sfx/Anti Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
 		elif (piece_b.type == "9") && (piece_a.type != "0"):

@@ -13,7 +13,7 @@ func _ready():
 		$music.value = data.music
 		$sfx.value = data.sfx
 	$CheckBox.button_pressed = Global.crt_on
-	
+	print("hi")
 
 func _on_button_pressed():
 	if close_to_home:
@@ -36,4 +36,5 @@ func _on_hidden():
 	}))
 	file.close()
 	file = null
+	print("dhfjus")
 	Global.crt_on = $CheckBox.button_pressed

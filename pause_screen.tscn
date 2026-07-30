@@ -48,10 +48,6 @@ text = "PAUSE MENU"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="settings" parent="." unique_id=743456714 instance=ExtResource("2_rk3l4")]
-visible = false
-close_to_home = false
-
 [node name="Settings_Button" type="Button" parent="." unique_id=1764498903]
 offset_left = 485.0
 offset_top = 230.0
@@ -91,6 +87,10 @@ theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_rbgr5")
 theme_override_font_sizes/font_size = 32
 text = "Main Menu"
+
+[node name="settings" parent="." unique_id=743456714 instance=ExtResource("2_rk3l4")]
+visible = false
+close_to_home = false
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="Settings_Button" to="." method="_on_button_pressed"]

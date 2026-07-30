@@ -98,7 +98,6 @@ theme_override_constants/outline_size = 1
 theme_override_constants/h_separation = 7
 theme_override_fonts/font = ExtResource("2_3ykye")
 theme_override_font_sizes/font_size = 32
-toggle_mode = false
 text = "CRT Filter"
 
 [connection signal="hidden" from="." to="." method="_on_hidden"]

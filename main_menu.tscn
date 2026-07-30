@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cjw1wbqi08crg" path="res://music/Title Screen.wav" id="5_glbon"]
 [ext_resource type="PackedScene" uid="uid://cwop7h3qng4w7" path="res://settings.tscn" id="6_nlkkf"]
 [ext_resource type="PackedScene" uid="uid://ce6h03dkleugn" path="res://leader_board.tscn" id="7_qe12f"]
+[ext_resource type="PackedScene" uid="uid://buv74nc20e1ce" path="res://tutorial.tscn" id="8_8qtwp"]
 
 [node name="Main menu" type="Control" unique_id=631415015 node_paths=PackedStringArray("MusicPlayer")]
 layout_mode = 3
@@ -104,7 +105,16 @@ layout_mode = 1
 [node name="score" parent="LeaderBoard" index="2" unique_id=1937078894]
 visible = false
 
-[node name="LineEdit" parent="LeaderBoard" index="3" unique_id=1805952698]
+[node name="submit" parent="LeaderBoard" index="3" unique_id=1777289468]
+visible = false
+
+[node name="to_main" parent="LeaderBoard" index="4" unique_id=1394107366]
+visible = false
+
+[node name="LineEdit" parent="LeaderBoard" index="5" unique_id=1805952698]
+visible = false
+
+[node name="Tutorial" parent="." unique_id=456041026 instance=ExtResource("8_8qtwp")]
 visible = false
 
 [connection signal="pressed" from="Start" to="." method="_on_button_pressed"]

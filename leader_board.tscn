@@ -58,7 +58,6 @@ theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("3_xvw5l")
 theme_override_font_sizes/font_size = 24
 text = "TOTAL EARNED:
-$
 "
 horizontal_alignment = 1
 

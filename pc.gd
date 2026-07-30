@@ -136,7 +136,7 @@ func _process(delta):
 	elif (debt_due == 0 && celebrate) == false:
 		celebrate = true
 		#PLAY SFX
-		debtMinimumPayDisplay.text = "Minimum Debt Paid\n$" + str(debt_due)
+		debtMinimumPayDisplay.text = "Minimum Debt Paid!"
 	elif (debt_due < 0):
 		debtMinimumPayDisplay.text = "Minimum Debt Due Today\n$" + str(debt_due)
 	progressBar.value = time

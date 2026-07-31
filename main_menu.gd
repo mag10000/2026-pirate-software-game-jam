@@ -11,11 +11,9 @@ func _ready():
 func _on_button_pressed():
 	get_tree().change_scene_to_file("res://story_beat.tscn")
 
-
 func _on_setttings_pressed():
 	$LeaderBoard.get_scores()
 	$settings.show()
-
 
 func cycle_leaderboard():
 	await get_tree().create_timer(5).timeout
@@ -27,7 +25,6 @@ func cycle_leaderboard():
 	$LeaderBoard.hide()
 	$Tutorial.show()
 	cycle_leaderboard()
-
 
 func _input(event):
 	if event is InputEventMouseMotion:

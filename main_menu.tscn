@@ -43,10 +43,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 180.0
-offset_top = 50.0
-offset_right = 308.0
-offset_bottom = 90.0
+offset_left = 184.0
+offset_top = 52.0
+offset_right = 312.0
+offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
@@ -68,10 +68,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 180.0
-offset_top = 100.0
-offset_right = 308.0
-offset_bottom = 140.0
+offset_left = 184.0
+offset_top = 102.0
+offset_right = 312.0
+offset_bottom = 142.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
@@ -85,8 +85,34 @@ theme_override_fonts/font = ExtResource("2_fu7sn")
 theme_override_font_sizes/font_size = 32
 text = "Settings"
 
+[node name="Tutorial2" type="Button" parent="." unique_id=1220851807]
+visible = false
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 184.0
+offset_top = 106.0
+offset_right = 312.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.93333334, 0.039215688, 0.40392157, 1)
+theme_override_colors/font_focus_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_pressed_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_hover_color = Color(0.45882353, 0.3764706, 0.41568628, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 32
+text = "Tutorial"
+
 [node name="HyperDebtSwapLogoV2" type="Sprite2D" parent="." unique_id=667697646]
-position = Vector2(364, 159)
+position = Vector2(359, 147)
 texture = ExtResource("3_jix8l")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1659671116]
@@ -120,5 +146,6 @@ visible = false
 
 [connection signal="pressed" from="Start" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Setttings" to="." method="_on_setttings_pressed"]
+[connection signal="pressed" from="Tutorial2" to="." method="_on_tutorial_2_pressed"]
 
 [editable path="LeaderBoard"]

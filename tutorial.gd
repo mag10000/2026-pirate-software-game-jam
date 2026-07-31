@@ -11,7 +11,6 @@ extends Node2D
 @export var image9: TextureRect
 @export var cycle_time = 1.0
 var total_time = cycle_time * 9 + 10
-var reset_cycle = false
 
 func cycle():
 	break_cycle()

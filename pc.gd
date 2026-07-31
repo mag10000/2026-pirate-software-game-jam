@@ -110,7 +110,7 @@ func _ready():
 	topWindow.hide()
 	update_day_hour_text()
 	Global.phase = 0
-	
+	Global.hour = 1
 	match Global.day:
 		1:
 			dateOnScreen.text = "07/31/2026"
@@ -216,8 +216,6 @@ func _process(delta):
 			Global.break_time_started = false
 			if Global.hour >= 8:
 				Global.day += 1
-				Global.hour = 1
-				# TODO - Check Minimum
 				if deposited_in_round < Global.minimumPay:
 					get_tree().change_scene_to_file("res://game_over.tscn")
 				elif Global.day == 5:
@@ -228,14 +226,12 @@ func _process(delta):
 					# TODO - Create scene for new_day
 					get_tree().change_scene_to_file("res://day_win.tscn")
 			else:
-				if deposited_in_round < Global.minimumPay:
-					get_tree().change_scene_to_file("res://game_over.tscn")
-				else:
-					await get_tree().create_timer(0.5).timeout
-					storeWindow.hide()
-					phase0Setup = true
-					Global.phase = 0
-					Global.hour += 1
+				await get_tree().create_timer(0.5).timeout
+				storeWindow.hide()
+				phase0Setup = true
+				Global.phase = 0
+				Global.hour += 1
+
 
 
 func seconds2hhmmss(total_seconds: float) -> String:

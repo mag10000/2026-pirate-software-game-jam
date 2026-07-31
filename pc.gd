@@ -136,8 +136,8 @@ func _process(delta):
 		Audio.play("res://sfx/MinimumMet.wav",true)
 		debtMinimumPayDisplay.text = "Minimum Payment Made!"
 	elif Global.debt <= 0:
-		debtAmountDisplay.text = "PROFIT!\n$" + str(Global.money)
-		debtMinimumPayDisplay.text = "NO MORE DEBT!\n"
+		debtAmountDisplay.text = "NO MORE DEBT!\nGO FOR PROFIT!"
+		debtMinimumPayDisplay.text = ""
 	elif (debt_due) > 0:
 		debtMinimumPayDisplay.text = "Minimum Payment Due Today\n$" + str(debt_due)
 		

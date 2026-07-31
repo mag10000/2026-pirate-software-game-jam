@@ -33,6 +33,8 @@ extends Control
 
 @export var debugScreen: CanvasLayer
 
+@export var dateOnScreen: Label
+
 @export_group("store")
 
 @export var item1: Button
@@ -108,6 +110,20 @@ func _ready():
 	topWindow.hide()
 	update_day_hour_text()
 	Global.phase = 0
+	
+	match Global.day:
+		1:
+			dateOnScreen.text = "07/31/2026"
+		2:
+			dateOnScreen.text = "08/01/2026"
+		3:
+			dateOnScreen.text = "08/02/2026"
+		4:
+			dateOnScreen.text = "08/03/2026"
+		5:
+			dateOnScreen.text = "08/04/2026"
+		_:
+			dateOnScreen.text = "07/31/2026"
 
 # Runs every frame
 func _process(delta):

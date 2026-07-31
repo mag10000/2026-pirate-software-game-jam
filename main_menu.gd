@@ -30,5 +30,8 @@ func cycle_leaderboard():
 
 
 func _input(event):
-	$LeaderBoard.hide()
-	$Tutorial.hide()
+	if event is InputEventMouseMotion:
+		return
+	else:
+		$LeaderBoard.hide()
+		$Tutorial.hide()

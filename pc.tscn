@@ -108,7 +108,7 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oj12w"]
 bg_color = Color(0, 1, 0, 1)
 
-[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtTitleDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "dayHourText", "workTimer", "breakTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "dayHourWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "MusicPlayer", "pauseScreen", "debugScreen", "item1", "item1Label", "item1TextureRect", "item2", "item2Label", "item2TextureRect", "item3", "item3Label", "item3TextureRect")]
+[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtTitleDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "dayHourText", "workTimer", "breakTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "dayHourWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "MusicPlayer", "pauseScreen", "debugScreen", "dateOnScreen", "item1", "item1Label", "item1TextureRect", "item2", "item2Label", "item2TextureRect", "item3", "item3Label", "item3TextureRect")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,6 +138,7 @@ tileGameReference = NodePath("work window/Main")
 MusicPlayer = NodePath("MusicPlayer")
 pauseScreen = NodePath("Pause Screen")
 debugScreen = NodePath("Debug Screen")
+dateOnScreen = NodePath("ComputerDate")
 item1 = NodePath("store window/storeitems/item1")
 item1Label = NodePath("store window/storeitems/item1discription")
 item1TextureRect = NodePath("store window/storeitems/item1/TextureRect")
@@ -164,7 +165,7 @@ offset_right = 640.0
 offset_bottom = 360.0
 texture = ExtResource("3_32g7d")
 
-[node name="Label" type="Label" parent="." unique_id=1737939297]
+[node name="ComputerDate" type="Label" parent="." unique_id=1737939297]
 layout_mode = 0
 offset_left = 558.0
 offset_top = 340.0

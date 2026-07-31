@@ -11,6 +11,7 @@ extends Node2D
 @export var image9: TextureRect
 @export var cycle_time = 1.0
 var total_time = cycle_time * 9 + 10
+var reset_cycle = false
 
 func cycle():
 	image1.show()
@@ -41,6 +42,9 @@ func cycle():
 	await get_tree().create_timer(cycle_time + 5).timeout
 	image9.hide()
 	hide()
+
+func break_cycle():
+	reset_cycle = 
 
 func _on_visibility_changed():
 	if visible:

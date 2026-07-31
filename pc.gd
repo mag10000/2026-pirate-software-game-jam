@@ -222,10 +222,10 @@ func _process(delta):
 				if Global.day == 5:
 					get_tree().change_scene_to_file("res://you_win_credits.tscn")
 				else:
-					Global.day += 1
 					raise_items_update()
 					update_minimum_debt_payment()
 					# TODO - Create scene for new_day
+					Global.day += 1
 					get_tree().change_scene_to_file("res://day_win.tscn")
 			else:
 				await get_tree().create_timer(0.5).timeout

@@ -217,7 +217,7 @@ func _process(delta):
 					raise_items_update()
 					update_minimum_debt_payment()
 					# TODO - Create scene for new_day
-					get_tree().change_scene_to_file("res://story_beat.tscn")
+					get_tree().change_scene_to_file("res://day_win.tscn")
 
 
 func seconds2hhmmss(total_seconds: float) -> String:

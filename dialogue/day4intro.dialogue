@@ -1,5 +1,5 @@
 ~ start
-Evil Banker: Impossible! You should have lost by now! If you make it to $3,000 in 8 hours I’ll start to sweat!
+Evil Banker: Impossible! Your home should be MINE by now! Try a $3,000 daily minimum on for size... No way you can work hard enough to make it this time!
 
 do new_day_text()
 => END

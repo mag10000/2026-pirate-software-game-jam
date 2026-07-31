@@ -228,11 +228,14 @@ func _process(delta):
 					# TODO - Create scene for new_day
 					get_tree().change_scene_to_file("res://day_win.tscn")
 			else:
-				await get_tree().create_timer(0.5).timeout
-				storeWindow.hide()
-				phase0Setup = true
-				Global.phase = 0
-				Global.hour += 1
+				if deposited_in_round < Global.minimumPay:
+					get_tree().change_scene_to_file("res://game_over.tscn")
+				else:
+					await get_tree().create_timer(0.5).timeout
+					storeWindow.hide()
+					phase0Setup = true
+					Global.phase = 0
+					Global.hour += 1
 
 
 func seconds2hhmmss(total_seconds: float) -> String:
@@ -640,17 +643,18 @@ func _unhandled_input(event):
 			bankWindow.grab_focus()
 
 func debug():
-	if not debugScreen.visible:
-		MusicPlayer.volume_db = -40
-		topWindow.hide()
-		$"work window/Title".hide()
-		bankWindow.hide()
-		timerWindow.hide()
-		dayHourWindow.hide()
-		itemWindow.hide()
-		storeWindow.hide()
-		Engine.time_scale = 0
-		debugScreen.show()
+	pass
+	#if not debugScreen.visible:
+		#MusicPlayer.volume_db = -40
+		#topWindow.hide()
+		#$"work window/Title".hide()
+		#bankWindow.hide()
+		#timerWindow.hide()
+		#dayHourWindow.hide()
+		#itemWindow.hide()
+		#storeWindow.hide()
+		#Engine.time_scale = 0
+		#debugScreen.show()
 
 
 func _on_x_button_pressed():

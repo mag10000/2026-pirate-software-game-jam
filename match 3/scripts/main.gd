@@ -129,7 +129,7 @@ func initial_spawn(x, y, blanks: bool):
 	
 	created_piece.set_tile_type(str(random_index), textures[random_index]) 
 	created_piece.tile_pressed.connect(_on_tile_pressed)
-	created_piece.tile_dpad_swap.connect(_on_tile_dpad_swap)
+	#created_piece.tile_dpad_swap.connect(_on_tile_dpad_swap)
 	created_piece.grid_position = Vector2i(x, y) 
 	created_piece.position = grid_to_pixel(x, y) 
 	
@@ -154,7 +154,7 @@ func spawn_at(x, y, blanks: bool):
 	
 	created_piece.set_tile_type(str(random_index), textures[random_index]) 
 	created_piece.tile_pressed.connect(_on_tile_pressed)
-	created_piece.tile_dpad_swap.connect(_on_tile_dpad_swap)
+	#created_piece.tile_dpad_swap.connect(_on_tile_dpad_swap)
 	created_piece.grid_position = Vector2i(x, y) 
 	created_piece.position = grid_to_pixel(x, y) 
 	
@@ -168,7 +168,7 @@ func spawn_specific_at(x, y, type: String):
 	
 	created_piece.set_tile_type(type, textures[int(type)])
 	created_piece.tile_pressed.connect(_on_tile_pressed)
-	created_piece.tile_dpad_swap.connect(_on_tile_dpad_swap)
+	#created_piece.tile_dpad_swap.connect(_on_tile_dpad_swap)
 	created_piece.grid_position = Vector2i(x, y) 
 	created_piece.position = grid_to_pixel(x, y) 
 	
@@ -226,44 +226,44 @@ func _on_tile_pressed(grid_position: Vector2i):
 		first_touch = grid_position
 
 
-func _on_tile_dpad_swap(direction_to_swap : String, grid_position: Vector2):
-
-	print (grid_position)
-	first_touch = grid_position
-	var difference = grid_position - grid_to_pixel(first_touch.x, first_touch.y)
-	print(difference)
-	if (grid[first_touch.x][first_touch.y].type == "0"):
-		return
-	
-	if difference.length() > 32:
-		var other_position = grid_position
-		if abs(difference.x) > abs(difference.y): # Horizontal dragging
-			other_position.x += 1 if difference.x > 0 else -1
-		else: # Vertical dragging
-			other_position.y += 1 if difference.y > 0 else -1
-	
-		match direction_to_swap:
-			"up":
-				other_position.y += 1
-			"down":
-				other_position.y -= 1
-			"left":
-				other_position.x -= 1
-			"right":
-				other_position.x += 1
-		#TODO - Logic to figure out the grid position
-		
-		print(other_position)
-		if is_within_grid(other_position):
-			#print (grid_position)
-			#print (other_position)
-			# If one of the blocks is an Error block that can't move then return
-			if (grid[grid_position.x][grid_position.y].type == "7" || grid[other_position.x][other_position.y].type == "7"):
-				return
-			handle_swap_logic(grid_position, other_position)
-			Audio.play("res://match 3/sounds/tile-swap.ogg", false, randf_range(0.8, 1.2), 0.3)
-			
-	first_touch = Vector2i(-1, -1)
+#func _on_tile_dpad_swap(direction_to_swap : String, grid_position: Vector2):
+#
+	#print (grid_position)
+	#first_touch = grid_position
+	#var difference = grid_position - grid_to_pixel(first_touch.x, first_touch.y)
+	#print(difference)
+	#if (grid[first_touch.x][first_touch.y].type == "0"):
+		#return
+	#
+	#if difference.length() > 32:
+		#var other_position = grid_position
+		#if abs(difference.x) > abs(difference.y): # Horizontal dragging
+			#other_position.x += 1 if difference.x > 0 else -1
+		#else: # Vertical dragging
+			#other_position.y += 1 if difference.y > 0 else -1
+	#
+		#match direction_to_swap:
+			#"up":
+				#other_position.y += 1
+			#"down":
+				#other_position.y -= 1
+			#"left":
+				#other_position.x -= 1
+			#"right":
+				#other_position.x += 1
+		##TODO - Logic to figure out the grid position
+		#
+		#print(other_position)
+		#if is_within_grid(other_position):
+			##print (grid_position)
+			##print (other_position)
+			## If one of the blocks is an Error block that can't move then return
+			#if (grid[grid_position.x][grid_position.y].type == "7" || grid[other_position.x][other_position.y].type == "7"):
+				#return
+			#handle_swap_logic(grid_position, other_position)
+			#Audio.play("res://match 3/sounds/tile-swap.ogg", false, randf_range(0.8, 1.2), 0.3)
+			#
+	#first_touch = Vector2i(-1, -1)
 
 func _input(event):
 	

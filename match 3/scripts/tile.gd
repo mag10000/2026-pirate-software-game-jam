@@ -68,31 +68,30 @@ func _on_button_mouse_exited():
 	tween.tween_property($Sprite2D, "scale", Vector2(1.0, 1.0), 0.1)
 	tween.tween_property($Sprite2D, "modulate", Color(1, 1, 1), 0.1)
 
-
-func _unhandled_input(event):
-	if Input.is_action_just_pressed("up"):
-		print(grid_position)
-		if dpad_pressing == false:
-			dpad_pressing = true
-			tile_dpad_swap.emit("up",grid_position)
-			await get_tree().create_timer(1).timeout
-			dpad_pressing = false
-	if Input.is_action_just_pressed("down"):
-		if dpad_pressing == false:
-			dpad_pressing = true
-			dpad_pressing = true
-			tile_dpad_swap.emit("down",grid_position)
-			await get_tree().create_timer(0.3).timeout
-			dpad_pressing = false
-	if Input.is_action_just_pressed("left"):
-		if dpad_pressing == false:
-			dpad_pressing = true
-			tile_dpad_swap.emit("left",grid_position)
-			await get_tree().create_timer(0.3).timeout
-			dpad_pressing = false
-	if Input.is_action_just_pressed("right"):
-		if dpad_pressing == false:
-			dpad_pressing = true
-			tile_dpad_swap.emit("right",grid_position)
-			await get_tree().create_timer(0.3).timeout
-			dpad_pressing = false
+#func _unhandled_input(event):
+	#if Input.is_action_just_pressed("up"):
+		#print(grid_position)
+		#if dpad_pressing == false:
+			#dpad_pressing = true
+			#tile_dpad_swap.emit("up",grid_position)
+			#await get_tree().create_timer(1).timeout
+			#dpad_pressing = false
+	#if Input.is_action_just_pressed("down"):
+		#if dpad_pressing == false:
+			#dpad_pressing = true
+			#dpad_pressing = true
+			#tile_dpad_swap.emit("down",grid_position)
+			#await get_tree().create_timer(0.3).timeout
+			#dpad_pressing = false
+	#if Input.is_action_just_pressed("left"):
+		#if dpad_pressing == false:
+			#dpad_pressing = true
+			#tile_dpad_swap.emit("left",grid_position)
+			#await get_tree().create_timer(0.3).timeout
+			#dpad_pressing = false
+	#if Input.is_action_just_pressed("right"):
+		#if dpad_pressing == false:
+			#dpad_pressing = true
+			#tile_dpad_swap.emit("right",grid_position)
+			#await get_tree().create_timer(0.3).timeout
+			#dpad_pressing = false

@@ -65,15 +65,15 @@ func show_text():
 	var itemstext = ""
 	match Global.day:
 		1:
-			info_text_label.text = "Match ICONS for $$$   COMBOS payout HIGHER!!"
+			info_text_label.text = "Match ICONS for $$$!   COMBOS payout HIGHER!!"
 		2:
-			info_text_label.text = "You got a RAISE!   COMBOS payout EVEN HIGHER!!"
+			info_text_label.text = "ITEMS can STACK together!   WORK EFFICIENTLY!!"
 		3:
-			info_text_label.text = "You got another RAISE!  You're a GOOD WORKER!!"
+			info_text_label.text = "Only 8 HOURS in a DAY!   Keep track of TIME!!"
 		4:
-			info_text_label.text = "You got another RAISE!  LOOK OUT for VIRUSES!!"
+			info_text_label.text = "Even more ICON varieties!  LOOK OUT for VIRUSES!!"
 		5:
-			info_text_label.text = "You got your last RAISE!!   BRING IT HOME!!!"
+			info_text_label.text = "Almost at the end now!  LET'S MAKE SOME MONEY!!!"
 	#for icon in Global.newIconsForRound[Global.day]:
 		#match icon:
 			#1:

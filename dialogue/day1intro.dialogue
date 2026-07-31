@@ -1,5 +1,5 @@
 ~ start
-Evil Banker: You only have the 8 hour work day to pay off $500 of your debt! Can you make it?
+Evil Banker: You got a little too comfortable with the credit card, Ziggy. If you don't hit the $500 minimum payment by end of day, you're finished!
 
 do new_day_text()
 => END

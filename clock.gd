@@ -8,4 +8,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$hour.points[0] = Global.clock_hand_pos[Global.hour - 1]
+	if (Global.hour !=9):
+		$hour.points[0] = Global.clock_hand_pos[Global.hour - 1]

@@ -1,4 +1,4 @@
 ~ start
-Evil Banker: You failed to meet your minimum payment. I’m gonna foreclose on everything you own!
+Evil Banker: You failed to meet your minimum payment.
 do load_scene("res://game_over.tscn")
 => END

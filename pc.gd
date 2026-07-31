@@ -129,12 +129,11 @@ func _ready():
 
 # Runs every frame
 func _process(delta):
-	if day1hour1Setup == false:
+	if Global.day == 1 && day1hour1Setup == false:
 		day1hour1Setup = true
 		InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 3)
 		InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 3)
-		InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 3)
-	
+		InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 3)	
 	crtFilerOn = Global.crt_on
 	if crtFilerOn:
 		$CRTScreen.show()
@@ -222,6 +221,7 @@ func _process(delta):
 					get_tree().change_scene_to_file("res://game_over.tscn")
 				if Global.day == 5:
 					get_tree().change_scene_to_file("res://you_win_credits.tscn")
+				else:
 					Global.day += 1
 					raise_items_update()
 					update_minimum_debt_payment()

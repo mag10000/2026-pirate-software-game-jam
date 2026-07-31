@@ -106,6 +106,7 @@ func _ready():
 	storeWindow.hide()
 	topWindow.hide()
 	update_day_hour_text()
+	Global.phase = 0
 
 # Runs every frame
 func _process(delta):
@@ -129,15 +130,15 @@ func _process(delta):
 	else:
 		debt_due = Global.minimumPay
 	
-	if Global.debt < 0:
-		debtMinimumPayDisplay.text = "PROFIT!\n$" + str(0-Global.debt)
-	if (debt_due) > 0:
-		debtMinimumPayDisplay.text = "Minimum Payment Due Today\n$" + str(debt_due)
-	elif (debt_due == 0 && celebrate) == false:
+	if (debt_due <= 0 && celebrate == false):
 		celebrate = true
 		Audio.play("res://sfx/MinimumMet.wav",true)
 		debtMinimumPayDisplay.text = "Minimum Payment Made!\n For Today..."
-	elif (debt_due < 0):
+	elif Global.debt <= 0:
+		debtMinimumPayDisplay.text = "PROFIT!\n$" + str(Global.money)
+	elif (debt_due) > 0:
+		debtMinimumPayDisplay.text = "Minimum Payment Due Today\n$" + str(debt_due)
+	elif (debt_due <= 0):
 		debtMinimumPayDisplay.text = "Minimum Payment Made!\n For Today..."
 	progressBar.value = time
 	update_day_hour_text()
@@ -197,14 +198,14 @@ func _process(delta):
 			breakTimer.stop()
 			Global.break_time_started = false
 			if Global.hour >= 8:
+				Global.day += 1
+				Global.hour = 1
 				# TODO - Check Minimum
 				if deposited_in_round < Global.minimumPay:
 					get_tree().change_scene_to_file("res://game_over.tscn")
 				elif Global.day == 5:
 					get_tree().change_scene_to_file("res://you_win_credits.tscn")
 				else:
-					Global.day += 1
-					Global.hour = 1
 					raise_items_update()
 					update_minimum_debt_payment()
 					# TODO - Create scene for new_day
@@ -622,18 +623,17 @@ func _unhandled_input(event):
 			bankWindow.grab_focus()
 
 func debug():
-	pass
-		#if not debugScreen.visible:
-		#	MusicPlayer.volume_db = -40
-		#	topWindow.hide()
-		#	$"work window/Title".hide()
-		#	bankWindow.hide()
-		#	timerWindow.hide()
-		#	dayHourWindow.hide()
-		#	itemWindow.hide()
-		#	storeWindow.hide()
-		#	Engine.time_scale = 0
-		#	debugScreen.show()
+	if not debugScreen.visible:
+		MusicPlayer.volume_db = -40
+		topWindow.hide()
+		$"work window/Title".hide()
+		bankWindow.hide()
+		timerWindow.hide()
+		dayHourWindow.hide()
+		itemWindow.hide()
+		storeWindow.hide()
+		Engine.time_scale = 0
+		debugScreen.show()
 
 
 func _on_x_button_pressed():

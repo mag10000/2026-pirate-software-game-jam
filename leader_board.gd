@@ -1,7 +1,10 @@
 extends Control
 
 func _ready():
-	$score.text += "$" + format_number(Global.money-Global.debt)
+	if (Global.debt <= 0):
+		$score.text += "$" + format_number(Global.money)
+	else: 
+		$score.text += "$" + format_number(Global.money- Global.debt)
 	get_scores()
 
 func get_scores():

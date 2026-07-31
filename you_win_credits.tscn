@@ -1,10 +1,29 @@
 [gd_scene format=3 uid="uid://21sbyt4uks1r"]
 
 [ext_resource type="Script" uid="uid://dvtpoi7ls754c" path="res://you_win_credits.gd" id="1_s1ic0"]
+[ext_resource type="Texture2D" uid="uid://bx2els8um6ix7" path="res://art/Main_Menu_BG.png" id="2_ma4je"]
 [ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="3_s1ic0"]
 [ext_resource type="Texture2D" uid="uid://ca3nrc25pjbit" path="res://art/HyperDebtSwap_logo_v2.png" id="3_v2j0v"]
+[ext_resource type="Texture2D" uid="uid://dk8lhsxgsnr5r" path="res://Starburst.png" id="4_5yu2j"]
 [ext_resource type="AudioStream" uid="uid://bjylr1h6vlsjl" path="res://music/Victory Jam.wav" id="4_v2j0v"]
+[ext_resource type="Script" uid="uid://dv2k8owiih7xh" path="res://spin.gd" id="5_c5d70"]
 [ext_resource type="PackedScene" uid="uid://ce6h03dkleugn" path="res://leader_board.tscn" id="5_txgdd"]
+[ext_resource type="Texture2D" uid="uid://dspcfx2wqrlq" path="res://art/Ziggy_Happy_1.png" id="6_yqth1"]
+[ext_resource type="Texture2D" uid="uid://b4an5sxpx7vym" path="res://art/Ziggy_Happy_2.png" id="7_6b1j2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qdjen"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_yqth1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6b1j2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.5
+}]
 
 [sub_resource type="Animation" id="Animation_nqk0f"]
 resource_name = "fade"
@@ -58,7 +77,7 @@ _data = {
 &"fade": SubResource("Animation_nqk0f")
 }
 
-[node name="You Win" type="Control" unique_id=1602707038]
+[node name="You Win" type="Control" unique_id=1602707038 node_paths=PackedStringArray("scoreLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,6 +85,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s1ic0")
+scoreLabel = NodePath("Scores")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1277404989]
 layout_mode = 1
@@ -75,6 +95,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="MainMenuBg" type="Sprite2D" parent="." unique_id=1281781597]
+position = Vector2(320, 180)
+texture = ExtResource("2_ma4je")
+
 [node name="YOU WIN" type="Label" parent="." unique_id=850907030]
 layout_mode = 1
 anchors_preset = 8
@@ -82,10 +106,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -203.5
-offset_top = -181.0
-offset_right = 203.5
-offset_bottom = 99.0
+offset_left = -123.0
+offset_top = -120.0
+offset_right = 284.0
+offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 16
@@ -102,17 +126,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -192.0
-offset_top = -105.0
-offset_right = 215.0
-offset_bottom = 175.0
+offset_left = -116.0
+offset_top = -65.0
+offset_right = 291.0
+offset_bottom = 238.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("3_s1ic0")
-theme_override_font_sizes/font_size = 48
-text = "PROFIT: $
-TOTAL $ EARNED: $
+theme_override_font_sizes/font_size = 32
+text = "
 
 
 
@@ -135,7 +158,7 @@ grow_vertical = 2
 theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("3_s1ic0")
 theme_override_font_sizes/font_size = 48
-text = "DESIGN
+text = "DESIGN AND ART
 David Howe
 
 CODE
@@ -144,7 +167,7 @@ Magnus Knisely
 ART AND CODE
 Patrick Knisely
 
-AUDIO
+MUSIC AND SFX
 Numbra"
 horizontal_alignment = 1
 
@@ -168,6 +191,18 @@ text = "Stick around to post
 your score to the leaderboard"
 horizontal_alignment = 1
 
+[node name="Starburst" type="Sprite2D" parent="Scores" unique_id=1990908231]
+position = Vector2(-60, 72)
+texture = ExtResource("4_5yu2j")
+script = ExtResource("5_c5d70")
+speed = 0.05
+
+[node name="ZiggyHappy1" type="AnimatedSprite2D" parent="Scores" unique_id=784190910]
+position = Vector2(-57.999943, 85.00001)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_qdjen")
+autoplay = "default"
+
 [node name="Button" type="Button" parent="." unique_id=274403113]
 layout_mode = 1
 anchors_preset = 8
@@ -175,10 +210,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -84.0
-offset_top = 18.5
-offset_right = 84.0
-offset_bottom = 49.5
+offset_left = -3.0
+offset_top = 73.0
+offset_right = 165.0
+offset_bottom = 113.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)

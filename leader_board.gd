@@ -1,7 +1,7 @@
 extends Control
 
 func _ready():
-	$score.text += "$" + format_number(0-Global.debt)
+	$score.text += "$" + format_number(Global.money-Global.debt)
 	get_scores()
 
 func get_scores():
@@ -44,7 +44,7 @@ func format_number(number: int) -> String:
 
 
 func _on_submit_pressed():
-	SilentWolf.Scores.save_score($LineEdit.text.to_upper(), 0-Global.money_earned)
+	SilentWolf.Scores.save_score($LineEdit.text.to_upper(), Global.money-Global.debt)
 	$submit.disabled = true
 	get_scores()
 

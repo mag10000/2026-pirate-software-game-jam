@@ -2,6 +2,19 @@ extends Control
 
 var scroll = false
 
+@export var scoreLabel: Label
+
+var earnedScore
+var profitScore
+
+func _ready():
+	earnedScore = str(Global.money_earned)
+	profitScore = str(Global.money)
+	scoreLabel.text = "PROFIT: " + "
+$"+ profitScore + "
+TOTAL EARNED: " + "
+$" + earnedScore
+
 func _on_button_pressed():
 	$Button.disabled = true
 	$AnimationPlayer.play("fade")

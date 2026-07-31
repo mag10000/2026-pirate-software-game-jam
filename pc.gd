@@ -214,19 +214,19 @@ func _process(delta):
 			Global.break_time_started = true
 
 		if time == 0:
+			print(Global.day)
 			breakTimer.stop()
 			Global.break_time_started = false
 			if Global.hour >= 8:
-				Global.day += 1
 				if deposited_in_round < Global.minimumPay:
 					get_tree().change_scene_to_file("res://game_over.tscn")
-				elif Global.day == 5:
+				if Global.day == 5:
 					get_tree().change_scene_to_file("res://you_win_credits.tscn")
-				else:
-					raise_items_update()
-					update_minimum_debt_payment()
-					# TODO - Create scene for new_day
-					get_tree().change_scene_to_file("res://day_win.tscn")
+				Global.day += 1
+				raise_items_update()
+				update_minimum_debt_payment()
+				# TODO - Create scene for new_day
+				get_tree().change_scene_to_file("res://day_win.tscn")
 			else:
 				await get_tree().create_timer(0.5).timeout
 				storeWindow.hide()

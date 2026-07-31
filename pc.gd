@@ -52,6 +52,8 @@ extends Control
 @export var itemSoldOutArt: Texture
 @export var crtFilerOn = true
 
+var is_skipping = false
+
 # Pause variable...
 var topWindowVisible = false
 
@@ -776,4 +778,8 @@ func reset_item_limit_on_round():
 	missleInRound = 0
 
 func _on_skip_pressed():
-	time = 0
+	if is_skipping == false:
+		is_skipping = true
+		time = 0
+		await get_tree().create_timer(0.5).timeout	
+		is_skipping = false	

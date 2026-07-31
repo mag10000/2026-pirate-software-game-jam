@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://fk5smvrckvqb"]
+
+[ext_resource type="Texture2D" uid="uid://dspcfx2wqrlq" path="res://art/Ziggy_Happy_1.png" id="1_toqtt"]
+[ext_resource type="Texture2D" uid="uid://dk8lhsxgsnr5r" path="res://Starburst.png" id="2_qpf2h"]
+[ext_resource type="Texture2D" uid="uid://b4an5sxpx7vym" path="res://art/Ziggy_Happy_2.png" id="2_t8d6e"]
+[ext_resource type="Texture2D" uid="uid://bx2els8um6ix7" path="res://art/Main_Menu_BG.png" id="3_67wb4"]
+[ext_resource type="FontFile" uid="uid://bnieecfp18o8k" path="res://Match 8h.ttf" id="4_67wb4"]
+[ext_resource type="Script" uid="uid://dv2k8owiih7xh" path="res://spin.gd" id="5_5rono"]
+[ext_resource type="AudioStream" uid="uid://ctitga27g5vsg" path="res://music/Winner.wav" id="5_67wb4"]
+[ext_resource type="FontFile" uid="uid://bmttpf1ckj2ny" path="res://Match 7h.ttf" id="5_kcreh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_toqtt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_toqtt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_t8d6e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.5
+}]
+
+[node name="DayWin" type="Node2D" unique_id=1455386856]
+
+[node name="MainMenuBg" type="Sprite2D" parent="." unique_id=1964556040]
+position = Vector2(320, 180)
+texture = ExtResource("3_67wb4")
+
+[node name="Starburst" type="Sprite2D" parent="." unique_id=1358886501]
+position = Vector2(465, 187)
+texture = ExtResource("2_qpf2h")
+script = ExtResource("5_5rono")
+speed = 0.05
+
+[node name="ZiggyHappy1" type="AnimatedSprite2D" parent="." unique_id=1252013728]
+position = Vector2(467, 200)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_toqtt")
+autoplay = "default"
+frame_progress = 0.6341088
+
+[node name="Button" type="Button" parent="." unique_id=1609098621]
+offset_left = 66.0
+offset_top = 269.0
+offset_right = 157.0
+offset_bottom = 300.0
+theme_override_fonts/font = ExtResource("5_kcreh")
+theme_override_font_sizes/font_size = 32
+text = "CONTINUE"
+
+[node name="Text1" type="Label" parent="." unique_id=1053124987]
+offset_left = 33.0
+offset_top = 82.0
+offset_right = 263.0
+offset_bottom = 114.0
+theme_override_fonts/font = ExtResource("4_67wb4")
+theme_override_font_sizes/font_size = 32
+text = "CONGRATULATIONS!"
+
+[node name="Text2" type="Label" parent="." unique_id=1646120796]
+offset_left = 33.0
+offset_top = 136.0
+offset_right = 437.0
+offset_bottom = 203.0
+theme_override_fonts/font = ExtResource("4_67wb4")
+theme_override_font_sizes/font_size = 32
+text = "YOU PAID OFF A BIT
+OF YOUR DEBT!"
+
+[node name="Text3" type="Label" parent="." unique_id=785553301]
+offset_left = 33.0
+offset_top = 229.0
+offset_right = 235.0
+offset_bottom = 261.0
+theme_override_fonts/font = ExtResource("4_67wb4")
+theme_override_font_sizes/font_size = 32
+text = "YOU GOT A RAISE!"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1412338263]
+stream = ExtResource("5_67wb4")
+autoplay = true
+bus = &"Sfx"

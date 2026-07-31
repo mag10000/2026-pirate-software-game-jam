@@ -196,15 +196,6 @@ func _process(delta):
 		if time == 0:
 			breakTimer.stop()
 			Global.break_time_started = false
-			if Global.hour == 8:
-				pass
-			else:
-				await get_tree().create_timer(0.5).timeout
-				storeWindow.hide()
-				phase0Setup = true
-				Global.phase = 0
-				Global.hour += 1
-
 			if Global.hour >= 8:
 				# TODO - Check Minimum
 				if deposited_in_round < Global.minimumPay:
@@ -218,6 +209,12 @@ func _process(delta):
 					update_minimum_debt_payment()
 					# TODO - Create scene for new_day
 					get_tree().change_scene_to_file("res://day_win.tscn")
+			else:
+				await get_tree().create_timer(0.5).timeout
+				storeWindow.hide()
+				phase0Setup = true
+				Global.phase = 0
+				Global.hour += 1
 
 
 func seconds2hhmmss(total_seconds: float) -> String:

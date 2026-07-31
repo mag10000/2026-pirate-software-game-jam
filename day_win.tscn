@@ -40,7 +40,7 @@ position = Vector2(467, 200)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_toqtt")
 autoplay = "default"
-frame_progress = 0.60612196
+frame_progress = 0.02592963
 
 [node name="Button" type="Button" parent="." unique_id=1609098621]
 offset_left = 66.0

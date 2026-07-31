@@ -44,7 +44,8 @@ func cycle():
 	hide()
 
 func break_cycle():
-	reset_cycle = 
+	#reset_cycle = 
+	pass
 
 func _on_visibility_changed():
 	if visible:

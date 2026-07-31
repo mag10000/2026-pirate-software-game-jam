@@ -2,6 +2,7 @@ extends Control
 
 # Export Variables
 @export var earningsAmountDisplay: Label
+@export var debtTitleDisplay: Label
 @export var debtAmountDisplay: Label
 @export var debtMinimumPayDisplay: Label
 @export var scrollAlertText: Label
@@ -130,16 +131,16 @@ func _process(delta):
 	else:
 		debt_due = Global.minimumPay
 	
-	if (debt_due <= 0 && celebrate == false):
+	if (debt_due == 0 && celebrate == false):
 		celebrate = true
 		Audio.play("res://sfx/MinimumMet.wav",true)
-		debtMinimumPayDisplay.text = "Minimum Payment Made!\n For Today..."
+		debtMinimumPayDisplay.text = "Minimum Payment Made!"
 	elif Global.debt <= 0:
-		debtMinimumPayDisplay.text = "PROFIT!\n$" + str(Global.money)
+		debtAmountDisplay.text = "PROFIT!\n$" + str(Global.money)
+		debtMinimumPayDisplay.text = "NO MORE DEBT!\n"
 	elif (debt_due) > 0:
 		debtMinimumPayDisplay.text = "Minimum Payment Due Today\n$" + str(debt_due)
-	elif (debt_due <= 0):
-		debtMinimumPayDisplay.text = "Minimum Payment Made!\n For Today..."
+		
 	progressBar.value = time
 	update_day_hour_text()
 	

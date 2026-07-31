@@ -108,7 +108,7 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oj12w"]
 bg_color = Color(0, 1, 0, 1)
 
-[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "dayHourText", "workTimer", "breakTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "dayHourWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "MusicPlayer", "pauseScreen", "debugScreen", "item1", "item1Label", "item1TextureRect", "item2", "item2Label", "item2TextureRect", "item3", "item3Label", "item3TextureRect")]
+[node name="PC" type="Control" unique_id=354160987 node_paths=PackedStringArray("earningsAmountDisplay", "debtTitleDisplay", "debtAmountDisplay", "debtMinimumPayDisplay", "scrollAlertText", "dayHourText", "workTimer", "breakTimer", "workWindow", "bankWindow", "itemWindow", "storeWindow", "topWindow", "timerWindow", "dayHourWindow", "progressBar", "depositButton", "scrollAlertTextAnimation", "tileGameReference", "MusicPlayer", "pauseScreen", "debugScreen", "item1", "item1Label", "item1TextureRect", "item2", "item2Label", "item2TextureRect", "item3", "item3Label", "item3TextureRect")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -117,7 +117,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_de6uy")
 earningsAmountDisplay = NodePath("bank account window/EarningsAmountText")
-debtAmountDisplay = NodePath("bank account window/debt/Money Display")
+debtTitleDisplay = NodePath("bank account window/debt/Debt Title")
+debtAmountDisplay = NodePath("bank account window/debt/Debt Amount Display")
 debtMinimumPayDisplay = NodePath("bank account window/debt/Min Debt")
 scrollAlertText = NodePath("top window/Label")
 dayHourText = NodePath("day hour window/Control/Day and Hour Text")
@@ -289,7 +290,7 @@ offset_top = 69.0
 offset_right = 40.0
 offset_bottom = 109.0
 
-[node name="Title" type="Label" parent="bank account window/debt" unique_id=1542182676]
+[node name="Debt Title" type="Label" parent="bank account window/debt" unique_id=1542182676]
 layout_mode = 0
 offset_top = -13.0
 offset_right = 215.0
@@ -302,7 +303,7 @@ theme_override_font_sizes/font_size = 24
 text = "Debt"
 horizontal_alignment = 1
 
-[node name="Money Display" type="Label" parent="bank account window/debt" unique_id=423204325]
+[node name="Debt Amount Display" type="Label" parent="bank account window/debt" unique_id=423204325]
 layout_mode = 0
 offset_top = 10.0
 offset_right = 215.0

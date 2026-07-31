@@ -1,5 +1,5 @@
 ~ start
-Evil Banker: Ho ho, Ziggy! Anyone can do that... I'm inceasing your daily minimum! Can you pay it off? There are only 8 hours in the work day...
+Evil Banker: Ho ho, Ziggy! Anyone can do that... I'm increasing your daily minimum! Can you pay it off? There are only 8 hours in the work day...
 
 do new_day_text()
 => END

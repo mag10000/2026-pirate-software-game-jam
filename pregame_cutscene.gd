@@ -81,5 +81,5 @@ func load_main_menu():
 	get_tree().change_scene_to_file("res://main_menu.tscn")
 
 
-func _on_button_pressed():
+func _on_skip_button_pressed():
 	load_main_menu()

@@ -622,17 +622,18 @@ func _unhandled_input(event):
 			bankWindow.grab_focus()
 
 func debug():
-		if not debugScreen.visible:
-			MusicPlayer.volume_db = -40
-			topWindow.hide()
-			$"work window/Title".hide()
-			bankWindow.hide()
-			timerWindow.hide()
-			dayHourWindow.hide()
-			itemWindow.hide()
-			storeWindow.hide()
-			Engine.time_scale = 0
-			debugScreen.show()
+	pass
+		#if not debugScreen.visible:
+		#	MusicPlayer.volume_db = -40
+		#	topWindow.hide()
+		#	$"work window/Title".hide()
+		#	bankWindow.hide()
+		#	timerWindow.hide()
+		#	dayHourWindow.hide()
+		#	itemWindow.hide()
+		#	storeWindow.hide()
+		#	Engine.time_scale = 0
+		#	debugScreen.show()
 
 
 func _on_x_button_pressed():

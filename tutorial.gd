@@ -14,6 +14,7 @@ var total_time = cycle_time * 9 + 10
 var reset_cycle = false
 
 func cycle():
+	break_cycle()
 	image1.show()
 	await get_tree().create_timer(cycle_time).timeout
 	image1.hide()
@@ -44,9 +45,16 @@ func cycle():
 	hide()
 
 func break_cycle():
-	#reset_cycle = 
-	pass
-
+	image1.hide()
+	image2.hide()
+	image3.hide()
+	image4.hide()
+	image5.hide()
+	image6.hide()
+	image7.hide()
+	image8.hide()
+	image9.hide()
+	
 func _on_visibility_changed():
 	if visible:
 		cycle()

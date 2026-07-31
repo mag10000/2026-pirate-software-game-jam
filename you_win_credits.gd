@@ -11,9 +11,7 @@ func _ready():
 	earnedScore = str(Global.money_earned)
 	profitScore = str(Global.money)
 	scoreLabel.text = "PROFIT: " + "
-$"+ profitScore + "
-TOTAL EARNED: " + "
-$" + earnedScore
+$"+ profitScore 
 
 func _on_button_pressed():
 	$Button.disabled = true

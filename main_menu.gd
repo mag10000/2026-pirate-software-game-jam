@@ -18,17 +18,14 @@ func _on_setttings_pressed():
 
 
 func cycle_leaderboard():
-	$LeaderBoard.get_scores()
 	await get_tree().create_timer(5).timeout
-	$Tutorial.hide()
+	$Tutorial.show()
+	await get_tree().create_timer($Tutorial.total_time + 10).timeout
 	$LeaderBoard.get_scores()
 	$LeaderBoard.show()
 	await get_tree().create_timer(5).timeout
-	$LeaderBoard.get_scores()
 	$LeaderBoard.hide()
 	$Tutorial.show()
-	await get_tree().create_timer($Tutorial.total_time).timeout
-	await get_tree().create_timer(4).timeout
 	cycle_leaderboard()
 
 

@@ -10,7 +10,7 @@ extends Node2D
 @export var image8: TextureRect
 @export var image9: TextureRect
 @export var cycle_time = 1.0
-var total_time = cycle_time * 9
+var total_time = cycle_time * 9 + 10
 
 func cycle():
 	image1.show()
@@ -23,7 +23,7 @@ func cycle():
 	await get_tree().create_timer(cycle_time).timeout
 	image3.hide()
 	image4.show()
-	await get_tree().create_timer(cycle_time).timeout
+	await get_tree().create_timer(cycle_time + 5).timeout
 	image4.hide()
 	image5.show()
 	await get_tree().create_timer(cycle_time).timeout
@@ -38,7 +38,7 @@ func cycle():
 	await get_tree().create_timer(cycle_time).timeout
 	image8.hide()
 	image9.show()
-	await get_tree().create_timer(cycle_time).timeout
+	await get_tree().create_timer(cycle_time + 5).timeout
 	image9.hide()
 	hide()
 

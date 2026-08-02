@@ -45,28 +45,34 @@ var spawn_count = 0
 # Functions
 
 func _ready():
-	iconArray = Global.iconsForRound[Global.day].duplicate(true)
+	# Get the correct array for the day
+	refresh_icons()
+	
+	# Get a new random number seed
 	randomize()
 	
+	# Setup the grid and process the board state
 	setup_grid_array() 
 	process_board_state()
-	
+	# TODO - REVIEW THIS AND SEE IF WE STILL NEED IT IN CURRENT SITUATION
+	# Centers the board on-screen, the above conection ensures 
+	#the board is centered after resizing the window
 	center_grid_on_screen() 
-	
 	get_viewport().size_changed.connect(center_grid_on_screen)
+	
+	# Set the values for the amount of money you can earn for the day
 	amount_tile = Global.amt_earned_icon
 	amount_combo = Global.amt_earned_combos
 	
-# Centers the board on-screen, the above conection ensures the board is centered after resizing the window
-
+# Centers the grid on the screen
 func center_grid_on_screen():
 	
 	container.position = get_viewport_rect().size / 2.0 - Vector2(width - 1, height - 1) * offset / 2.0
 
 # Initialize grid
-
 func setup_grid_array():
 	
+	# Create an array of the correct size
 	grid = []
 	for x in width:
 		grid.append([])
@@ -74,12 +80,12 @@ func setup_grid_array():
 		grid[x].fill(null)
 		
 	# Spawn initial pieces
-	
 	for x in width:
 		for y in height:
 			#print(x, y)
 			initial_spawn(x, y, false)
 	
+	# Reset the evil block count and spawn count to zero
 	evil_block_count = 0
 	spawn_count = 0
 
@@ -175,9 +181,6 @@ func spawn_specific_at(x, y, type: String):
 	grid[x][y] = created_piece
 
 func check_neighbors(x, y, random_index) -> bool:
-	#TODO - This sin't right, we can't just flag as false if either is true, have to check
-	#specifically within that function
-	#print(x, y)
 	if x == 0:
 		if y == 0:
 			return false
@@ -306,7 +309,7 @@ func handle_swap_logic(pos_a: Vector2i, pos_b: Vector2i):
 	is_swapping = true
 	swap_pieces(pos_a, pos_b)
 	
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.2).timeout
 	
 	process_board_state()
 	
@@ -351,7 +354,7 @@ func swap_pieces(a: Vector2i, b: Vector2i):
 
 		#SFX for Virus?
 		
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.2).timeout
 	await collapse_columns()
 	await refill_board(true)
 
@@ -424,7 +427,7 @@ func process_board_state():
 		elif earned_this_round < 0:
 			pc_ref.show_money_popup(earned_this_round, false)
 			Audio.play("res://sfx/Anti Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
-		await get_tree().create_timer(0.3).timeout
+		await get_tree().create_timer(0.2).timeout
 		await collapse_columns()
 		await refill_board(true)
 		
@@ -479,7 +482,7 @@ func refill_board(blanks: bool):
 				grid[x][y].move_to(grid_to_pixel(x, y))
 	evil_block_count = 0
 	spawn_count = 0
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.2).timeout
 
 # Utilities for coordinates
 
@@ -561,10 +564,10 @@ func simplify_board():
 			pc_ref.show_money_popup(earned_this_round)
 		elif earned_this_round < 0:
 			pc_ref.show_money_popup(earned_this_round, false)
-		await get_tree().create_timer(0.15).timeout
+		await get_tree().create_timer(0.2).timeout
 		await collapse_columns()
 		await refill_board(true)
-	await get_tree().create_timer(0.15).timeout
+	await get_tree().create_timer(0.2).timeout
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
@@ -601,10 +604,10 @@ func lightning():
 			pc_ref.show_money_popup(earned_this_round)
 		elif earned_this_round < 0:
 			pc_ref.show_money_popup(earned_this_round, false)
-		await get_tree().create_timer(0.15).timeout
+		await get_tree().create_timer(0.2).timeout
 		await collapse_columns()
 		await refill_board(true)
-	await get_tree().create_timer(0.15).timeout
+	await get_tree().create_timer(0.2).timeout
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
@@ -703,10 +706,10 @@ func bomb_random_icon():
 			pc_ref.show_money_popup(earned_this_round)
 		elif earned_this_round < 0:
 			pc_ref.show_money_popup(earned_this_round, false)
-		await get_tree().create_timer(0.15).timeout
+		await get_tree().create_timer(0.2).timeout
 		await collapse_columns()
 		await refill_board(true)
-	await get_tree().create_timer(0.15).timeout
+	await get_tree().create_timer(0.2).timeout
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
@@ -730,10 +733,10 @@ func missle_evil_icons():
 			tween.finished.connect(piece.queue_free)
 	if objectsDestroyed == true:
 		Audio.play("res://sfx/Missile.wav",true)
-		await get_tree().create_timer(0.3).timeout
+		await get_tree().create_timer(0.2).timeout
 		await collapse_columns()
 		await refill_board(true)
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.2).timeout
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
@@ -753,23 +756,31 @@ func reset_board():
 			tween.tween_property(piece, "scale", Vector2.ZERO, 0.2)
 			tween.finished.connect(piece.queue_free)
 		
-		await get_tree().create_timer(0.3).timeout
+		await get_tree().create_timer(0.2).timeout
 		await collapse_columns()
 		await refill_board(false)
 	
 		process_board_state()
 
+# This function sets the icons for the day(the correct array, from Global)
 func refresh_icons():
 	iconArray = Global.iconsForRound[Global.day].duplicate(true)
-	
+
+# This function tells us whether or not the type that is passed to it is evil
 func is_evil_block(type: int)-> bool: 
 	if (type == 7 || type == 9 || type == 11):
 		return true
 	else:
 		return false
-		
+
+# This function tells us whether or not an x, y value is in the 0-5, 0-5 integer grid
 func is_position_in_grid(x: int, y: int)->bool:
 	if (x >= 0 && x <=5 && y >=0 && y<= 5):
 		return true
 	else:
 		return false
+
+# This function reviews the current existing board to return whether or not said type 
+# is available, for example, to missle or lightning.
+func review_whole_board(type: int)-> bool:
+	return true

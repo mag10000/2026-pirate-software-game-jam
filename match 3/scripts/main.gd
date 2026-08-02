@@ -309,7 +309,7 @@ func handle_swap_logic(pos_a: Vector2i, pos_b: Vector2i):
 	is_swapping = true
 	swap_pieces(pos_a, pos_b)
 	
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.225).timeout
 	
 	process_board_state()
 	
@@ -354,7 +354,7 @@ func swap_pieces(a: Vector2i, b: Vector2i):
 
 		#SFX for Virus?
 		
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.225).timeout
 	await collapse_columns()
 	await refill_board(true)
 
@@ -427,7 +427,7 @@ func process_board_state():
 		elif earned_this_round < 0:
 			pc_ref.show_money_popup(earned_this_round, false)
 			Audio.play("res://sfx/Anti Cha Ching.wav", true, 1.0 + (combo_count * 0.1))
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.225).timeout
 		await collapse_columns()
 		await refill_board(true)
 		
@@ -482,7 +482,7 @@ func refill_board(blanks: bool):
 				grid[x][y].move_to(grid_to_pixel(x, y))
 	evil_block_count = 0
 	spawn_count = 0
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.225).timeout
 
 # Utilities for coordinates
 
@@ -564,10 +564,10 @@ func simplify_board():
 			pc_ref.show_money_popup(earned_this_round)
 		elif earned_this_round < 0:
 			pc_ref.show_money_popup(earned_this_round, false)
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.225).timeout
 		await collapse_columns()
 		await refill_board(true)
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.225).timeout
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
@@ -604,10 +604,10 @@ func lightning():
 			pc_ref.show_money_popup(earned_this_round)
 		elif earned_this_round < 0:
 			pc_ref.show_money_popup(earned_this_round, false)
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.225).timeout
 		await collapse_columns()
 		await refill_board(true)
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.225).timeout
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
@@ -706,10 +706,10 @@ func bomb_random_icon():
 			pc_ref.show_money_popup(earned_this_round)
 		elif earned_this_round < 0:
 			pc_ref.show_money_popup(earned_this_round, false)
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.225).timeout
 		await collapse_columns()
 		await refill_board(true)
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.225).timeout
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
@@ -733,10 +733,10 @@ func missle_evil_icons():
 			tween.finished.connect(piece.queue_free)
 	if objectsDestroyed == true:
 		Audio.play("res://sfx/Missile.wav",true)
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.225).timeout
 		await collapse_columns()
 		await refill_board(true)
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.225).timeout
 	await collapse_columns()
 	await refill_board(true)
 	process_board_state()
@@ -756,7 +756,7 @@ func reset_board():
 			tween.tween_property(piece, "scale", Vector2.ZERO, 0.2)
 			tween.finished.connect(piece.queue_free)
 		
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.225).timeout
 		await collapse_columns()
 		await refill_board(false)
 	

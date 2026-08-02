@@ -50,7 +50,7 @@ extends Control
 @export var item3TextureRect: TextureRect
 
 @export var itemSoldOutArt: Texture
-@export var crtFilerOn = true
+@export var crtFilterOn = true
 
 var is_skipping = false
 
@@ -98,14 +98,15 @@ var r = 0
 var g = 0
 var b = 0
 
-# Phase setup booleans
+# Phase setup and wrapup booleans
 var phase0Setup = true
 var phase1Setup = false
-var day1hour1Setup = false
+var phase0Wrapup = false
+var phase1Wrapup = false
 
 func _ready():
-	crtFilerOn = Global.crt_on
-	if crtFilerOn:
+	crtFilterOn = Global.crt_on
+	if crtFilterOn:
 		$CRTScreen.show()
 	create_new_store()
 	storeWindow.hide()
@@ -129,13 +130,9 @@ func _ready():
 
 # Runs every frame
 func _process(delta):
-	if Global.day == 1 && day1hour1Setup == false:
-		day1hour1Setup = true
-		InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 3)
-		InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 3)
-		InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 3)	
-	crtFilerOn = Global.crt_on
-	if crtFilerOn:
+
+	crtFilterOn = Global.crt_on
+	if crtFilterOn:
 		$CRTScreen.show()
 	else:
 		$CRTScreen.hide()
@@ -180,22 +177,19 @@ func _process(delta):
 			await phase_0_setup()
 		
 		if not Global.work_time_started:
+			Global.work_time_started = true
 			change_phase_display(0)
 			time = Global.work_times[Global.current_work_time_id]
 			progressBar.max_value = time
 			$"work window/Title".show()
 			workTimer.start()
-			Global.work_time_started = true
 			reset_item_limit_on_round()
 
 		if time == 0:
-			workTimer.stop()
-			Global.work_time_started = false
-			Global.current_work_time_id = randi_range(0,3)
-			await get_tree().create_timer(0.5).timeout
-			$"work window/Title".hide()
-			phase1Setup = true
-			Global.phase = 1
+			if phase0Wrapup == false:
+				phase0Wrapup = true
+				phase_0_wrapup()
+
 
 			
 	if Global.phase == 1:
@@ -203,6 +197,7 @@ func _process(delta):
 			await phase_1_setup()
 		
 		if not Global.break_time_started:
+			Global.break_time_started = true
 			change_phase_display(1)
 			time = Global.break_times[Global.current_break_time_id]
 			progressBar.max_value = time
@@ -210,29 +205,14 @@ func _process(delta):
 			debtMinimumPayDisplay.show()
 			storeWindow.show()
 			breakTimer.start()
-			Global.break_time_started = true
 
 		if time == 0:
-			print(Global.day)
-			breakTimer.stop()
-			Global.break_time_started = false
-			if Global.hour >= 8:
-				if deposited_in_round < Global.minimumPay:
-					get_tree().change_scene_to_file("res://game_over.tscn")
-				elif Global.day == 5:
-					get_tree().change_scene_to_file("res://you_win_credits.tscn")
-				else:
-					Global.day += 1
-					raise_items_update()
-					update_minimum_debt_payment()
-					# TODO - Create scene for new_day
-					get_tree().change_scene_to_file("res://day_win.tscn")
-			else:
-				await get_tree().create_timer(0.5).timeout
-				storeWindow.hide()
-				phase0Setup = true
-				Global.phase = 0
-				Global.hour += 1
+			if phase1Wrapup == false:
+				phase1Wrapup = true
+				# Create new function for wrapup and then set wrapup to false at end of it after we move on
+				phase_1_wrapup()
+				
+			
 
 
 
@@ -303,36 +283,6 @@ func _on_deposit_100_pressed():
 func _on_break_timer_timeout():
 	time -= 1
 
-
-func raise_items_update():
-	match Global.day:
-		2:
-			Global.amt_earned_combos += 6
-			Global.amt_earned_icon +=2
-			Global.item_pool = ["res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
-			InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 1)
-		3:	
-			Global.amt_earned_combos += 6
-			Global.amt_earned_icon +=2
-			Global.item_pool = ["res://inventory/items/lightning_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
-			InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 1)
-		4: 
-			Global.amt_earned_combos += 6
-			Global.amt_earned_icon +=2
-			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
-			InventoryManager.grant_item("res://inventory/items/missle_item.tres", 1)	
-		5: 
-			Global.amt_earned_combos += 6
-			Global.amt_earned_icon +=2
-			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
-			InventoryManager.grant_item("res://inventory/items/missle_item.tres", 1)
-			InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 1)
-			InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 1)
-			InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 1)
-			InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 1)
-			InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 1)
-		_:
-			pass
 func item_clicked(node):
 	match node.item.item_name:
 		"Add Time":
@@ -490,7 +440,41 @@ func phase_1_setup():
 	MusicPlayer.play()
 	workTimer.stop()
 	Global.money_multiplier = 1
-	
+
+func phase_0_wrapup():
+	phase1Wrapup = false
+	workTimer.stop()
+	Global.work_time_started = false
+	Global.current_work_time_id = randi_range(0,3)
+	await get_tree().create_timer(0.5).timeout
+	$"work window/Title".hide()
+	phase1Setup = true
+	Global.phase = 1
+
+func phase_1_wrapup():
+	phase0Wrapup = false
+	breakTimer.stop()
+
+	if Global.hour >= 8:
+		if deposited_in_round < Global.minimumPay:
+			get_tree().change_scene_to_file("res://game_over.tscn")
+		elif Global.day == 5:
+			get_tree().change_scene_to_file("res://you_win_credits.tscn")
+		else:
+			Global.day += 1
+			update_minimum_debt_payment()
+			# TODO - Create scene for new_day
+			get_tree().change_scene_to_file("res://day_win.tscn")
+	else:
+		await get_tree().create_timer(0.5).timeout
+		storeWindow.hide()
+		Global.break_time_started = false
+		phase0Setup = true
+		Global.phase = 0
+		print (Global.hour)
+		Global.hour += 1
+		print (Global.hour)
+
 func change_phase_display(phase: int):
 	if phase == 0:
 		scrollAlertText.text = "It's Work Time!!!"

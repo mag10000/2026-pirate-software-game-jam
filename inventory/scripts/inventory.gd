@@ -12,6 +12,43 @@ func _ready():
 		var slot_to_create = slot_scene.instantiate()
 		slots_Box_Container.add_child(slot_to_create)
 	slots = slots_Box_Container.get_children()
+	
+	raise_items_update()
+	
+func raise_items_update():
+	match Global.day:
+		1:
+			InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 3)
+			InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 3)
+			InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 3)
+		2:
+			Global.amt_earned_combos += 6
+			Global.amt_earned_icon +=2
+			Global.item_pool = ["res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
+			InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 1)
+		3:	
+			Global.amt_earned_combos += 6
+			Global.amt_earned_icon +=2
+			Global.item_pool = ["res://inventory/items/lightning_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
+			InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 1)
+		4: 
+			Global.amt_earned_combos += 6
+			Global.amt_earned_icon +=2
+			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
+			InventoryManager.grant_item("res://inventory/items/missle_item.tres", 1)	
+		5: 
+			Global.amt_earned_combos += 6
+			Global.amt_earned_icon +=2
+			Global.item_pool = ["res://inventory/items/missle_item.tres","res://inventory/items/money_multiplier_item.tres","res://inventory/items/time_add_item.tres","res://inventory/items/refresh_item.tres","res://inventory/items/bomb_item.tres"]
+			InventoryManager.grant_item("res://inventory/items/missle_item.tres", 1)
+			InventoryManager.grant_item("res://inventory/items/lightning_item.tres", 1)
+			InventoryManager.grant_item("res://inventory/items/money_multiplier_item.tres", 1)
+			InventoryManager.grant_item("res://inventory/items/time_add_item.tres", 1)
+			InventoryManager.grant_item("res://inventory/items/bomb_item.tres", 1)
+			InventoryManager.grant_item("res://inventory/items/refresh_item.tres", 1)
+		_:
+			pass
+
 
 
 #		$Control/slots.add_child(slot_to_create)

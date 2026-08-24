@@ -17,6 +17,7 @@ var dayItemText = [[],["Base Items: "]]
 var dayEvilText = [[],[],[],[],[]]
 
 func _ready():
+	$"CanvasLayer/Skip Button".grab_focus()
 	var balloon: Node = Balloon.instantiate()
 	main_node.add_child(balloon)
 	match Global.day:
@@ -120,6 +121,7 @@ func show_text():
 	
 
 	$"CanvasLayer/Continue Button".show()
+	$"CanvasLayer/Continue Button".grab_focus()
 	$"CanvasLayer/Skip Button".hide()
 	#"
 #Match 3 for $5" + "

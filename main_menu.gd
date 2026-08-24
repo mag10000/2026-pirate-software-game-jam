@@ -2,7 +2,14 @@ extends Control
 
 @export var MusicPlayer: AudioStreamPlayer
 
+var launcher_path = ""
+
 func _ready():
+	$Start.grab_focus()
+	if FileAccess.file_exists("user://launcher.txt"):
+		var file = FileAccess.open("user://launcher.txt", FileAccess.READ)
+		launcher_path = file.get_as_text()
+		print(launcher_path)
 	$LeaderBoard.get_scores()
 	MusicPlayer.play()
 	cycle_leaderboard()
@@ -32,3 +39,10 @@ func _input(event):
 	else:
 		$LeaderBoard.hide()
 		$Tutorial.hide()
+
+
+func _on_quit_pressed():
+	OS.create_process(launcher_path,[])
+	$MusicPlayer.stop()
+	await get_tree().create_timer(1.5).timeout
+	get_tree().quit()

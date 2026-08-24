@@ -18,6 +18,8 @@ func _on_button_pressed():
 
 func _on_visibility_changed():
 	$settings.hide()
+	if visible:
+		$Back.grab_focus()
 
 
 func _on_tutorial_button_pressed():

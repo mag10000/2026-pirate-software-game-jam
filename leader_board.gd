@@ -1,18 +1,33 @@
 extends Control
 
 func _ready():
+	if not FileAccess.file_exists("user://leaderboard.csv"):
+		var file = FileAccess.open("user://leaderboard.csv", FileAccess.WRITE)
+		file.store_string("name:,score:")
+		file.close()
+		file = null
+	print(Time.get_datetime_string_from_system())
 	if (Global.debt <= 0):
 		$score.text += "$" + format_number(Global.money)
 	else: 
 		$score.text += "$" + format_number(Global.money- Global.debt)
 	get_scores()
 
+func sort_ascending(a, b):
+	if a.score < b.score:
+		return false
+	return true
+
 func get_scores():
-	var sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
-	print("Scores: " + str(sw_result.scores))
+	#var sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
+	#print("Scores: " + str(sw_result.scores))
 	for child in $ScrollContainer/ScoresContainer.get_children():
 		child.queue_free()
-	for score in sw_result.scores:
+	#for score in sw_result.scores:
+	
+	var csv_data = get_dict_from_csv()
+	
+	for score in csv_data:
 		var label = Label.new()
 		label.text = " Name: " + score.player_name + ", Score: " + format_number(score.score)
 		label.add_theme_font_size_override("font_size",32)
@@ -21,6 +36,20 @@ func get_scores():
 		label.name = score.player_name + str(score.score)
 		$ScrollContainer/ScoresContainer.add_child(label)
 
+func get_dict_from_csv():
+	var plain_csv_data = FileAccess.get_file_as_string("user://leaderboard.csv")
+	var formatted_csv = []
+	
+	var format1 = plain_csv_data.split("
+")
+	format1.remove_at(0)
+	for line in format1:
+		if line == "":
+			return formatted_csv
+		var formatted_line = line.split(",")
+		print(formatted_line.size())
+		formatted_csv.append({"player_name" : formatted_line[0],"score" : int(formatted_line[1])})
+	return formatted_csv
 
 
 
@@ -47,10 +76,26 @@ func format_number(number: int) -> String:
 
 
 func _on_submit_pressed():
-	SilentWolf.Scores.save_score($LineEdit.text.to_upper(), Global.money-Global.debt)
+	var csv_data = get_dict_from_csv()
+	csv_data.append({"player_name" : $LineEdit.text.to_upper(),"score" : Global.money-Global.debt})
+	#SilentWolf.Scores.save_score($LineEdit.text.to_upper(), Global.money-Global.debt)
+	csv_data.sort_custom(sort_ascending)
+	var final_text = "name:,score:"
+	for value in csv_data:
+		var line = value.player_name + "," + str(value.score)
+		final_text += "
+" + str(line)
+	var file = FileAccess.open("user://leaderboard.csv", FileAccess.WRITE)
+	file.store_string(final_text)
+	file.close()
+	file = null
 	$submit.disabled = true
 	get_scores()
 
 
 func _on_to_main_pressed():
 	get_tree().change_scene_to_file("res://main_menu.tscn")
+
+
+func wipe():
+	DirAccess.remove_absolute("user://leaderboard.csv")

@@ -742,6 +742,7 @@ func missle_evil_icons():
 	process_board_state()
 
 func reset_board():
+	is_swapping = true
 	var whole_board = get_whole_board()
 	
 	while whole_board.size() > 0:

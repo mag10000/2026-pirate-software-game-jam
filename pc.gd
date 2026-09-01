@@ -363,7 +363,6 @@ func item_clicked(node):
 
 func _on_item_1_pressed():
 	if Global.money > 0 && item1Price > 0:
-		print("TEST")
 		item1Price -= 1
 		Global.money -= 1
 		show_money_popup(1, false)
@@ -371,7 +370,6 @@ func _on_item_1_pressed():
 		if item1Price == 0:
 			# Grant Item and Remove Item from Store
 			InventoryManager.grant_item(item1Random.get_path())
-			print("Item3Price is Zero")
 			
 			item1SoldOut = true
 			item1TextureRect.texture = itemSoldOutArt
@@ -382,7 +380,6 @@ func _on_item_1_pressed():
 
 func _on_item_2_pressed():
 	if Global.money > 0 && item2Price > 0:
-		print("TEST")
 		item2Price -= 1
 		Global.money -= 1
 		show_money_popup(1, false)
@@ -390,7 +387,6 @@ func _on_item_2_pressed():
 		if item2Price == 0:
 			# Grant Item and Remove Item from Store
 			InventoryManager.grant_item(item2Random.get_path())
-			print("Item2Price is Zero")
 			
 			item2SoldOut = true
 			item2TextureRect.texture = itemSoldOutArt
@@ -400,7 +396,6 @@ func _on_item_2_pressed():
 
 func _on_item_3_pressed():
 	if Global.money > 0 && item3Price > 0:
-		print("TEST")
 		item3Price -= 1
 		Global.money -= 1
 		show_money_popup(1, false)
@@ -408,7 +403,6 @@ func _on_item_3_pressed():
 		if item3Price == 0:
 			# Grant Item and Remove Item from Store
 			InventoryManager.grant_item(item3Random.get_path())
-			print("Item3Price is Zero")
 			
 			item3SoldOut = true
 			item3TextureRect.texture = itemSoldOutArt
@@ -442,7 +436,6 @@ func phase_1_setup():
 	Global.money_multiplier = 1
 
 func phase_0_wrapup():
-	phase1Wrapup = false
 	workTimer.stop()
 	Global.work_time_started = false
 	Global.current_work_time_id = randi_range(0,3)
@@ -450,20 +443,19 @@ func phase_0_wrapup():
 	$"work window/Title".hide()
 	phase1Setup = true
 	Global.phase = 1
+	phase1Wrapup = false
 
 func phase_1_wrapup():
-	phase0Wrapup = false
 	breakTimer.stop()
 
 	if Global.hour >= 8:
-		if deposited_in_round < Global.minimumPay:
+		if Global.debt_paid < Global.dueToday:
 			get_tree().change_scene_to_file("res://game_over.tscn")
 		elif Global.day == 5:
 			get_tree().change_scene_to_file("res://you_win_credits.tscn")
 		else:
 			Global.day += 1
 			update_minimum_debt_payment()
-			# TODO - Create scene for new_day
 			get_tree().change_scene_to_file("res://day_win.tscn")
 	else:
 		await get_tree().create_timer(0.5).timeout
@@ -471,9 +463,8 @@ func phase_1_wrapup():
 		Global.break_time_started = false
 		phase0Setup = true
 		Global.phase = 0
-		print (Global.hour)
 		Global.hour += 1
-		print (Global.hour)
+		phase0Wrapup = false
 
 func change_phase_display(phase: int):
 	if phase == 0:
@@ -524,16 +515,22 @@ func update_minimum_debt_payment():
 	match Global.day:
 		1:
 			Global.minimumPay = 500
+			Global.dueToday = 500
 		2:
 			Global.minimumPay = 1500 - Global.debt_paid
+			Global.dueToday = 1500 
 		3:
 			Global.minimumPay = 3000 - Global.debt_paid
+			Global.dueToday = 3000 
 		4:
 			Global.minimumPay = 6000 - Global.debt_paid
+			Global.dueToday = 6000 
 		5:
 			Global.minimumPay = 10000 - Global.debt_paid
+			Global.dueToday = 10000 
 		_:
 			Global.minimumPay = 500
+			Global.dueToday = 500
 
 func update_day_hour_text():
 	dayHourText.text = "Day: " + str(Global.day) + "/5 \nHour: " + str(Global.hour) + "/8 \nPhase: " + str(Global.phase + 1) +"/2"

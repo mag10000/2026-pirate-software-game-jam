@@ -6,10 +6,11 @@ var launcher_path = ""
 
 func _ready():
 	$Start.grab_focus()
-	if FileAccess.file_exists("user://launcher.txt"):
-		var file = FileAccess.open("user://launcher.txt", FileAccess.READ)
-		launcher_path = file.get_as_text()
-		print(launcher_path)
+	#if FileAccess.file_exists("user://launcher.txt"):
+		#var file = FileAccess.open("user://launcher.txt", FileAccess.READ)
+		#launcher_path = file.get_as_text()
+		#print(launcher_path)
+	launcher_path = "/home/deck/Desktop/SanJapan2026/sanjapanlauncher.x86_64"
 	$LeaderBoard.get_scores()
 	MusicPlayer.play()
 	cycle_leaderboard()
